@@ -1,0 +1,13 @@
+## Gales Dips
+#
+Step 1. create application
+aws deploy create-application --application-name gales-dips2
+
+
+Step 2. create deployment group
+aws deploy create-deployment-group \
+  --application-name gales-dips2 \
+  --deployment-group-name gales-dips2_DepGroup \
+  --deployment-config-name CodeDeployDefault.OneAtATime \
+  --ec2-tag-filters Key=Name,Value=gales-cluster,Type=KEY_AND_VALUE \
+  --service-role-arn arn:aws:iam::407205661819:role/CodeDeployServiceRole
