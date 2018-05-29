@@ -3,14 +3,37 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "1.0.0",
+    "@material-ui/icons": "1.0.0",
+    "apollo-boost": "0.1.6",
+    "graphql": "0.13.2",
+    "graphql-tag": "2.9.2",
+    "history": "4.7.2",
+    "jss": "9.8.1",
+    "material-ui-pickers": "1.0.0-rc.9",
+    "moment": "2.22.1",
     "react": "^16.3.2",
+    "react-apollo": "2.1.4",
     "react-dom": "^16.3.2",
-    "react-scripts": "1.1.4"
+    "react-jss": "8.4.0",
+    "react-popper": "1.0.0-beta.6",
+    "react-redux": "5.0.7",
+    "react-router-dom": "4.2.2",
+    "react-router-redux": "5.0.0-alpha.9",
+    "redux": "4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel-eslint": "8.2.3",
+    "custom-react-scripts": "0.2.2",
+    "enzyme": "3.3.0",
+    "enzyme-adapter-react-16": "1.1.1",
+    "eslint": "4.19.1",
+    "eslint-plugin-react": "7.8.2"
   }
 }
