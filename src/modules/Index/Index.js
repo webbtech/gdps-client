@@ -6,6 +6,13 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import { Switch, Route } from 'react-router'
 
+import Amplify from 'aws-amplify'
+// import { withAuthenticator } from 'aws-amplify-react'
+// import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, SignIn, SignUp, VerifyContact, withAuthenticator } from 'aws-amplify-react'
+import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, SignIn, VerifyContact, withAuthenticator } from 'aws-amplify-react'
+
+import aws_exports from '../Auth/aws-exports'
+
 import Dashboard from './Dashboard'
 import Admin from '../Admin/Admin'
 import Dips from '../Dips/Dips'
@@ -21,6 +28,9 @@ const store = createStore(
   }),
   applyMiddleware(middleware)
 )
+
+Amplify.configure(aws_exports)
+
 
 class Index extends Component {
   render() {
@@ -57,4 +67,14 @@ class Index extends Component {
   }
 }
 
-export default withRoot(Index)
+// export default withRoot(Index)
+const auth = withAuthenticator(Index, false, [
+  <SignIn/>,
+  <ConfirmSignIn/>,
+  <VerifyContact/>,
+  <ConfirmSignUp/>,
+  <ForgotPassword/>,
+])
+
+// export default withRoot(withAuthenticator(Index))
+export default withRoot(auth)

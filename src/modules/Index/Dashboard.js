@@ -17,6 +17,8 @@ class Dashboard extends Component {
 
   render() {
 
+    console.log('props in Header render: ', this.props)
+
     const { classes, history } = this.props
     return (
       <div>
