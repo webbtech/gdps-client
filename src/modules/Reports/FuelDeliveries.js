@@ -26,7 +26,6 @@ class FuelDeliveries extends Component {
 
   render() {
 
-    const { history, match } = this.props
     const { pathname } = this.props.location
 
     return (
@@ -35,10 +34,7 @@ class FuelDeliveries extends Component {
             gutterBottom
             variant="subheading"
         >Fuel Deliveries</Typography>
-        <ReportSelectors
-            history={history}
-            match={match}
-        />
+        <ReportSelectors />
         {this.renderReport(pathname)}
       </div>
     )
@@ -47,9 +43,7 @@ class FuelDeliveries extends Component {
 
 FuelDeliveries.propTypes = {
   classes:  PropTypes.object.isRequired,
-  history:  PropTypes.object.isRequired,
   location: PropTypes.object,
-  match:    PropTypes.object.isRequired,
 }
 
 export default withStyles(ms)(FuelDeliveries)

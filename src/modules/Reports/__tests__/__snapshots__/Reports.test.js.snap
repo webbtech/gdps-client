@@ -34,7 +34,7 @@ ShallowWrapper {
         "entries": Array [
           Object {
             "hash": "",
-            "key": "wyvegu",
+            "key": "d90qsw",
             "pathname": "/",
             "search": "",
             "state": undefined,
@@ -48,7 +48,7 @@ ShallowWrapper {
         "listen": [Function],
         "location": Object {
           "hash": "",
-          "key": "wyvegu",
+          "key": "d90qsw",
           "pathname": "/",
           "search": "",
           "state": undefined,
@@ -90,7 +90,7 @@ ShallowWrapper {
           "entries": Array [
             Object {
               "hash": "",
-              "key": "wyvegu",
+              "key": "d90qsw",
               "pathname": "/",
               "search": "",
               "state": undefined,
@@ -104,7 +104,7 @@ ShallowWrapper {
           "listen": [Function],
           "location": Object {
             "hash": "",
-            "key": "wyvegu",
+            "key": "d90qsw",
             "pathname": "/",
             "search": "",
             "state": undefined,

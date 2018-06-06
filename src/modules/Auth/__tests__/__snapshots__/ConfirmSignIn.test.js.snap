@@ -1,0 +1,1170 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConfirmSignIn matches snapshot 1`] = `
+initialize {
+  "0": Object {
+    "attribs": Object {},
+    "children": Array [
+      Object {
+        "attribs": Object {
+          "class": "MuiPaper-root-4 MuiPaper-elevation2-8 MuiPaper-rounded-5 ConfirmSignIn-container-1",
+        },
+        "children": Array [
+          Object {
+            "attribs": Object {
+              "class": "MuiPaper-root-4 MuiPaper-elevation4-10 MuiAppBar-root-31 MuiAppBar-positionStatic-35 MuiAppBar-colorSecondary-38",
+            },
+            "children": Array [
+              Object {
+                "attribs": Object {
+                  "class": "MuiToolbar-root-39 MuiToolbar-gutters-40",
+                },
+                "children": Array [
+                  Object {
+                    "attribs": Object {
+                      "class": "MuiTypography-root-41 MuiTypography-title-47 MuiTypography-colorInherit-60",
+                    },
+                    "children": Array [
+                      Object {
+                        "data": "Confirm Code",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "text",
+                      },
+                    ],
+                    "name": "h2",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                ],
+                "name": "div",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": null,
+                "parent": [Circular],
+                "prev": null,
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                },
+              },
+            ],
+            "name": "header",
+            "namespace": "http://www.w3.org/1999/xhtml",
+            "next": Object {
+              "attribs": Object {
+                "class": "MuiFormControl-root-65 ConfirmSignIn-formControl-2",
+              },
+              "children": Array [
+                Object {
+                  "attribs": Object {
+                    "class": "MuiFormLabel-root-74 MuiInputLabel-root-69 MuiInputLabel-formControl-70 MuiInputLabel-animated-73",
+                    "data-shrink": "false",
+                    "for": "code",
+                  },
+                  "children": Array [
+                    Object {
+                      "data": "Code",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "text",
+                    },
+                  ],
+                  "name": "label",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": Object {
+                    "attribs": Object {
+                      "class": "MuiInput-root-79 MuiInput-formControl-80 MuiInput-underline-83",
+                    },
+                    "children": Array [
+                      Object {
+                        "attribs": Object {
+                          "aria-invalid": "false",
+                          "aria-required": "false",
+                          "autofocus": "",
+                          "class": "MuiInput-input-87",
+                          "id": "code",
+                          "name": "code",
+                          "type": "text",
+                          "value": "",
+                        },
+                        "children": Array [],
+                        "name": "input",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "aria-invalid": undefined,
+                          "aria-required": undefined,
+                          "autofocus": undefined,
+                          "class": undefined,
+                          "id": undefined,
+                          "name": undefined,
+                          "type": undefined,
+                          "value": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "aria-invalid": undefined,
+                          "aria-required": undefined,
+                          "autofocus": undefined,
+                          "class": undefined,
+                          "id": undefined,
+                          "name": undefined,
+                          "type": undefined,
+                          "value": undefined,
+                        },
+                      },
+                    ],
+                    "name": "div",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": [Circular],
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                    "data-shrink": undefined,
+                    "for": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                    "data-shrink": undefined,
+                    "for": undefined,
+                  },
+                },
+                Object {
+                  "attribs": Object {
+                    "class": "MuiInput-root-79 MuiInput-formControl-80 MuiInput-underline-83",
+                  },
+                  "children": Array [
+                    Object {
+                      "attribs": Object {
+                        "aria-invalid": "false",
+                        "aria-required": "false",
+                        "autofocus": "",
+                        "class": "MuiInput-input-87",
+                        "id": "code",
+                        "name": "code",
+                        "type": "text",
+                        "value": "",
+                      },
+                      "children": Array [],
+                      "name": "input",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "aria-invalid": undefined,
+                        "aria-required": undefined,
+                        "autofocus": undefined,
+                        "class": undefined,
+                        "id": undefined,
+                        "name": undefined,
+                        "type": undefined,
+                        "value": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "aria-invalid": undefined,
+                        "aria-required": undefined,
+                        "autofocus": undefined,
+                        "class": undefined,
+                        "id": undefined,
+                        "name": undefined,
+                        "type": undefined,
+                        "value": undefined,
+                      },
+                    },
+                  ],
+                  "name": "div",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": Object {
+                    "attribs": Object {
+                      "class": "MuiFormLabel-root-74 MuiInputLabel-root-69 MuiInputLabel-formControl-70 MuiInputLabel-animated-73",
+                      "data-shrink": "false",
+                      "for": "code",
+                    },
+                    "children": Array [
+                      Object {
+                        "data": "Code",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "text",
+                      },
+                    ],
+                    "name": "label",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": [Circular],
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                      "data-shrink": undefined,
+                      "for": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                      "data-shrink": undefined,
+                      "for": undefined,
+                    },
+                  },
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+              ],
+              "name": "div",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": Object {
+                "attribs": Object {
+                  "class": "MuiButtonBase-root-108 MuiButton-root-92 MuiButton-raised-98 MuiButton-raisedPrimary-99 ConfirmSignIn-submitButton-3",
+                  "tabindex": "0",
+                  "type": "button",
+                },
+                "children": Array [
+                  Object {
+                    "attribs": Object {
+                      "class": "MuiButton-label-93",
+                    },
+                    "children": Array [
+                      Object {
+                        "data": "Confirm",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "text",
+                      },
+                    ],
+                    "name": "span",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": Object {
+                      "attribs": Object {
+                        "class": "MuiTouchRipple-root-111",
+                      },
+                      "children": Array [],
+                      "name": "span",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": [Circular],
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                  Object {
+                    "attribs": Object {
+                      "class": "MuiTouchRipple-root-111",
+                    },
+                    "children": Array [],
+                    "name": "span",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": Object {
+                      "attribs": Object {
+                        "class": "MuiButton-label-93",
+                      },
+                      "children": Array [
+                        Object {
+                          "data": "Confirm",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "text",
+                        },
+                      ],
+                      "name": "span",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": [Circular],
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                ],
+                "name": "button",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": null,
+                "parent": [Circular],
+                "prev": [Circular],
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                  "tabindex": undefined,
+                  "type": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                  "tabindex": undefined,
+                  "type": undefined,
+                },
+              },
+              "parent": [Circular],
+              "prev": [Circular],
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "class": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "class": undefined,
+              },
+            },
+            "parent": [Circular],
+            "prev": null,
+            "type": "tag",
+            "x-attribsNamespace": Object {
+              "class": undefined,
+            },
+            "x-attribsPrefix": Object {
+              "class": undefined,
+            },
+          },
+          Object {
+            "attribs": Object {
+              "class": "MuiFormControl-root-65 ConfirmSignIn-formControl-2",
+            },
+            "children": Array [
+              Object {
+                "attribs": Object {
+                  "class": "MuiFormLabel-root-74 MuiInputLabel-root-69 MuiInputLabel-formControl-70 MuiInputLabel-animated-73",
+                  "data-shrink": "false",
+                  "for": "code",
+                },
+                "children": Array [
+                  Object {
+                    "data": "Code",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "text",
+                  },
+                ],
+                "name": "label",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": Object {
+                  "attribs": Object {
+                    "class": "MuiInput-root-79 MuiInput-formControl-80 MuiInput-underline-83",
+                  },
+                  "children": Array [
+                    Object {
+                      "attribs": Object {
+                        "aria-invalid": "false",
+                        "aria-required": "false",
+                        "autofocus": "",
+                        "class": "MuiInput-input-87",
+                        "id": "code",
+                        "name": "code",
+                        "type": "text",
+                        "value": "",
+                      },
+                      "children": Array [],
+                      "name": "input",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "aria-invalid": undefined,
+                        "aria-required": undefined,
+                        "autofocus": undefined,
+                        "class": undefined,
+                        "id": undefined,
+                        "name": undefined,
+                        "type": undefined,
+                        "value": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "aria-invalid": undefined,
+                        "aria-required": undefined,
+                        "autofocus": undefined,
+                        "class": undefined,
+                        "id": undefined,
+                        "name": undefined,
+                        "type": undefined,
+                        "value": undefined,
+                      },
+                    },
+                  ],
+                  "name": "div",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": [Circular],
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+                "parent": [Circular],
+                "prev": null,
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                  "data-shrink": undefined,
+                  "for": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                  "data-shrink": undefined,
+                  "for": undefined,
+                },
+              },
+              Object {
+                "attribs": Object {
+                  "class": "MuiInput-root-79 MuiInput-formControl-80 MuiInput-underline-83",
+                },
+                "children": Array [
+                  Object {
+                    "attribs": Object {
+                      "aria-invalid": "false",
+                      "aria-required": "false",
+                      "autofocus": "",
+                      "class": "MuiInput-input-87",
+                      "id": "code",
+                      "name": "code",
+                      "type": "text",
+                      "value": "",
+                    },
+                    "children": Array [],
+                    "name": "input",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "aria-invalid": undefined,
+                      "aria-required": undefined,
+                      "autofocus": undefined,
+                      "class": undefined,
+                      "id": undefined,
+                      "name": undefined,
+                      "type": undefined,
+                      "value": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "aria-invalid": undefined,
+                      "aria-required": undefined,
+                      "autofocus": undefined,
+                      "class": undefined,
+                      "id": undefined,
+                      "name": undefined,
+                      "type": undefined,
+                      "value": undefined,
+                    },
+                  },
+                ],
+                "name": "div",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": null,
+                "parent": [Circular],
+                "prev": Object {
+                  "attribs": Object {
+                    "class": "MuiFormLabel-root-74 MuiInputLabel-root-69 MuiInputLabel-formControl-70 MuiInputLabel-animated-73",
+                    "data-shrink": "false",
+                    "for": "code",
+                  },
+                  "children": Array [
+                    Object {
+                      "data": "Code",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "text",
+                    },
+                  ],
+                  "name": "label",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": [Circular],
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                    "data-shrink": undefined,
+                    "for": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                    "data-shrink": undefined,
+                    "for": undefined,
+                  },
+                },
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                },
+              },
+            ],
+            "name": "div",
+            "namespace": "http://www.w3.org/1999/xhtml",
+            "next": Object {
+              "attribs": Object {
+                "class": "MuiButtonBase-root-108 MuiButton-root-92 MuiButton-raised-98 MuiButton-raisedPrimary-99 ConfirmSignIn-submitButton-3",
+                "tabindex": "0",
+                "type": "button",
+              },
+              "children": Array [
+                Object {
+                  "attribs": Object {
+                    "class": "MuiButton-label-93",
+                  },
+                  "children": Array [
+                    Object {
+                      "data": "Confirm",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "text",
+                    },
+                  ],
+                  "name": "span",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": Object {
+                    "attribs": Object {
+                      "class": "MuiTouchRipple-root-111",
+                    },
+                    "children": Array [],
+                    "name": "span",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": [Circular],
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+                Object {
+                  "attribs": Object {
+                    "class": "MuiTouchRipple-root-111",
+                  },
+                  "children": Array [],
+                  "name": "span",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": Object {
+                    "attribs": Object {
+                      "class": "MuiButton-label-93",
+                    },
+                    "children": Array [
+                      Object {
+                        "data": "Confirm",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "text",
+                      },
+                    ],
+                    "name": "span",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": [Circular],
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+              ],
+              "name": "button",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": null,
+              "parent": [Circular],
+              "prev": [Circular],
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "class": undefined,
+                "tabindex": undefined,
+                "type": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "class": undefined,
+                "tabindex": undefined,
+                "type": undefined,
+              },
+            },
+            "parent": [Circular],
+            "prev": Object {
+              "attribs": Object {
+                "class": "MuiPaper-root-4 MuiPaper-elevation4-10 MuiAppBar-root-31 MuiAppBar-positionStatic-35 MuiAppBar-colorSecondary-38",
+              },
+              "children": Array [
+                Object {
+                  "attribs": Object {
+                    "class": "MuiToolbar-root-39 MuiToolbar-gutters-40",
+                  },
+                  "children": Array [
+                    Object {
+                      "attribs": Object {
+                        "class": "MuiTypography-root-41 MuiTypography-title-47 MuiTypography-colorInherit-60",
+                      },
+                      "children": Array [
+                        Object {
+                          "data": "Confirm Code",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "text",
+                        },
+                      ],
+                      "name": "h2",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                  ],
+                  "name": "div",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+              ],
+              "name": "header",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": [Circular],
+              "parent": [Circular],
+              "prev": null,
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "class": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "class": undefined,
+              },
+            },
+            "type": "tag",
+            "x-attribsNamespace": Object {
+              "class": undefined,
+            },
+            "x-attribsPrefix": Object {
+              "class": undefined,
+            },
+          },
+          Object {
+            "attribs": Object {
+              "class": "MuiButtonBase-root-108 MuiButton-root-92 MuiButton-raised-98 MuiButton-raisedPrimary-99 ConfirmSignIn-submitButton-3",
+              "tabindex": "0",
+              "type": "button",
+            },
+            "children": Array [
+              Object {
+                "attribs": Object {
+                  "class": "MuiButton-label-93",
+                },
+                "children": Array [
+                  Object {
+                    "data": "Confirm",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "text",
+                  },
+                ],
+                "name": "span",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": Object {
+                  "attribs": Object {
+                    "class": "MuiTouchRipple-root-111",
+                  },
+                  "children": Array [],
+                  "name": "span",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": [Circular],
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+                "parent": [Circular],
+                "prev": null,
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                },
+              },
+              Object {
+                "attribs": Object {
+                  "class": "MuiTouchRipple-root-111",
+                },
+                "children": Array [],
+                "name": "span",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": null,
+                "parent": [Circular],
+                "prev": Object {
+                  "attribs": Object {
+                    "class": "MuiButton-label-93",
+                  },
+                  "children": Array [
+                    Object {
+                      "data": "Confirm",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "text",
+                    },
+                  ],
+                  "name": "span",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": [Circular],
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                },
+              },
+            ],
+            "name": "button",
+            "namespace": "http://www.w3.org/1999/xhtml",
+            "next": null,
+            "parent": [Circular],
+            "prev": Object {
+              "attribs": Object {
+                "class": "MuiFormControl-root-65 ConfirmSignIn-formControl-2",
+              },
+              "children": Array [
+                Object {
+                  "attribs": Object {
+                    "class": "MuiFormLabel-root-74 MuiInputLabel-root-69 MuiInputLabel-formControl-70 MuiInputLabel-animated-73",
+                    "data-shrink": "false",
+                    "for": "code",
+                  },
+                  "children": Array [
+                    Object {
+                      "data": "Code",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "text",
+                    },
+                  ],
+                  "name": "label",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": Object {
+                    "attribs": Object {
+                      "class": "MuiInput-root-79 MuiInput-formControl-80 MuiInput-underline-83",
+                    },
+                    "children": Array [
+                      Object {
+                        "attribs": Object {
+                          "aria-invalid": "false",
+                          "aria-required": "false",
+                          "autofocus": "",
+                          "class": "MuiInput-input-87",
+                          "id": "code",
+                          "name": "code",
+                          "type": "text",
+                          "value": "",
+                        },
+                        "children": Array [],
+                        "name": "input",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "aria-invalid": undefined,
+                          "aria-required": undefined,
+                          "autofocus": undefined,
+                          "class": undefined,
+                          "id": undefined,
+                          "name": undefined,
+                          "type": undefined,
+                          "value": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "aria-invalid": undefined,
+                          "aria-required": undefined,
+                          "autofocus": undefined,
+                          "class": undefined,
+                          "id": undefined,
+                          "name": undefined,
+                          "type": undefined,
+                          "value": undefined,
+                        },
+                      },
+                    ],
+                    "name": "div",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": [Circular],
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                    "data-shrink": undefined,
+                    "for": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                    "data-shrink": undefined,
+                    "for": undefined,
+                  },
+                },
+                Object {
+                  "attribs": Object {
+                    "class": "MuiInput-root-79 MuiInput-formControl-80 MuiInput-underline-83",
+                  },
+                  "children": Array [
+                    Object {
+                      "attribs": Object {
+                        "aria-invalid": "false",
+                        "aria-required": "false",
+                        "autofocus": "",
+                        "class": "MuiInput-input-87",
+                        "id": "code",
+                        "name": "code",
+                        "type": "text",
+                        "value": "",
+                      },
+                      "children": Array [],
+                      "name": "input",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "aria-invalid": undefined,
+                        "aria-required": undefined,
+                        "autofocus": undefined,
+                        "class": undefined,
+                        "id": undefined,
+                        "name": undefined,
+                        "type": undefined,
+                        "value": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "aria-invalid": undefined,
+                        "aria-required": undefined,
+                        "autofocus": undefined,
+                        "class": undefined,
+                        "id": undefined,
+                        "name": undefined,
+                        "type": undefined,
+                        "value": undefined,
+                      },
+                    },
+                  ],
+                  "name": "div",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": Object {
+                    "attribs": Object {
+                      "class": "MuiFormLabel-root-74 MuiInputLabel-root-69 MuiInputLabel-formControl-70 MuiInputLabel-animated-73",
+                      "data-shrink": "false",
+                      "for": "code",
+                    },
+                    "children": Array [
+                      Object {
+                        "data": "Code",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "text",
+                      },
+                    ],
+                    "name": "label",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": [Circular],
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                      "data-shrink": undefined,
+                      "for": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                      "data-shrink": undefined,
+                      "for": undefined,
+                    },
+                  },
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+              ],
+              "name": "div",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": [Circular],
+              "parent": [Circular],
+              "prev": Object {
+                "attribs": Object {
+                  "class": "MuiPaper-root-4 MuiPaper-elevation4-10 MuiAppBar-root-31 MuiAppBar-positionStatic-35 MuiAppBar-colorSecondary-38",
+                },
+                "children": Array [
+                  Object {
+                    "attribs": Object {
+                      "class": "MuiToolbar-root-39 MuiToolbar-gutters-40",
+                    },
+                    "children": Array [
+                      Object {
+                        "attribs": Object {
+                          "class": "MuiTypography-root-41 MuiTypography-title-47 MuiTypography-colorInherit-60",
+                        },
+                        "children": Array [
+                          Object {
+                            "data": "Confirm Code",
+                            "next": null,
+                            "parent": [Circular],
+                            "prev": null,
+                            "type": "text",
+                          },
+                        ],
+                        "name": "h2",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                        },
+                      },
+                    ],
+                    "name": "div",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                ],
+                "name": "header",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": [Circular],
+                "parent": [Circular],
+                "prev": null,
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                },
+              },
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "class": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "class": undefined,
+              },
+            },
+            "type": "tag",
+            "x-attribsNamespace": Object {
+              "class": undefined,
+              "tabindex": undefined,
+              "type": undefined,
+            },
+            "x-attribsPrefix": Object {
+              "class": undefined,
+              "tabindex": undefined,
+              "type": undefined,
+            },
+          },
+        ],
+        "name": "div",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": null,
+        "parent": [Circular],
+        "prev": null,
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "class": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "class": undefined,
+        },
+      },
+    ],
+    "name": "div",
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "next": null,
+    "parent": null,
+    "prev": null,
+    "root": Object {
+      "attribs": Object {},
+      "children": Array [
+        [Circular],
+      ],
+      "name": "root",
+      "namespace": "http://www.w3.org/1999/xhtml",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+      "x-attribsNamespace": Object {},
+      "x-attribsPrefix": Object {},
+    },
+    "type": "tag",
+    "x-attribsNamespace": Object {},
+    "x-attribsPrefix": Object {},
+  },
+  "_root": [Circular],
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "normalizeWhitespace": false,
+    "withDomLvl1": true,
+    "xml": false,
+  },
+}
+`;

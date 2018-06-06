@@ -23,7 +23,7 @@ export const styles =  theme => ({
     minHeight: 600,
     // minWidth: 275,
     margin: theme.spacing.unit * 2,
-    padding: 20,
+    padding: theme.spacing.unit * 2,
   },
   popperClose: {
     pointerEvents: 'none',

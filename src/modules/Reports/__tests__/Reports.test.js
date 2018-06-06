@@ -1,7 +1,8 @@
 /* eslint no-undef: "off" */
 
 import React from 'react'
-import { MemoryRouter } from 'react-router'
+import { MemoryRouter as Router } from 'react-router-dom'
+
 import { shallow } from 'enzyme'
 import Reports from '../Reports'
 
@@ -11,7 +12,7 @@ describe('Reports', () => {
   const reportsC = () => {
     if (!mountedC) {
       mountedC = shallow(
-        <MemoryRouter><Reports {...props} /></MemoryRouter>
+        <Router><Reports {...props} /></Router>
       )
     }
     return mountedC

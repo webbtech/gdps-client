@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import classNames from 'classnames'
 import moment from 'moment'
+import { withRouter } from 'react-router'
 
 import ArrowBack from '@material-ui/icons/ArrowBack'
 import ArrowForward from '@material-ui/icons/ArrowForward'
@@ -154,10 +155,10 @@ class DipSelectors extends Component {
 }
 
 DipSelectors.propTypes = {
-  classes:      PropTypes.object.isRequired,
-  history:      PropTypes.object.isRequired,
-  location:     PropTypes.object.isRequired,
-  match:        PropTypes.object.isRequired,
+  classes:  PropTypes.object.isRequired,
+  history:  PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  match:    PropTypes.object.isRequired,
 }
 
 const styles =  theme => ({
@@ -185,4 +186,4 @@ const styles =  theme => ({
   },
 })
 
-export default withStyles(styles)(DipSelectors)
+export default withRouter(withStyles(styles)(DipSelectors))
