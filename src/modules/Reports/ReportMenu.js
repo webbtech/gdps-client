@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import classNames from 'classnames'
 import { Manager, Reference, Popper } from 'react-popper'
-
+import { withRouter } from 'react-router'
 
 import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
@@ -217,4 +217,4 @@ ReportMenu.propTypes = {
   match: PropTypes.object.isRequired,
 }
 
-export default withStyles(ms)(ReportMenu)
+export default withRouter(withStyles(ms)(ReportMenu))

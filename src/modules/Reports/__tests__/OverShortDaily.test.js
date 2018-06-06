@@ -1,6 +1,8 @@
 /* eslint no-undef: "off" */
 
 import React from 'react'
+import { MemoryRouter as Router } from 'react-router-dom'
+
 import OverShortDaily from '../OverShortDaily'
 import { render } from 'enzyme'
 
@@ -11,7 +13,7 @@ describe('OverShortDaily', () => {
   const testC = () => {
     if (!mountedC) {
       mountedC = render(
-        <OverShortDaily {...props} />
+        <Router><OverShortDaily {...props} /></Router>
       )
     }
     return mountedC

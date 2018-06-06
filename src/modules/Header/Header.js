@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
 
 import { Auth } from 'aws-amplify'
 import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router'
+import LogRocket from 'logrocket'
 
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import AppBar from '@material-ui/core/AppBar'
@@ -13,6 +14,9 @@ import MenuIcon from '@material-ui/icons/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
+import { withStyles } from '@material-ui/core/styles'
+
+import { LOGROCKET_ID } from '../../config/constants'
 
 
 // function Header(props) {
@@ -26,11 +30,35 @@ class Header extends React.Component {
     this.handleMainMenu = this.handleMainMenu.bind(this)
 
     this.state = {
-      auth: true,
-      anchorEl: null,
-      menuEl: null,
-      selectedIndex: this.props.history.location.pathname,
+      auth:           true,
+      anchorEl:       null,
+      menuEl:         null,
+      selectedIndex:  this.props.history.location.pathname,
+      user:           '',
     }
+  }
+
+  componentDidMount = () => {
+    Auth.currentUserInfo()
+    // Auth.currentAuthenticatedUser()
+    .then(user => {
+      // console.log('user in componentDidMount: ', user.attributes)
+      this.setState({user: user.attributes})
+      if (user) {
+        LogRocket.init(LOGROCKET_ID)
+        const id = user.username
+
+        LogRocket.identify(id, {
+          name: user.attributes.name,
+          email: user.attributes.email,
+          environment: 'dev',
+        })
+      }
+    })
+    .catch(err => console.log(err)) // eslint-disable-line
+
+
+
   }
 
   handleChange = (event, checked) => {
@@ -63,15 +91,13 @@ class Header extends React.Component {
     .then(() => {
       this.props.history.push('/')
     })
-    .catch(err => console.error(err))
+    .catch(err => console.error(err)) // eslint-disable-line
   }
 
   render() {
 
-    // console.log('props in Header render: ', this.props)
-
     const { classes } = this.props
-    const { auth, anchorEl, menuEl, selectedIndex } = this.state
+    const { auth, anchorEl, menuEl, selectedIndex, user } = this.state
     const open = Boolean(anchorEl)
     const openMenu = Boolean(menuEl)
 
@@ -121,6 +147,7 @@ class Header extends React.Component {
             </Typography>
             {auth && (
               <div>
+                {user.name}
                 <IconButton
                     aria-haspopup="true"
                     aria-owns={open ? 'menu-appbar' : null}
@@ -143,7 +170,7 @@ class Header extends React.Component {
                       horizontal: 'right',
                     }}
                 >
-                  <MenuItem onClick={() => this.handleCloseProfileMenu()}>Profile</MenuItem>
+                  <MenuItem onClick={() => this.props.history.push('/profile')}>Profile</MenuItem>
                   <MenuItem onClick={() => this.handleLogout()}>Logout</MenuItem>
                 </Menu>
               </div>
@@ -160,22 +187,23 @@ Header.propTypes = {
   history: PropTypes.object.isRequired,
 }
 
-const styles = {
+const styles =  theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow:   1,
+    fontFamily: theme.typography.fontFamily,
   },
   flex: {
     flex: 1,
   },
   menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
+    marginLeft:   -12,
+    marginRight:  20,
   },
   titleLink: {
     textDecoration: 'none',
-    color: '#fff',
+    color:          '#fff',
   },
-}
+})
 
 const menuItems = [
   {uri: '/', label: 'Dashboard'},
@@ -185,4 +213,4 @@ const menuItems = [
   {uri: '/admin', label: 'Administration'},
 ]
 
-export default withStyles(styles)(Header)
+export default withRouter(withStyles(styles)(Header))

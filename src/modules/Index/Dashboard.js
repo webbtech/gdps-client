@@ -17,12 +17,12 @@ class Dashboard extends Component {
 
   render() {
 
-    console.log('props in Header render: ', this.props)
+    // console.log('props in Header render: ', this.props)
 
-    const { classes, history } = this.props
+    const { classes } = this.props
     return (
       <div>
-        <Header history={history} />
+        <Header />
         <Paper className={classes.paper}>
           <Typography
               gutterBottom

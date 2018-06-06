@@ -16,7 +16,7 @@ class Propane extends Component {
 
   render() {
 
-    const { classes, history, location, match } = this.props
+    const { classes, history, location } = this.props
 
     return (
       <div>
@@ -27,11 +27,7 @@ class Propane extends Component {
               variant="headline"
           >Propane Entries</Typography>
           <Divider /><br />
-          <PropaneSelectors
-              history={history}
-              location={location}
-              match={match}
-          />
+          <PropaneSelectors />
           <div style={{marginTop: 20}}>
             <PropaneForm location={location} />
           </div>
