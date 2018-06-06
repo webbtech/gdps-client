@@ -1,8 +1,10 @@
 /* eslint no-undef: "off" */
 
 import React from 'react'
-import ReportMenu from '../ReportMenu'
+import { MemoryRouter as Router } from 'react-router-dom'
 import { render } from 'enzyme'
+
+import ReportMenu from '../ReportMenu'
 
 describe('ReportMenu', () => {
 
@@ -11,7 +13,7 @@ describe('ReportMenu', () => {
   const reportC = () => {
     if (!mountedC) {
       mountedC = render(
-        <ReportMenu {...props} />
+        <Router><ReportMenu {...props} /></Router>
       )
     }
     return mountedC

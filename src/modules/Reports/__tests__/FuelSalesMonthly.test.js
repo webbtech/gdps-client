@@ -1,6 +1,8 @@
 /* eslint no-undef: "off" */
 
 import React from 'react'
+import { MemoryRouter as Router } from 'react-router-dom'
+
 import FuelSalesMonthly from '../FuelSalesMonthly'
 import { render } from 'enzyme'
 
@@ -11,7 +13,7 @@ describe('FuelSalesMonthly', () => {
   const testC = () => {
     if (!mountedC) {
       mountedC = render(
-        <FuelSalesMonthly {...props} />
+        <Router><FuelSalesMonthly {...props} /></Router>
       )
     }
     return mountedC

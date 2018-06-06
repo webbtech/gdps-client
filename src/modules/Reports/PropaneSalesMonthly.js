@@ -25,7 +25,6 @@ class PropaneSalesMonthly extends Component {
 
   render() {
 
-    const { history, match } = this.props
     const { pathname } = this.props.location
 
     return (
@@ -37,8 +36,6 @@ class PropaneSalesMonthly extends Component {
         <ReportSelectors
             hideMonth
             hideStation
-            history={history}
-            match={match}
         />
         {this.renderReport(pathname)}
       </div>
@@ -48,9 +45,7 @@ class PropaneSalesMonthly extends Component {
 
 PropaneSalesMonthly.propTypes = {
   classes:  PropTypes.object.isRequired,
-  history:  PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
-  match:    PropTypes.object.isRequired,
 }
 
 export default withStyles(ms)(PropaneSalesMonthly)

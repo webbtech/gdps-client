@@ -1,0 +1,2604 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PropaneSelectors matches snapshot 1`] = `
+initialize {
+  "0": Object {
+    "attribs": Object {
+      "class": "withRouter-PropaneSelectors--container-2",
+    },
+    "children": Array [
+      Object {
+        "attribs": Object {
+          "class": "withRouter-PropaneSelectors--selectRow-5",
+        },
+        "children": Array [
+          Object {
+            "attribs": Object {
+              "class": "withRouter-PropaneSelectors--cell-1 ",
+            },
+            "children": Array [
+              Object {
+                "attribs": Object {
+                  "class": "MuiFormControl-root-6 withRouter-PropaneSelectors--formControl-3",
+                },
+                "children": Array [
+                  Object {
+                    "data": " ",
+                    "next": Object {
+                      "attribs": Object {
+                        "class": "MuiFormControl-root-6",
+                      },
+                      "children": Array [
+                        Object {
+                          "attribs": Object {
+                            "class": "MuiFormLabel-root-16 MuiInputLabel-root-11 MuiInputLabel-formControl-12 MuiInputLabel-animated-15 MuiInputLabel-shrink-14",
+                            "data-shrink": "true",
+                          },
+                          "children": Array [
+                            Object {
+                              "data": "Date",
+                              "next": null,
+                              "parent": [Circular],
+                              "prev": null,
+                              "type": "text",
+                            },
+                          ],
+                          "name": "label",
+                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "next": Object {
+                            "attribs": Object {
+                              "class": "MuiInput-root-21 MuiInput-formControl-22 MuiInput-underline-25 WithUtils-DateTextField--input-10",
+                            },
+                            "children": Array [
+                              Object {
+                                "attribs": Object {
+                                  "aria-invalid": "false",
+                                  "aria-required": "false",
+                                  "class": "MuiInput-input-29",
+                                  "readonly": "",
+                                  "type": "text",
+                                  "value": "Jun 6, 2018",
+                                },
+                                "children": Array [],
+                                "name": "input",
+                                "namespace": "http://www.w3.org/1999/xhtml",
+                                "next": null,
+                                "parent": [Circular],
+                                "prev": null,
+                                "type": "tag",
+                                "x-attribsNamespace": Object {
+                                  "aria-invalid": undefined,
+                                  "aria-required": undefined,
+                                  "class": undefined,
+                                  "readonly": undefined,
+                                  "type": undefined,
+                                  "value": undefined,
+                                },
+                                "x-attribsPrefix": Object {
+                                  "aria-invalid": undefined,
+                                  "aria-required": undefined,
+                                  "class": undefined,
+                                  "readonly": undefined,
+                                  "type": undefined,
+                                  "value": undefined,
+                                },
+                              },
+                            ],
+                            "name": "div",
+                            "namespace": "http://www.w3.org/1999/xhtml",
+                            "next": null,
+                            "parent": [Circular],
+                            "prev": [Circular],
+                            "type": "tag",
+                            "x-attribsNamespace": Object {
+                              "class": undefined,
+                            },
+                            "x-attribsPrefix": Object {
+                              "class": undefined,
+                            },
+                          },
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "class": undefined,
+                            "data-shrink": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "class": undefined,
+                            "data-shrink": undefined,
+                          },
+                        },
+                        Object {
+                          "attribs": Object {
+                            "class": "MuiInput-root-21 MuiInput-formControl-22 MuiInput-underline-25 WithUtils-DateTextField--input-10",
+                          },
+                          "children": Array [
+                            Object {
+                              "attribs": Object {
+                                "aria-invalid": "false",
+                                "aria-required": "false",
+                                "class": "MuiInput-input-29",
+                                "readonly": "",
+                                "type": "text",
+                                "value": "Jun 6, 2018",
+                              },
+                              "children": Array [],
+                              "name": "input",
+                              "namespace": "http://www.w3.org/1999/xhtml",
+                              "next": null,
+                              "parent": [Circular],
+                              "prev": null,
+                              "type": "tag",
+                              "x-attribsNamespace": Object {
+                                "aria-invalid": undefined,
+                                "aria-required": undefined,
+                                "class": undefined,
+                                "readonly": undefined,
+                                "type": undefined,
+                                "value": undefined,
+                              },
+                              "x-attribsPrefix": Object {
+                                "aria-invalid": undefined,
+                                "aria-required": undefined,
+                                "class": undefined,
+                                "readonly": undefined,
+                                "type": undefined,
+                                "value": undefined,
+                              },
+                            },
+                          ],
+                          "name": "div",
+                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": Object {
+                            "attribs": Object {
+                              "class": "MuiFormLabel-root-16 MuiInputLabel-root-11 MuiInputLabel-formControl-12 MuiInputLabel-animated-15 MuiInputLabel-shrink-14",
+                              "data-shrink": "true",
+                            },
+                            "children": Array [
+                              Object {
+                                "data": "Date",
+                                "next": null,
+                                "parent": [Circular],
+                                "prev": null,
+                                "type": "text",
+                              },
+                            ],
+                            "name": "label",
+                            "namespace": "http://www.w3.org/1999/xhtml",
+                            "next": [Circular],
+                            "parent": [Circular],
+                            "prev": null,
+                            "type": "tag",
+                            "x-attribsNamespace": Object {
+                              "class": undefined,
+                              "data-shrink": undefined,
+                            },
+                            "x-attribsPrefix": Object {
+                              "class": undefined,
+                              "data-shrink": undefined,
+                            },
+                          },
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "class": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "class": undefined,
+                          },
+                        },
+                      ],
+                      "name": "div",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": Object {
+                        "data": " ",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": [Circular],
+                        "type": "text",
+                      },
+                      "parent": [Circular],
+                      "prev": [Circular],
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "text",
+                  },
+                  Object {
+                    "attribs": Object {
+                      "class": "MuiFormControl-root-6",
+                    },
+                    "children": Array [
+                      Object {
+                        "attribs": Object {
+                          "class": "MuiFormLabel-root-16 MuiInputLabel-root-11 MuiInputLabel-formControl-12 MuiInputLabel-animated-15 MuiInputLabel-shrink-14",
+                          "data-shrink": "true",
+                        },
+                        "children": Array [
+                          Object {
+                            "data": "Date",
+                            "next": null,
+                            "parent": [Circular],
+                            "prev": null,
+                            "type": "text",
+                          },
+                        ],
+                        "name": "label",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": Object {
+                          "attribs": Object {
+                            "class": "MuiInput-root-21 MuiInput-formControl-22 MuiInput-underline-25 WithUtils-DateTextField--input-10",
+                          },
+                          "children": Array [
+                            Object {
+                              "attribs": Object {
+                                "aria-invalid": "false",
+                                "aria-required": "false",
+                                "class": "MuiInput-input-29",
+                                "readonly": "",
+                                "type": "text",
+                                "value": "Jun 6, 2018",
+                              },
+                              "children": Array [],
+                              "name": "input",
+                              "namespace": "http://www.w3.org/1999/xhtml",
+                              "next": null,
+                              "parent": [Circular],
+                              "prev": null,
+                              "type": "tag",
+                              "x-attribsNamespace": Object {
+                                "aria-invalid": undefined,
+                                "aria-required": undefined,
+                                "class": undefined,
+                                "readonly": undefined,
+                                "type": undefined,
+                                "value": undefined,
+                              },
+                              "x-attribsPrefix": Object {
+                                "aria-invalid": undefined,
+                                "aria-required": undefined,
+                                "class": undefined,
+                                "readonly": undefined,
+                                "type": undefined,
+                                "value": undefined,
+                              },
+                            },
+                          ],
+                          "name": "div",
+                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": [Circular],
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "class": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "class": undefined,
+                          },
+                        },
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                          "data-shrink": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                          "data-shrink": undefined,
+                        },
+                      },
+                      Object {
+                        "attribs": Object {
+                          "class": "MuiInput-root-21 MuiInput-formControl-22 MuiInput-underline-25 WithUtils-DateTextField--input-10",
+                        },
+                        "children": Array [
+                          Object {
+                            "attribs": Object {
+                              "aria-invalid": "false",
+                              "aria-required": "false",
+                              "class": "MuiInput-input-29",
+                              "readonly": "",
+                              "type": "text",
+                              "value": "Jun 6, 2018",
+                            },
+                            "children": Array [],
+                            "name": "input",
+                            "namespace": "http://www.w3.org/1999/xhtml",
+                            "next": null,
+                            "parent": [Circular],
+                            "prev": null,
+                            "type": "tag",
+                            "x-attribsNamespace": Object {
+                              "aria-invalid": undefined,
+                              "aria-required": undefined,
+                              "class": undefined,
+                              "readonly": undefined,
+                              "type": undefined,
+                              "value": undefined,
+                            },
+                            "x-attribsPrefix": Object {
+                              "aria-invalid": undefined,
+                              "aria-required": undefined,
+                              "class": undefined,
+                              "readonly": undefined,
+                              "type": undefined,
+                              "value": undefined,
+                            },
+                          },
+                        ],
+                        "name": "div",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": Object {
+                          "attribs": Object {
+                            "class": "MuiFormLabel-root-16 MuiInputLabel-root-11 MuiInputLabel-formControl-12 MuiInputLabel-animated-15 MuiInputLabel-shrink-14",
+                            "data-shrink": "true",
+                          },
+                          "children": Array [
+                            Object {
+                              "data": "Date",
+                              "next": null,
+                              "parent": [Circular],
+                              "prev": null,
+                              "type": "text",
+                            },
+                          ],
+                          "name": "label",
+                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "next": [Circular],
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "class": undefined,
+                            "data-shrink": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "class": undefined,
+                            "data-shrink": undefined,
+                          },
+                        },
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                        },
+                      },
+                    ],
+                    "name": "div",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": Object {
+                      "data": " ",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": [Circular],
+                      "type": "text",
+                    },
+                    "parent": [Circular],
+                    "prev": Object {
+                      "data": " ",
+                      "next": [Circular],
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "text",
+                    },
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                  Object {
+                    "data": " ",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": Object {
+                      "attribs": Object {
+                        "class": "MuiFormControl-root-6",
+                      },
+                      "children": Array [
+                        Object {
+                          "attribs": Object {
+                            "class": "MuiFormLabel-root-16 MuiInputLabel-root-11 MuiInputLabel-formControl-12 MuiInputLabel-animated-15 MuiInputLabel-shrink-14",
+                            "data-shrink": "true",
+                          },
+                          "children": Array [
+                            Object {
+                              "data": "Date",
+                              "next": null,
+                              "parent": [Circular],
+                              "prev": null,
+                              "type": "text",
+                            },
+                          ],
+                          "name": "label",
+                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "next": Object {
+                            "attribs": Object {
+                              "class": "MuiInput-root-21 MuiInput-formControl-22 MuiInput-underline-25 WithUtils-DateTextField--input-10",
+                            },
+                            "children": Array [
+                              Object {
+                                "attribs": Object {
+                                  "aria-invalid": "false",
+                                  "aria-required": "false",
+                                  "class": "MuiInput-input-29",
+                                  "readonly": "",
+                                  "type": "text",
+                                  "value": "Jun 6, 2018",
+                                },
+                                "children": Array [],
+                                "name": "input",
+                                "namespace": "http://www.w3.org/1999/xhtml",
+                                "next": null,
+                                "parent": [Circular],
+                                "prev": null,
+                                "type": "tag",
+                                "x-attribsNamespace": Object {
+                                  "aria-invalid": undefined,
+                                  "aria-required": undefined,
+                                  "class": undefined,
+                                  "readonly": undefined,
+                                  "type": undefined,
+                                  "value": undefined,
+                                },
+                                "x-attribsPrefix": Object {
+                                  "aria-invalid": undefined,
+                                  "aria-required": undefined,
+                                  "class": undefined,
+                                  "readonly": undefined,
+                                  "type": undefined,
+                                  "value": undefined,
+                                },
+                              },
+                            ],
+                            "name": "div",
+                            "namespace": "http://www.w3.org/1999/xhtml",
+                            "next": null,
+                            "parent": [Circular],
+                            "prev": [Circular],
+                            "type": "tag",
+                            "x-attribsNamespace": Object {
+                              "class": undefined,
+                            },
+                            "x-attribsPrefix": Object {
+                              "class": undefined,
+                            },
+                          },
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "class": undefined,
+                            "data-shrink": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "class": undefined,
+                            "data-shrink": undefined,
+                          },
+                        },
+                        Object {
+                          "attribs": Object {
+                            "class": "MuiInput-root-21 MuiInput-formControl-22 MuiInput-underline-25 WithUtils-DateTextField--input-10",
+                          },
+                          "children": Array [
+                            Object {
+                              "attribs": Object {
+                                "aria-invalid": "false",
+                                "aria-required": "false",
+                                "class": "MuiInput-input-29",
+                                "readonly": "",
+                                "type": "text",
+                                "value": "Jun 6, 2018",
+                              },
+                              "children": Array [],
+                              "name": "input",
+                              "namespace": "http://www.w3.org/1999/xhtml",
+                              "next": null,
+                              "parent": [Circular],
+                              "prev": null,
+                              "type": "tag",
+                              "x-attribsNamespace": Object {
+                                "aria-invalid": undefined,
+                                "aria-required": undefined,
+                                "class": undefined,
+                                "readonly": undefined,
+                                "type": undefined,
+                                "value": undefined,
+                              },
+                              "x-attribsPrefix": Object {
+                                "aria-invalid": undefined,
+                                "aria-required": undefined,
+                                "class": undefined,
+                                "readonly": undefined,
+                                "type": undefined,
+                                "value": undefined,
+                              },
+                            },
+                          ],
+                          "name": "div",
+                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": Object {
+                            "attribs": Object {
+                              "class": "MuiFormLabel-root-16 MuiInputLabel-root-11 MuiInputLabel-formControl-12 MuiInputLabel-animated-15 MuiInputLabel-shrink-14",
+                              "data-shrink": "true",
+                            },
+                            "children": Array [
+                              Object {
+                                "data": "Date",
+                                "next": null,
+                                "parent": [Circular],
+                                "prev": null,
+                                "type": "text",
+                              },
+                            ],
+                            "name": "label",
+                            "namespace": "http://www.w3.org/1999/xhtml",
+                            "next": [Circular],
+                            "parent": [Circular],
+                            "prev": null,
+                            "type": "tag",
+                            "x-attribsNamespace": Object {
+                              "class": undefined,
+                              "data-shrink": undefined,
+                            },
+                            "x-attribsPrefix": Object {
+                              "class": undefined,
+                              "data-shrink": undefined,
+                            },
+                          },
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "class": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "class": undefined,
+                          },
+                        },
+                      ],
+                      "name": "div",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": [Circular],
+                      "parent": [Circular],
+                      "prev": Object {
+                        "data": " ",
+                        "next": [Circular],
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "text",
+                      },
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                    "type": "text",
+                  },
+                ],
+                "name": "div",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": null,
+                "parent": [Circular],
+                "prev": null,
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                },
+              },
+            ],
+            "name": "div",
+            "namespace": "http://www.w3.org/1999/xhtml",
+            "next": Object {
+              "attribs": Object {
+                "class": "withRouter-PropaneSelectors--cell-1",
+              },
+              "children": Array [
+                Object {
+                  "attribs": Object {
+                    "class": "MuiButtonBase-root-65 MuiButton-root-49 MuiButton-raised-55 MuiButton-fab-60 MuiButton-raisedSecondary-57 withRouter-PropaneSelectors--navButton-4",
+                    "tabindex": "0",
+                    "type": "button",
+                  },
+                  "children": Array [
+                    Object {
+                      "attribs": Object {
+                        "class": "MuiButton-label-50",
+                      },
+                      "children": Array [
+                        Object {
+                          "attribs": Object {
+                            "aria-hidden": "true",
+                            "class": "MuiSvgIcon-root-68",
+                            "focusable": "false",
+                            "viewBox": "0 0 24 24",
+                          },
+                          "children": Array [
+                            Object {
+                              "attribs": Object {},
+                              "children": Array [
+                                Object {
+                                  "attribs": Object {
+                                    "d": "M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z",
+                                  },
+                                  "children": Array [],
+                                  "name": "path",
+                                  "namespace": "http://www.w3.org/2000/svg",
+                                  "next": null,
+                                  "parent": [Circular],
+                                  "prev": null,
+                                  "type": "tag",
+                                  "x-attribsNamespace": Object {
+                                    "d": undefined,
+                                  },
+                                  "x-attribsPrefix": Object {
+                                    "d": undefined,
+                                  },
+                                },
+                              ],
+                              "name": "g",
+                              "namespace": "http://www.w3.org/2000/svg",
+                              "next": null,
+                              "parent": [Circular],
+                              "prev": null,
+                              "type": "tag",
+                              "x-attribsNamespace": Object {},
+                              "x-attribsPrefix": Object {},
+                            },
+                          ],
+                          "name": "svg",
+                          "namespace": "http://www.w3.org/2000/svg",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "aria-hidden": undefined,
+                            "class": undefined,
+                            "focusable": undefined,
+                            "viewBox": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "aria-hidden": undefined,
+                            "class": undefined,
+                            "focusable": undefined,
+                            "viewBox": undefined,
+                          },
+                        },
+                      ],
+                      "name": "span",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": Object {
+                        "attribs": Object {
+                          "class": "MuiTouchRipple-root-74",
+                        },
+                        "children": Array [],
+                        "name": "span",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": [Circular],
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                        },
+                      },
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                    Object {
+                      "attribs": Object {
+                        "class": "MuiTouchRipple-root-74",
+                      },
+                      "children": Array [],
+                      "name": "span",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": Object {
+                        "attribs": Object {
+                          "class": "MuiButton-label-50",
+                        },
+                        "children": Array [
+                          Object {
+                            "attribs": Object {
+                              "aria-hidden": "true",
+                              "class": "MuiSvgIcon-root-68",
+                              "focusable": "false",
+                              "viewBox": "0 0 24 24",
+                            },
+                            "children": Array [
+                              Object {
+                                "attribs": Object {},
+                                "children": Array [
+                                  Object {
+                                    "attribs": Object {
+                                      "d": "M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z",
+                                    },
+                                    "children": Array [],
+                                    "name": "path",
+                                    "namespace": "http://www.w3.org/2000/svg",
+                                    "next": null,
+                                    "parent": [Circular],
+                                    "prev": null,
+                                    "type": "tag",
+                                    "x-attribsNamespace": Object {
+                                      "d": undefined,
+                                    },
+                                    "x-attribsPrefix": Object {
+                                      "d": undefined,
+                                    },
+                                  },
+                                ],
+                                "name": "g",
+                                "namespace": "http://www.w3.org/2000/svg",
+                                "next": null,
+                                "parent": [Circular],
+                                "prev": null,
+                                "type": "tag",
+                                "x-attribsNamespace": Object {},
+                                "x-attribsPrefix": Object {},
+                              },
+                            ],
+                            "name": "svg",
+                            "namespace": "http://www.w3.org/2000/svg",
+                            "next": null,
+                            "parent": [Circular],
+                            "prev": null,
+                            "type": "tag",
+                            "x-attribsNamespace": Object {
+                              "aria-hidden": undefined,
+                              "class": undefined,
+                              "focusable": undefined,
+                              "viewBox": undefined,
+                            },
+                            "x-attribsPrefix": Object {
+                              "aria-hidden": undefined,
+                              "class": undefined,
+                              "focusable": undefined,
+                              "viewBox": undefined,
+                            },
+                          },
+                        ],
+                        "name": "span",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": [Circular],
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                        },
+                      },
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                  ],
+                  "name": "button",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": Object {
+                    "attribs": Object {
+                      "class": "MuiButtonBase-root-65 MuiButtonBase-disabled-66 MuiButton-root-49 MuiButton-raised-55 MuiButton-fab-60 MuiButton-raisedSecondary-57 MuiButton-disabled-59 withRouter-PropaneSelectors--navButton-4",
+                      "disabled": "",
+                      "tabindex": "-1",
+                      "type": "button",
+                    },
+                    "children": Array [
+                      Object {
+                        "attribs": Object {
+                          "class": "MuiButton-label-50",
+                        },
+                        "children": Array [
+                          Object {
+                            "attribs": Object {
+                              "aria-hidden": "true",
+                              "class": "MuiSvgIcon-root-68",
+                              "focusable": "false",
+                              "viewBox": "0 0 24 24",
+                            },
+                            "children": Array [
+                              Object {
+                                "attribs": Object {},
+                                "children": Array [
+                                  Object {
+                                    "attribs": Object {
+                                      "d": "M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z",
+                                    },
+                                    "children": Array [],
+                                    "name": "path",
+                                    "namespace": "http://www.w3.org/2000/svg",
+                                    "next": null,
+                                    "parent": [Circular],
+                                    "prev": null,
+                                    "type": "tag",
+                                    "x-attribsNamespace": Object {
+                                      "d": undefined,
+                                    },
+                                    "x-attribsPrefix": Object {
+                                      "d": undefined,
+                                    },
+                                  },
+                                ],
+                                "name": "g",
+                                "namespace": "http://www.w3.org/2000/svg",
+                                "next": null,
+                                "parent": [Circular],
+                                "prev": null,
+                                "type": "tag",
+                                "x-attribsNamespace": Object {},
+                                "x-attribsPrefix": Object {},
+                              },
+                            ],
+                            "name": "svg",
+                            "namespace": "http://www.w3.org/2000/svg",
+                            "next": null,
+                            "parent": [Circular],
+                            "prev": null,
+                            "type": "tag",
+                            "x-attribsNamespace": Object {
+                              "aria-hidden": undefined,
+                              "class": undefined,
+                              "focusable": undefined,
+                              "viewBox": undefined,
+                            },
+                            "x-attribsPrefix": Object {
+                              "aria-hidden": undefined,
+                              "class": undefined,
+                              "focusable": undefined,
+                              "viewBox": undefined,
+                            },
+                          },
+                        ],
+                        "name": "span",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                        },
+                      },
+                    ],
+                    "name": "button",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": [Circular],
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                      "disabled": undefined,
+                      "tabindex": undefined,
+                      "type": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                      "disabled": undefined,
+                      "tabindex": undefined,
+                      "type": undefined,
+                    },
+                  },
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                    "tabindex": undefined,
+                    "type": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                    "tabindex": undefined,
+                    "type": undefined,
+                  },
+                },
+                Object {
+                  "attribs": Object {
+                    "class": "MuiButtonBase-root-65 MuiButtonBase-disabled-66 MuiButton-root-49 MuiButton-raised-55 MuiButton-fab-60 MuiButton-raisedSecondary-57 MuiButton-disabled-59 withRouter-PropaneSelectors--navButton-4",
+                    "disabled": "",
+                    "tabindex": "-1",
+                    "type": "button",
+                  },
+                  "children": Array [
+                    Object {
+                      "attribs": Object {
+                        "class": "MuiButton-label-50",
+                      },
+                      "children": Array [
+                        Object {
+                          "attribs": Object {
+                            "aria-hidden": "true",
+                            "class": "MuiSvgIcon-root-68",
+                            "focusable": "false",
+                            "viewBox": "0 0 24 24",
+                          },
+                          "children": Array [
+                            Object {
+                              "attribs": Object {},
+                              "children": Array [
+                                Object {
+                                  "attribs": Object {
+                                    "d": "M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z",
+                                  },
+                                  "children": Array [],
+                                  "name": "path",
+                                  "namespace": "http://www.w3.org/2000/svg",
+                                  "next": null,
+                                  "parent": [Circular],
+                                  "prev": null,
+                                  "type": "tag",
+                                  "x-attribsNamespace": Object {
+                                    "d": undefined,
+                                  },
+                                  "x-attribsPrefix": Object {
+                                    "d": undefined,
+                                  },
+                                },
+                              ],
+                              "name": "g",
+                              "namespace": "http://www.w3.org/2000/svg",
+                              "next": null,
+                              "parent": [Circular],
+                              "prev": null,
+                              "type": "tag",
+                              "x-attribsNamespace": Object {},
+                              "x-attribsPrefix": Object {},
+                            },
+                          ],
+                          "name": "svg",
+                          "namespace": "http://www.w3.org/2000/svg",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "aria-hidden": undefined,
+                            "class": undefined,
+                            "focusable": undefined,
+                            "viewBox": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "aria-hidden": undefined,
+                            "class": undefined,
+                            "focusable": undefined,
+                            "viewBox": undefined,
+                          },
+                        },
+                      ],
+                      "name": "span",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                  ],
+                  "name": "button",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": Object {
+                    "attribs": Object {
+                      "class": "MuiButtonBase-root-65 MuiButton-root-49 MuiButton-raised-55 MuiButton-fab-60 MuiButton-raisedSecondary-57 withRouter-PropaneSelectors--navButton-4",
+                      "tabindex": "0",
+                      "type": "button",
+                    },
+                    "children": Array [
+                      Object {
+                        "attribs": Object {
+                          "class": "MuiButton-label-50",
+                        },
+                        "children": Array [
+                          Object {
+                            "attribs": Object {
+                              "aria-hidden": "true",
+                              "class": "MuiSvgIcon-root-68",
+                              "focusable": "false",
+                              "viewBox": "0 0 24 24",
+                            },
+                            "children": Array [
+                              Object {
+                                "attribs": Object {},
+                                "children": Array [
+                                  Object {
+                                    "attribs": Object {
+                                      "d": "M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z",
+                                    },
+                                    "children": Array [],
+                                    "name": "path",
+                                    "namespace": "http://www.w3.org/2000/svg",
+                                    "next": null,
+                                    "parent": [Circular],
+                                    "prev": null,
+                                    "type": "tag",
+                                    "x-attribsNamespace": Object {
+                                      "d": undefined,
+                                    },
+                                    "x-attribsPrefix": Object {
+                                      "d": undefined,
+                                    },
+                                  },
+                                ],
+                                "name": "g",
+                                "namespace": "http://www.w3.org/2000/svg",
+                                "next": null,
+                                "parent": [Circular],
+                                "prev": null,
+                                "type": "tag",
+                                "x-attribsNamespace": Object {},
+                                "x-attribsPrefix": Object {},
+                              },
+                            ],
+                            "name": "svg",
+                            "namespace": "http://www.w3.org/2000/svg",
+                            "next": null,
+                            "parent": [Circular],
+                            "prev": null,
+                            "type": "tag",
+                            "x-attribsNamespace": Object {
+                              "aria-hidden": undefined,
+                              "class": undefined,
+                              "focusable": undefined,
+                              "viewBox": undefined,
+                            },
+                            "x-attribsPrefix": Object {
+                              "aria-hidden": undefined,
+                              "class": undefined,
+                              "focusable": undefined,
+                              "viewBox": undefined,
+                            },
+                          },
+                        ],
+                        "name": "span",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": Object {
+                          "attribs": Object {
+                            "class": "MuiTouchRipple-root-74",
+                          },
+                          "children": Array [],
+                          "name": "span",
+                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": [Circular],
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "class": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "class": undefined,
+                          },
+                        },
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                        },
+                      },
+                      Object {
+                        "attribs": Object {
+                          "class": "MuiTouchRipple-root-74",
+                        },
+                        "children": Array [],
+                        "name": "span",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": Object {
+                          "attribs": Object {
+                            "class": "MuiButton-label-50",
+                          },
+                          "children": Array [
+                            Object {
+                              "attribs": Object {
+                                "aria-hidden": "true",
+                                "class": "MuiSvgIcon-root-68",
+                                "focusable": "false",
+                                "viewBox": "0 0 24 24",
+                              },
+                              "children": Array [
+                                Object {
+                                  "attribs": Object {},
+                                  "children": Array [
+                                    Object {
+                                      "attribs": Object {
+                                        "d": "M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z",
+                                      },
+                                      "children": Array [],
+                                      "name": "path",
+                                      "namespace": "http://www.w3.org/2000/svg",
+                                      "next": null,
+                                      "parent": [Circular],
+                                      "prev": null,
+                                      "type": "tag",
+                                      "x-attribsNamespace": Object {
+                                        "d": undefined,
+                                      },
+                                      "x-attribsPrefix": Object {
+                                        "d": undefined,
+                                      },
+                                    },
+                                  ],
+                                  "name": "g",
+                                  "namespace": "http://www.w3.org/2000/svg",
+                                  "next": null,
+                                  "parent": [Circular],
+                                  "prev": null,
+                                  "type": "tag",
+                                  "x-attribsNamespace": Object {},
+                                  "x-attribsPrefix": Object {},
+                                },
+                              ],
+                              "name": "svg",
+                              "namespace": "http://www.w3.org/2000/svg",
+                              "next": null,
+                              "parent": [Circular],
+                              "prev": null,
+                              "type": "tag",
+                              "x-attribsNamespace": Object {
+                                "aria-hidden": undefined,
+                                "class": undefined,
+                                "focusable": undefined,
+                                "viewBox": undefined,
+                              },
+                              "x-attribsPrefix": Object {
+                                "aria-hidden": undefined,
+                                "class": undefined,
+                                "focusable": undefined,
+                                "viewBox": undefined,
+                              },
+                            },
+                          ],
+                          "name": "span",
+                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "next": [Circular],
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "class": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "class": undefined,
+                          },
+                        },
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                        },
+                      },
+                    ],
+                    "name": "button",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": [Circular],
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                      "tabindex": undefined,
+                      "type": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                      "tabindex": undefined,
+                      "type": undefined,
+                    },
+                  },
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                    "disabled": undefined,
+                    "tabindex": undefined,
+                    "type": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                    "disabled": undefined,
+                    "tabindex": undefined,
+                    "type": undefined,
+                  },
+                },
+              ],
+              "name": "div",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": null,
+              "parent": [Circular],
+              "prev": [Circular],
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "class": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "class": undefined,
+              },
+            },
+            "parent": [Circular],
+            "prev": null,
+            "type": "tag",
+            "x-attribsNamespace": Object {
+              "class": undefined,
+            },
+            "x-attribsPrefix": Object {
+              "class": undefined,
+            },
+          },
+          Object {
+            "attribs": Object {
+              "class": "withRouter-PropaneSelectors--cell-1",
+            },
+            "children": Array [
+              Object {
+                "attribs": Object {
+                  "class": "MuiButtonBase-root-65 MuiButton-root-49 MuiButton-raised-55 MuiButton-fab-60 MuiButton-raisedSecondary-57 withRouter-PropaneSelectors--navButton-4",
+                  "tabindex": "0",
+                  "type": "button",
+                },
+                "children": Array [
+                  Object {
+                    "attribs": Object {
+                      "class": "MuiButton-label-50",
+                    },
+                    "children": Array [
+                      Object {
+                        "attribs": Object {
+                          "aria-hidden": "true",
+                          "class": "MuiSvgIcon-root-68",
+                          "focusable": "false",
+                          "viewBox": "0 0 24 24",
+                        },
+                        "children": Array [
+                          Object {
+                            "attribs": Object {},
+                            "children": Array [
+                              Object {
+                                "attribs": Object {
+                                  "d": "M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z",
+                                },
+                                "children": Array [],
+                                "name": "path",
+                                "namespace": "http://www.w3.org/2000/svg",
+                                "next": null,
+                                "parent": [Circular],
+                                "prev": null,
+                                "type": "tag",
+                                "x-attribsNamespace": Object {
+                                  "d": undefined,
+                                },
+                                "x-attribsPrefix": Object {
+                                  "d": undefined,
+                                },
+                              },
+                            ],
+                            "name": "g",
+                            "namespace": "http://www.w3.org/2000/svg",
+                            "next": null,
+                            "parent": [Circular],
+                            "prev": null,
+                            "type": "tag",
+                            "x-attribsNamespace": Object {},
+                            "x-attribsPrefix": Object {},
+                          },
+                        ],
+                        "name": "svg",
+                        "namespace": "http://www.w3.org/2000/svg",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "aria-hidden": undefined,
+                          "class": undefined,
+                          "focusable": undefined,
+                          "viewBox": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "aria-hidden": undefined,
+                          "class": undefined,
+                          "focusable": undefined,
+                          "viewBox": undefined,
+                        },
+                      },
+                    ],
+                    "name": "span",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": Object {
+                      "attribs": Object {
+                        "class": "MuiTouchRipple-root-74",
+                      },
+                      "children": Array [],
+                      "name": "span",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": [Circular],
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                  Object {
+                    "attribs": Object {
+                      "class": "MuiTouchRipple-root-74",
+                    },
+                    "children": Array [],
+                    "name": "span",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": Object {
+                      "attribs": Object {
+                        "class": "MuiButton-label-50",
+                      },
+                      "children": Array [
+                        Object {
+                          "attribs": Object {
+                            "aria-hidden": "true",
+                            "class": "MuiSvgIcon-root-68",
+                            "focusable": "false",
+                            "viewBox": "0 0 24 24",
+                          },
+                          "children": Array [
+                            Object {
+                              "attribs": Object {},
+                              "children": Array [
+                                Object {
+                                  "attribs": Object {
+                                    "d": "M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z",
+                                  },
+                                  "children": Array [],
+                                  "name": "path",
+                                  "namespace": "http://www.w3.org/2000/svg",
+                                  "next": null,
+                                  "parent": [Circular],
+                                  "prev": null,
+                                  "type": "tag",
+                                  "x-attribsNamespace": Object {
+                                    "d": undefined,
+                                  },
+                                  "x-attribsPrefix": Object {
+                                    "d": undefined,
+                                  },
+                                },
+                              ],
+                              "name": "g",
+                              "namespace": "http://www.w3.org/2000/svg",
+                              "next": null,
+                              "parent": [Circular],
+                              "prev": null,
+                              "type": "tag",
+                              "x-attribsNamespace": Object {},
+                              "x-attribsPrefix": Object {},
+                            },
+                          ],
+                          "name": "svg",
+                          "namespace": "http://www.w3.org/2000/svg",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "aria-hidden": undefined,
+                            "class": undefined,
+                            "focusable": undefined,
+                            "viewBox": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "aria-hidden": undefined,
+                            "class": undefined,
+                            "focusable": undefined,
+                            "viewBox": undefined,
+                          },
+                        },
+                      ],
+                      "name": "span",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": [Circular],
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                ],
+                "name": "button",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": Object {
+                  "attribs": Object {
+                    "class": "MuiButtonBase-root-65 MuiButtonBase-disabled-66 MuiButton-root-49 MuiButton-raised-55 MuiButton-fab-60 MuiButton-raisedSecondary-57 MuiButton-disabled-59 withRouter-PropaneSelectors--navButton-4",
+                    "disabled": "",
+                    "tabindex": "-1",
+                    "type": "button",
+                  },
+                  "children": Array [
+                    Object {
+                      "attribs": Object {
+                        "class": "MuiButton-label-50",
+                      },
+                      "children": Array [
+                        Object {
+                          "attribs": Object {
+                            "aria-hidden": "true",
+                            "class": "MuiSvgIcon-root-68",
+                            "focusable": "false",
+                            "viewBox": "0 0 24 24",
+                          },
+                          "children": Array [
+                            Object {
+                              "attribs": Object {},
+                              "children": Array [
+                                Object {
+                                  "attribs": Object {
+                                    "d": "M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z",
+                                  },
+                                  "children": Array [],
+                                  "name": "path",
+                                  "namespace": "http://www.w3.org/2000/svg",
+                                  "next": null,
+                                  "parent": [Circular],
+                                  "prev": null,
+                                  "type": "tag",
+                                  "x-attribsNamespace": Object {
+                                    "d": undefined,
+                                  },
+                                  "x-attribsPrefix": Object {
+                                    "d": undefined,
+                                  },
+                                },
+                              ],
+                              "name": "g",
+                              "namespace": "http://www.w3.org/2000/svg",
+                              "next": null,
+                              "parent": [Circular],
+                              "prev": null,
+                              "type": "tag",
+                              "x-attribsNamespace": Object {},
+                              "x-attribsPrefix": Object {},
+                            },
+                          ],
+                          "name": "svg",
+                          "namespace": "http://www.w3.org/2000/svg",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "aria-hidden": undefined,
+                            "class": undefined,
+                            "focusable": undefined,
+                            "viewBox": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "aria-hidden": undefined,
+                            "class": undefined,
+                            "focusable": undefined,
+                            "viewBox": undefined,
+                          },
+                        },
+                      ],
+                      "name": "span",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                  ],
+                  "name": "button",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": [Circular],
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                    "disabled": undefined,
+                    "tabindex": undefined,
+                    "type": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                    "disabled": undefined,
+                    "tabindex": undefined,
+                    "type": undefined,
+                  },
+                },
+                "parent": [Circular],
+                "prev": null,
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                  "tabindex": undefined,
+                  "type": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                  "tabindex": undefined,
+                  "type": undefined,
+                },
+              },
+              Object {
+                "attribs": Object {
+                  "class": "MuiButtonBase-root-65 MuiButtonBase-disabled-66 MuiButton-root-49 MuiButton-raised-55 MuiButton-fab-60 MuiButton-raisedSecondary-57 MuiButton-disabled-59 withRouter-PropaneSelectors--navButton-4",
+                  "disabled": "",
+                  "tabindex": "-1",
+                  "type": "button",
+                },
+                "children": Array [
+                  Object {
+                    "attribs": Object {
+                      "class": "MuiButton-label-50",
+                    },
+                    "children": Array [
+                      Object {
+                        "attribs": Object {
+                          "aria-hidden": "true",
+                          "class": "MuiSvgIcon-root-68",
+                          "focusable": "false",
+                          "viewBox": "0 0 24 24",
+                        },
+                        "children": Array [
+                          Object {
+                            "attribs": Object {},
+                            "children": Array [
+                              Object {
+                                "attribs": Object {
+                                  "d": "M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z",
+                                },
+                                "children": Array [],
+                                "name": "path",
+                                "namespace": "http://www.w3.org/2000/svg",
+                                "next": null,
+                                "parent": [Circular],
+                                "prev": null,
+                                "type": "tag",
+                                "x-attribsNamespace": Object {
+                                  "d": undefined,
+                                },
+                                "x-attribsPrefix": Object {
+                                  "d": undefined,
+                                },
+                              },
+                            ],
+                            "name": "g",
+                            "namespace": "http://www.w3.org/2000/svg",
+                            "next": null,
+                            "parent": [Circular],
+                            "prev": null,
+                            "type": "tag",
+                            "x-attribsNamespace": Object {},
+                            "x-attribsPrefix": Object {},
+                          },
+                        ],
+                        "name": "svg",
+                        "namespace": "http://www.w3.org/2000/svg",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "aria-hidden": undefined,
+                          "class": undefined,
+                          "focusable": undefined,
+                          "viewBox": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "aria-hidden": undefined,
+                          "class": undefined,
+                          "focusable": undefined,
+                          "viewBox": undefined,
+                        },
+                      },
+                    ],
+                    "name": "span",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                ],
+                "name": "button",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": null,
+                "parent": [Circular],
+                "prev": Object {
+                  "attribs": Object {
+                    "class": "MuiButtonBase-root-65 MuiButton-root-49 MuiButton-raised-55 MuiButton-fab-60 MuiButton-raisedSecondary-57 withRouter-PropaneSelectors--navButton-4",
+                    "tabindex": "0",
+                    "type": "button",
+                  },
+                  "children": Array [
+                    Object {
+                      "attribs": Object {
+                        "class": "MuiButton-label-50",
+                      },
+                      "children": Array [
+                        Object {
+                          "attribs": Object {
+                            "aria-hidden": "true",
+                            "class": "MuiSvgIcon-root-68",
+                            "focusable": "false",
+                            "viewBox": "0 0 24 24",
+                          },
+                          "children": Array [
+                            Object {
+                              "attribs": Object {},
+                              "children": Array [
+                                Object {
+                                  "attribs": Object {
+                                    "d": "M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z",
+                                  },
+                                  "children": Array [],
+                                  "name": "path",
+                                  "namespace": "http://www.w3.org/2000/svg",
+                                  "next": null,
+                                  "parent": [Circular],
+                                  "prev": null,
+                                  "type": "tag",
+                                  "x-attribsNamespace": Object {
+                                    "d": undefined,
+                                  },
+                                  "x-attribsPrefix": Object {
+                                    "d": undefined,
+                                  },
+                                },
+                              ],
+                              "name": "g",
+                              "namespace": "http://www.w3.org/2000/svg",
+                              "next": null,
+                              "parent": [Circular],
+                              "prev": null,
+                              "type": "tag",
+                              "x-attribsNamespace": Object {},
+                              "x-attribsPrefix": Object {},
+                            },
+                          ],
+                          "name": "svg",
+                          "namespace": "http://www.w3.org/2000/svg",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "aria-hidden": undefined,
+                            "class": undefined,
+                            "focusable": undefined,
+                            "viewBox": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "aria-hidden": undefined,
+                            "class": undefined,
+                            "focusable": undefined,
+                            "viewBox": undefined,
+                          },
+                        },
+                      ],
+                      "name": "span",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": Object {
+                        "attribs": Object {
+                          "class": "MuiTouchRipple-root-74",
+                        },
+                        "children": Array [],
+                        "name": "span",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": [Circular],
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                        },
+                      },
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                    Object {
+                      "attribs": Object {
+                        "class": "MuiTouchRipple-root-74",
+                      },
+                      "children": Array [],
+                      "name": "span",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": Object {
+                        "attribs": Object {
+                          "class": "MuiButton-label-50",
+                        },
+                        "children": Array [
+                          Object {
+                            "attribs": Object {
+                              "aria-hidden": "true",
+                              "class": "MuiSvgIcon-root-68",
+                              "focusable": "false",
+                              "viewBox": "0 0 24 24",
+                            },
+                            "children": Array [
+                              Object {
+                                "attribs": Object {},
+                                "children": Array [
+                                  Object {
+                                    "attribs": Object {
+                                      "d": "M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z",
+                                    },
+                                    "children": Array [],
+                                    "name": "path",
+                                    "namespace": "http://www.w3.org/2000/svg",
+                                    "next": null,
+                                    "parent": [Circular],
+                                    "prev": null,
+                                    "type": "tag",
+                                    "x-attribsNamespace": Object {
+                                      "d": undefined,
+                                    },
+                                    "x-attribsPrefix": Object {
+                                      "d": undefined,
+                                    },
+                                  },
+                                ],
+                                "name": "g",
+                                "namespace": "http://www.w3.org/2000/svg",
+                                "next": null,
+                                "parent": [Circular],
+                                "prev": null,
+                                "type": "tag",
+                                "x-attribsNamespace": Object {},
+                                "x-attribsPrefix": Object {},
+                              },
+                            ],
+                            "name": "svg",
+                            "namespace": "http://www.w3.org/2000/svg",
+                            "next": null,
+                            "parent": [Circular],
+                            "prev": null,
+                            "type": "tag",
+                            "x-attribsNamespace": Object {
+                              "aria-hidden": undefined,
+                              "class": undefined,
+                              "focusable": undefined,
+                              "viewBox": undefined,
+                            },
+                            "x-attribsPrefix": Object {
+                              "aria-hidden": undefined,
+                              "class": undefined,
+                              "focusable": undefined,
+                              "viewBox": undefined,
+                            },
+                          },
+                        ],
+                        "name": "span",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": [Circular],
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                        },
+                      },
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                  ],
+                  "name": "button",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": [Circular],
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                    "tabindex": undefined,
+                    "type": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                    "tabindex": undefined,
+                    "type": undefined,
+                  },
+                },
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                  "disabled": undefined,
+                  "tabindex": undefined,
+                  "type": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                  "disabled": undefined,
+                  "tabindex": undefined,
+                  "type": undefined,
+                },
+              },
+            ],
+            "name": "div",
+            "namespace": "http://www.w3.org/1999/xhtml",
+            "next": null,
+            "parent": [Circular],
+            "prev": Object {
+              "attribs": Object {
+                "class": "withRouter-PropaneSelectors--cell-1 ",
+              },
+              "children": Array [
+                Object {
+                  "attribs": Object {
+                    "class": "MuiFormControl-root-6 withRouter-PropaneSelectors--formControl-3",
+                  },
+                  "children": Array [
+                    Object {
+                      "data": " ",
+                      "next": Object {
+                        "attribs": Object {
+                          "class": "MuiFormControl-root-6",
+                        },
+                        "children": Array [
+                          Object {
+                            "attribs": Object {
+                              "class": "MuiFormLabel-root-16 MuiInputLabel-root-11 MuiInputLabel-formControl-12 MuiInputLabel-animated-15 MuiInputLabel-shrink-14",
+                              "data-shrink": "true",
+                            },
+                            "children": Array [
+                              Object {
+                                "data": "Date",
+                                "next": null,
+                                "parent": [Circular],
+                                "prev": null,
+                                "type": "text",
+                              },
+                            ],
+                            "name": "label",
+                            "namespace": "http://www.w3.org/1999/xhtml",
+                            "next": Object {
+                              "attribs": Object {
+                                "class": "MuiInput-root-21 MuiInput-formControl-22 MuiInput-underline-25 WithUtils-DateTextField--input-10",
+                              },
+                              "children": Array [
+                                Object {
+                                  "attribs": Object {
+                                    "aria-invalid": "false",
+                                    "aria-required": "false",
+                                    "class": "MuiInput-input-29",
+                                    "readonly": "",
+                                    "type": "text",
+                                    "value": "Jun 6, 2018",
+                                  },
+                                  "children": Array [],
+                                  "name": "input",
+                                  "namespace": "http://www.w3.org/1999/xhtml",
+                                  "next": null,
+                                  "parent": [Circular],
+                                  "prev": null,
+                                  "type": "tag",
+                                  "x-attribsNamespace": Object {
+                                    "aria-invalid": undefined,
+                                    "aria-required": undefined,
+                                    "class": undefined,
+                                    "readonly": undefined,
+                                    "type": undefined,
+                                    "value": undefined,
+                                  },
+                                  "x-attribsPrefix": Object {
+                                    "aria-invalid": undefined,
+                                    "aria-required": undefined,
+                                    "class": undefined,
+                                    "readonly": undefined,
+                                    "type": undefined,
+                                    "value": undefined,
+                                  },
+                                },
+                              ],
+                              "name": "div",
+                              "namespace": "http://www.w3.org/1999/xhtml",
+                              "next": null,
+                              "parent": [Circular],
+                              "prev": [Circular],
+                              "type": "tag",
+                              "x-attribsNamespace": Object {
+                                "class": undefined,
+                              },
+                              "x-attribsPrefix": Object {
+                                "class": undefined,
+                              },
+                            },
+                            "parent": [Circular],
+                            "prev": null,
+                            "type": "tag",
+                            "x-attribsNamespace": Object {
+                              "class": undefined,
+                              "data-shrink": undefined,
+                            },
+                            "x-attribsPrefix": Object {
+                              "class": undefined,
+                              "data-shrink": undefined,
+                            },
+                          },
+                          Object {
+                            "attribs": Object {
+                              "class": "MuiInput-root-21 MuiInput-formControl-22 MuiInput-underline-25 WithUtils-DateTextField--input-10",
+                            },
+                            "children": Array [
+                              Object {
+                                "attribs": Object {
+                                  "aria-invalid": "false",
+                                  "aria-required": "false",
+                                  "class": "MuiInput-input-29",
+                                  "readonly": "",
+                                  "type": "text",
+                                  "value": "Jun 6, 2018",
+                                },
+                                "children": Array [],
+                                "name": "input",
+                                "namespace": "http://www.w3.org/1999/xhtml",
+                                "next": null,
+                                "parent": [Circular],
+                                "prev": null,
+                                "type": "tag",
+                                "x-attribsNamespace": Object {
+                                  "aria-invalid": undefined,
+                                  "aria-required": undefined,
+                                  "class": undefined,
+                                  "readonly": undefined,
+                                  "type": undefined,
+                                  "value": undefined,
+                                },
+                                "x-attribsPrefix": Object {
+                                  "aria-invalid": undefined,
+                                  "aria-required": undefined,
+                                  "class": undefined,
+                                  "readonly": undefined,
+                                  "type": undefined,
+                                  "value": undefined,
+                                },
+                              },
+                            ],
+                            "name": "div",
+                            "namespace": "http://www.w3.org/1999/xhtml",
+                            "next": null,
+                            "parent": [Circular],
+                            "prev": Object {
+                              "attribs": Object {
+                                "class": "MuiFormLabel-root-16 MuiInputLabel-root-11 MuiInputLabel-formControl-12 MuiInputLabel-animated-15 MuiInputLabel-shrink-14",
+                                "data-shrink": "true",
+                              },
+                              "children": Array [
+                                Object {
+                                  "data": "Date",
+                                  "next": null,
+                                  "parent": [Circular],
+                                  "prev": null,
+                                  "type": "text",
+                                },
+                              ],
+                              "name": "label",
+                              "namespace": "http://www.w3.org/1999/xhtml",
+                              "next": [Circular],
+                              "parent": [Circular],
+                              "prev": null,
+                              "type": "tag",
+                              "x-attribsNamespace": Object {
+                                "class": undefined,
+                                "data-shrink": undefined,
+                              },
+                              "x-attribsPrefix": Object {
+                                "class": undefined,
+                                "data-shrink": undefined,
+                              },
+                            },
+                            "type": "tag",
+                            "x-attribsNamespace": Object {
+                              "class": undefined,
+                            },
+                            "x-attribsPrefix": Object {
+                              "class": undefined,
+                            },
+                          },
+                        ],
+                        "name": "div",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": Object {
+                          "data": " ",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": [Circular],
+                          "type": "text",
+                        },
+                        "parent": [Circular],
+                        "prev": [Circular],
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                        },
+                      },
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "text",
+                    },
+                    Object {
+                      "attribs": Object {
+                        "class": "MuiFormControl-root-6",
+                      },
+                      "children": Array [
+                        Object {
+                          "attribs": Object {
+                            "class": "MuiFormLabel-root-16 MuiInputLabel-root-11 MuiInputLabel-formControl-12 MuiInputLabel-animated-15 MuiInputLabel-shrink-14",
+                            "data-shrink": "true",
+                          },
+                          "children": Array [
+                            Object {
+                              "data": "Date",
+                              "next": null,
+                              "parent": [Circular],
+                              "prev": null,
+                              "type": "text",
+                            },
+                          ],
+                          "name": "label",
+                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "next": Object {
+                            "attribs": Object {
+                              "class": "MuiInput-root-21 MuiInput-formControl-22 MuiInput-underline-25 WithUtils-DateTextField--input-10",
+                            },
+                            "children": Array [
+                              Object {
+                                "attribs": Object {
+                                  "aria-invalid": "false",
+                                  "aria-required": "false",
+                                  "class": "MuiInput-input-29",
+                                  "readonly": "",
+                                  "type": "text",
+                                  "value": "Jun 6, 2018",
+                                },
+                                "children": Array [],
+                                "name": "input",
+                                "namespace": "http://www.w3.org/1999/xhtml",
+                                "next": null,
+                                "parent": [Circular],
+                                "prev": null,
+                                "type": "tag",
+                                "x-attribsNamespace": Object {
+                                  "aria-invalid": undefined,
+                                  "aria-required": undefined,
+                                  "class": undefined,
+                                  "readonly": undefined,
+                                  "type": undefined,
+                                  "value": undefined,
+                                },
+                                "x-attribsPrefix": Object {
+                                  "aria-invalid": undefined,
+                                  "aria-required": undefined,
+                                  "class": undefined,
+                                  "readonly": undefined,
+                                  "type": undefined,
+                                  "value": undefined,
+                                },
+                              },
+                            ],
+                            "name": "div",
+                            "namespace": "http://www.w3.org/1999/xhtml",
+                            "next": null,
+                            "parent": [Circular],
+                            "prev": [Circular],
+                            "type": "tag",
+                            "x-attribsNamespace": Object {
+                              "class": undefined,
+                            },
+                            "x-attribsPrefix": Object {
+                              "class": undefined,
+                            },
+                          },
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "class": undefined,
+                            "data-shrink": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "class": undefined,
+                            "data-shrink": undefined,
+                          },
+                        },
+                        Object {
+                          "attribs": Object {
+                            "class": "MuiInput-root-21 MuiInput-formControl-22 MuiInput-underline-25 WithUtils-DateTextField--input-10",
+                          },
+                          "children": Array [
+                            Object {
+                              "attribs": Object {
+                                "aria-invalid": "false",
+                                "aria-required": "false",
+                                "class": "MuiInput-input-29",
+                                "readonly": "",
+                                "type": "text",
+                                "value": "Jun 6, 2018",
+                              },
+                              "children": Array [],
+                              "name": "input",
+                              "namespace": "http://www.w3.org/1999/xhtml",
+                              "next": null,
+                              "parent": [Circular],
+                              "prev": null,
+                              "type": "tag",
+                              "x-attribsNamespace": Object {
+                                "aria-invalid": undefined,
+                                "aria-required": undefined,
+                                "class": undefined,
+                                "readonly": undefined,
+                                "type": undefined,
+                                "value": undefined,
+                              },
+                              "x-attribsPrefix": Object {
+                                "aria-invalid": undefined,
+                                "aria-required": undefined,
+                                "class": undefined,
+                                "readonly": undefined,
+                                "type": undefined,
+                                "value": undefined,
+                              },
+                            },
+                          ],
+                          "name": "div",
+                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": Object {
+                            "attribs": Object {
+                              "class": "MuiFormLabel-root-16 MuiInputLabel-root-11 MuiInputLabel-formControl-12 MuiInputLabel-animated-15 MuiInputLabel-shrink-14",
+                              "data-shrink": "true",
+                            },
+                            "children": Array [
+                              Object {
+                                "data": "Date",
+                                "next": null,
+                                "parent": [Circular],
+                                "prev": null,
+                                "type": "text",
+                              },
+                            ],
+                            "name": "label",
+                            "namespace": "http://www.w3.org/1999/xhtml",
+                            "next": [Circular],
+                            "parent": [Circular],
+                            "prev": null,
+                            "type": "tag",
+                            "x-attribsNamespace": Object {
+                              "class": undefined,
+                              "data-shrink": undefined,
+                            },
+                            "x-attribsPrefix": Object {
+                              "class": undefined,
+                              "data-shrink": undefined,
+                            },
+                          },
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "class": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "class": undefined,
+                          },
+                        },
+                      ],
+                      "name": "div",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": Object {
+                        "data": " ",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": [Circular],
+                        "type": "text",
+                      },
+                      "parent": [Circular],
+                      "prev": Object {
+                        "data": " ",
+                        "next": [Circular],
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "text",
+                      },
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                    Object {
+                      "data": " ",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": Object {
+                        "attribs": Object {
+                          "class": "MuiFormControl-root-6",
+                        },
+                        "children": Array [
+                          Object {
+                            "attribs": Object {
+                              "class": "MuiFormLabel-root-16 MuiInputLabel-root-11 MuiInputLabel-formControl-12 MuiInputLabel-animated-15 MuiInputLabel-shrink-14",
+                              "data-shrink": "true",
+                            },
+                            "children": Array [
+                              Object {
+                                "data": "Date",
+                                "next": null,
+                                "parent": [Circular],
+                                "prev": null,
+                                "type": "text",
+                              },
+                            ],
+                            "name": "label",
+                            "namespace": "http://www.w3.org/1999/xhtml",
+                            "next": Object {
+                              "attribs": Object {
+                                "class": "MuiInput-root-21 MuiInput-formControl-22 MuiInput-underline-25 WithUtils-DateTextField--input-10",
+                              },
+                              "children": Array [
+                                Object {
+                                  "attribs": Object {
+                                    "aria-invalid": "false",
+                                    "aria-required": "false",
+                                    "class": "MuiInput-input-29",
+                                    "readonly": "",
+                                    "type": "text",
+                                    "value": "Jun 6, 2018",
+                                  },
+                                  "children": Array [],
+                                  "name": "input",
+                                  "namespace": "http://www.w3.org/1999/xhtml",
+                                  "next": null,
+                                  "parent": [Circular],
+                                  "prev": null,
+                                  "type": "tag",
+                                  "x-attribsNamespace": Object {
+                                    "aria-invalid": undefined,
+                                    "aria-required": undefined,
+                                    "class": undefined,
+                                    "readonly": undefined,
+                                    "type": undefined,
+                                    "value": undefined,
+                                  },
+                                  "x-attribsPrefix": Object {
+                                    "aria-invalid": undefined,
+                                    "aria-required": undefined,
+                                    "class": undefined,
+                                    "readonly": undefined,
+                                    "type": undefined,
+                                    "value": undefined,
+                                  },
+                                },
+                              ],
+                              "name": "div",
+                              "namespace": "http://www.w3.org/1999/xhtml",
+                              "next": null,
+                              "parent": [Circular],
+                              "prev": [Circular],
+                              "type": "tag",
+                              "x-attribsNamespace": Object {
+                                "class": undefined,
+                              },
+                              "x-attribsPrefix": Object {
+                                "class": undefined,
+                              },
+                            },
+                            "parent": [Circular],
+                            "prev": null,
+                            "type": "tag",
+                            "x-attribsNamespace": Object {
+                              "class": undefined,
+                              "data-shrink": undefined,
+                            },
+                            "x-attribsPrefix": Object {
+                              "class": undefined,
+                              "data-shrink": undefined,
+                            },
+                          },
+                          Object {
+                            "attribs": Object {
+                              "class": "MuiInput-root-21 MuiInput-formControl-22 MuiInput-underline-25 WithUtils-DateTextField--input-10",
+                            },
+                            "children": Array [
+                              Object {
+                                "attribs": Object {
+                                  "aria-invalid": "false",
+                                  "aria-required": "false",
+                                  "class": "MuiInput-input-29",
+                                  "readonly": "",
+                                  "type": "text",
+                                  "value": "Jun 6, 2018",
+                                },
+                                "children": Array [],
+                                "name": "input",
+                                "namespace": "http://www.w3.org/1999/xhtml",
+                                "next": null,
+                                "parent": [Circular],
+                                "prev": null,
+                                "type": "tag",
+                                "x-attribsNamespace": Object {
+                                  "aria-invalid": undefined,
+                                  "aria-required": undefined,
+                                  "class": undefined,
+                                  "readonly": undefined,
+                                  "type": undefined,
+                                  "value": undefined,
+                                },
+                                "x-attribsPrefix": Object {
+                                  "aria-invalid": undefined,
+                                  "aria-required": undefined,
+                                  "class": undefined,
+                                  "readonly": undefined,
+                                  "type": undefined,
+                                  "value": undefined,
+                                },
+                              },
+                            ],
+                            "name": "div",
+                            "namespace": "http://www.w3.org/1999/xhtml",
+                            "next": null,
+                            "parent": [Circular],
+                            "prev": Object {
+                              "attribs": Object {
+                                "class": "MuiFormLabel-root-16 MuiInputLabel-root-11 MuiInputLabel-formControl-12 MuiInputLabel-animated-15 MuiInputLabel-shrink-14",
+                                "data-shrink": "true",
+                              },
+                              "children": Array [
+                                Object {
+                                  "data": "Date",
+                                  "next": null,
+                                  "parent": [Circular],
+                                  "prev": null,
+                                  "type": "text",
+                                },
+                              ],
+                              "name": "label",
+                              "namespace": "http://www.w3.org/1999/xhtml",
+                              "next": [Circular],
+                              "parent": [Circular],
+                              "prev": null,
+                              "type": "tag",
+                              "x-attribsNamespace": Object {
+                                "class": undefined,
+                                "data-shrink": undefined,
+                              },
+                              "x-attribsPrefix": Object {
+                                "class": undefined,
+                                "data-shrink": undefined,
+                              },
+                            },
+                            "type": "tag",
+                            "x-attribsNamespace": Object {
+                              "class": undefined,
+                            },
+                            "x-attribsPrefix": Object {
+                              "class": undefined,
+                            },
+                          },
+                        ],
+                        "name": "div",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": [Circular],
+                        "parent": [Circular],
+                        "prev": Object {
+                          "data": " ",
+                          "next": [Circular],
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "text",
+                        },
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                        },
+                      },
+                      "type": "text",
+                    },
+                  ],
+                  "name": "div",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+              ],
+              "name": "div",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": [Circular],
+              "parent": [Circular],
+              "prev": null,
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "class": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "class": undefined,
+              },
+            },
+            "type": "tag",
+            "x-attribsNamespace": Object {
+              "class": undefined,
+            },
+            "x-attribsPrefix": Object {
+              "class": undefined,
+            },
+          },
+        ],
+        "name": "div",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": null,
+        "parent": [Circular],
+        "prev": null,
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "class": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "class": undefined,
+        },
+      },
+    ],
+    "name": "div",
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "next": null,
+    "parent": null,
+    "prev": null,
+    "root": Object {
+      "attribs": Object {},
+      "children": Array [
+        [Circular],
+      ],
+      "name": "root",
+      "namespace": "http://www.w3.org/1999/xhtml",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+      "x-attribsNamespace": Object {},
+      "x-attribsPrefix": Object {},
+    },
+    "type": "tag",
+    "x-attribsNamespace": Object {
+      "class": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "class": undefined,
+    },
+  },
+  "_root": [Circular],
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "normalizeWhitespace": false,
+    "withDomLvl1": true,
+    "xml": false,
+  },
+}
+`;

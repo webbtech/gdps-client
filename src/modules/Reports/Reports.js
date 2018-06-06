@@ -24,20 +24,17 @@ class Reports extends Component {
 
   render() {
 
-    const { classes, history, match } = this.props
+    const { classes, match } = this.props
 
     return (
       <div style={{display: 'flex', flexDirection: 'column'}}>
-        <Header history={history} />
+        <Header />
         <Paper className={classes.paper}>
           <Typography
               gutterBottom
               variant="headline"
           >Reports</Typography>
-          <ReportMenu
-              history={history}
-              match={match}
-          />
+          <ReportMenu />
           <Divider /><br />
           <div>
             <Route

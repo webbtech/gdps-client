@@ -24,7 +24,6 @@ class FuelSalesMonthly extends Component {
 
   render() {
 
-    const { history, match } = this.props
 
     return (
       <div>
@@ -34,8 +33,6 @@ class FuelSalesMonthly extends Component {
         >Monthly Fuel Sales</Typography>
         <ReportSelectors
             hideStation
-            history={history}
-            match={match}
         />
         {this.renderReport()}
       </div>

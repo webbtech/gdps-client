@@ -26,7 +26,7 @@ class Dips extends Component {
 
   render() {
 
-    const { classes, history, location, match } = this.props
+    const { classes, history } = this.props
 
     return (
       <div>
@@ -37,11 +37,7 @@ class Dips extends Component {
               variant="headline"
           >Dip Entries</Typography>
           <Divider /><br />
-          <DipSelectors
-              history={history}
-              location={location}
-              match={match}
-          />
+          <DipSelectors />
           <div style={{display: 'flex', flexDirection: 'row', marginTop: 20}}>
             <div style={{flex: 1}}>
               {this.renderForm()}

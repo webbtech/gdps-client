@@ -1,6 +1,8 @@
 /* eslint no-undef: "off" */
 
 import React from 'react'
+import { MemoryRouter as Router } from 'react-router-dom'
+
 import OverShortMonthly from '../OverShortMonthly'
 import { render } from 'enzyme'
 
@@ -11,7 +13,7 @@ describe('OverShortMonthly', () => {
   const testC = () => {
     if (!mountedC) {
       mountedC = render(
-        <OverShortMonthly {...props} />
+        <Router><OverShortMonthly {...props} /></Router>
       )
     }
     return mountedC

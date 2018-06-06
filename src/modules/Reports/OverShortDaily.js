@@ -25,7 +25,6 @@ class OverShortDaily extends Component {
 
   render() {
 
-    const { history, match } = this.props
     const { pathname } = this.props.location
 
     return (
@@ -34,10 +33,7 @@ class OverShortDaily extends Component {
             gutterBottom
             variant="subheading"
         >Daily Overshort</Typography>
-        <ReportSelectors
-            history={history}
-            match={match}
-        />
+        <ReportSelectors />
         {this.renderReport(pathname)}
       </div>
     )

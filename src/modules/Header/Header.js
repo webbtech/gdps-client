@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
 
+import { Auth } from 'aws-amplify'
 import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router'
+import LogRocket from 'logrocket'
 
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import AppBar from '@material-ui/core/AppBar'
@@ -12,32 +14,9 @@ import MenuIcon from '@material-ui/icons/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
+import { withStyles } from '@material-ui/core/styles'
 
-
-const styles = {
-  root: {
-    flexGrow: 1,
-  },
-  flex: {
-    flex: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-  titleLink: {
-    textDecoration: 'none',
-    color: '#fff',
-  },
-}
-
-const menuItems = [
-  {uri: '/', label: 'Dashboard'},
-  {uri: '/dips', label: 'Dip Entries'},
-  {uri: '/reports', label: 'Reports'},
-  {uri: '/propane', label: 'Propane Entries'},
-  {uri: '/admin', label: 'Administration'},
-]
+import { LOGROCKET_ID } from '../../config/constants'
 
 
 // function Header(props) {
@@ -45,47 +24,80 @@ class Header extends React.Component {
 
   constructor(props) {
     super(props)
-    this.handleCloseProfileMenu = this.handleCloseProfileMenu.bind(this)
-    this.handleMainMenu = this.handleMainMenu.bind(this)
     this.handleCloseMainMenu = this.handleCloseMainMenu.bind(this)
+    this.handleCloseProfileMenu = this.handleCloseProfileMenu.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
+    this.handleMainMenu = this.handleMainMenu.bind(this)
 
     this.state = {
-      auth: true,
-      anchorEl: null,
-      menuEl: null,
-      selectedIndex: this.props.history.location.pathname,
+      auth:           true,
+      anchorEl:       null,
+      menuEl:         null,
+      selectedIndex:  this.props.history.location.pathname,
+      user:           '',
     }
   }
 
-  handleChange(event, checked) {
+  componentDidMount = () => {
+    Auth.currentUserInfo()
+    // Auth.currentAuthenticatedUser()
+    .then(user => {
+      // console.log('user in componentDidMount: ', user.attributes)
+      this.setState({user: user.attributes})
+      if (user) {
+        LogRocket.init(LOGROCKET_ID)
+        const id = user.username
+
+        LogRocket.identify(id, {
+          name: user.attributes.name,
+          email: user.attributes.email,
+          environment: 'dev',
+        })
+      }
+    })
+    .catch(err => console.log(err)) // eslint-disable-line
+
+
+
+  }
+
+  handleChange = (event, checked) => {
     this.setState({ auth: checked })
   }
 
-  handleProfileMenu(event) {
+  handleProfileMenu = (event) => {
     this.setState({ anchorEl: event.currentTarget })
   }
 
-  handleCloseProfileMenu() {
+  handleCloseProfileMenu = () => {
     this.setState({ anchorEl: null })
   }
 
-  handleMainMenu(event) {
+  handleMainMenu = event => {
     this.setState({ menuEl: event.currentTarget })
   }
 
-  handleCloseMainMenu() {
+  handleCloseMainMenu = () => {
     this.setState({ menuEl: null })
   }
 
-  handleNavigate(url) {
+  handleNavigate = url => {
      this.props.history.push(url)
      this.setState(() => ({selectedIndex: url, menuEl: null}))
+  }
+
+  handleLogout = () => {
+    Auth.signOut()
+    .then(() => {
+      this.props.history.push('/')
+    })
+    .catch(err => console.error(err)) // eslint-disable-line
   }
 
   render() {
 
     const { classes } = this.props
-    const { auth, anchorEl, menuEl, selectedIndex } = this.state
+    const { auth, anchorEl, menuEl, selectedIndex, user } = this.state
     const open = Boolean(anchorEl)
     const openMenu = Boolean(menuEl)
 
@@ -135,6 +147,7 @@ class Header extends React.Component {
             </Typography>
             {auth && (
               <div>
+                {user.name}
                 <IconButton
                     aria-haspopup="true"
                     aria-owns={open ? 'menu-appbar' : null}
@@ -157,8 +170,8 @@ class Header extends React.Component {
                       horizontal: 'right',
                     }}
                 >
-                  <MenuItem onClick={() => this.handleCloseProfileMenu()}>Profile</MenuItem>
-                  <MenuItem onClick={() => this.handleCloseProfileMenu()}>My account</MenuItem>
+                  <MenuItem onClick={() => this.props.history.push('/profile')}>Profile</MenuItem>
+                  <MenuItem onClick={() => this.handleLogout()}>Logout</MenuItem>
                 </Menu>
               </div>
             )}
@@ -174,4 +187,30 @@ Header.propTypes = {
   history: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(Header)
+const styles =  theme => ({
+  root: {
+    flexGrow:   1,
+    fontFamily: theme.typography.fontFamily,
+  },
+  flex: {
+    flex: 1,
+  },
+  menuButton: {
+    marginLeft:   -12,
+    marginRight:  20,
+  },
+  titleLink: {
+    textDecoration: 'none',
+    color:          '#fff',
+  },
+})
+
+const menuItems = [
+  {uri: '/', label: 'Dashboard'},
+  {uri: '/dips', label: 'Dip Entries'},
+  {uri: '/reports', label: 'Reports'},
+  {uri: '/propane', label: 'Propane Entries'},
+  {uri: '/admin', label: 'Administration'},
+]
+
+export default withRouter(withStyles(styles)(Header))

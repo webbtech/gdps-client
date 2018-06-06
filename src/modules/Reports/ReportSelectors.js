@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import moment from 'moment'
+import { withRouter } from 'react-router'
 
 import Button from '@material-ui/core/Button'
 import CloseIcon from '@material-ui/icons/Close'
@@ -236,5 +237,4 @@ const styles =  theme => ({
   },
 })
 
-
-export default withStyles(styles)(Reports)
+export default withRouter(withStyles(styles)(Reports))

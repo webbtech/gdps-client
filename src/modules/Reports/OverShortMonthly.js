@@ -25,7 +25,6 @@ class OverShortMonthly extends Component {
 
   render() {
 
-    const { history, match } = this.props
     const { pathname } = this.props.location
 
     return (
@@ -36,8 +35,6 @@ class OverShortMonthly extends Component {
         >Monthly Overshort</Typography>
         <ReportSelectors
             hideMonth
-            history={history}
-            match={match}
         />
         {this.renderReport(pathname)}
       </div>
@@ -47,9 +44,7 @@ class OverShortMonthly extends Component {
 
 OverShortMonthly.propTypes = {
   classes:  PropTypes.object.isRequired,
-  history:  PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
-  match:    PropTypes.object.isRequired,
 }
 
 export default withStyles(ms)(OverShortMonthly)

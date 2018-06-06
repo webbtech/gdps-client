@@ -25,7 +25,6 @@ class FuelSalesWeekly extends Component {
 
   render() {
 
-    const { history, match } = this.props
     const { pathname } = this.props.location
 
     return (
@@ -34,11 +33,7 @@ class FuelSalesWeekly extends Component {
             gutterBottom
             variant="subheading"
         >Weekly Fuel Sales</Typography>
-        <ReportSelectors
-            history={history}
-            match={match}
-        />
-
+        <ReportSelectors />
         {this.renderReport(pathname)}
       </div>
     )

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import classNames from 'classnames'
 import moment from 'moment'
+import { withRouter } from 'react-router'
 
 import ArrowBack from '@material-ui/icons/ArrowBack'
 import ArrowForward from '@material-ui/icons/ArrowForward'
@@ -143,4 +144,5 @@ const styles =  theme => ({
   },
 })
 
-export default withStyles(styles)(PropaneSelectors)
+const comp = withRouter(PropaneSelectors)
+export default withStyles(styles)(comp)
