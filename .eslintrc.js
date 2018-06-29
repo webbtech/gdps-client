@@ -53,7 +53,7 @@ module.exports = {
     'react/no-did-mount-set-state': 'warn',
     'react/no-did-update-set-state': 'warn',
     'react/no-direct-mutation-state': 'warn',
-    'react/no-multi-comp': 'warn',
+    // 'react/no-multi-comp': 'warn',
     // 'react/no-set-state': 'warn',
     'react/no-unknown-property': 'warn',
     'react/prefer-es6-class': 'warn',

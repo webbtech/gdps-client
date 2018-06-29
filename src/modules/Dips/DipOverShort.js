@@ -4,15 +4,41 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import Typography from '@material-ui/core/Typography'
-
 import { withStyles } from '@material-ui/core/styles'
 
-//fixme: this should be a pure component
+import { fmtNumber } from '../../utils/utils'
+
+// fixme: I think this should be a pure component
 class DipOverShort extends Component {
 
   render() {
 
-    const { classes } = this.props
+    const { classes, data } = this.props
+
+    // console.log('data: ', this.props.dateObj.format('dddd'))
+
+    let rows = []
+    let haveData = false
+    let fuelPrice
+    let displayDate
+
+    if (data && data.loading === false && data.dipOverShortRange && data.dipOverShortRange[1]) {
+      haveData = true
+      const os = data.dipOverShortRange[1].overShort
+      for (const prop in os) {
+        rows.push({
+          fuelType:   os[prop].fuelType,
+          litres:     os[prop].litres,
+          overshort:  os[prop].overshort,
+          sale:       os[prop].sale,
+        })
+      }
+    }
+
+    if (haveData && data.fuelPrice) {
+      fuelPrice = data.fuelPrice.price
+      displayDate = this.props.dateObj.format('ddd, MMM Do')
+    }
 
     return (
       <div className={classes.container}>
@@ -20,23 +46,36 @@ class DipOverShort extends Component {
             gutterBottom
             variant="title"
         >Overshort</Typography>
-        <div className={classes.headerRow}>
-          <div className={classes.headerCell}>Fuel Type</div>
-          <div className={classNames([classes.headerCell], [classes.alignRight])}>Dip Litres</div>
-          <div className={classNames([classes.headerCell], [classes.alignRight])}>Sale Litres</div>
-          <div className={classNames([classes.headerCell], [classes.alignRight])}>Over/Short</div>
-        </div>
-        {mockOSs.map(os => (
-          <div
-              className={classes.dataRow}
-              key={os.id}
-          >
-            <div className={classes.dataCell}>{os.fuelType}</div>
-            <div className={classNames([classes.dataCell], [classes.alignRight])}>{fmtNumber(os.litres, 3)}</div>
-            <div className={classNames([classes.dataCell], [classes.alignRight])}>{fmtNumber(os.sale, 3)}</div>
-            <div className={classNames([classes.dataCell], [classes.alignRight], {[classes.negative]: os.overshort < 0})}>{fmtNumber(os.overshort, 3)}</div>
+        {haveData &&
+          <div className={classes.container}>
+            <div className={classes.headerRow}>
+              <div className={classes.headerCell}>Fuel Type</div>
+              <div className={classNames([classes.headerCell], [classes.alignRight])}>Dip Litres</div>
+              <div className={classNames([classes.headerCell], [classes.alignRight])}>Sale Litres</div>
+              <div className={classNames([classes.headerCell], [classes.alignRight])}>Over/Short</div>
+            </div>
+
+            {rows.map((os, i) => (
+              <div
+                  className={classes.dataRow}
+                  key={i}
+              >
+                <div className={classes.dataCell}>{os.fuelType}</div>
+                <div className={classNames([classes.dataCell], [classes.alignRight])}>{fmtNumber(os.litres, 3)}</div>
+                <div className={classNames([classes.dataCell], [classes.alignRight])}>{fmtNumber(os.sale, 3)}</div>
+                <div className={classNames([classes.dataCell], [classes.alignRight], {[classes.negative]: os.overshort < 0})}>{fmtNumber(os.overshort, 3)}</div>
+              </div>
+            ))}
           </div>
-        ))}
+        }
+        {fuelPrice &&
+        <div className={classes.fuelPrice}>
+        <Typography
+            gutterBottom
+            variant="subheading"
+        >Fuel Price: {fuelPrice} - ({displayDate})</Typography>
+        </div>
+        }
       </div>
     )
   }
@@ -44,6 +83,8 @@ class DipOverShort extends Component {
 
 DipOverShort.propTypes = {
   classes:  PropTypes.object.isRequired,
+  data:     PropTypes.object,
+  dateObj:  PropTypes.object,
 }
 
 const styles =  theme => ({
@@ -64,7 +105,6 @@ const styles =  theme => ({
     alignSelf:      'flex-end',
     flex:           1,
     padding:        theme.spacing.unit,
-    // paddingBottom:  theme.spacing.unit * 2,
   },
   dataRow: {
     borderBottomColor:  '#efefef',
@@ -75,6 +115,9 @@ const styles =  theme => ({
     '&:hover': {
       backgroundColor: theme.palette.grey['50'],
     },
+  },
+  fuelPrice: {
+    marginTop: theme.spacing.unit * 2,
   },
   headerRow: {
     borderBottomColor:  '#efefef',
@@ -94,42 +137,5 @@ const styles =  theme => ({
     color: 'red',
   },
 })
-
-const mockOSs = [
-  {
-    id: '678',
-    fuelType: 'DSL',
-    litres: 286.000,
-    sale: 250.990,
-    overshort: -35.010,
-  },
-  {
-    id: '123',
-    fuelType: 'NL',
-    litres: 7208.000,
-    sale: 5486.0550334,
-    overshort: -1721.945,
-  },
-  {
-    id: '345',
-    fuelType: 'SNL',
-    litres: 0,
-    sale: 232.1742089,
-    overshort: 232.175,
-  },
-]
-
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat
-const fmtNumber = (number, decimal = 2) => {
-  if (number === undefined) return
-  const formatter = new Intl.NumberFormat('en-US', {
-    // style: 'currency',
-    // currency: 'USD',
-    useGrouping: false,
-    minimumFractionDigits: decimal,
-    maximumFractionDigits: decimal,
-  })
-  return formatter.format(number)
-}
 
 export default withStyles(styles)(DipOverShort)

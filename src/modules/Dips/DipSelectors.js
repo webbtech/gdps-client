@@ -9,25 +9,28 @@ import ArrowBack from '@material-ui/icons/ArrowBack'
 import ArrowForward from '@material-ui/icons/ArrowForward'
 import Button from '@material-ui/core/Button'
 import FormControl from '@material-ui/core/FormControl'
-import InputLabel from '@material-ui/core/InputLabel'
-import MenuItem from '@material-ui/core/MenuItem'
-import Select from '@material-ui/core/Select'
 import { withStyles } from '@material-ui/core/styles'
 
 import MomentUtils from 'material-ui-pickers/utils/moment-utils'
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider'
 import DatePicker from 'material-ui-pickers/DatePicker'
 
+import StationSelector from '../Common/StationSelector'
 import { STD_DATE_FORMAT as dateFormat } from '../../config/constants'
 
 class DipSelectors extends Component {
 
-  state = {
-    // openSnackbar: false,
-    // snackbarMessage: '',
-    nextDisabled: true,
-    selectedDate: moment(),
-    stationID: '',
+  constructor(props) {
+    super(props)
+    this.handleStationChange = this.handleStationChange.bind(this)
+
+    this.state = {
+      // openSnackbar: false,
+      // snackbarMessage: '',
+      nextDisabled: true,
+      selectedDate: moment(),
+      stationID: '',
+    }
   }
 
   componentDidMount = () => {
@@ -49,8 +52,11 @@ class DipSelectors extends Component {
   }
 
   // This could get more involved if state isn't set in time: https://stackoverflow.com/questions/37401635/react-js-wait-for-setstate-to-finish-before-triggering-a-function
-  handleStationChange = event => {
-    this.setState({ [event.target.name]: event.target.value }, this.handleGetDip)
+  /*handleStationChange = event => {
+    this.setState({ stationID: event.target.value }, this.handleGetDip)
+  }*/
+  handleStationChange = value => {
+    this.setState({ stationID: value }, this.handleGetDip)
   }
 
   handleDateChange = date => {
@@ -88,7 +94,7 @@ class DipSelectors extends Component {
   render() {
 
     const { classes } = this.props
-    const { nextDisabled, selectedDate } = this.state
+    const { nextDisabled, selectedDate, stationID } = this.state
 
     return (
       <div className={classes.container}>
@@ -96,20 +102,10 @@ class DipSelectors extends Component {
 
           <div className={classes.cell}>
             <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="station-select">Station</InputLabel>
-              <Select
-                  inputProps={{
-                    name: 'stationID',
-                    id: 'station-select',
-                  }}
-                  onChange={this.handleStationChange}
-                  value={this.state.stationID}
-              >
-                <MenuItem value={'b-10'}>Bridge</MenuItem>
-                <MenuItem value={'ch-20'}>Chippawa</MenuItem>
-                <MenuItem value={'c0-30'}>Collier</MenuItem>
-                <MenuItem value={'d-30'}>Drummond</MenuItem>
-              </Select>
+              <StationSelector
+                  onStationChange={this.handleStationChange}
+                  stationID={stationID}
+              />
             </FormControl>
           </div>
 

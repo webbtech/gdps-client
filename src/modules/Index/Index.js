@@ -3,15 +3,18 @@ import PropTypes from 'prop-types'
 
 // import { Auth } from 'aws-amplify'
 
-import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
+import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import { Switch, Route } from 'react-router'
 import Amplify from 'aws-amplify'
 // import { Authenticator, ConfirmSignIn, SignIn, ForgotPassword, RequireNewPassword } from 'aws-amplify-react'
 import { Authenticator } from 'aws-amplify-react'
 // import { AmplifyTheme } from 'aws-amplify-react'
+
+import logger from 'redux-logger'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 import Admin from '../Admin/Admin'
 import aws_exports from '../Auth/aws-exports'
@@ -22,19 +25,28 @@ import Profile from '../Profile/Profile'
 import Propane from '../Propane/Propane'
 import Reports from '../Reports/Reports'
 import withRoot from '../../withRoot'
+import rootReducer from '../../reducers'
 
 import ConfirmSignIn from '../Auth/ConfirmSignIn'
 import SignIn from '../Auth/SignIn'
 import ForgotPassword from '../Auth/ForgotPassword'
 import RequireNewPassword from '../Auth/RequireNewPassword'
+import Errors from '../Error/ErrorContainer'
+
 
 const history = createHistory()
 const middleware = routerMiddleware(history)
+
+/*const store = createStore(reducer, composeWithDevTools(
+  applyMiddleware(...middleware),
+  // other store enhancers if any
+));*/
+
 const store = createStore(
-  combineReducers({
-    router: routerReducer,
-  }),
-  applyMiddleware(middleware)
+  rootReducer,
+  composeWithDevTools(
+    applyMiddleware(middleware, logger)
+  )
 )
 
 Amplify.configure(aws_exports)
@@ -49,37 +61,40 @@ class Index extends Component {
     return (
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          <Switch>
-            <Route
-                component={Dashboard}
-                exact
-                path="/"
-            />
-            <Route
-                component={Dips}
-                path="/dips"
-            />
-            <Route
-                component={Reports}
-                path="/reports"
-            />
-            <Route
-                component={Propane}
-                path="/propane"
-            />
-            <Route
-                component={Admin}
-                path="/admin"
-            />
-            <Route
-                component={Profile}
-                path="/profile"
-            />
-            <Route
-                component={ChangePassword}
-                path="/change-password"
-            />
-          </Switch>
+          <div>
+            <Errors />
+            <Switch>
+              <Route
+                  component={Dashboard}
+                  exact
+                  path="/"
+              />
+              <Route
+                  component={Dips}
+                  path="/dips"
+              />
+              <Route
+                  component={Reports}
+                  path="/reports"
+              />
+              <Route
+                  component={Propane}
+                  path="/propane"
+              />
+              <Route
+                  component={Admin}
+                  path="/admin"
+              />
+              <Route
+                  component={Profile}
+                  path="/profile"
+              />
+              <Route
+                  component={ChangePassword}
+                  path="/change-password"
+              />
+            </Switch>
+          </div>
         </ConnectedRouter>
       </Provider>
     )
@@ -117,17 +132,17 @@ class AppWithAuth extends Component { // eslint-disable-line react/no-multi-comp
 
     return (
       <div>
-      <Authenticator
-          hideDefault
-          // onStateChange={this.handleAuthStateChange}
-          theme={{}}
-      >
-        <Index />
-        <SignIn/>
-        <ConfirmSignIn/>
-        <ForgotPassword/>
-        <RequireNewPassword/>
-      </Authenticator>
+        <Authenticator
+            hideDefault
+            // onStateChange={this.handleAuthStateChange}
+            theme={{}}
+        >
+          <Index />
+          <SignIn/>
+          <ConfirmSignIn/>
+          <ForgotPassword/>
+          <RequireNewPassword/>
+        </Authenticator>
       </div>
     )
   }
