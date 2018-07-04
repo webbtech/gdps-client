@@ -6,7 +6,6 @@ export default function errorReducer(state = [], action) {
 
   switch (action.type) {
   case ERROR_SEND:
-    console.log('state: ', state)
     return [action.payload, ...state]
 
   case ERROR_DISMISS:

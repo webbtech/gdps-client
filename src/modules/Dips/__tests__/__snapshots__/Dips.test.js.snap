@@ -5,7 +5,7 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <MemoryRouter>
-    <Apollo(WithStyles(Dips))
+    <Apollo(Connect(WithStyles(Dips)))
         history={Object {}}
         location={
             Object {
@@ -27,7 +27,7 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "class",
     "props": Object {
-      "children": <Apollo(WithStyles(Dips))
+      "children": <Apollo(Connect(WithStyles(Dips)))
         history={Object {}}
         location={
                 Object {
@@ -44,7 +44,7 @@ ShallowWrapper {
         "entries": Array [
           Object {
             "hash": "",
-            "key": "yfnflm",
+            "key": "lj9v53",
             "pathname": "/",
             "search": "",
             "state": undefined,
@@ -58,7 +58,7 @@ ShallowWrapper {
         "listen": [Function],
         "location": Object {
           "hash": "",
-          "key": "yfnflm",
+          "key": "lj9v53",
           "pathname": "/",
           "search": "",
           "state": undefined,
@@ -91,7 +91,7 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
-        "children": <Apollo(WithStyles(Dips))
+        "children": <Apollo(Connect(WithStyles(Dips)))
           history={Object {}}
           location={
                     Object {
@@ -108,7 +108,7 @@ ShallowWrapper {
           "entries": Array [
             Object {
               "hash": "",
-              "key": "yfnflm",
+              "key": "lj9v53",
               "pathname": "/",
               "search": "",
               "state": undefined,
@@ -122,7 +122,7 @@ ShallowWrapper {
           "listen": [Function],
           "location": Object {
             "hash": "",
-            "key": "yfnflm",
+            "key": "lj9v53",
             "pathname": "/",
             "search": "",
             "state": undefined,

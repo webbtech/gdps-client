@@ -18,14 +18,13 @@ import Header from '../Header/Header'
 import { extractPathParts, datePrevDay, dateToInt } from '../../utils/utils'
 import { styles as ms } from '../../styles/main'
 
-// import * as errorActions from '../Error/errorActions'
 import { errorSend } from '../Error/errorActions'
 
 
 const DIP_QUERY = gql`
   query Dips($date: Int!, $dateFrom: Int!, $dateTo: Int!, $stationID: String!) {
     dips(date: $date, stationID: $stationID) {
-      fuelTyp
+      fuelType
       level
       litres
       stationTankID
@@ -55,26 +54,6 @@ const DIP_QUERY = gql`
 
 class Dips extends Component {
 
-  // componentDidUpdate = prevProps => {
-  componentDidMount = () => {
-    console.log('props in Dips: ', this.props)
-    const { data } = this.props
-    if (data && data.error) {
-      // console.log('error in Dips: ', data.error)
-      console.log('graphQLErrors error in Dips: ', data.error.graphQLErrors)
-      console.log('networkError error in Dips: ', data.error.networkError)
-      this.props.sendError({message: 'Generic error message here...\nfooo \n bar', type: 'danger'})
-
-      /*if (graphQLErrors) {
-        graphQLErrors.map(({ message, locations, path }) =>
-          console.log(
-            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-          ),
-        )
-      }*/
-    }
-  }
-
   renderForm = () => {
     const { pathname } = this.props.location
     const date = pathname.split('/')[2]
@@ -96,8 +75,7 @@ class Dips extends Component {
     let editMode = false
 
     if (data && data.error) {
-      console.log('***data.error: ', data.error)
-      return <p>Error :(</p>
+      return <p>Data Error :(</p>
     }
 
     if (data && data.loading === false && data.dipOverShortRange) {
@@ -111,17 +89,22 @@ class Dips extends Component {
       }
     }
 
+    // throw new Error("Oops!")
+
     return (
       <div>
         <Header history={history} />
         <Paper className={classes.paper}>
+
           <Typography
               gutterBottom
               variant="headline"
           >Dip Entries</Typography>
           <Divider /><br />
           <DipSelectors />
+
           <div style={{display: 'flex', flexDirection: 'row', marginTop: 20}}>
+
             <div style={{flex: 1}}>
               <DipForm
                   data={data}
@@ -129,6 +112,7 @@ class Dips extends Component {
                   havePrevDayDips={havePrevDayDips}
               />
             </div>
+
             <div style={{flex: 1}}>
               <DipOverShort
                   data={data}
@@ -136,6 +120,7 @@ class Dips extends Component {
               />
             </div>
           </div>
+
         </Paper>
       </div>
     )
@@ -159,7 +144,6 @@ const DipsConnect = connect(
   mapDispatchToProps
 )(withStyles(ms)(Dips))
 
-// const DipsStyled = withStyles(ms)(Dips)
 
 export default graphql(DIP_QUERY, {
   skip: props => props.location.pathname.split('/').length <= 3,

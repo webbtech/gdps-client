@@ -9,10 +9,6 @@ export function errorSend(error) {
   if (!error.id) {
     error.id = new Date().getTime()
   }
-  /*return dispatch => {
-    dispatch({ type: ERROR_SEND, payload: error })
-  }*/
-  // console.log('error in errorSend: ', error)
   return { type: ERROR_SEND, payload: error}
 }
 
@@ -20,7 +16,6 @@ export function errorSend(error) {
  * Dismiss an error by the given id.
  */
 export function errorDismiss(id) {
-  console.log('errorDismiss: ', id)
   return { type: ERROR_DISMISS, payload: id }
 }
 

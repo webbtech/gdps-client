@@ -1,20 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-// import { Auth } from 'aws-amplify'
-
-import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
+import { ConnectedRouter } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
-import { createStore, applyMiddleware } from 'redux'
-import { Provider } from 'react-redux'
 import { Switch, Route } from 'react-router'
 import Amplify from 'aws-amplify'
-// import { Authenticator, ConfirmSignIn, SignIn, ForgotPassword, RequireNewPassword } from 'aws-amplify-react'
 import { Authenticator } from 'aws-amplify-react'
-// import { AmplifyTheme } from 'aws-amplify-react'
-
-import logger from 'redux-logger'
-import { composeWithDevTools } from 'redux-devtools-extension'
 
 import Admin from '../Admin/Admin'
 import aws_exports from '../Auth/aws-exports'
@@ -25,7 +16,6 @@ import Profile from '../Profile/Profile'
 import Propane from '../Propane/Propane'
 import Reports from '../Reports/Reports'
 import withRoot from '../../withRoot'
-import rootReducer from '../../reducers'
 
 import ConfirmSignIn from '../Auth/ConfirmSignIn'
 import SignIn from '../Auth/SignIn'
@@ -34,22 +24,8 @@ import RequireNewPassword from '../Auth/RequireNewPassword'
 import Errors from '../Error/ErrorContainer'
 
 
-const history = createHistory()
-const middleware = routerMiddleware(history)
-
-/*const store = createStore(reducer, composeWithDevTools(
-  applyMiddleware(...middleware),
-  // other store enhancers if any
-));*/
-
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(
-    applyMiddleware(middleware, logger)
-  )
-)
-
 Amplify.configure(aws_exports)
+const history = createHistory()
 
 
 class Index extends Component {
@@ -59,7 +35,6 @@ class Index extends Component {
     if (this.props.authState !== 'signedIn') return null
 
     return (
-      <Provider store={store}>
         <ConnectedRouter history={history}>
           <div>
             <Errors />
@@ -96,7 +71,6 @@ class Index extends Component {
             </Switch>
           </div>
         </ConnectedRouter>
-      </Provider>
     )
   }
 }
@@ -127,7 +101,6 @@ class AppWithAuth extends Component { // eslint-disable-line react/no-multi-comp
   }
 
   render(){
-
     // console.log('user in render: ', this.state)
 
     return (

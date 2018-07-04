@@ -5,7 +5,10 @@
   "dependencies": {
     "@material-ui/core": "1.2.2",
     "@material-ui/icons": "1.1.0",
-    "apollo-boost": "0.1.10",
+    "apollo-cache-inmemory": "1.2.5",
+    "apollo-client": "2.3.5",
+    "apollo-link-error": "1.1.0",
+    "apollo-link-http": "1.5.4",
     "aws-amplify": "0.4.4",
     "aws-amplify-react": "0.1.50",
     "graphql": "0.13.2",
@@ -14,11 +17,11 @@
     "jss": "9.8.1",
     "lodash": "4.17.10",
     "logrocket": "0.6.12",
-    "material-ui-pickers": "1.0.0-rc.9",
+    "material-ui-pickers": "1.0.0-rc.10",
     "moment": "2.22.1",
     "ramda": "0.25.0",
     "react": "16.4.1",
-    "react-apollo": "2.1.4",
+    "react-apollo": "2.1.8",
     "react-dom": "16.4.1",
     "react-jss": "8.4.0",
     "react-popper": "1.0.0-beta.6",
@@ -41,6 +44,7 @@
     "enzyme-adapter-react-16": "1.1.1",
     "eslint": "4.19.1",
     "eslint-plugin-react": "7.8.2",
+    "redbox-react": "1.6.0",
     "redux-devtools-extension": "2.13.5",
     "redux-logger": "3.0.6"
   }
