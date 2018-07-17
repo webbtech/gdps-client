@@ -12,6 +12,8 @@ import { Provider } from 'react-redux'
 import registerServiceWorker from './registerServiceWorker'
 import configureStore from './store/configureStore'
 
+import { config } from './config/config'
+
 const errorLink = onError(({ networkError, graphQLErrors }) => {
   if (graphQLErrors) {
     graphQLErrors.map(({ message, locations, path }) =>
@@ -23,7 +25,8 @@ const errorLink = onError(({ networkError, graphQLErrors }) => {
   if (networkError) console.log(`[Network error]: ${networkError}`) // eslint-disable-line
 })
 
-const httpLink = new HttpLink({ uri: 'http://localhost:4000/' })
+// const httpLink = new HttpLink({ uri: 'http://localhost:4000/' })
+const httpLink = new HttpLink({ uri: config.BASE_URL })
 
 const link = ApolloLink.from([
   errorLink,

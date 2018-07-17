@@ -15,8 +15,6 @@ class DipOverShort extends Component {
 
     const { classes, data } = this.props
 
-    // console.log('data: ', this.props.dateObj.format('dddd'))
-
     let rows = []
     let haveData = false
     let fuelPrice
@@ -36,7 +34,7 @@ class DipOverShort extends Component {
     }
 
     if (haveData && data.fuelPrice) {
-      fuelPrice = data.fuelPrice.price
+      fuelPrice = fmtNumber(data.fuelPrice.price, 2)
       displayDate = this.props.dateObj.format('ddd, MMM Do')
     }
 

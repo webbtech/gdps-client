@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import moment from 'moment'
+
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
@@ -24,6 +26,11 @@ class FuelSalesMonthly extends Component {
 
   render() {
 
+    const dte = '2018-06-01'
+    const wk = moment(dte).week()
+    console.log('wk: ', wk)
+    const wkDte = moment().week(wk)
+    console.log('moment.week: ', wkDte.day(0).format('YYYY-MM-DD'))
 
     return (
       <div>
