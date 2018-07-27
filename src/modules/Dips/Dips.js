@@ -89,8 +89,6 @@ class Dips extends Component {
       }
     }
 
-    // throw new Error("Oops!")
-
     return (
       <div>
         <Header history={history} />

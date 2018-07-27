@@ -2,7 +2,7 @@
 
 // To test this file, use: npm test -- utils-test
 
-import { dateNextDay, datePrevDay, dateToInt, extractPathParts, fmtNumber } from './utils'
+import { dateNextDay, datePrevDay, dateToInt, extractPathParts, fmtNumber, setOrderedFuelTypes } from './utils'
 
 describe('dateToInt', () => {
 
@@ -106,5 +106,22 @@ describe('fmtNumber', () => {
   it('returns null', () => {
     const num = fmtNumber()
     expect(num).toBeNull()
+  })
+})
+
+describe('setOrderedFuelTypes', () => {
+  const { FUEL_TYPE_LIST } = require('../config/constants')
+  const fuelTypes = ['DSL', 'NL', 'SNL', 'CDSL']
+  const fuelTypes2 = ['DSL', 'NL', 'SNL']
+
+  it('return ordered fuel types', () => {
+    const fts = setOrderedFuelTypes(fuelTypes, FUEL_TYPE_LIST)
+    expect(fts).toEqual(['NL', 'SNL', 'DSL', 'CDSL'])
+  })
+
+  it('return 3 ordered fuel types', () => {
+    const fts = setOrderedFuelTypes(fuelTypes2, FUEL_TYPE_LIST)
+    console.log('fts: ', fts)
+    expect(fts).toEqual(['NL', 'SNL', 'DSL'])
   })
 })

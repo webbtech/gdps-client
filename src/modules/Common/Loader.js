@@ -16,8 +16,8 @@ Loader.propTypes = {
 
 const styles = theme => ({
   container: {
-    position: 'absolute',
-    left: theme.spacing.unit * 10,
+    position: 'relative',
+    // left: theme.spacing.unit * 10,
   },
   progress: {
     margin: theme.spacing.unit * 2,

@@ -10,7 +10,7 @@ import Icon from '@material-ui/core/Icon'
 
 const Error = ({ message, classes, type, onClick }) => {
   type = type || 'warning'
-  return(
+  return (
     <div
         className={classNames(classes.base, classes[type])}
         onClick={onClick}

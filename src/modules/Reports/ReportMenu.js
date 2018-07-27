@@ -95,8 +95,8 @@ class ReportMenu extends Component {
                 >
                   <Paper>
                     <MenuList role="menu">
-                      <MenuItem onClick={() => this.handleLink('/fuel-sales-weekly')}>Weekly</MenuItem>
-                      <MenuItem onClick={() => this.handleLink('/fuel-sales-monthly')}>Monthly</MenuItem>
+                      <MenuItem onClick={() => this.handleLink('/fuel-sales-detailed')}>Station Details</MenuItem>
+                      <MenuItem onClick={() => this.handleLink('/fuel-sales-list')}>Station List</MenuItem>
                     </MenuList>
                   </Paper>
                 </Grow>
@@ -149,8 +149,8 @@ class ReportMenu extends Component {
                 >
                   <Paper>
                     <MenuList role="menu">
-                      <MenuItem onClick={() => this.handleLink('/overshort-daily')}>Daily</MenuItem>
                       <MenuItem onClick={() => this.handleLink('/overshort-monthly')}>Monthly</MenuItem>
+                      <MenuItem onClick={() => this.handleLink('/overshort-annually')}>Annual</MenuItem>
                     </MenuList>
                   </Paper>
                 </Grow>
@@ -194,8 +194,8 @@ class ReportMenu extends Component {
                 >
                   <Paper>
                     <MenuList role="menu">
-                      <MenuItem onClick={() => this.handleLink('/propane-sales-weekly')}>Weekly</MenuItem>
                       <MenuItem onClick={() => this.handleLink('/propane-sales-monthly')}>Monthly</MenuItem>
+                      <MenuItem onClick={() => this.handleLink('/propane-sales-annual')}>Annual</MenuItem>
                     </MenuList>
                   </Paper>
                 </Grow>

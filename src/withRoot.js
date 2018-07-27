@@ -39,7 +39,7 @@ const theme = createMuiTheme({
   },
 })
 
-// console.log('theme: ', theme.palette)
+// console.log('theme: ', theme)
 
 // Create a JSS instance with the default preset of plugins.
 // It's optional.

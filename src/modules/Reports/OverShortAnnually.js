@@ -16,29 +16,23 @@ import ReportSelectors from './ReportSelectors'
 import { FUEL_TYPE_LIST } from '../../config/constants'
 
 
-const OSM_REPORT_QUERY = gql`
-query DipOSMonthReport($date: String!, $stationID: String!) {
-  dipOSMonthReport(date: $date, stationID: $stationID) {
-    stationID
+const OSA_REPORT_QUERY = gql`
+query DipOSAnnualReport($date: String!, $stationID: String!) {
+  dipOSAnnualReport(date: $date, stationID: $stationID) {
     fuelTypes
-    period
-    overShort {
-      date
-      data
-    }
-    overShortSummary
+    months
+    summary
+    year
   }
 }
 `
-
 const Report = ({ classes, data }) => {
 
   if (!data) return null
-  if (data && data.loading) {
+  if (data && data.loading)
     return <div className={classes.container}><Loader /></div>
-  }
 
-  if (!data.dipOSMonthReport) {
+  if (!data.dipOSAnnualReport) {
     return (
       <div className={classes.container}>
         <Typography
@@ -48,7 +42,7 @@ const Report = ({ classes, data }) => {
     )
   }
 
-  const fts = utils.setOrderedFuelTypes(data.dipOSMonthReport.fuelTypes, FUEL_TYPE_LIST)
+  const fts = utils.setOrderedFuelTypes(data.dipOSAnnualReport.fuelTypes, FUEL_TYPE_LIST)
 
   return (
     <div className={classes.container}>
@@ -57,7 +51,7 @@ const Report = ({ classes, data }) => {
             className={classes.title}
             gutterBottom
             variant="title"
-        >OverShort Monthly</Typography>
+        >OverShort Annual</Typography>
         <br />
         <ReportHeading
             classes={classes}
@@ -65,12 +59,12 @@ const Report = ({ classes, data }) => {
         />
         <ReportData
             classes={classes}
-            data={data.dipOSMonthReport.overShort}
+            data={data.dipOSAnnualReport.months}
             fuelTypes={fts}
         />
         <ReportSummary
             classes={classes}
-            data={data.dipOSMonthReport.overShortSummary}
+            data={data.dipOSAnnualReport.summary}
             fuelTypes={fts}
         />
       </Paper>
@@ -84,7 +78,7 @@ Report.propTypes = {
 
 const ReportHeading = ({ classes, data }) => (
   <div className={classes.headerRow}>
-    <div className={classes.headerCell}>Day</div>
+    <div className={classes.headerCell}>Month</div>
     {data.map(ft => (
       <div
           className={classes.headerCellRt}
@@ -101,32 +95,32 @@ ReportHeading.propTypes = {
 const ReportData = ({ classes, data, fuelTypes }) => {
 
   let rows = []
-  data.forEach(d => {
+  for (const d in data) {
     rows.push(
       <div
           className={classes.reportDataRow}
-          key={d.date}
+          key={d}
       >
         <div className={classes.reportDataDateCell}>
-          {moment(d.date.toString()).format('MMM D')}
+          {moment(`${d.toString()}01`).format('MMM')}
         </div>
         {fuelTypes.map(ft => (
           <div
-              className={classNames(classes.reportDataCell, {[classes.reportDataNeg]: d.data[ft].overShort < 0})}
+              className={classNames(classes.reportDataCell, {[classes.reportDataNeg]: data[d][ft] < 0})}
               key={ft}
           >
-            {utils.fmtNumber(d.data[ft].overShort, 2, true)}
+            {utils.fmtNumber(data[d][ft], 2, true)}
           </div>
         ))}
       </div>
     )
-  })
+  }
 
   return rows
 }
 ReportData.propTypes = {
   classes:  PropTypes.object.isRequired,
-  data:     PropTypes.array.isRequired,
+  data:     PropTypes.object.isRequired,
 }
 
 const ReportSummary = ({ classes, data, fuelTypes }) => (
@@ -149,19 +143,17 @@ ReportSummary.propTypes = {
 }
 
 
-class OverShortMonthly extends Component {
+class OverShortAnnually extends Component {
 
   render() {
 
     const { classes, data } = this.props
 
-    if (data && data.error) {
-      return <p>Data Error :(</p>
-    }
-
     return (
       <div className={classes.mainContainer}>
-        <ReportSelectors />
+        <ReportSelectors
+            hideMonth
+        />
         <Report
             classes={classes}
             data={data}
@@ -170,12 +162,10 @@ class OverShortMonthly extends Component {
     )
   }
 }
-OverShortMonthly.propTypes = {
+OverShortAnnually.propTypes = {
   classes:  PropTypes.object.isRequired,
   data:     PropTypes.object,
-  history:  PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
-  match:    PropTypes.object.isRequired,
 }
 
 const styles =  theme => ({
@@ -253,15 +243,15 @@ const styles =  theme => ({
   },
 })
 
-export default graphql(OSM_REPORT_QUERY, {
+export default graphql(OSA_REPORT_QUERY, {
   skip: props => props.location.pathname.split('/').length < 5,
   options: (props) => {
     const prts = utils.extractPathParts(props.location.pathname, 3)
     return ({
       variables: {
-        date:       utils.dateToInt(prts[0]),
+        date:       Number(moment().year(prts[0]).format('YYYYMMDD')),
         stationID:  prts[1],
       },
     })
   },
-})(withStyles(styles)(OverShortMonthly))
+})(withStyles(styles)(OverShortAnnually))

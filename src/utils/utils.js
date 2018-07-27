@@ -49,3 +49,7 @@ export const fmtNumber = (number, decimal = 2, useGrouping = false, currency = f
   const formatter = new Intl.NumberFormat('en-US', opts)
   return formatter.format(number)
 }
+
+export const setOrderedFuelTypes = (fuelTypes, fuelTypeList) => {
+  return fuelTypeList.filter(ft => fuelTypes.includes(ft))
+}

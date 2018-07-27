@@ -18,6 +18,12 @@ const QUERY = gql`
   }
 `
 
+/*const QUERY = gql`
+  query hello {
+    hello
+  }
+`*/
+
 class StationSelector extends React.Component {
 
   constructor(props) {
@@ -36,6 +42,11 @@ class StationSelector extends React.Component {
     if (data.loading) return <p>Loading...</p>
     if (data.error) return <p>Error :(</p>
 
+    // console.log('data: ', data)
+    // console.log('data.hello: ', data.hello)
+
+    // return <p>{data.hello}</p>
+
     return (
       <div>
         <InputLabel htmlFor="station-select">Station</InputLabel>
@@ -48,7 +59,7 @@ class StationSelector extends React.Component {
             style={{minWidth: 110}}
             value={stationID}
         >
-          {data.stations.map(({ id, name }) => (
+          {data.stations && data.stations.map(({ id, name }) => (
             <MenuItem
                 key={id}
                 value={id}
