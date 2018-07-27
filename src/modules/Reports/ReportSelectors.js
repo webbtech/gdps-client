@@ -16,6 +16,8 @@ import Select from '@material-ui/core/Select'
 import Snackbar from '@material-ui/core/Snackbar'
 import { withStyles } from '@material-ui/core/styles'
 
+import StationSelector from '../Common/StationSelector'
+import { extractPathParts } from '../../utils/utils'
 import { RECORDS_START_YEAR as startYear } from '../../config/constants'
 
 // note: This might need to go into an init file
@@ -27,11 +29,38 @@ class Reports extends Component {
   state = {
     month: moment(new Date()).format('MM'),
     openSnackbar: false,
+    selectedDate: moment(),
     snackbarMessage: '',
     stationID: '',
     year: (new Date()).getFullYear(),
   }
 
+  componentDidMount = () => {
+    const pathPrts = extractPathParts(this.props.location.pathname, 3)
+    if (!pathPrts) return
+
+    const date = pathPrts[0]
+    const stationID = pathPrts[1]
+    if (date) {
+      let setDate
+      if (date.length === 4) {
+        setDate = moment().year(date)
+      } else {
+        setDate = moment(date)
+      }
+      const newDte = {
+        year:   setDate.format('YYYY'),
+        month:  setDate.subtract(1, 'months').format('MM'),
+        date:   setDate.format('DD'),
+      }
+      this.setState({ selectedDate: this.state.selectedDate.set(newDte) })
+      this.setState({ month: this.state.selectedDate.format('MM') })
+      this.setState({ year: parseInt(this.state.selectedDate.format('YYYY'), 10) })
+    }
+    if (stationID) {
+      this.setState({ stationID })
+    }
+  }
 
   handleChange = event => {
     this.setState(() => ({ [event.target.name]: event.target.value }))
@@ -46,6 +75,11 @@ class Reports extends Component {
 
   handleOpenSnackbar = (message) => {
     this.setState({ openSnackbar: true, snackbarMessage: message })
+  }
+
+  handleStationChange = value => {
+    this.setState({ stationID: value })
+    // this.setState({ stationID: value }, this.handleGetDip)
   }
 
   renderSnackBar = () => {
@@ -118,20 +152,10 @@ class Reports extends Component {
           {!hideStation &&
           <div className={classes.cell}>
             <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="station-select">Station</InputLabel>
-              <Select
-                  inputProps={{
-                    name: 'stationID',
-                    id: 'station-select',
-                  }}
-                  onChange={this.handleChange}
-                  value={this.state.stationID}
-              >
-                <MenuItem value={'10'}>Bridge</MenuItem>
-                <MenuItem value={'20'}>Chippawa</MenuItem>
-                <MenuItem value={'30'}>Collier</MenuItem>
-                <MenuItem value={'30'}>Drummond</MenuItem>
-              </Select>
+              <StationSelector
+                  onStationChange={this.handleStationChange}
+                  stationID={this.state.stationID}
+              />
             </FormControl>
           </div>
           }
@@ -196,14 +220,14 @@ class Reports extends Component {
       </div>
     )
   }
-
 }
 
 Reports.propTypes = {
   classes:      PropTypes.object.isRequired,
-  hideMonth:  PropTypes.bool,
+  hideMonth:    PropTypes.bool,
   hideStation:  PropTypes.bool,
   history:      PropTypes.object.isRequired,
+  location:     PropTypes.object.isRequired,
   match:        PropTypes.object.isRequired,
 }
 

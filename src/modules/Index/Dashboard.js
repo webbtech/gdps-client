@@ -17,8 +17,6 @@ class Dashboard extends Component {
 
   render() {
 
-    // console.log('props in Header render: ', this.props)
-
     const { classes } = this.props
     return (
       <div>

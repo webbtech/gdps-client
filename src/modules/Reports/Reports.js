@@ -9,13 +9,13 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
 import FuelDeliveries from './FuelDeliveries'
-import FuelSalesMonthly from './FuelSalesMonthly'
-import FuelSalesWeekly from './FuelSalesWeekly'
+import FuelSalesList from './FuelSalesList'
+import FuelSalesDetailed from './FuelSalesDetailed'
 import Header from '../Header/Header'
-import OverShortDaily from './OverShortDaily'
 import OverShortMonthly from './OverShortMonthly'
+import OverShortAnnually from './OverShortAnnually'
 import PropaneSalesMonthly from './PropaneSalesMonthly'
-import PropaneSalesWeekly from './PropaneSalesWeekly'
+import PropaneSalesAnnual from './PropaneSalesAnnual'
 import ReportMenu from './ReportMenu'
 import { styles as ms } from '../../styles/main'
 
@@ -38,28 +38,28 @@ class Reports extends Component {
           <Divider /><br />
           <div>
             <Route
-                component={FuelSalesWeekly}
-                path={`${match.url}/fuel-sales-weekly`}
+                component={FuelSalesDetailed}
+                path={`${match.url}/fuel-sales-detailed`}
             />
             <Route
-                component={FuelSalesMonthly}
-                path={`${match.url}/fuel-sales-monthly`}
-            />
-            <Route
-                component={OverShortDaily}
-                path={`${match.url}/overshort-daily`}
+                component={FuelSalesList}
+                path={`${match.url}/fuel-sales-list`}
             />
             <Route
                 component={OverShortMonthly}
                 path={`${match.url}/overshort-monthly`}
             />
             <Route
+                component={OverShortAnnually}
+                path={`${match.url}/overshort-annually`}
+            />
+            <Route
                 component={FuelDeliveries}
                 path={`${match.url}/fuel-deliveries`}
             />
             <Route
-                component={PropaneSalesWeekly}
-                path={`${match.url}/propane-sales-weekly`}
+                component={PropaneSalesAnnual}
+                path={`${match.url}/propane-sales-annual`}
             />
             <Route
                 component={PropaneSalesMonthly}

@@ -8,7 +8,7 @@
 
 # production
 /build
-/deploy
+/deploy/artifacts
 
 # misc
 .DS_Store
