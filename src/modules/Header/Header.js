@@ -210,6 +210,7 @@ const menuItems = [
   {uri: '/dips', label: 'Dip Entries'},
   {uri: '/reports', label: 'Reports'},
   {uri: '/propane', label: 'Propane Entries'},
+  {uri: '/import-data', label: 'Import Sales Data'},
   {uri: '/admin', label: 'Administration'},
 ]
 

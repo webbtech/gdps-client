@@ -5,7 +5,8 @@ import ApolloClient from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
 import { ApolloProvider } from 'react-apollo'
 import { HttpLink } from 'apollo-link-http'
-import { InMemoryCache } from 'apollo-cache-inmemory'
+import { setContext } from 'apollo-link-context'
+import { defaultDataIdFromObject, InMemoryCache } from 'apollo-cache-inmemory'
 import { onError } from 'apollo-link-error'
 import { Provider } from 'react-redux'
 
@@ -25,18 +26,65 @@ const errorLink = onError(({ networkError, graphQLErrors }) => {
   if (networkError) console.log(`[Network error]: ${networkError}`) // eslint-disable-line
 })
 
-// const httpLink = new HttpLink({ uri: 'http://localhost:4000/' })
 const httpLink = new HttpLink({ uri: config.BASE_URL })
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = window.localStorage.getItem('userToken')
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      Authorization: token ? `Bearer ${token}` : '',
+    },
+  }
+})
 
 const link = ApolloLink.from([
+  authLink,
   errorLink,
   httpLink,
 ])
 
+const defaultOptions = {
+  watchQuery: {
+    // fetchPolicy: 'cache-and-network',
+    fetchPolicy: 'network-only',
+    // fetchPolicy: 'no-cache',
+    errorPolicy: 'ignore',
+  },
+  query: {
+    fetchPolicy: 'network-only',
+    // fetchPolicy: 'no-cache',
+    errorPolicy: 'all',
+  },
+  mutate: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'all',
+  },
+}
+
+const cache = new InMemoryCache({
+  dataIdFromObject: object => {
+    /*if (object.__typename === 'FuelSaleDetailedReport') {
+      console.log('object: ', object)
+    }*/
+    switch (object.__typename) {
+      case 'DipOverShort': return `${object.date}${object.stationID}`
+      case 'Dip': return `${object.date}${object.stationTankID}`
+      case 'FuelPrice': return `${object.date}${object.stationID}`
+      case 'PropaneDeliver': return object.date
+      case 'Station': return object.id
+      case 'StationTank': return object.id
+      default: return defaultDataIdFromObject(object) // fall back to default handling
+    }
+  },
+})
+
 const client = new ApolloClient({
   link,
-  cache: new InMemoryCache(),
+  cache,
   queryDeduplication: true,
+  defaultOptions,
 })
 
 const store = configureStore()
@@ -63,13 +111,6 @@ if (module.hot) {
   // Support hot reloading of components
   // and display an overlay for runtime errors
   const renderApp = render
-  /*const renderError = (error) => {
-    const RedBox = require('redbox-react').default
-    ReactDOM.render(
-      <RedBox error={error} />,
-      rootEl,
-    )
-  }*/
 
   // In development, we wrap the rendering function to catch errors,
   // and if something breaks, log the error and render it to the screen

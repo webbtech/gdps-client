@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
 import { fmtNumber } from '../../utils/utils'
+import { FUEL_TYPE_LIST as fuelTypeList } from '../../config/constants'
 
 // fixme: I think this should be a pure component
 class DipOverShort extends Component {
@@ -14,7 +15,6 @@ class DipOverShort extends Component {
   render() {
 
     const { classes, data } = this.props
-
     let rows = []
     let haveData = false
     let fuelPrice
@@ -23,14 +23,18 @@ class DipOverShort extends Component {
     if (data && data.loading === false && data.dipOverShortRange && data.dipOverShortRange[1]) {
       haveData = true
       const os = data.dipOverShortRange[1].overShort
-      for (const prop in os) {
-        rows.push({
-          fuelType:   os[prop].fuelType,
-          litres:     os[prop].litres,
-          overshort:  os[prop].overshort,
-          sale:       os[prop].sale,
-        })
-      }
+
+      // Sort by fuel type
+      fuelTypeList.forEach(ft => {
+        if (os[ft]) {
+          rows.push({
+            fuelType:   os[ft].fuelType,
+            litres:     os[ft].tankLitres,
+            overshort:  os[ft].overShort,
+            sale:       os[ft].litresSold,
+          })
+        }
+      })
     }
 
     if (haveData && data.fuelPrice) {
@@ -49,7 +53,7 @@ class DipOverShort extends Component {
             <div className={classes.headerRow}>
               <div className={classes.headerCell}>Fuel Type</div>
               <div className={classNames([classes.headerCell], [classes.alignRight])}>Dip Litres</div>
-              <div className={classNames([classes.headerCell], [classes.alignRight])}>Sale Litres</div>
+              <div className={classNames([classes.headerCell], [classes.alignRight])}>Litres Sold</div>
               <div className={classNames([classes.headerCell], [classes.alignRight])}>Over/Short</div>
             </div>
 
@@ -59,8 +63,8 @@ class DipOverShort extends Component {
                   key={i}
               >
                 <div className={classes.dataCell}>{os.fuelType}</div>
-                <div className={classNames([classes.dataCell], [classes.alignRight])}>{fmtNumber(os.litres, 3)}</div>
-                <div className={classNames([classes.dataCell], [classes.alignRight])}>{fmtNumber(os.sale, 3)}</div>
+                <div className={classNames([classes.dataCell], [classes.alignRight])}>{fmtNumber(os.litres, 3, true)}</div>
+                <div className={classNames([classes.dataCell], [classes.alignRight])}>{fmtNumber(os.sale, 3, true)}</div>
                 <div className={classNames([classes.dataCell], [classes.alignRight], {[classes.negative]: os.overshort < 0})}>{fmtNumber(os.overshort, 3)}</div>
               </div>
             ))}
@@ -96,8 +100,7 @@ const styles =  theme => ({
     display:        'flex',
     flexDirection:  'column',
     fontFamily:     theme.typography.fontFamily,
-    marginLeft:     theme.spacing.unit * 6,
-    width:          theme.spacing.unit * 55,
+    marginLeft:     theme.spacing.unit * 4,
   },
   dataCell: {
     alignSelf:      'flex-end',
@@ -116,6 +119,7 @@ const styles =  theme => ({
   },
   fuelPrice: {
     marginTop: theme.spacing.unit * 2,
+    paddingLeft: theme.spacing.unit * 4,
   },
   headerRow: {
     borderBottomColor:  '#efefef',
@@ -132,7 +136,7 @@ const styles =  theme => ({
     padding:    theme.spacing.unit,
   },
   negative: {
-    color: 'red',
+    color: theme.palette.primary.main,
   },
 })
 

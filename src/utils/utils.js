@@ -53,3 +53,7 @@ export const fmtNumber = (number, decimal = 2, useGrouping = false, currency = f
 export const setOrderedFuelTypes = (fuelTypes, fuelTypeList) => {
   return fuelTypeList.filter(ft => fuelTypes.includes(ft))
 }
+
+export const ucFirst = word => {
+  return word.charAt(0).toUpperCase() + word.slice(1)
+}

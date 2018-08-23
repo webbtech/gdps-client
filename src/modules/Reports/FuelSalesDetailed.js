@@ -182,7 +182,7 @@ const styles =  theme => ({
     width:          theme.spacing.unit * 55,
   },
   mainContainer: {
-    width:  900,
+    width:  600,
     margin: 'auto',
   },
   weekContainer: {

@@ -5,6 +5,7 @@ import { ConnectedRouter } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 import { Switch, Route } from 'react-router'
 import Amplify from 'aws-amplify'
+import { Auth } from 'aws-amplify'
 import { Authenticator } from 'aws-amplify-react'
 
 import Admin from '../Admin/Admin'
@@ -12,6 +13,7 @@ import aws_exports from '../Auth/aws-exports'
 import ChangePassword from '../Profile/ChangePassword'
 import Dashboard from './Dashboard'
 import Dips from '../Dips/Dips'
+import ImportData from '../ImportData/ImportData'
 import Profile from '../Profile/Profile'
 import Propane from '../Propane/Propane'
 import Reports from '../Reports/Reports'
@@ -57,6 +59,10 @@ class Index extends Component {
                   path="/propane"
               />
               <Route
+                  component={ImportData}
+                  path="/import-data"
+              />
+              <Route
                   component={Admin}
                   path="/admin"
               />
@@ -85,13 +91,16 @@ class AppWithAuth extends Component { // eslint-disable-line react/no-multi-comp
     user: '',
   }
 
-  /*async componentWillMount() {
+  async componentWillMount() {
     const user = await Auth.currentAuthenticatedUser()
     if (user) {
-      this.setState({user})
-      console.log('user in componentDidMount: ', user)
+      // this.setState({user})
+      console.log('fetching user from Auth')
+      const storage = window.localStorage
+      // console.log('user in componentDidMount: ', user.signInUserSession.accessToken.jwtToken)
+      storage.setItem('userToken', user.signInUserSession.accessToken.jwtToken)
     }
-  }*/
+  }
 
   handleAuthStateChange(state) {
     console.log('state in handleAuthStateChange: ', state) // eslint-disable-line
@@ -107,7 +116,7 @@ class AppWithAuth extends Component { // eslint-disable-line react/no-multi-comp
       <div>
         <Authenticator
             hideDefault
-            // onStateChange={this.handleAuthStateChange}
+            onStateChange={this.handleAuthStateChange}
             theme={{}}
         >
           <Index />

@@ -21,9 +21,10 @@ import { styles as ms } from '../../styles/main'
 import { errorSend } from '../Error/errorActions'
 
 
-const DIP_QUERY = gql`
+export const DIP_QUERY = gql`
   query Dips($date: Int!, $dateFrom: Int!, $dateTo: Int!, $stationID: String!) {
     dips(date: $date, stationID: $stationID) {
+      date
       fuelType
       level
       litres
@@ -33,11 +34,14 @@ const DIP_QUERY = gql`
       }
     }
     fuelPrice(date: $date, stationID: $stationID) {
+      date
       price
+      stationID
     }
     dipOverShortRange(dateFrom: $dateFrom, dateTo: $dateTo, stationID: $stationID) {
       date
       overShort
+      stationID
     }
     stationTanks(stationID: $stationID) {
       id
@@ -99,23 +103,26 @@ class Dips extends Component {
               variant="headline"
           >Dip Entries</Typography>
           <Divider /><br />
-          <DipSelectors />
+          <div
+              className={classes.mainContainer}
+              style={{width: 1200}}
+          >
+            <DipSelectors />
 
-          <div style={{display: 'flex', flexDirection: 'row', marginTop: 20}}>
-
-            <div style={{flex: 1}}>
-              <DipForm
-                  data={data}
-                  editMode={editMode}
-                  havePrevDayDips={havePrevDayDips}
-              />
-            </div>
-
-            <div style={{flex: 1}}>
-              <DipOverShort
-                  data={data}
-                  dateObj={dateObj}
-              />
+            <div style={{display: 'flex', flexDirection: 'row', marginTop: 20}}>
+              <div style={{flex: 1}}>
+                <DipForm
+                    data={data}
+                    editMode={editMode}
+                    havePrevDayDips={havePrevDayDips}
+                />
+              </div>
+              <div style={{flex: .7}}>
+                <DipOverShort
+                    data={data}
+                    dateObj={dateObj}
+                />
+              </div>
             </div>
           </div>
 
@@ -133,6 +140,7 @@ Dips.propTypes = {
   match:    PropTypes.object.isRequired,
 }
 
+// todo: check if we do or will need this
 const mapDispatchToProps = dispatch => ({
   sendError: obj => dispatch(errorSend(obj)),
 })

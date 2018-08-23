@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import gql from 'graphql-tag'
+import { Mutation } from 'react-apollo'
+
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import classNames from 'classnames'
@@ -12,11 +15,23 @@ import Save from '@material-ui/icons/Save'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
-
+import Toaster from '../Common/Toaster'
 import * as errorActions from '../Error/errorActions'
 import Alert from '../Common/Alert'
 import { fmtNumber } from '../../utils/utils'
+import { DIP_QUERY } from './Dips'
+import { FUEL_TYPE_LIST as fuelTypeList } from '../../config/constants'
 const R = require('ramda')
+
+
+const CREATE_DIPS = gql`
+mutation CreateDips($fields: [DipInput]) {
+  createDips(input: $fields) {
+    ok
+    nModified
+  }
+}
+`
 
 class DipForm extends Component {
 
@@ -24,9 +39,12 @@ class DipForm extends Component {
     super(props)
     this.state = {
       tanks: null,
+      toasterMsg: '',
     }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleCalculateLitres = debounce(this.handleCalculateLitres, 350)
+    // this.createDipsParams = this.createDipsParams.bind(this)
+    // this.handleChange = this.handleChange.bind(this)
+    this.handleCalculateLitres = debounce(this.handleCalculateLitres, 400)
+    // this.handleChange = debounce(this.handleChange, 400)
   }
 
   componentWillMount = () => {
@@ -39,24 +57,30 @@ class DipForm extends Component {
     const { data } = this.props
     if (data !== prevProps.data && data.loading === false && data.stationTanks) {
       const dips = data.dips
-      data.stationTanks.forEach(t => {
-        const tmp = {
-          level: '',
-          litres: null,
-          delivery: '',
-          tank: t,
-        }
-        if (dips) {
-          tmp.dips = R.find(R.propEq('stationTankID', t.id))(data.dips)
-          tmp.level = tmp.dips.level
-          tmp.litres = tmp.dips.litres
-          if (tmp.dips.fuelDelivery) {
-            tmp.delivery = tmp.dips.fuelDelivery.litres
+      fuelTypeList.forEach(ft => {
+
+        data.stationTanks.forEach(t => {
+          if (t.fuelType === ft) {
+            const tmp = {
+              level: '',
+              litres: null,
+              delivery: '',
+              tank: t,
+            }
+            if (dips) {
+              tmp.dips = R.find(R.propEq('stationTankID', t.id))(data.dips)
+              tmp.level = tmp.dips.level
+              tmp.litres = tmp.dips.litres
+              if (tmp.dips.fuelDelivery) {
+                tmp.delivery = tmp.dips.fuelDelivery.litres
+              }
+            }
+            tanks[t.id] = tmp
           }
-        }
-        tanks[t.id] = tmp
+        })
       })
-      this.setState(() => ({tanks})) // eslint-disable-line
+
+      this.setState(() => ({tanks}))
     }
   }
 
@@ -80,6 +104,7 @@ class DipForm extends Component {
     }
   }
 
+  // fixme: bounce is not working on this
   handleCalculateLitres = (tankID, val) => {
 
     // If user deletes value entirely, we need to zero out entry
@@ -93,17 +118,21 @@ class DipForm extends Component {
     }
 
     let inputLevel = parseInt(val, 10)
-    const levels = tanks[tankID].tank.tank.Levels
-    while (!levels[inputLevel]) {
-      inputLevel += 1
+    if (inputLevel <= 1) return
+    const levels = tanks[tankID].tank.tank.levels
+    if (!levels[inputLevel]) {
+      inputLevel++
     }
+
     tanks[tankID].level = inputLevel
-    tanks[tankID].litres = levels[inputLevel].litres
-    this.setState(() => ({tanks}))
+    if (levels[inputLevel]) {
+      tanks[tankID].litres = levels[inputLevel].litres
+      this.setState(() => ({tanks}))
+    }
   }
 
-  handleSubmit = () => {
-    this.props.actions.errorSend({message: 'Propane Saved'})
+  handleDipComplete = () => {
+    this.setState({toasterMsg: 'Dip entry successfully completed'})
   }
 
   renderTanks = (data, classes) => {
@@ -157,7 +186,7 @@ class DipForm extends Component {
     ))
   }
 
-  submitReport = () => {
+  createDipsParams = () => {
     const tanks = this.state.tanks
     let error = false
     for (const t in tanks) {
@@ -165,24 +194,45 @@ class DipForm extends Component {
         error = true
         break
       }
-      // console.log('t.id: ', tanks[t].level)
     }
-    //todo: add toaster snackbar here
+    // this.props.actions.errorSend({message: 'Generic error message here...\nfooo \n bar', type: 'danger'})
 
-    this.props.actions.errorSend({message: 'Generic error message here...\nfooo \n bar', type: 'danger'})
+    // Extract station and date from the graphql data
+    const { variables } = this.props.data
+    let dips = []
+    for (const stID in tanks) {
+      dips.push({
+        date:       variables.date,
+        delivery:       tanks[stID].delivery || null,
+        fuelType:       tanks[stID].tank.fuelType,
+        level:          tanks[stID].level,
+        litres:         tanks[stID].litres,
+        stationID:  variables.stationID,
+        stationTankID:  stID,
+      })
+    }
 
     if (error) {
-      console.error('invalid form tanks: ', tanks)
+      console.error('invalid form tanks: ', tanks) // eslint-disable-line
+    }
+
+    return { fields: dips }
+  }
+
+  fetchDipsParams = () => {
+    const { variables } = this.props.data
+    return {
+      date:       variables.date,
+      dateFrom:   variables.dateFrom,
+      dateTo:     variables.dateTo,
+      stationID:  variables.stationID,
     }
   }
 
   render() {
 
     const { classes, data, editMode, havePrevDayDips } = this.props
-    // console.log('data: ', data)
-
     let loading = data && data.loading ? true : false
-
     let submitLabel = 'Save Dips'
     if (data && data.loading === false && editMode === true) {
       submitLabel = 'Edit Dips'
@@ -204,17 +254,33 @@ class DipForm extends Component {
         </div>
 
         {data && this.renderTanks(data, classes)}
-        {data && !loading && <div className={classes.buttonContainer}>
-        <Button
-            className={classes.submitButton}
-            color="primary"
-            disabled={!havePrevDayDips}
-            onClick={this.submitReport}
-            variant="raised"
+        {data && !loading && <div>
+        <Mutation
+            awaitRefetchQueries
+            mutation={CREATE_DIPS}
+            onCompleted={this.handleDipComplete}
+            refetchQueries={[{query: DIP_QUERY, variables: this.fetchDipsParams()}]}
+            variables={this.createDipsParams()}
         >
-          <Save className={classNames(classes.leftIcon, classes.iconSmall)} />
-          {submitLabel}
-        </Button>
+          {(createDips, { loading, error }) => (
+            <div className={classes.buttonContainer}>
+              <Button
+                  className={classes.submitButton}
+                  color="primary"
+                  disabled={!havePrevDayDips}
+                  onClick={createDips}
+                  variant="raised"
+              >
+                <Save className={classNames(classes.leftIcon, classes.iconSmall)} />
+                {submitLabel}
+              </Button>
+              <div className={classes.submitMsg}>
+              {loading && <div>Processing...</div>}
+              {error && <div>Error :( Please try again</div>}
+              </div>
+            </div>
+          )}
+        </Mutation>
         {data && !havePrevDayDips &&
           <div>
           <Alert type="info">Previous day dips missing. Ensure dips are entered consecutively.</Alert>
@@ -222,7 +288,7 @@ class DipForm extends Component {
         }
         </div>
         }
-
+        <Toaster message={this.state.toasterMsg} />
       </div>
     )
   }
@@ -251,7 +317,6 @@ const styles =  theme => ({
     display:        'flex',
     flexDirection:  'column',
     fontFamily:     theme.typography.fontFamily,
-    width:          theme.spacing.unit * 80,
   },
   dataAlignRight: {
     textAlign:    'right',
@@ -309,6 +374,9 @@ const styles =  theme => ({
   submitButton: {
     margin: theme.spacing.unit,
     marginTop: theme.spacing.unit * 3,
+  },
+  submitMsg: {
+    margin: 'auto',
   },
 })
 

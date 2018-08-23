@@ -10,7 +10,7 @@ import Select from '@material-ui/core/Select'
 
 
 const QUERY = gql`
-  query stations {
+  query Stations {
     stations {
       id
       name

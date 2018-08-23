@@ -46,6 +46,12 @@ class Dashboard extends Component {
           >
             Reports
           </Button>
+          <Button
+              component={Link}
+              to="/import-data"
+          >
+            Import Sales Data
+          </Button>
           <Divider light /><br />
         </Paper>
       </div>
