@@ -23,7 +23,7 @@ import { errorSend } from '../Error/errorActions'
 
 export const DIP_QUERY = gql`
   query Dips($date: Int!, $dateFrom: Int!, $dateTo: Int!, $stationID: String!) {
-    dips(date: $date, stationID: $stationID) {
+    curDips: dips(date: $date, stationID: $stationID) {
       date
       fuelType
       level
@@ -32,6 +32,13 @@ export const DIP_QUERY = gql`
       fuelDelivery {
         litres
       }
+    }
+    prevDips: dips(date: $dateFrom, stationID: $stationID) {
+      date
+      fuelType
+      level
+      litres
+      stationTankID
     }
     fuelPrice(date: $date, stationID: $stationID) {
       date
@@ -149,7 +156,6 @@ const DipsConnect = connect(
   null,
   mapDispatchToProps
 )(withStyles(ms)(Dips))
-
 
 export default graphql(DIP_QUERY, {
   skip: props => props.location.pathname.split('/').length <= 3,

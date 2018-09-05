@@ -9,12 +9,13 @@ import { withStyles } from '@material-ui/core/styles'
 class Toaster extends Component {
 
   state = {
+    duration: 3000,
     open: false,
     message: '',
   }
 
-  componentDidUpdate = prevProps => {
-    if (this.props.message !== prevProps.message) {
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevState.open === false && this.props.message) {
       this.setState({message: this.props.message, open: true})
     }
   }
@@ -23,7 +24,7 @@ class Toaster extends Component {
     if (reason === 'clickaway') {
       return
     }
-    this.setState({ open: false })
+    this.setState({ open: false, message: '' })
   }
 
   handleOpen = (message) => {
@@ -31,9 +32,9 @@ class Toaster extends Component {
   }
 
   render() {
-    const { classes } = this.props
 
-    // console.log('props in Toaster: ', this.props)
+    const { classes, message } = this.props
+    const duration = this.props.duration || this.state.duration
 
     return (
       <Snackbar
@@ -55,8 +56,8 @@ class Toaster extends Component {
             vertical: 'bottom',
             horizontal: 'left',
           }}
-          autoHideDuration={6000}
-          message={<span id="message-id">{this.state.message}</span>}
+          autoHideDuration={duration}
+          message={<span id="message-id">{message}</span>}
           onClose={this.handleClose}
           open={this.state.open}
       />
@@ -65,6 +66,7 @@ class Toaster extends Component {
 }
 Toaster.propTypes = {
   classes:  PropTypes.object.isRequired,
+  duration:  PropTypes.number,
   message:  PropTypes.string,
 }
 

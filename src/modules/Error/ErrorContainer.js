@@ -67,7 +67,7 @@ const styles = theme => ({
     fontFamily:       theme.typography.fontFamily,
     left:             0,
     minWidth:         500,
-    paddingBottom:    theme.spacing.unit,
+    // paddingBottom:    theme.spacing.unit,
     position:         'fixed',
     top:              0,
     width:            '100%',

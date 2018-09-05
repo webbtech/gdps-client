@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import gql from 'graphql-tag'
-import { Mutation } from 'react-apollo'
+import { graphql } from 'react-apollo'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -15,14 +15,14 @@ import Save from '@material-ui/icons/Save'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
-import Toaster from '../Common/Toaster'
 import * as errorActions from '../Error/errorActions'
 import Alert from '../Common/Alert'
-import { fmtNumber } from '../../utils/utils'
+import Toaster from '../Common/Toaster'
 import { DIP_QUERY } from './Dips'
+import { fmtNumber } from '../../utils/utils'
 import { FUEL_TYPE_LIST as fuelTypeList } from '../../config/constants'
-const R = require('ramda')
 
+const R = require('ramda')
 
 const CREATE_DIPS = gql`
 mutation CreateDips($fields: [DipInput]) {
@@ -38,17 +38,12 @@ class DipForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      haveErrors: false,
       tanks: null,
       toasterMsg: '',
     }
-    // this.createDipsParams = this.createDipsParams.bind(this)
-    // this.handleChange = this.handleChange.bind(this)
+    this.createDipsVars = this.createDipsVars.bind(this)
     this.handleCalculateLitres = debounce(this.handleCalculateLitres, 400)
-    // this.handleChange = debounce(this.handleChange, 400)
-  }
-
-  componentWillMount = () => {
-    this.timer = null
   }
 
   componentDidUpdate = prevProps => {
@@ -56,24 +51,30 @@ class DipForm extends Component {
     let tanks = {}
     const { data } = this.props
     if (data !== prevProps.data && data.loading === false && data.stationTanks) {
-      const dips = data.dips
+      const { curDips, prevDips } = data
       fuelTypeList.forEach(ft => {
 
         data.stationTanks.forEach(t => {
           if (t.fuelType === ft) {
             const tmp = {
               level: '',
+              prevLevel: '',
               litres: null,
               delivery: '',
               tank: t,
+              dlError: false,
             }
-            if (dips) {
-              tmp.dips = R.find(R.propEq('stationTankID', t.id))(data.dips)
+            if (curDips) {
+              tmp.dips = R.find(R.propEq('stationTankID', t.id))(curDips)
               tmp.level = tmp.dips.level
               tmp.litres = tmp.dips.litres
               if (tmp.dips.fuelDelivery) {
                 tmp.delivery = tmp.dips.fuelDelivery.litres
               }
+            }
+            if (prevDips) {
+              tmp.prevDips = R.find(R.propEq('stationTankID', t.id))(prevDips)
+              tmp.prevLevel = tmp.prevDips.level
             }
             tanks[t.id] = tmp
           }
@@ -104,13 +105,12 @@ class DipForm extends Component {
     }
   }
 
-  // fixme: bounce is not working on this
   handleCalculateLitres = (tankID, val) => {
 
     // If user deletes value entirely, we need to zero out entry
     let tanks = this.state.tanks
 
-    if (!val) {
+    if (!val || val === '0') {
       tanks[tankID].level = 0
       tanks[tankID].litres = 0
       this.setState(() => ({tanks}))
@@ -132,7 +132,101 @@ class DipForm extends Component {
   }
 
   handleDipComplete = () => {
-    this.setState({toasterMsg: 'Dip entry successfully completed'})
+    this.setState({toasterMsg: 'Dip entry successfully persisted'})
+  }
+
+  handleValidateTankLevel = (tankID, e) => {
+    let { tanks } = this.state
+    const field = e.target.name
+    let changeVals = false
+
+    if (field === 'level') {
+      if (!tanks[tankID].delivery && (tanks[tankID].level > tanks[tankID].prevLevel)) {
+        tanks[tankID].dlError = true
+        changeVals = true
+      } else if (tanks[tankID].level === '') {
+        tanks[tankID].dlError = true
+        changeVals = true
+      } else {
+        tanks[tankID].dlError = false
+        changeVals = true
+      }
+    } else if (field === 'delivery') {
+      if (tanks[tankID].delivery) {
+        tanks[tankID].dlError = false
+        changeVals = true
+      }
+    }
+    if (changeVals) {
+      if (tanks[tankID].dlError) {
+        this.setState(() => ({tanks, haveErrors: true}))
+      } else {
+        this.setState(() => ({tanks}))
+      }
+    }
+  }
+
+  handleDipSumit = () => {
+    const dipParams = this.createDipsVars()
+    if (!dipParams) return false
+
+    this.props.mutate({
+      variables: dipParams,
+      refetchQueries: [{query: DIP_QUERY, variables: this.fetchDipsVars()}],
+    })
+    .then(() => {
+    // .then(({ data }) => {
+      // console.log('got data', data)
+      this.handleDipComplete()
+    }).catch((error) => {
+      const errMsg = `There was an error sending the query: ${error}`
+      this.props.actions.errorSend({message: errMsg, type: 'danger'})
+    })
+  }
+
+  createDipsVars = () => {
+    const tanks = this.state.tanks
+    let error = false
+    let errMsgs = []
+    for (const t in tanks) {
+      if (tanks[t].dlError) {
+        error = true
+        errMsgs.push(`Invalid tank level for tank id: ${tanks[t].tank.tankID}`)
+      }
+    }
+    if (error) {
+      errMsgs.forEach(e => {
+        this.props.actions.errorSend({message: e, type: 'danger'})
+      })
+      return null
+    }
+
+    // Extract station and date from the graphql data
+    const { variables } = this.props.data
+    let dips = []
+    for (const stID in tanks) {
+      dips.push({
+        date:           variables.date,
+        delivery:       tanks[stID].delivery || null,
+        fuelType:       tanks[stID].tank.fuelType,
+        level:          tanks[stID].level,
+        litres:         tanks[stID].litres,
+        stationID:      variables.stationID,
+        stationTankID:  stID,
+      })
+    }
+
+    return { fields: dips }
+  }
+
+  fetchDipsVars = () => {
+    const { variables } = this.props.data
+    return {
+      date:       variables.date,
+      dateFrom:   variables.dateFrom,
+      dateTo:     variables.dateTo,
+      stationID:  variables.stationID,
+    }
   }
 
   renderTanks = (data, classes) => {
@@ -149,12 +243,13 @@ class DipForm extends Component {
         fuelType: tanks[t].tank.fuelType,
         tankID:   tanks[t].tank.tankID,
         size:     tanks[t].tank.tank.size,
+        dlError:  tanks[t].dlError,
       })
     }
 
     return rows.map((t, i) => (
       <div
-          className={classes.dataRow}
+          className={classNames(classes.dataRow, {[classes.dataRowError]: t.dlError})}
           key={t.id}
       >
         <div className={classes.dataCell}>
@@ -167,6 +262,7 @@ class DipForm extends Component {
               className={classes.input}
               id={`${t.id}_level`}
               name="level"
+              onBlur={(e) => this.handleValidateTankLevel(t.id, e)}
               onChange={this.handleChange}
               type="number"
               value={tanks[t.id].level}
@@ -177,6 +273,8 @@ class DipForm extends Component {
           <Input
               className={classes.input}
               id={`${t.id}_delivery`}
+              name="delivery"
+              onBlur={(e) => this.handleValidateTankLevel(t.id, e)}
               onChange={this.handleChange}
               type="number"
               value={tanks[t.id].delivery}
@@ -184,49 +282,6 @@ class DipForm extends Component {
           </div>
       </div>
     ))
-  }
-
-  createDipsParams = () => {
-    const tanks = this.state.tanks
-    let error = false
-    for (const t in tanks) {
-      if (tanks[t].level === null) {
-        error = true
-        break
-      }
-    }
-    // this.props.actions.errorSend({message: 'Generic error message here...\nfooo \n bar', type: 'danger'})
-
-    // Extract station and date from the graphql data
-    const { variables } = this.props.data
-    let dips = []
-    for (const stID in tanks) {
-      dips.push({
-        date:       variables.date,
-        delivery:       tanks[stID].delivery || null,
-        fuelType:       tanks[stID].tank.fuelType,
-        level:          tanks[stID].level,
-        litres:         tanks[stID].litres,
-        stationID:  variables.stationID,
-        stationTankID:  stID,
-      })
-    }
-
-    if (error) {
-      console.error('invalid form tanks: ', tanks) // eslint-disable-line
-    }
-
-    return { fields: dips }
-  }
-
-  fetchDipsParams = () => {
-    const { variables } = this.props.data
-    return {
-      date:       variables.date,
-      dateFrom:   variables.dateFrom,
-      dateTo:     variables.dateTo,
-      stationID:  variables.stationID,
-    }
   }
 
   render() {
@@ -240,7 +295,6 @@ class DipForm extends Component {
 
     return (
       <div className={classes.container}>
-        {/*<Errors />*/}
         <Typography
             gutterBottom
             variant="title"
@@ -255,38 +309,27 @@ class DipForm extends Component {
 
         {data && this.renderTanks(data, classes)}
         {data && !loading && <div>
-        <Mutation
-            awaitRefetchQueries
-            mutation={CREATE_DIPS}
-            onCompleted={this.handleDipComplete}
-            refetchQueries={[{query: DIP_QUERY, variables: this.fetchDipsParams()}]}
-            variables={this.createDipsParams()}
-        >
-          {(createDips, { loading, error }) => (
-            <div className={classes.buttonContainer}>
-              <Button
-                  className={classes.submitButton}
-                  color="primary"
-                  disabled={!havePrevDayDips}
-                  onClick={createDips}
-                  variant="raised"
-              >
-                <Save className={classNames(classes.leftIcon, classes.iconSmall)} />
-                {submitLabel}
-              </Button>
-              <div className={classes.submitMsg}>
-              {loading && <div>Processing...</div>}
-              {error && <div>Error :( Please try again</div>}
-              </div>
+          <div className={classes.buttonContainer}>
+            <Button
+                className={classes.submitButton}
+                color="primary"
+                disabled={!havePrevDayDips}
+                onClick={this.handleDipSumit.bind(this)}
+                variant="raised"
+            >
+              <Save className={classNames(classes.leftIcon, classes.iconSmall)} />
+              {submitLabel}
+            </Button>
+            <div className={classes.submitMsg}>
+              {loading && <div>Loading...</div>}
             </div>
-          )}
-        </Mutation>
-        {data && !havePrevDayDips &&
-          <div>
-          <Alert type="info">Previous day dips missing. Ensure dips are entered consecutively.</Alert>
           </div>
-        }
-        </div>
+          {data && !havePrevDayDips &&
+            <div>
+            <Alert type="info">Previous day dips missing. Ensure dips are entered consecutively.</Alert>
+            </div>
+          }
+          </div>
         }
         <Toaster message={this.state.toasterMsg} />
       </div>
@@ -300,6 +343,7 @@ DipForm.propTypes = {
   data:             PropTypes.object,
   editMode:         PropTypes.bool.isRequired,
   havePrevDayDips:  PropTypes.bool.isRequired,
+  mutate:           PropTypes.func.isRequired,
 }
 
 const styles =  theme => ({
@@ -329,15 +373,15 @@ const styles =  theme => ({
     padding:        theme.spacing.unit,
     paddingBottom:  theme.spacing.unit * 2,
   },
+  dataRowError: {
+    backgroundColor: '#FAC7C6',
+  },
   dataRow: {
     borderBottomColor:  '#efefef',
     borderBottomStyle:  'solid',
     borderBottomWidth:  1,
     display:            'inline-flex',
     flexDirection:      'row',
-    '&:hover': {
-      backgroundColor: theme.palette.grey['50'],
-    },
   },
   delButton: {
     minWidth: 0,
@@ -388,9 +432,14 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const StyledForm = withStyles(styles)(DipForm)
+const styledForm = withStyles(styles)(DipForm)
 
-export default connect(
+const connectedForm = connect(
   null,
   mapDispatchToProps
-)(StyledForm)
+)(styledForm)
+
+export default graphql(CREATE_DIPS, {
+  skip: true,
+})(connectedForm)
+
