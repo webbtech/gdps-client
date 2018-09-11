@@ -107,6 +107,7 @@ class ReportMenu extends Component {
         </div>
       {/* End Fuel Sales Menu */}
 
+      {/* Start Fuel Deliveries Button */}
         <div style={{flex: 'flex-grow'}}>
           <Button
               color={this.setButtonColor(pathname, '/fuel-deliveries')}
@@ -115,6 +116,7 @@ class ReportMenu extends Component {
             Fuel Deliveries
           </Button>
         </div>
+      {/* End Fuel Deliveries Button */}
 
       {/* Start Overshort Menu */}
         <div style={{flex: 'flex-grow'}}>
@@ -205,6 +207,17 @@ class ReportMenu extends Component {
           </Manager>
         </div>
       {/* End Propane Sales Menu */}
+
+      {/* Start Fuel Deliveries Button */}
+        <div style={{flex: 'flex-grow'}}>
+          <Button
+              color={this.setButtonColor(pathname, '/report-download')}
+              onClick={() => this.handleLink('/report-download')}
+          >
+            Report Download
+          </Button>
+        </div>
+      {/* End Fuel Deliveries Button */}
 
       </div>
     )

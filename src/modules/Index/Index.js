@@ -12,6 +12,7 @@ import Admin from '../Admin/Admin'
 import aws_exports from '../Auth/aws-exports'
 import ChangePassword from '../Profile/ChangePassword'
 import Dashboard from './Dashboard'
+import Download from '../Common/Download'
 import Dips from '../Dips/Dips'
 import ImportData from '../ImportData/ImportData'
 import Profile from '../Profile/Profile'
@@ -74,6 +75,10 @@ class Index extends Component {
                   component={ChangePassword}
                   path="/change-password"
               />
+              <Route
+                  component={Download}
+                  path="/download"
+              />
             </Switch>
           </div>
         </ConnectedRouter>
@@ -95,7 +100,7 @@ class AppWithAuth extends Component { // eslint-disable-line react/no-multi-comp
     const user = await Auth.currentAuthenticatedUser()
     if (user) {
       // this.setState({user})
-      console.log('fetching user from Auth')
+      // console.log('fetching user from Auth')
       const storage = window.localStorage
       // console.log('user in componentDidMount: ', user.signInUserSession.accessToken.jwtToken)
       storage.setItem('userToken', user.signInUserSession.accessToken.jwtToken)
@@ -103,7 +108,7 @@ class AppWithAuth extends Component { // eslint-disable-line react/no-multi-comp
   }
 
   handleAuthStateChange(state) {
-    console.log('state in handleAuthStateChange: ', state) // eslint-disable-line
+    // console.log('state in handleAuthStateChange: ', state) // eslint-disable-line
     // if (state === 'signedIn') {
         // Do something when the user has signed-in
     // }

@@ -11,6 +11,7 @@ import { withStyles } from '@material-ui/core/styles'
 import AdminMenu from './AdminMenu'
 import StationAdmin from './StationAdmin'
 import TankAdmin from './TankAdmin'
+import TankForm from './TankForm'
 import Header from '../Header/Header'
 // import AdminSelectors from './AdminSelectors'
 // import StationInfo from './StationInfo'
@@ -41,6 +42,15 @@ class Admin extends Component {
             <Route
                 component={TankAdmin}
                 path={`${match.url}/tank-admin`}
+            />
+            <Route
+                component={TankForm}
+                exact
+                path={`${match.url}/tank-form`}
+            />
+            <Route
+                component={TankForm}
+                path={`${match.url}/tank-form/:tankID`}
             />
           </div>
         </Paper>

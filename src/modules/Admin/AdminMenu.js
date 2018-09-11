@@ -27,7 +27,7 @@ class AdminMenu extends Component {
           Stations
         </Button>
         <Button
-            color={this.setButtonColor(pathname, '/admin/tank-admin')}
+            color={this.setButtonColor(pathname, '/admin/tank-')}
             component={Link}
             to="/admin/tank-admin"
         >

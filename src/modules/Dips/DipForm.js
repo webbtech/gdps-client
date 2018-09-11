@@ -98,7 +98,7 @@ class DipForm extends Component {
     let tanks = this.state.tanks
     const value = parseInt(val, 10) || ''
     tanks[id][field] = value
-    this.setState(() => ({tanks}))
+    this.setState(() => ({tanks, toasterMsg: ''}))
 
     if (field === 'level') {
       this.handleCalculateLitres(id, val)
@@ -441,5 +441,22 @@ const connectedForm = connect(
 
 export default graphql(CREATE_DIPS, {
   skip: true,
+  /*props: (props) => {
+    console.log('props: ', props)
+  // props: ({ data: { loading, error, networkStatus } }) => {
+    if (loading) {
+      return { loading }
+    }
+
+    if (error) {
+      return { error }
+    }
+
+    return {
+      // loading: false,
+      networkStatus,
+    }
+    return { mutate: props.mutate}
+  },*/
 })(connectedForm)
 
