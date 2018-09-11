@@ -47,13 +47,17 @@ const link = ApolloLink.from([
 
 const defaultOptions = {
   watchQuery: {
+    fetchPolicy: 'cache-first',
     // fetchPolicy: 'cache-and-network',
-    fetchPolicy: 'network-only',
+    // fetchPolicy: 'network-only',
     // fetchPolicy: 'no-cache',
-    errorPolicy: 'ignore',
+    // errorPolicy: 'ignore',
+    errorPolicy: 'all',
   },
   query: {
-    fetchPolicy: 'network-only',
+    fetchPolicy: 'cache-first',
+    // fetchPolicy: 'cache-and-network',
+    // fetchPolicy: 'network-only',
     // fetchPolicy: 'no-cache',
     errorPolicy: 'all',
   },
