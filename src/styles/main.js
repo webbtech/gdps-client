@@ -11,10 +11,12 @@ export const styles =  theme => ({
   flex: {
     flex: 1,
   },
-  /*menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },*/
+  mainContainer: {
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
+    margin: 'auto',
+  },
   titleLink: {
     textDecoration: 'none',
     color: '#fff',

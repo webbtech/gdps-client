@@ -1,13 +1,21 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { Route } from 'react-router'
+
+import Divider from '@material-ui/core/Divider'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
+import AdminMenu from './AdminMenu'
+// import StationAdmin from './StationAdmin'
+import StationTanks from './StationTanks.cntr'
+import TankAdmin from './TankAdmin'
+import TankForm from './TankForm.cntr'
 import Header from '../Header/Header'
-import AdminSelectors from './AdminSelectors'
-import StationInfo from './StationInfo'
+// import AdminSelectors from './AdminSelectors'
+// import StationInfo from './StationInfo'
 import { styles as ms } from '../../styles/main'
 
 
@@ -15,7 +23,7 @@ class Admin extends Component {
 
   render() {
 
-    const { classes } = this.props
+    const { classes, match } = this.props
 
     return (
       <div>
@@ -24,9 +32,33 @@ class Admin extends Component {
           <Typography
               gutterBottom
               variant="headline"
-          >Station Administration</Typography>
-          <AdminSelectors />
-          <StationInfo />
+          >Administration</Typography>
+          <AdminMenu />
+          <Divider /><br />
+          <div>
+            <Route
+                component={StationTanks}
+                exact
+                path={`${match.url}/station-admin`}
+            />
+            <Route
+                component={StationTanks}
+                path={`${match.url}/station-admin/:stationID`}
+            />
+            <Route
+                component={TankAdmin}
+                path={`${match.url}/tank-admin`}
+            />
+            <Route
+                component={TankForm}
+                exact
+                path={`${match.url}/tank-form`}
+            />
+            <Route
+                component={TankForm}
+                path={`${match.url}/tank-form/:tankID`}
+            />
+          </div>
         </Paper>
       </div>
     )
@@ -34,7 +66,8 @@ class Admin extends Component {
 }
 
 Admin.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes:  PropTypes.object.isRequired,
+  match:    PropTypes.object.isRequired,
 }
 
 export default withStyles(ms)(Admin)

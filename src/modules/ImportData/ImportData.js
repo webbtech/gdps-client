@@ -7,37 +7,35 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
 import Header from '../Header/Header'
+import ImportForm from './ImportForm'
 import { styles as ms } from '../../styles/main'
 
-import PropaneForm from './PropaneForm'
 
-class Propane extends Component {
+class ImportData extends Component {
 
   render() {
 
-    const { classes, history, location } = this.props
+    const { classes } = this.props
 
     return (
       <div>
-        <Header history={history} />
+        <Header />
         <Paper className={classes.paper}>
           <Typography
               gutterBottom
               variant="headline"
-          >Propane Entries</Typography>
+          >
+            Import Sales Data
+          </Typography>
           <Divider /><br />
-          <PropaneForm location={location} />
+          <ImportForm />
         </Paper>
       </div>
     )
   }
 }
-
-Propane.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  history:  PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-  match:    PropTypes.object.isRequired,
+ImportData.propTypes = {
+  classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(ms)(Propane)
+export default withStyles(ms)(ImportData)

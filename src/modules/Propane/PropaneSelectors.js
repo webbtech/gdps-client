@@ -15,6 +15,7 @@ import MomentUtils from 'material-ui-pickers/utils/moment-utils'
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider'
 import DatePicker from 'material-ui-pickers/DatePicker'
 
+import { extractPathParts } from '../../utils/utils'
 import { STD_DATE_FORMAT as dateFormat } from '../../config/constants'
 
 class PropaneSelectors extends Component {
@@ -25,11 +26,19 @@ class PropaneSelectors extends Component {
   }
 
   componentDidMount = () => {
-    const { history, match } = this.props
+    const pathPrts = extractPathParts(this.props.location.pathname, 2)
+    if (!pathPrts) return
+
+    const date = pathPrts[0]
+    // console.log('date: ', date)
+    // this.setState({ selectedDate: date }, this.handleGetEntry)
+    this.setState({ selectedDate: moment(date.toString()) }, this.setNextDisabled)
+
+    /*const { history, match } = this.props
     const { selectedDate } = this.state
     const dte = selectedDate.format(dateFormat)
     const uri = `${match.url}/${dte}`
-    history.push(uri)
+    history.push(uri)*/
   }
 
   handleDateChange = date => {
@@ -129,7 +138,7 @@ const styles =  theme => ({
   },
   formControl: {
     margin:   theme.spacing.unit,
-    minWidth: 120,
+    minWidth: 160,
   },
   navButton: {
     margin: theme.spacing.unit,

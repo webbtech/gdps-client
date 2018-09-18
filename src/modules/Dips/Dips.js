@@ -21,9 +21,10 @@ import { styles as ms } from '../../styles/main'
 import { errorSend } from '../Error/errorActions'
 
 
-const DIP_QUERY = gql`
+export const DIP_QUERY = gql`
   query Dips($date: Int!, $dateFrom: Int!, $dateTo: Int!, $stationID: String!) {
-    dips(date: $date, stationID: $stationID) {
+    curDips: dips(date: $date, stationID: $stationID) {
+      date
       fuelType
       level
       litres
@@ -32,12 +33,22 @@ const DIP_QUERY = gql`
         litres
       }
     }
+    prevDips: dips(date: $dateFrom, stationID: $stationID) {
+      date
+      fuelType
+      level
+      litres
+      stationTankID
+    }
     fuelPrice(date: $date, stationID: $stationID) {
+      date
       price
+      stationID
     }
     dipOverShortRange(dateFrom: $dateFrom, dateTo: $dateTo, stationID: $stationID) {
       date
       overShort
+      stationID
     }
     stationTanks(stationID: $stationID) {
       id
@@ -54,13 +65,27 @@ const DIP_QUERY = gql`
 
 class Dips extends Component {
 
-  renderForm = () => {
-    const { pathname } = this.props.location
-    const date = pathname.split('/')[2]
-    const stationID = pathname.split('/')[3]
+  state = {
+    stationID: '',
+    myData: '',
+  }
 
-    if (!date || ! stationID) return
-    return <DipForm />
+  componentDidUpdate = (prevProps, prevState) => {
+    // console.log('prevProps.match.params: ', prevProps.match.params)
+    // console.log('prevState: ', prevState)
+    let prevStationID = prevProps.match.params.stationID
+    let curStationID = this.props.match.params.stationID
+    if (prevStationID !== curStationID) {
+      console.log('setting station id: ', curStationID)
+      this.setState(() => ({stationID: curStationID, myData: 'good always'}))
+    }
+    /*if (prevProps.match.params.stationID) {
+      // prevStationID = 
+      console.log('prevStationID: ', prevProps.match.params.stationID)
+    }
+    if (this.props.match.params.stationID) {
+      console.log('props stationID: ', this.props.match.params.stationID)
+    }*/
   }
 
   render() {
@@ -99,23 +124,26 @@ class Dips extends Component {
               variant="headline"
           >Dip Entries</Typography>
           <Divider /><br />
-          <DipSelectors />
+          <div
+              className={classes.mainContainer}
+              style={{width: 1200}}
+          >
+            <DipSelectors />
 
-          <div style={{display: 'flex', flexDirection: 'row', marginTop: 20}}>
-
-            <div style={{flex: 1}}>
-              <DipForm
-                  data={data}
-                  editMode={editMode}
-                  havePrevDayDips={havePrevDayDips}
-              />
-            </div>
-
-            <div style={{flex: 1}}>
-              <DipOverShort
-                  data={data}
-                  dateObj={dateObj}
-              />
+            <div style={{display: 'flex', flexDirection: 'row', marginTop: 20}}>
+              <div style={{flex: 1}}>
+                <DipForm
+                    data={data}
+                    editMode={editMode}
+                    havePrevDayDips={havePrevDayDips}
+                />
+              </div>
+              <div style={{flex: .7}}>
+                <DipOverShort
+                    data={data}
+                    dateObj={dateObj}
+                />
+              </div>
             </div>
           </div>
 
@@ -133,6 +161,7 @@ Dips.propTypes = {
   match:    PropTypes.object.isRequired,
 }
 
+// todo: check if we do or will need this
 const mapDispatchToProps = dispatch => ({
   sendError: obj => dispatch(errorSend(obj)),
 })
@@ -142,11 +171,11 @@ const DipsConnect = connect(
   mapDispatchToProps
 )(withStyles(ms)(Dips))
 
-
 export default graphql(DIP_QUERY, {
   skip: props => props.location.pathname.split('/').length <= 3,
   options: (props) => {
     const prts = extractPathParts(props.location.pathname)
+    console.log('prts: ', prts)
     return ({
       variables: {
         date:       dateToInt(prts[0]),

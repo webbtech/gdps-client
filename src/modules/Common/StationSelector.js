@@ -10,19 +10,13 @@ import Select from '@material-ui/core/Select'
 
 
 const QUERY = gql`
-  query stations {
+  query Stations {
     stations {
       id
       name
     }
   }
 `
-
-/*const QUERY = gql`
-  query hello {
-    hello
-  }
-`*/
 
 class StationSelector extends React.Component {
 
@@ -41,11 +35,6 @@ class StationSelector extends React.Component {
 
     if (data.loading) return <p>Loading...</p>
     if (data.error) return <p>Error :(</p>
-
-    // console.log('data: ', data)
-    // console.log('data.hello: ', data.hello)
-
-    // return <p>{data.hello}</p>
 
     return (
       <div>

@@ -79,9 +79,9 @@ class Reports extends Component {
 
   handleStationChange = value => {
     this.setState({ stationID: value })
-    // this.setState({ stationID: value }, this.handleGetDip)
   }
 
+  // todo: replace this with the Common/Toaster component
   renderSnackBar = () => {
 
     const { classes } = this.props

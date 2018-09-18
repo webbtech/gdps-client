@@ -3,7 +3,7 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   // const env = getEnv()
   // if (env === 'development') {
-    module.exports = require('./configureStore.dev')
+  module.exports = require('./configureStore.dev')
   // } else if (env === 'stage') {
     // module.exports = require('./configureStore.stg')
   // }
