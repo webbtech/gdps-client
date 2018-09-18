@@ -65,13 +65,27 @@ export const DIP_QUERY = gql`
 
 class Dips extends Component {
 
-  renderForm = () => {
-    const { pathname } = this.props.location
-    const date = pathname.split('/')[2]
-    const stationID = pathname.split('/')[3]
+  state = {
+    stationID: '',
+    myData: '',
+  }
 
-    if (!date || ! stationID) return
-    return <DipForm />
+  componentDidUpdate = (prevProps, prevState) => {
+    // console.log('prevProps.match.params: ', prevProps.match.params)
+    // console.log('prevState: ', prevState)
+    let prevStationID = prevProps.match.params.stationID
+    let curStationID = this.props.match.params.stationID
+    if (prevStationID !== curStationID) {
+      console.log('setting station id: ', curStationID)
+      this.setState(() => ({stationID: curStationID, myData: 'good always'}))
+    }
+    /*if (prevProps.match.params.stationID) {
+      // prevStationID = 
+      console.log('prevStationID: ', prevProps.match.params.stationID)
+    }
+    if (this.props.match.params.stationID) {
+      console.log('props stationID: ', this.props.match.params.stationID)
+    }*/
   }
 
   render() {
@@ -161,6 +175,7 @@ export default graphql(DIP_QUERY, {
   skip: props => props.location.pathname.split('/').length <= 3,
   options: (props) => {
     const prts = extractPathParts(props.location.pathname)
+    console.log('prts: ', prts)
     return ({
       variables: {
         date:       dateToInt(prts[0]),

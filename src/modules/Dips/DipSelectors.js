@@ -75,12 +75,12 @@ class DipSelectors extends Component {
 
   handleGetDip = () => {
     this.setNextDisabled()
-    const { history, match } = this.props
+    const { history } = this.props
     const { selectedDate, stationID } = this.state
 
     if (stationID) {
       const dte = selectedDate.format(dateFormat)
-      const uri = `${match.url}/${dte}/${stationID}`
+      const uri = `/dips/${dte}/${stationID}`
       history.push(uri)
     }
   }

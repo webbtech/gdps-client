@@ -292,6 +292,7 @@ class DipForm extends Component {
     if (data && data.loading === false && editMode === true) {
       submitLabel = 'Edit Dips'
     }
+    console.log('data: ', data)
 
     return (
       <div className={classes.container}>

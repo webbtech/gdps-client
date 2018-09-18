@@ -9,9 +9,10 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
 import AdminMenu from './AdminMenu'
-import StationAdmin from './StationAdmin'
+// import StationAdmin from './StationAdmin'
+import StationTanks from './StationTanks.cntr'
 import TankAdmin from './TankAdmin'
-import TankForm from './TankForm'
+import TankForm from './TankForm.cntr'
 import Header from '../Header/Header'
 // import AdminSelectors from './AdminSelectors'
 // import StationInfo from './StationInfo'
@@ -36,8 +37,13 @@ class Admin extends Component {
           <Divider /><br />
           <div>
             <Route
-                component={StationAdmin}
+                component={StationTanks}
+                exact
                 path={`${match.url}/station-admin`}
+            />
+            <Route
+                component={StationTanks}
+                path={`${match.url}/station-admin/:stationID`}
             />
             <Route
                 component={TankAdmin}

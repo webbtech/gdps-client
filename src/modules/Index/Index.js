@@ -49,7 +49,12 @@ class Index extends Component {
               />
               <Route
                   component={Dips}
+                  exact
                   path="/dips"
+              />
+              <Route
+                  component={Dips}
+                  path="/dips/:date/:stationID"
               />
               <Route
                   component={Reports}
