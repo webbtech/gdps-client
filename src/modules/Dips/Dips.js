@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import gql from 'graphql-tag'
 import moment from 'moment'
-import { graphql } from 'react-apollo'
-import { connect } from 'react-redux'
 
 import Divider from '@material-ui/core/Divider'
 import Paper from '@material-ui/core/Paper'
@@ -15,101 +12,76 @@ import DipForm from './DipForm'
 import DipOverShort from './DipOverShort'
 import DipSelectors from './DipSelectors'
 import Header from '../Header/Header'
-import { extractPathParts, datePrevDay, dateToInt } from '../../utils/utils'
-import { styles as ms } from '../../styles/main'
+import Loader from '../Common/Loader'
+import { datePrevDay, dateToInt } from '../../utils/utils'
+import { FUEL_TYPE_LIST as fuelTypeList } from '../../config/constants'
 
-import { errorSend } from '../Error/errorActions'
+const R = require('ramda')
 
+const populateTanks = (dips, tanks) => {
 
-export const DIP_QUERY = gql`
-  query Dips($date: Int!, $dateFrom: Int!, $dateTo: Int!, $stationID: String!) {
-    curDips: dips(date: $date, stationID: $stationID) {
-      date
-      fuelType
-      level
-      litres
-      stationTankID
-      fuelDelivery {
-        litres
+  const { curDips, prevDips } = dips
+  let tanksObj = {}
+
+  fuelTypeList.forEach(ft => {
+    tanks.forEach(t => {
+      if (t.fuelType === ft) {
+        const tmp = {
+          level: '',
+          prevLevel: '',
+          litres: null,
+          delivery: '',
+          tank: t,
+          dlError: false,
+        }
+        if (curDips) {
+          tmp.dips = R.find(R.propEq('stationTankID', t.id))(curDips)
+          tmp.level = tmp.dips.level
+          tmp.litres = tmp.dips.litres
+          if (tmp.dips.fuelDelivery) {
+            tmp.delivery = tmp.dips.fuelDelivery.litres
+          }
+        }
+        if (prevDips) {
+          tmp.prevDips = R.find(R.propEq('stationTankID', t.id))(prevDips)
+          tmp.prevLevel = tmp.prevDips.level
+        }
+        tanksObj[t.id] = tmp
       }
-    }
-    prevDips: dips(date: $dateFrom, stationID: $stationID) {
-      date
-      fuelType
-      level
-      litres
-      stationTankID
-    }
-    fuelPrice(date: $date, stationID: $stationID) {
-      date
-      price
-      stationID
-    }
-    dipOverShortRange(dateFrom: $dateFrom, dateTo: $dateTo, stationID: $stationID) {
-      date
-      overShort
-      stationID
-    }
-    stationTanks(stationID: $stationID) {
-      id
-      fuelType
-      tankID
-      tank {
-        levels
-        size
-      }
-    }
-  }
-`
+    })
+  })
 
+  return tanksObj
+}
 
 class Dips extends Component {
 
-  state = {
-    stationID: '',
-    myData: '',
-  }
-
-  componentDidUpdate = (prevProps, prevState) => {
-    // console.log('prevProps.match.params: ', prevProps.match.params)
-    // console.log('prevState: ', prevState)
-    let prevStationID = prevProps.match.params.stationID
-    let curStationID = this.props.match.params.stationID
-    if (prevStationID !== curStationID) {
-      console.log('setting station id: ', curStationID)
-      this.setState(() => ({stationID: curStationID, myData: 'good always'}))
-    }
-    /*if (prevProps.match.params.stationID) {
-      // prevStationID = 
-      console.log('prevStationID: ', prevProps.match.params.stationID)
-    }
-    if (this.props.match.params.stationID) {
-      console.log('props stationID: ', this.props.match.params.stationID)
-    }*/
-  }
-
   render() {
 
-    const { classes, data, history } = this.props
-    const { pathname } = this.props.location
-
-    const pathPrts = extractPathParts(pathname)
-    const requestDate = pathPrts ? pathPrts[0] : null
-    const dateObj = moment(requestDate)
+    const { classes, dips, history, match: { params }, tanks } = this.props
+    const requestDate = params.date
+    const dateObj = moment(params.date)
     let havePrevDayDips = false
     let editMode = false
 
-    if (data && data.error) {
+    if (dips && dips.error) {
       return <p>Data Error :(</p>
     }
 
-    if (data && data.loading === false && data.dipOverShortRange) {
+    let waitComponent
+    if (!params.stationID) {
+      waitComponent = <div>Select a Station</div>
+    } else {
+      waitComponent = <Loader />
+    }
+
+    if (dips && dips.loading === false && dips.dipOverShortRange) {
       const curDay = dateToInt(requestDate)
       const prevDay = datePrevDay(requestDate)
-      if (data.dipOverShortRange[0].date === prevDay) {
+      if (dips.dipOverShortRange[0].date === prevDay) {
         havePrevDayDips = true
       }
-      if (data.dipOverShortRange[1] && data.dipOverShortRange[1].date === curDay) {
+      if (dips.dipOverShortRange[1] && dips.dipOverShortRange[1].date === curDay) {
         editMode = true
       }
     }
@@ -117,31 +89,32 @@ class Dips extends Component {
     return (
       <div>
         <Header history={history} />
-        <Paper className={classes.paper}>
+        <Paper className={classes.container}>
 
           <Typography
               gutterBottom
               variant="headline"
           >Dip Entries</Typography>
           <Divider /><br />
-          <div
-              className={classes.mainContainer}
-              style={{width: 1200}}
-          >
+          <div className={classes.secondaryContainer}>
             <DipSelectors />
 
             <div style={{display: 'flex', flexDirection: 'row', marginTop: 20}}>
               <div style={{flex: 1}}>
+              {tanks && tanks.stationTanks && dips && dips.loading === false ? (
                 <DipForm
-                    data={data}
                     editMode={editMode}
                     havePrevDayDips={havePrevDayDips}
+                    tankDips={populateTanks(dips, tanks.stationTanks)}
                 />
+              ) : (
+                waitComponent
+              )}
               </div>
               <div style={{flex: .7}}>
                 <DipOverShort
-                    data={data}
                     dateObj={dateObj}
+                    dips={dips}
                 />
               </div>
             </div>
@@ -156,33 +129,27 @@ class Dips extends Component {
 Dips.propTypes = {
   classes:  PropTypes.object.isRequired,
   data:     PropTypes.object,
+  dips:     PropTypes.object,
   history:  PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   match:    PropTypes.object.isRequired,
+  tanks:    PropTypes.object,
 }
 
-// todo: check if we do or will need this
-const mapDispatchToProps = dispatch => ({
-  sendError: obj => dispatch(errorSend(obj)),
+const styles =  theme => ({
+  container: {
+    fontFamily: theme.typography.fontFamily,
+    minHeight:  600,
+    margin:     theme.spacing.unit * 2,
+    padding:    theme.spacing.unit * 2,
+  },
+  secondaryContainer: {
+    display:        'flex',
+    flex:           1,
+    flexDirection:  'column',
+    margin:         'auto',
+    width:          1200,
+  },
 })
 
-const DipsConnect = connect(
-  null,
-  mapDispatchToProps
-)(withStyles(ms)(Dips))
-
-export default graphql(DIP_QUERY, {
-  skip: props => props.location.pathname.split('/').length <= 3,
-  options: (props) => {
-    const prts = extractPathParts(props.location.pathname)
-    console.log('prts: ', prts)
-    return ({
-      variables: {
-        date:       dateToInt(prts[0]),
-        dateFrom:   datePrevDay(prts[0]),
-        dateTo:     dateToInt(prts[0]),
-        stationID:  prts[1],
-      },
-    })
-  },
-})(DipsConnect)
+export default withStyles(styles)(Dips)

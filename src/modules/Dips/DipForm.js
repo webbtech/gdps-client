@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import gql from 'graphql-tag'
-import { graphql } from 'react-apollo'
+// import gql from 'graphql-tag'
+// import { graphql } from 'react-apollo'
+import { withRouter } from 'react-router'
 
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+
 import classNames from 'classnames'
 import { debounce } from 'lodash'
 
@@ -15,23 +15,12 @@ import Save from '@material-ui/icons/Save'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
-import * as errorActions from '../Error/errorActions'
+
 import Alert from '../Common/Alert'
 import Toaster from '../Common/Toaster'
-import { DIP_QUERY } from './Dips'
+import { DIP_QUERY } from './Dips.cont'
 import { fmtNumber } from '../../utils/utils'
-import { FUEL_TYPE_LIST as fuelTypeList } from '../../config/constants'
 
-const R = require('ramda')
-
-const CREATE_DIPS = gql`
-mutation CreateDips($fields: [DipInput]) {
-  createDips(input: $fields) {
-    ok
-    nModified
-  }
-}
-`
 
 class DipForm extends Component {
 
@@ -39,7 +28,7 @@ class DipForm extends Component {
     super(props)
     this.state = {
       haveErrors: false,
-      tanks: null,
+      tanks: props.tankDips,
       toasterMsg: '',
     }
     this.createDipsVars = this.createDipsVars.bind(this)
@@ -47,41 +36,11 @@ class DipForm extends Component {
   }
 
   componentDidUpdate = prevProps => {
-
-    let tanks = {}
-    const { data } = this.props
-    if (data !== prevProps.data && data.loading === false && data.stationTanks) {
-      const { curDips, prevDips } = data
-      fuelTypeList.forEach(ft => {
-
-        data.stationTanks.forEach(t => {
-          if (t.fuelType === ft) {
-            const tmp = {
-              level: '',
-              prevLevel: '',
-              litres: null,
-              delivery: '',
-              tank: t,
-              dlError: false,
-            }
-            if (curDips) {
-              tmp.dips = R.find(R.propEq('stationTankID', t.id))(curDips)
-              tmp.level = tmp.dips.level
-              tmp.litres = tmp.dips.litres
-              if (tmp.dips.fuelDelivery) {
-                tmp.delivery = tmp.dips.fuelDelivery.litres
-              }
-            }
-            if (prevDips) {
-              tmp.prevDips = R.find(R.propEq('stationTankID', t.id))(prevDips)
-              tmp.prevLevel = tmp.prevDips.level
-            }
-            tanks[t.id] = tmp
-          }
-        })
-      })
-
-      this.setState(() => ({tanks}))
+    // When route changes, update state
+    const { match: { params }, tankDips } = this.props
+    const prevParams = prevProps.match.params
+    if (prevParams.stationID !== params.stationID || prevParams.date !== params.date) {
+      this.setState(() => ({tanks: tankDips}))
     }
   }
 
@@ -202,7 +161,7 @@ class DipForm extends Component {
     }
 
     // Extract station and date from the graphql data
-    const { variables } = this.props.data
+    const { variables } = this.props.dips
     let dips = []
     for (const stID in tanks) {
       dips.push({
@@ -220,7 +179,7 @@ class DipForm extends Component {
   }
 
   fetchDipsVars = () => {
-    const { variables } = this.props.data
+    const { variables } = this.props.dips
     return {
       date:       variables.date,
       dateFrom:   variables.dateFrom,
@@ -229,70 +188,24 @@ class DipForm extends Component {
     }
   }
 
-  renderTanks = (data, classes) => {
-
-    const { tanks } = this.state
-    if (!tanks) return null
-
-    if (data.loading) return <p>Loading...</p>
-
-    let rows = []
-    for (const t in tanks) {
-      rows.push({
-        id:       t,
-        fuelType: tanks[t].tank.fuelType,
-        tankID:   tanks[t].tank.tankID,
-        size:     tanks[t].tank.tank.size,
-        dlError:  tanks[t].dlError,
-      })
-    }
-
-    return rows.map((t, i) => (
-      <div
-          className={classNames(classes.dataRow, {[classes.dataRowError]: t.dlError})}
-          key={t.id}
-      >
-        <div className={classes.dataCell}>
-          {t.size} ({t.tankID})
-          <span style={{display: 'inline', marginLeft: 15}}>{t.fuelType}</span>
-        </div>
-        <div className={classes.dataCell}>
-          <Input
-              autoFocus={i === 0}
-              className={classes.input}
-              id={`${t.id}_level`}
-              name="level"
-              onBlur={(e) => this.handleValidateTankLevel(t.id, e)}
-              onChange={this.handleChange}
-              type="number"
-              value={tanks[t.id].level}
-          />
-        </div>
-        <div className={classNames([classes.dataCell], [classes.dataAlignRight])}>{fmtNumber(tanks[t.id].litres, 0, true)}</div>
-        <div  className={classes.dataCell}>
-          <Input
-              className={classes.input}
-              id={`${t.id}_delivery`}
-              name="delivery"
-              onBlur={(e) => this.handleValidateTankLevel(t.id, e)}
-              onChange={this.handleChange}
-              type="number"
-              value={tanks[t.id].delivery}
-          />
-          </div>
-      </div>
-    ))
-  }
-
   render() {
 
-    const { classes, data, editMode, havePrevDayDips } = this.props
-    let loading = data && data.loading ? true : false
-    let submitLabel = 'Save Dips'
-    if (data && data.loading === false && editMode === true) {
-      submitLabel = 'Edit Dips'
+    console.log('props in DipForm: ', this.props)
+
+    const { classes, editMode, havePrevDayDips, tankDips } = this.props
+    const { tanks } = this.state
+    let submitLabel = editMode ? 'Edit Dips' : 'Save Dips'
+
+    let rows = []
+    for (const t in tankDips) {
+      rows.push({
+        id:       t,
+        fuelType: tankDips[t].tank.fuelType,
+        tankID:   tankDips[t].tank.tankID,
+        size:     tankDips[t].tank.tank.size,
+        dlError:  tankDips[t].dlError,
+      })
     }
-    console.log('data: ', data)
 
     return (
       <div className={classes.container}>
@@ -308,8 +221,42 @@ class DipForm extends Component {
           <div className={classNames([classes.headerCell], [classes.narrowCell])} />
         </div>
 
-        {data && this.renderTanks(data, classes)}
-        {data && !loading && <div>
+        {rows.map((t, i) => (
+          <div
+              className={classNames(classes.dataRow, {[classes.dataRowError]: t.dlError})}
+              key={t.id}
+          >
+            <div className={classes.dataCell}>
+              {t.size} ({t.tankID})
+              <span style={{display: 'inline', marginLeft: 15}}>{t.fuelType}</span>
+            </div>
+            <div className={classes.dataCell}>
+              <Input
+                  autoFocus={i === 0}
+                  className={classes.input}
+                  id={`${t.id}_level`}
+                  name="level"
+                  onBlur={(e) => this.handleValidateTankLevel(t.id, e)}
+                  onChange={this.handleChange}
+                  type="number"
+                  value={tanks[t.id].level}
+              />
+            </div>
+            <div className={classNames([classes.dataCell], [classes.dataAlignRight])}>{fmtNumber(tanks[t.id].litres, 0, true)}</div>
+            <div  className={classes.dataCell}>
+              <Input
+                  className={classes.input}
+                  id={`${t.id}_delivery`}
+                  name="delivery"
+                  onBlur={(e) => this.handleValidateTankLevel(t.id, e)}
+                  onChange={this.handleChange}
+                  type="number"
+                  value={tanks[t.id].delivery}
+              />
+              </div>
+          </div>
+        ))}
+        <div>
           <div className={classes.buttonContainer}>
             <Button
                 className={classes.submitButton}
@@ -321,17 +268,13 @@ class DipForm extends Component {
               <Save className={classNames(classes.leftIcon, classes.iconSmall)} />
               {submitLabel}
             </Button>
-            <div className={classes.submitMsg}>
-              {loading && <div>Loading...</div>}
-            </div>
           </div>
-          {data && !havePrevDayDips &&
+          {!havePrevDayDips &&
             <div>
             <Alert type="info">Previous day dips missing. Ensure dips are entered consecutively.</Alert>
             </div>
           }
           </div>
-        }
         <Toaster message={this.state.toasterMsg} />
       </div>
     )
@@ -339,12 +282,13 @@ class DipForm extends Component {
 }
 
 DipForm.propTypes = {
-  actions:          PropTypes.object.isRequired,
+  // actions:          PropTypes.object.isRequired,
   classes:          PropTypes.object.isRequired,
-  data:             PropTypes.object,
   editMode:         PropTypes.bool.isRequired,
   havePrevDayDips:  PropTypes.bool.isRequired,
-  mutate:           PropTypes.func.isRequired,
+  match:            PropTypes.object.isRequired,
+  // mutate:           PropTypes.func.isRequired,
+  tankDips:         PropTypes.object.isRequired,
 }
 
 const styles =  theme => ({
@@ -425,39 +369,4 @@ const styles =  theme => ({
   },
 })
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators({
-      ...errorActions,
-    }, dispatch),
-  }
-}
-
-const styledForm = withStyles(styles)(DipForm)
-
-const connectedForm = connect(
-  null,
-  mapDispatchToProps
-)(styledForm)
-
-export default graphql(CREATE_DIPS, {
-  skip: true,
-  /*props: (props) => {
-    console.log('props: ', props)
-  // props: ({ data: { loading, error, networkStatus } }) => {
-    if (loading) {
-      return { loading }
-    }
-
-    if (error) {
-      return { error }
-    }
-
-    return {
-      // loading: false,
-      networkStatus,
-    }
-    return { mutate: props.mutate}
-  },*/
-})(connectedForm)
-
+export default withRouter(withStyles(styles)(DipForm))
