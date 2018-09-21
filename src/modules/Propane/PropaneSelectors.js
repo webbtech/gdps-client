@@ -15,7 +15,7 @@ import MomentUtils from 'material-ui-pickers/utils/moment-utils'
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider'
 import DatePicker from 'material-ui-pickers/DatePicker'
 
-import { extractPathParts } from '../../utils/utils'
+// import { extractPathParts } from '../../utils/utils'
 import { STD_DATE_FORMAT as dateFormat } from '../../config/constants'
 
 class PropaneSelectors extends Component {
@@ -26,13 +26,16 @@ class PropaneSelectors extends Component {
   }
 
   componentDidMount = () => {
-    const pathPrts = extractPathParts(this.props.location.pathname, 2)
-    if (!pathPrts) return
+    // const pathPrts = extractPathParts(this.props.location.pathname, 2)
+    // if (!pathPrts) return
 
-    const date = pathPrts[0]
+    const { match: { params } } = this.props
+    if (!params.date) return
+    const date = params.date
+    // console.log('match: ', this.props.match.params)
     // console.log('date: ', date)
     // this.setState({ selectedDate: date }, this.handleGetEntry)
-    this.setState({ selectedDate: moment(date.toString()) }, this.setNextDisabled)
+    this.setState({ selectedDate: moment(date) }, this.setNextDisabled)
 
     /*const { history, match } = this.props
     const { selectedDate } = this.state
@@ -57,11 +60,12 @@ class PropaneSelectors extends Component {
 
   handleGetEntry = () => {
     this.setNextDisabled()
-    const { history, match } = this.props
+    const { history } = this.props
     const { selectedDate } = this.state
 
     const dte = selectedDate.format(dateFormat)
-    const uri = `${match.url}/${dte}`
+    // const uri = `${match.url}/${dte}`
+    const uri = `/propane/${dte}`
     history.push(uri)
   }
 

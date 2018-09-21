@@ -52,6 +52,14 @@ query StationTanks($stationID: String!) {
 }
 `
 
+const FUEL_SALE_LATEST = gql`
+query FuelSaleLatest($stationID: String!) {
+  fuelSaleLatest(stationID: $stationID) {
+    date
+  }
+}
+`
+
 const FetchDips = graphql(DIP_QUERY, {
   name: 'dips',
   skip: ({ match }) => !match || !match.params.date || !match.params.stationID,
@@ -76,6 +84,14 @@ const FetchTanks = graphql(STATION_TANK_QUERY, {
   }),
 })
 
+const FetchFuelSale = graphql(FUEL_SALE_LATEST, {
+  name: 'fuelSaleLatest',
+  skip: ({ match }) => !match || !match.params.stationID,
+  options: ({ match }) => ({
+    variables: {stationID: match.params.stationID},
+  }),
+})
+
 const mapDispatchToProps = dispatch => ({
   sendError: obj => dispatch(errorSend(obj)),
 })
@@ -83,6 +99,7 @@ const mapDispatchToProps = dispatch => ({
 export default compose(
   FetchDips,
   FetchTanks,
+  FetchFuelSale,
   connect(
     null,
     mapDispatchToProps

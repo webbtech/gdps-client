@@ -1,7 +1,6 @@
 import * as Yup from 'yup'
 import gql from 'graphql-tag'
-import { compose } from 'react-apollo'
-import { graphql } from 'react-apollo'
+import { compose, graphql } from 'react-apollo'
 import { withFormik } from 'formik'
 
 import TankForm from './TankForm'
@@ -94,7 +93,7 @@ const TankFormCntr = withFormik({
       .max(128, 'Maximum number of characters is: 128')
       .nullable(),
   }),
-  mapPropsToValues: ( { data } ) => {
+  mapPropsToValues: ({ data }) => {
     if (data && data.tank) {
       return data.tank
     }

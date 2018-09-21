@@ -10,10 +10,10 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 import Paper from '@material-ui/core/Paper'
+import red from '@material-ui/core/colors/red'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
-import red from '@material-ui/core/colors/red'
 
 import TankLevelsDialog from './TankLevelsDialog'
 

@@ -62,7 +62,12 @@ class Index extends Component {
               />
               <Route
                   component={Propane}
+                  exact
                   path="/propane"
+              />
+              <Route
+                  component={Propane}
+                  path="/propane/:date"
               />
               <Route
                   component={ImportData}

@@ -1,24 +1,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-// import gql from 'graphql-tag'
-// import { graphql } from 'react-apollo'
-import { withRouter } from 'react-router'
-
-
 import classNames from 'classnames'
-import { debounce } from 'lodash'
+import { clone, debounce } from 'lodash'
 
 import Button from '@material-ui/core/Button'
+import FormControl from '@material-ui/core/FormControl'
+import FormHelperText from '@material-ui/core/FormHelperText'
 import Input from '@material-ui/core/Input'
 import Save from '@material-ui/icons/Save'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
-
+import red from '@material-ui/core/colors/red'
 
 import Alert from '../Common/Alert'
 import Toaster from '../Common/Toaster'
-import { DIP_QUERY } from './Dips.cont'
 import { fmtNumber } from '../../utils/utils'
 
 
@@ -28,20 +24,9 @@ class DipForm extends Component {
     super(props)
     this.state = {
       haveErrors: false,
-      tanks: props.tankDips,
       toasterMsg: '',
     }
-    this.createDipsVars = this.createDipsVars.bind(this)
-    this.handleCalculateLitres = debounce(this.handleCalculateLitres, 400)
-  }
-
-  componentDidUpdate = prevProps => {
-    // When route changes, update state
-    const { match: { params }, tankDips } = this.props
-    const prevParams = prevProps.match.params
-    if (prevParams.stationID !== params.stationID || prevParams.date !== params.date) {
-      this.setState(() => ({tanks: tankDips}))
-    }
+    this.handleCalculateLitres = debounce(this.handleCalculateLitres, 750)
   }
 
   // see: https://stackoverflow.com/questions/23123138/perform-debounce-in-react-js for explanation on debounce
@@ -53,11 +38,7 @@ class DipForm extends Component {
     const id      = pcs[0]
     const field   = pcs[1]
 
-    // Using a tmp tank holder appeared to be the only way to set the state properly here
-    let tanks = this.state.tanks
-    const value = parseInt(val, 10) || ''
-    tanks[id][field] = value
-    this.setState(() => ({tanks, toasterMsg: ''}))
+    this.props.setFieldValue(`tanks.${id}.${field}`, Number(val), false)
 
     if (field === 'level') {
       this.handleCalculateLitres(id, val)
@@ -66,27 +47,33 @@ class DipForm extends Component {
 
   handleCalculateLitres = (tankID, val) => {
 
-    // If user deletes value entirely, we need to zero out entry
-    let tanks = this.state.tanks
+    let { errors } = this.props
+    let { tanks } = this.props.values
+
+    // Clear any old errors related this this tank
+    delete errors[`${tankID}_level`]
+    delete errors[tankID]
 
     if (!val || val === '0') {
-      tanks[tankID].level = 0
-      tanks[tankID].litres = 0
-      this.setState(() => ({tanks}))
+      this.props.setFieldValue(`tanks.${tankID}.level`, 0, false)
+      this.props.setFieldValue(`tanks.${tankID}.litres`, 0, false)
       return
     }
 
     let inputLevel = parseInt(val, 10)
+    const origLevel = clone(inputLevel)
     if (inputLevel <= 1) return
     const levels = tanks[tankID].tank.tank.levels
     if (!levels[inputLevel]) {
-      inputLevel++
+      inputLevel--
     }
 
     tanks[tankID].level = inputLevel
     if (levels[inputLevel]) {
-      tanks[tankID].litres = levels[inputLevel].litres
-      this.setState(() => ({tanks}))
+      this.props.setFieldValue(`tanks.${tankID}.litres`, levels[inputLevel].litres, false)
+    } else {
+      this.props.setFieldValue(`tanks.${tankID}.level`, origLevel, false)
+      this.props.setFieldError([`${tankID}_level`], 'Invalid field level')
     }
   }
 
@@ -94,106 +81,24 @@ class DipForm extends Component {
     this.setState({toasterMsg: 'Dip entry successfully persisted'})
   }
 
-  handleValidateTankLevel = (tankID, e) => {
-    let { tanks } = this.state
-    const field = e.target.name
-    let changeVals = false
-
-    if (field === 'level') {
-      if (!tanks[tankID].delivery && (tanks[tankID].level > tanks[tankID].prevLevel)) {
-        tanks[tankID].dlError = true
-        changeVals = true
-      } else if (tanks[tankID].level === '') {
-        tanks[tankID].dlError = true
-        changeVals = true
-      } else {
-        tanks[tankID].dlError = false
-        changeVals = true
-      }
-    } else if (field === 'delivery') {
-      if (tanks[tankID].delivery) {
-        tanks[tankID].dlError = false
-        changeVals = true
-      }
-    }
-    if (changeVals) {
-      if (tanks[tankID].dlError) {
-        this.setState(() => ({tanks, haveErrors: true}))
-      } else {
-        this.setState(() => ({tanks}))
-      }
-    }
-  }
-
-  handleDipSumit = () => {
-    const dipParams = this.createDipsVars()
-    if (!dipParams) return false
-
-    this.props.mutate({
-      variables: dipParams,
-      refetchQueries: [{query: DIP_QUERY, variables: this.fetchDipsVars()}],
-    })
-    .then(() => {
-    // .then(({ data }) => {
-      // console.log('got data', data)
-      this.handleDipComplete()
-    }).catch((error) => {
-      const errMsg = `There was an error sending the query: ${error}`
-      this.props.actions.errorSend({message: errMsg, type: 'danger'})
-    })
-  }
-
-  createDipsVars = () => {
-    const tanks = this.state.tanks
-    let error = false
-    let errMsgs = []
-    for (const t in tanks) {
-      if (tanks[t].dlError) {
-        error = true
-        errMsgs.push(`Invalid tank level for tank id: ${tanks[t].tank.tankID}`)
-      }
-    }
-    if (error) {
-      errMsgs.forEach(e => {
-        this.props.actions.errorSend({message: e, type: 'danger'})
-      })
-      return null
-    }
-
-    // Extract station and date from the graphql data
-    const { variables } = this.props.dips
-    let dips = []
-    for (const stID in tanks) {
-      dips.push({
-        date:           variables.date,
-        delivery:       tanks[stID].delivery || null,
-        fuelType:       tanks[stID].tank.fuelType,
-        level:          tanks[stID].level,
-        litres:         tanks[stID].litres,
-        stationID:      variables.stationID,
-        stationTankID:  stID,
-      })
-    }
-
-    return { fields: dips }
-  }
-
-  fetchDipsVars = () => {
-    const { variables } = this.props.dips
-    return {
-      date:       variables.date,
-      dateFrom:   variables.dateFrom,
-      dateTo:     variables.dateTo,
-      stationID:  variables.stationID,
-    }
+  handleSubmit = e => {
+    e.preventDefault()
+    this.props.handleSubmit(e)
   }
 
   render() {
 
-    console.log('props in DipForm: ', this.props)
-
-    const { classes, editMode, havePrevDayDips, tankDips } = this.props
-    const { tanks } = this.state
+    const {
+      classes,
+      dirty,
+      editMode,
+      errors,
+      havePrevDayDips,
+      isSubmitting,
+      tankDips,
+      values,
+    } = this.props
+    const errorKeys = Object.keys(errors).length
     let submitLabel = editMode ? 'Edit Dips' : 'Save Dips'
 
     let rows = []
@@ -203,7 +108,6 @@ class DipForm extends Component {
         fuelType: tankDips[t].tank.fuelType,
         tankID:   tankDips[t].tank.tankID,
         size:     tankDips[t].tank.tank.size,
-        dlError:  tankDips[t].dlError,
       })
     }
 
@@ -213,68 +117,88 @@ class DipForm extends Component {
             gutterBottom
             variant="title"
         >Dips</Typography>
-        <div className={classes.headerRow}>
-          <div className={classes.headerCell}>Tank</div>
-          <div className={classNames([classes.headerCell], [classes.alignCenter])}>Level</div>
-          <div className={classNames([classes.headerCell], [classes.alignCenter])}>Litres</div>
-          <div className={classNames([classes.headerCell], [classes.alignCenter])}>Delivery</div>
-          <div className={classNames([classes.headerCell], [classes.narrowCell])} />
-        </div>
 
-        {rows.map((t, i) => (
-          <div
-              className={classNames(classes.dataRow, {[classes.dataRowError]: t.dlError})}
-              key={t.id}
-          >
-            <div className={classes.dataCell}>
-              {t.size} ({t.tankID})
-              <span style={{display: 'inline', marginLeft: 15}}>{t.fuelType}</span>
-            </div>
-            <div className={classes.dataCell}>
-              <Input
-                  autoFocus={i === 0}
-                  className={classes.input}
-                  id={`${t.id}_level`}
-                  name="level"
-                  onBlur={(e) => this.handleValidateTankLevel(t.id, e)}
-                  onChange={this.handleChange}
-                  type="number"
-                  value={tanks[t.id].level}
-              />
-            </div>
-            <div className={classNames([classes.dataCell], [classes.dataAlignRight])}>{fmtNumber(tanks[t.id].litres, 0, true)}</div>
-            <div  className={classes.dataCell}>
-              <Input
-                  className={classes.input}
-                  id={`${t.id}_delivery`}
-                  name="delivery"
-                  onBlur={(e) => this.handleValidateTankLevel(t.id, e)}
-                  onChange={this.handleChange}
-                  type="number"
-                  value={tanks[t.id].delivery}
-              />
-              </div>
+        <form
+            autoComplete="off"
+            className={classes.form}
+            noValidate
+            onSubmit={this.handleSubmit}
+        >
+          <div className={classes.headerRow}>
+            <div className={classes.headerCell}>Tank</div>
+            <div className={classNames([classes.headerCell], [classes.alignCenter])}>Level</div>
+            <div className={classNames([classes.headerCell], [classes.alignCenter])}>Litres</div>
+            <div className={classNames([classes.headerCell], [classes.alignCenter])}>Delivery</div>
+            <div className={classNames([classes.headerCell], [classes.narrowCell])} />
           </div>
-        ))}
-        <div>
-          <div className={classes.buttonContainer}>
-            <Button
-                className={classes.submitButton}
-                color="primary"
-                disabled={!havePrevDayDips}
-                onClick={this.handleDipSumit.bind(this)}
-                variant="raised"
+
+          {rows.map((t, i) => (
+            <div
+                className={classNames(
+                  classes.dataRow,
+                  {[classes.errorDanger]: errors[t.id]}
+                )}
+                key={t.id}
             >
-              <Save className={classNames(classes.leftIcon, classes.iconSmall)} />
-              {submitLabel}
-            </Button>
-          </div>
-          {!havePrevDayDips &&
-            <div>
-            <Alert type="info">Previous day dips missing. Ensure dips are entered consecutively.</Alert>
+              <div className={classNames(classes.dataCell, classes.botSpacerField)}>
+                {t.size} ({t.tankID})
+                <span style={{display: 'inline', marginLeft: 15}}>{t.fuelType}</span>
+              </div>
+              <div className={classes.dataCell}>
+                <FormControl
+                    aria-describedby="size-helper-text"
+                    className={classes.formControl}
+                    error={!!errors[`${t.id}_level`]}
+                >
+                  <Input
+                      autoFocus={i === 0}
+                      className={classes.input}
+                      id={`${t.id}_level`}
+                      onChange={this.handleChange}
+                      type="number"
+                      value={values.tanks[t.id].level || ''}
+                  />
+                  <FormHelperText id="level-text">{errors[`${t.id}_level`]}</FormHelperText>
+                </FormControl>
+              </div>
+              <div className={classNames(classes.dataCell, classes.dataAlignRight, classes.botSpacerField)}>{fmtNumber(values.tanks[t.id].litres, 0, true)}</div>
+              <div  className={classes.dataCell}>
+                <FormControl
+                    aria-describedby="size-helper-text"
+                    className={classes.formControl}
+                    error={!!errors[`${t.id}_delivery`]}
+                >
+                  <Input
+                      className={classes.input}
+                      id={`${t.id}_delivery`}
+                      name="delivery"
+                      onChange={this.handleChange}
+                      type="number"
+                      value={values.tanks[t.id].delivery}
+                  />
+                  <FormHelperText id="delivery-text">{errors[`${t.id}_delivery`]}</FormHelperText>
+                </FormControl>
+              </div>
             </div>
-          }
+          ))}
+          <div>
+            <div className={classes.buttonContainer}>
+              <Button
+                  className={classes.submitButton}
+                  color="primary"
+                  disabled={!dirty || isSubmitting || !!errorKeys}
+                  type="submit"
+                  variant="raised"
+              >
+                <Save className={classNames(classes.leftIcon, classes.iconSmall)} />
+                {submitLabel}
+              </Button>
+            </div>
+            {!havePrevDayDips &&
+              <Alert type="info">Previous day dips missing. Ensure dips are entered consecutively.</Alert>
+            }
           </div>
+        </form>
         <Toaster message={this.state.toasterMsg} />
       </div>
     )
@@ -282,13 +206,19 @@ class DipForm extends Component {
 }
 
 DipForm.propTypes = {
-  // actions:          PropTypes.object.isRequired,
+  actions:          PropTypes.object.isRequired,
   classes:          PropTypes.object.isRequired,
+  dirty:            PropTypes.bool.isRequired,
   editMode:         PropTypes.bool.isRequired,
+  errors:           PropTypes.object.isRequired,
+  handleSubmit:     PropTypes.func.isRequired,
   havePrevDayDips:  PropTypes.bool.isRequired,
+  isSubmitting:     PropTypes.bool.isRequired,
   match:            PropTypes.object.isRequired,
-  // mutate:           PropTypes.func.isRequired,
+  setFieldError:    PropTypes.func.isRequired,
+  setFieldValue:    PropTypes.func.isRequired,
   tankDips:         PropTypes.object.isRequired,
+  values:           PropTypes.object.isRequired,
 }
 
 const styles =  theme => ({
@@ -331,6 +261,13 @@ const styles =  theme => ({
   delButton: {
     minWidth: 0,
   },
+  errorDanger: {
+    backgroundColor: red[100],
+  },
+  form: {
+    display:        'flex',
+    flexDirection:  'column',
+  },
   input: {
     paddingLeft:  10,
     width:        theme.spacing.unit * 15,
@@ -352,6 +289,9 @@ const styles =  theme => ({
   leftIcon: {
     marginRight: theme.spacing.unit,
   },
+  botSpacerField: {
+    marginBottom: theme.spacing.unit * 3,
+  },
   iconSmall: {
     fontSize: 20,
   },
@@ -361,12 +301,12 @@ const styles =  theme => ({
     paddingBottom:  theme.spacing.unit,
   },
   submitButton: {
-    margin: theme.spacing.unit,
-    marginTop: theme.spacing.unit * 3,
+    margin:     theme.spacing.unit,
+    marginTop:  theme.spacing.unit * 3,
   },
   submitMsg: {
     margin: 'auto',
   },
 })
 
-export default withRouter(withStyles(styles)(DipForm))
+export default withStyles(styles)(DipForm)
