@@ -7,6 +7,7 @@ import { Switch, Route } from 'react-router'
 import Amplify from 'aws-amplify'
 import { Auth } from 'aws-amplify'
 import { Authenticator } from 'aws-amplify-react'
+import { ApolloProvider } from 'react-apollo'
 
 import Admin from '../Admin/Admin'
 import aws_exports from '../Auth/aws-exports'
@@ -26,6 +27,7 @@ import ForgotPassword from '../Auth/ForgotPassword'
 import RequireNewPassword from '../Auth/RequireNewPassword'
 import Errors from '../Error/ErrorContainer'
 
+import client from '../../apollo.js'
 
 Amplify.configure(aws_exports)
 const history = createHistory()
@@ -38,6 +40,7 @@ class Index extends Component {
     if (this.props.authState !== 'signedIn') return null
 
     return (
+      <ApolloProvider client={client}>
         <ConnectedRouter history={history}>
           <div>
             <Errors />
@@ -92,6 +95,7 @@ class Index extends Component {
             </Switch>
           </div>
         </ConnectedRouter>
+        </ApolloProvider>
     )
   }
 }

@@ -56,11 +56,12 @@ const PersistDelivery = graphql(CREATE_DELIVERY, {
       refetchQueries: [{
         query: DELIVERY_QUERY,
         variables: {
-          date: dateToInt(params.date),
+          date: params.date ? dateToInt(params.date) : '',
         },
       }],
     })
   },
+  skip: ({ match }) => !match || !match.params.date,
 })
 
 const RemoveDelivery = graphql(REMOVE_DELIVERY, {
@@ -75,7 +76,7 @@ const RemoveDelivery = graphql(REMOVE_DELIVERY, {
       refetchQueries: [{
         query: DELIVERY_QUERY,
         variables: {
-          date: dateToInt(params.date),
+          date: params.date ? dateToInt(params.date) : '',
         },
       }],
     })
@@ -86,7 +87,7 @@ const PropaneFormCntr = withFormik({
 
   enableReinitialize: true,
   mapPropsToValues: ({ propane }) => {
-    const litres = propane.propaneDelivery ? propane.propaneDelivery.litres : ''
+    const litres = propane && propane.propaneDelivery ? propane.propaneDelivery.litres : ''
     return { litres }
   },
   handleSubmit: async (values, { props, setSubmitting }) => {

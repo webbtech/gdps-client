@@ -27,12 +27,11 @@ const populateTanks = (dips, tanks) => {
     tanks.forEach(t => {
       if (t.fuelType === ft) {
         const tmp = {
-          level: '',
-          prevLevel: '',
-          litres: null,
-          delivery: '',
-          tank: t,
-          dlError: false,
+          delivery:   '',
+          level:      '',
+          litres:     null,
+          prevLevel:  '',
+          tank:       t,
         }
         if (curDips) {
           tmp.dips = R.find(R.propEq('stationTankID', t.id))(curDips)
@@ -112,7 +111,7 @@ class Dips extends Component {
 
             <div style={{display: 'flex', flexDirection: 'row', marginTop: 20}}>
               <div style={{flex: 1}}>
-              {tanks && tanks.stationTanks && dips && dips.loading === false ? (
+              {tanks && tanks.stationTanks && tanks.loading === false && dips && dips.loading === false ? (
                 <DipForm
                     editMode={editMode}
                     havePrevDayDips={havePrevDayDips}

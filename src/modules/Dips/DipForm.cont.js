@@ -67,6 +67,12 @@ const validateInput = fields => {
         message: 'Tank level cannot be higher than previous day without a fuel delivery',
       })
     }
+    if (f.level > 0 && f.litres <= 0) {
+      errors.push({
+        tankID: id,
+        message: 'Invalid litres value.',
+      })
+    }
   }
 
   return errors
