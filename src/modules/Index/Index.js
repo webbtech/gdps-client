@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { ConnectedRouter } from 'react-router-redux'
-import createHistory from 'history/createBrowserHistory'
-import { Switch, Route } from 'react-router'
 import Amplify from 'aws-amplify'
+import createHistory from 'history/createBrowserHistory'
+// import Loadable from 'react-loadable'
+import { ApolloProvider } from 'react-apollo'
 import { Auth } from 'aws-amplify'
 import { Authenticator } from 'aws-amplify-react'
-import { ApolloProvider } from 'react-apollo'
+import { ConnectedRouter } from 'react-router-redux'
+import { Switch, Route } from 'react-router'
 
 import Admin from '../Admin/Admin'
 import aws_exports from '../Auth/aws-exports'
@@ -32,6 +33,17 @@ import client from '../../apollo.js'
 Amplify.configure(aws_exports)
 const history = createHistory()
 
+/*const Loading = () => <div>Loading...</div>
+
+const Admin = Loadable({
+  loader: () => import('../Admin/Admin'),
+  loading: Loading,
+})
+
+const Reports = Loadable({
+  loader: () => import('../Reports/Admin'),
+  loading: Loading,
+})*/
 
 class Index extends Component {
 
@@ -114,15 +126,15 @@ class AppWithAuth extends Component { // eslint-disable-line react/no-multi-comp
     const user = await Auth.currentAuthenticatedUser()
     if (user) {
       // this.setState({user})
-      // console.log('fetching user from Auth')
+      console.log('fetching user from Auth', user) // eslint-disable-line
       const storage = window.localStorage
       // console.log('user in componentDidMount: ', user.signInUserSession.accessToken.jwtToken)
       storage.setItem('userToken', user.signInUserSession.accessToken.jwtToken)
     }
   }
 
-  handleAuthStateChange(state) {
-    // console.log('state in handleAuthStateChange: ', state) // eslint-disable-line
+  handleAuthStateChange(state) { // eslint-disable-line
+    console.log('state in handleAuthStateChange: ', state) // eslint-disable-line
     // if (state === 'signedIn') {
         // Do something when the user has signed-in
     // }

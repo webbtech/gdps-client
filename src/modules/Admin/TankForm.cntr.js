@@ -7,6 +7,11 @@ import TankForm from './TankForm'
 import { TANKLIST_QUERY } from './TankAdmin'
 import { uploadTankFile } from '../../utils/s3File'
 
+/*async function LoadS3File() {
+  const { uploadTankFile } = await import('../../utils/s3File')
+  return uploadTankFile
+}*/
+
 const TANK_QUERY = gql`
 query Tank($id: String!) {
   tank(id: $id) {
@@ -109,8 +114,6 @@ const TankFormCntr = withFormik({
       if (values.levelsFile) {
         file = values.levelsFile
         delete values.levelsFile
-        // values.status = 'PENDING'
-        // values.status = 'PROCESSING'
 
         // Check file type
         if (file.type !== 'text/csv') {
@@ -132,6 +135,7 @@ const TankFormCntr = withFormik({
         setSubmitting(false)
       }
       if (file && graphqlReturn) {
+        // const uploadTankFile = await LoadS3File()
         const tankID = values.id
         const fileRet = await uploadTankFile(file, `tankFile_${tankID}.csv`)
         if (fileRet.error) {
@@ -161,6 +165,7 @@ const TankFormCntr = withFormik({
       }
       if (file && graphqlReturn) {
         const tankID = graphqlReturn.data.createTank.id
+        // const uploadTankFile = await LoadS3File()
         const fileRet = await uploadTankFile(file, `tankFile_${tankID}.csv`)
         if (fileRet.error) {
           setErrors({graphql: fileRet.error})

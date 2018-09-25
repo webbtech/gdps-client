@@ -1,14 +1,19 @@
 import ApolloClient from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
-// import { ApolloProvider } from 'react-apollo'
-import { HttpLink } from 'apollo-link-http'
-import { setContext } from 'apollo-link-context'
 import { defaultDataIdFromObject, InMemoryCache } from 'apollo-cache-inmemory'
+import { HttpLink } from 'apollo-link-http'
 import { onError } from 'apollo-link-error'
+import { setContext } from 'apollo-link-context'
 
 import { config } from './config/config'
 
+// import { errorSend } from './modules/Error/errorActions'
+
 const errorLink = onError(({ networkError, graphQLErrors }) => {
+// const errorLink = onError((props) => {
+  // console.log('props in errorLink: ', props)
+  // console.log('errorSend: ', errorSend)
+  // errorSend({message: 'bogus error message', type: 'danger'})
   if (graphQLErrors) {
     graphQLErrors.map(({ message, locations, path }) =>
       console.log( // eslint-disable-line
@@ -42,16 +47,11 @@ const defaultOptions = {
   watchQuery: {
     fetchPolicy: 'cache-first',
     // fetchPolicy: 'cache-and-network',
-    // fetchPolicy: 'network-only',
-    // fetchPolicy: 'no-cache',
-    // errorPolicy: 'ignore',
     errorPolicy: 'all',
   },
   query: {
     fetchPolicy: 'cache-first',
     // fetchPolicy: 'cache-and-network',
-    // fetchPolicy: 'network-only',
-    // fetchPolicy: 'no-cache',
     errorPolicy: 'all',
   },
   mutate: {
@@ -62,9 +62,9 @@ const defaultOptions = {
 
 const cache = new InMemoryCache({
   dataIdFromObject: object => {
-    /*if (object.__typename === 'FuelSaleDetailedReport') {
-      console.log('object: ', object)
-    }*/
+    // if (object.__typename === 'FuelSaleDetailedReport') {
+    //   console.log('object: ', object)
+    // }
     switch (object.__typename) {
       case 'DipOverShort': return `${object.date}${object.stationID}`
       case 'Dip': return `${object.date}${object.stationTankID}`
