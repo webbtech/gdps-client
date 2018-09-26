@@ -31,4 +31,5 @@ $PRT "\nFinished build stage\n"
 
 $PRT "Uploading files to S3\n"
 # $ECHO `aws s3 cp --recursive ./artifacts/ $S3_BUCKET`
-$ECHO `aws s3 sync ./artifacts/ $S3_BUCKET` --delete
+# $ECHO `aws s3 sync ./artifacts/ $S3_BUCKET` --delete
+$ECHO `aws s3 sync ./artifacts/ $S3_BUCKET --delete`

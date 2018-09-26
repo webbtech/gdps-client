@@ -26,7 +26,7 @@ import ConfirmSignIn from '../Auth/ConfirmSignIn'
 import SignIn from '../Auth/SignIn'
 import ForgotPassword from '../Auth/ForgotPassword'
 import RequireNewPassword from '../Auth/RequireNewPassword'
-import Errors from '../Error/ErrorContainer'
+import Errors from '../Error/Error.cont'
 
 import client from '../../apollo.js'
 
