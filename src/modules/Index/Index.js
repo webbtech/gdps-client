@@ -3,14 +3,14 @@ import PropTypes from 'prop-types'
 
 import Amplify from 'aws-amplify'
 import createHistory from 'history/createBrowserHistory'
-import Loadable from 'react-loadable'
+// import Loadable from 'react-loadable'
 import { ApolloProvider } from 'react-apollo'
 import { Auth } from 'aws-amplify'
 import { Authenticator } from 'aws-amplify-react'
 import { ConnectedRouter } from 'react-router-redux'
 import { Switch, Route } from 'react-router'
 
-// import Admin from '../Admin/Admin'
+import Admin from '../Admin/Admin'
 import aws_exports from '../Auth/aws-exports'
 import ChangePassword from '../Profile/ChangePassword'
 import Dashboard from './Dashboard'
@@ -19,7 +19,7 @@ import Dips from '../Dips/Dips.cont'
 import ImportData from '../ImportData/ImportData'
 import Profile from '../Profile/Profile'
 import Propane from '../Propane/Propane'
-// import Reports from '../Reports/Reports'
+import Reports from '../Reports/Reports'
 import withRoot from '../../withRoot'
 
 import ConfirmSignIn from '../Auth/ConfirmSignIn'
@@ -33,7 +33,7 @@ import client from '../../apollo.js'
 Amplify.configure(aws_exports)
 const history = createHistory()
 
-const Loading = () => <div>Loading...</div>
+/*const Loading = () => <div>Loading...</div>
 
 const Admin = Loadable({
   loader: () => import('../Admin/Admin'),
@@ -41,9 +41,9 @@ const Admin = Loadable({
 })
 
 const Reports = Loadable({
-  loader: () => import('../Reports/Reports'),
+  loader: () => import('../Reports/Admin'),
   loading: Loading,
-})
+})*/
 
 class Index extends Component {
 
