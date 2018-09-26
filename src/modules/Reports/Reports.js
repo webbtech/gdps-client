@@ -17,7 +17,9 @@ import OverShortAnnually from './OverShortAnnually'
 import PropaneSalesMonthly from './PropaneSalesMonthly'
 import PropaneSalesAnnual from './PropaneSalesAnnual'
 import ReportMenu from './ReportMenu'
-import ReportDownload from './ReportDownload'
+import StationReportDownload from './StationReportDownload'
+import PropaneReportDownload from './PropaneReportDownload'
+
 import { styles as ms } from '../../styles/main'
 
 
@@ -67,8 +69,12 @@ class Reports extends Component {
                 path={`${match.url}/propane-sales-monthly`}
             />
             <Route
-                component={ReportDownload}
-                path={`${match.url}/report-download`}
+                component={StationReportDownload}
+                path={`${match.url}/report-download-station`}
+            />
+            <Route
+                component={PropaneReportDownload}
+                path={`${match.url}/report-download-propane`}
             />
           </div>
         </Paper>

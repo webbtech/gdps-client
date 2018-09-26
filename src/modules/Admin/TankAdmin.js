@@ -17,7 +17,7 @@ import red from '@material-ui/core/colors/red'
 import green from '@material-ui/core/colors/lightGreen'
 import yellow from '@material-ui/core/colors/yellow'
 
-import Loader from '../Common/Loader'
+// import Loader from '../Common/Loader'
 import { fmtNumber } from '../../utils/utils'
 
 export const TANKLIST_QUERY = gql`
@@ -41,7 +41,7 @@ const TankList = ({ classes, formFunc }) => (
 
     {({ loading, error, data }) => {
       if (error) return `Error!: ${error}`
-      if (loading) return <div className={classes.container}><Loader /></div>
+      /*if (loading) return <div className={classes.container}><Loader /></div>*/
 
       const tanks = sortBy(data.tankList, [t => t.id])
       return (

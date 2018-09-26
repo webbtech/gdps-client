@@ -156,12 +156,14 @@ class DipForm extends Component {
                       id={`${t.id}_level`}
                       onChange={this.handleChange}
                       type="number"
-                      value={values.tanks[t.id].level || ''}
+                      value={values.tanks[t.id] ? values.tanks[t.id].level : ''}
                   />
                   <FormHelperText id="level-text">{errors[`${t.id}_level`]}</FormHelperText>
                 </FormControl>
               </div>
-              <div className={classNames(classes.dataCell, classes.dataAlignRight, classes.botSpacerField)}>{fmtNumber(values.tanks[t.id].litres, 0, true)}</div>
+              <div className={classNames(classes.dataCell, classes.dataAlignRight, classes.botSpacerField)}>
+                {values.tanks[t.id] && fmtNumber(values.tanks[t.id].litres, 0, true)}
+              </div>
               <div  className={classes.dataCell}>
                 <FormControl
                     aria-describedby="size-helper-text"
