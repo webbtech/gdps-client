@@ -14,15 +14,15 @@ class DipOverShort extends Component {
 
   render() {
 
-    const { classes, data } = this.props
+    const { classes, dips } = this.props
     let rows = []
     let haveData = false
     let fuelPrice
     let displayDate
 
-    if (data && data.loading === false && data.dipOverShortRange && data.dipOverShortRange[1]) {
+    if (dips && dips.loading === false && dips.dipOverShortRange && dips.dipOverShortRange[1]) {
       haveData = true
-      const os = data.dipOverShortRange[1].overShort
+      const os = dips.dipOverShortRange[1].overShort
 
       // Sort by fuel type
       fuelTypeList.forEach(ft => {
@@ -37,8 +37,8 @@ class DipOverShort extends Component {
       })
     }
 
-    if (haveData && data.fuelPrice) {
-      fuelPrice = fmtNumber(data.fuelPrice.price, 2)
+    if (haveData && dips.fuelPrice) {
+      fuelPrice = fmtNumber(dips.fuelPrice.price, 2)
       displayDate = this.props.dateObj.format('ddd, MMM Do')
     }
 
@@ -49,7 +49,7 @@ class DipOverShort extends Component {
             variant="title"
         >Overshort</Typography>
         {haveData &&
-          <div className={classes.container}>
+          <div className={classes.tblContainer}>
             <div className={classes.headerRow}>
               <div className={classes.headerCell}>Fuel Type</div>
               <div className={classNames([classes.headerCell], [classes.alignRight])}>Dip Litres</div>
@@ -85,8 +85,8 @@ class DipOverShort extends Component {
 
 DipOverShort.propTypes = {
   classes:  PropTypes.object.isRequired,
-  data:     PropTypes.object,
   dateObj:  PropTypes.object,
+  dips:     PropTypes.object,
 }
 
 const styles =  theme => ({
@@ -119,7 +119,7 @@ const styles =  theme => ({
   },
   fuelPrice: {
     marginTop: theme.spacing.unit * 2,
-    paddingLeft: theme.spacing.unit * 4,
+    paddingLeft: theme.spacing.unit,
   },
   headerRow: {
     borderBottomColor:  '#efefef',
@@ -137,6 +137,10 @@ const styles =  theme => ({
   },
   negative: {
     color: theme.palette.primary.main,
+  },
+  tblContainer: {
+    display:        'flex',
+    flexDirection:  'column',
   },
 })
 

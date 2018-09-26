@@ -28,6 +28,7 @@ export const styles =  theme => ({
     padding: theme.spacing.unit * 2,
   },
   popperClose: {
-    pointerEvents: 'none',
+    pointerEvents:  'none',
+    zIndex: -1,
   },
 })

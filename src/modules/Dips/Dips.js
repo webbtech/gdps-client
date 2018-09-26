@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
-import DipForm from './DipForm'
+import DipForm from './DipForm.cont'
 import DipOverShort from './DipOverShort'
 import DipSelectors from './DipSelectors'
 import Header from '../Header/Header'
@@ -27,12 +27,11 @@ const populateTanks = (dips, tanks) => {
     tanks.forEach(t => {
       if (t.fuelType === ft) {
         const tmp = {
-          level: '',
-          prevLevel: '',
-          litres: null,
-          delivery: '',
-          tank: t,
-          dlError: false,
+          delivery:   '',
+          level:      '',
+          litres:     null,
+          prevLevel:  '',
+          tank:       t,
         }
         if (curDips) {
           tmp.dips = R.find(R.propEq('stationTankID', t.id))(curDips)
@@ -58,11 +57,17 @@ class Dips extends Component {
 
   render() {
 
-    const { classes, dips, history, match: { params }, tanks } = this.props
+    const { classes, dips, fuelSaleLatest, history, match: { params }, tanks } = this.props
     const requestDate = params.date
     const dateObj = moment(params.date)
     let havePrevDayDips = false
     let editMode = false
+
+    let lastFSDate = ''
+    if (fuelSaleLatest && fuelSaleLatest.fuelSaleLatest) {
+      let fsDate = moment(fuelSaleLatest.fuelSaleLatest.date.toString())
+      lastFSDate = fsDate.format('YYYY-MM-DD')
+    }
 
     if (dips && dips.error) {
       return <p>Data Error :(</p>
@@ -90,7 +95,6 @@ class Dips extends Component {
       <div>
         <Header history={history} />
         <Paper className={classes.container}>
-
           <Typography
               gutterBottom
               variant="headline"
@@ -99,9 +103,15 @@ class Dips extends Component {
           <div className={classes.secondaryContainer}>
             <DipSelectors />
 
+            {lastFSDate &&
+            <div className={classes.lastFS}>
+              Last imported Fuel Sale date: {lastFSDate}
+            </div>
+            }
+
             <div style={{display: 'flex', flexDirection: 'row', marginTop: 20}}>
               <div style={{flex: 1}}>
-              {tanks && tanks.stationTanks && dips && dips.loading === false ? (
+              {tanks && tanks.stationTanks && tanks.loading === false && dips && dips.loading === false ? (
                 <DipForm
                     editMode={editMode}
                     havePrevDayDips={havePrevDayDips}
@@ -112,14 +122,15 @@ class Dips extends Component {
               )}
               </div>
               <div style={{flex: .7}}>
+              {dips &&
                 <DipOverShort
                     dateObj={dateObj}
                     dips={dips}
                 />
+              }
               </div>
             </div>
           </div>
-
         </Paper>
       </div>
     )
@@ -127,13 +138,14 @@ class Dips extends Component {
 }
 
 Dips.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.object,
-  dips:     PropTypes.object,
-  history:  PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-  match:    PropTypes.object.isRequired,
-  tanks:    PropTypes.object,
+  classes:        PropTypes.object.isRequired,
+  data:           PropTypes.object,
+  dips:           PropTypes.object,
+  fuelSaleLatest: PropTypes.object,
+  history:        PropTypes.object.isRequired,
+  location:       PropTypes.object.isRequired,
+  match:          PropTypes.object.isRequired,
+  tanks:          PropTypes.object,
 }
 
 const styles =  theme => ({
@@ -142,6 +154,12 @@ const styles =  theme => ({
     minHeight:  600,
     margin:     theme.spacing.unit * 2,
     padding:    theme.spacing.unit * 2,
+  },
+  lastFS: {
+    color:      theme.palette.secondary.main,
+    marginTop:  -(theme.spacing.unit),
+    marginLeft: theme.spacing.unit,
+    fontSize:   12,
   },
   secondaryContainer: {
     display:        'flex',

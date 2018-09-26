@@ -9,13 +9,13 @@ import { withStyles } from '@material-ui/core/styles'
 import Header from '../Header/Header'
 import { styles as ms } from '../../styles/main'
 
-import PropaneForm from './PropaneForm'
+import PropaneForm from './PropaneForm.cont'
 
 class Propane extends Component {
 
   render() {
 
-    const { classes, history, location } = this.props
+    const { classes, history } = this.props
 
     return (
       <div>
@@ -26,7 +26,7 @@ class Propane extends Component {
               variant="headline"
           >Propane Entries</Typography>
           <Divider /><br />
-          <PropaneForm location={location} />
+          <PropaneForm />
         </Paper>
       </div>
     )
@@ -36,7 +36,6 @@ class Propane extends Component {
 Propane.propTypes = {
   classes:  PropTypes.object.isRequired,
   history:  PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
   match:    PropTypes.object.isRequired,
 }
 

@@ -23,6 +23,7 @@ class ReportMenu extends Component {
       openMenu1: false,
       openMenu2: false,
       openMenu3: false,
+      openMenuDwnld: false,
     }
     this.handleClose  = this.handleClose.bind(this)
     this.handleToggle = this.handleToggle.bind(this)
@@ -36,6 +37,7 @@ class ReportMenu extends Component {
     this.setState({ openMenu1: false })
     this.setState({ openMenu2: false })
     this.setState({ openMenu3: false })
+    this.setState({ openMenuDwnld: false })
   }
 
   handleToggle(menu) {
@@ -56,7 +58,7 @@ class ReportMenu extends Component {
   render() {
 
     const { classes } = this.props
-    const { openMenu1, openMenu2, openMenu3 } = this.state
+    const { openMenu1, openMenu2, openMenu3, openMenuDwnld } = this.state
     const { pathname } = this.props.history.location
 
     return (
@@ -82,16 +84,16 @@ class ReportMenu extends Component {
               )}
             </Reference>
             <Popper
-                className={classNames({ [classes.popperClose]: !openMenu1 })}
                 eventsEnabled={openMenu1}
                 placement="bottom-start"
             >
               {() => (
               <ClickAwayListener onClickAway={this.handleClose}>
                 <Grow
+                    className={classNames({ [classes.popperClose]: !openMenu1 })}
                     id="menu1"
                     in={openMenu1}
-                    style={{ transformOrigin: '0 0 0', position: 'absolute', zIndex: 999 }}
+                    style={{ transformOrigin: '0 0 0', position: 'absolute', zIndex: 1 }}
                 >
                   <Paper>
                     <MenuList role="menu">
@@ -123,11 +125,7 @@ class ReportMenu extends Component {
           <Manager>
             <Reference>
               {() => (
-              <div
-                  ref={node => {
-                    this.target2 = node
-                  }}
-              >
+              <div ref={node => {this.target2 = node}}>
               <Button
                   color={this.setButtonColor(pathname, '/overshort-')}
                   onClick={() => this.handleToggle('openMenu2')}
@@ -138,16 +136,16 @@ class ReportMenu extends Component {
               )}
             </Reference>
             <Popper
-                className={classNames({ [classes.popperClose]: !openMenu2 })}
                 eventsEnabled={openMenu2}
                 placement="bottom"
             >
               {() => (
               <ClickAwayListener onClickAway={this.handleClose}>
                 <Grow
+                    className={classNames({ [classes.popperClose]: !openMenu2 })}
                     id="menu2"
                     in={openMenu2}
-                    style={{ transformOrigin: '0 0 0', position: 'absolute', zIndex: 999 }}
+                    style={{ transformOrigin: '0 0 0', position: 'absolute', zIndex: 1 }}
                 >
                   <Paper>
                     <MenuList role="menu">
@@ -168,11 +166,7 @@ class ReportMenu extends Component {
           <Manager>
             <Reference>
               {() => (
-              <div
-                  ref={node => {
-                    this.target3 = node
-                  }}
-              >
+              <div ref={node => {this.target3 = node}}>
                 <Button
                     color={this.setButtonColor(pathname, '/propane-sales-')}
                     onClick={() => this.handleToggle('openMenu3')}
@@ -183,16 +177,16 @@ class ReportMenu extends Component {
               )}
             </Reference>
             <Popper
-                className={classNames({ [classes.popperClose]: !openMenu3 })}
                 eventsEnabled={openMenu3}
                 placement="bottom-start"
             >
               {() => (
               <ClickAwayListener onClickAway={this.handleClose}>
                 <Grow
+                    className={classNames({ [classes.popperClose]: !openMenu3 })}
                     id="menu1"
                     in={openMenu3}
-                    style={{ transformOrigin: '0 0 0', position: 'absolute', zIndex: 999 }}
+                    style={{ transformOrigin: '0 0 0', position: 'absolute', zIndex: 1 }}
                 >
                   <Paper>
                     <MenuList role="menu">
@@ -208,16 +202,47 @@ class ReportMenu extends Component {
         </div>
       {/* End Propane Sales Menu */}
 
-      {/* Start Fuel Deliveries Button */}
+      {/* Start Report Downloads Menu */}
         <div style={{flex: 'flex-grow'}}>
-          <Button
-              color={this.setButtonColor(pathname, '/report-download')}
-              onClick={() => this.handleLink('/report-download')}
-          >
-            Report Download
-          </Button>
+          <Manager>
+            <Reference>
+              {() => (
+              <div ref={node => {this.target4 = node}}>
+                <Button
+                    color={this.setButtonColor(pathname, '/report-download-')}
+                    onClick={() => this.handleToggle('openMenuDwnld')}
+                >
+                  Report Downloads
+                </Button>
+              </div>
+              )}
+            </Reference>
+            <Popper
+                // className={classNames({ [classes.popperClose]: !openMenuDwnld })}
+                eventsEnabled={openMenuDwnld}
+                placement="bottom-start"
+            >
+              {() => (
+              <ClickAwayListener onClickAway={this.handleClose}>
+                <Grow
+                    className={classNames({ [classes.popperClose]: !openMenuDwnld })}
+                    id="menu1"
+                    in={openMenuDwnld}
+                    style={{ transformOrigin: '0 0 0', position: 'absolute', zIndex: 1 }}
+                >
+                  <Paper>
+                    <MenuList role="menu">
+                      <MenuItem onClick={() => this.handleLink('/report-download-propane')}>Propane Sales</MenuItem>
+                      <MenuItem onClick={() => this.handleLink('/report-download-station')}>Station Report</MenuItem>
+                    </MenuList>
+                  </Paper>
+                </Grow>
+              </ClickAwayListener>
+              )}
+            </Popper>
+          </Manager>
         </div>
-      {/* End Fuel Deliveries Button */}
+      {/* End Report Downloads Menu */}
 
       </div>
     )

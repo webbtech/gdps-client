@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 
 import classNames from 'classnames'
 
-import { withStyles } from '@material-ui/core/styles'
 import grey from '@material-ui/core/colors/grey'
 import Icon from '@material-ui/core/Icon'
+import red from '@material-ui/core/colors/red'
+import { withStyles } from '@material-ui/core/styles'
 
 
 const Error = ({ message, classes, type, onClick }) => {
@@ -43,8 +44,7 @@ const styles = theme => ({
     color:            grey[800],
   },
   danger: {
-    // backgroundColor:  'rgba(242, 69, 61, 0.3)',
-    backgroundColor:  '#FBC7C6',
+    backgroundColor:  red[100],
   },
   success: {
     backgroundColor: 'rgba(80, 174, 84, 0.3)',

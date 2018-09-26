@@ -14,67 +14,32 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import Save from '@material-ui/icons/Save'
 
-import StationSelector from '../Common/StationSelector'
-import Toaster from '../Common/Toaster'
-import { RECORDS_START_YEAR as startYear } from '../../config/constants'
-
-// note: This might need to go into an init file
-Array.range = (start, end) => Array.from({length: (end + 1 - start)}, (v, k) => k + start)
+// import Toaster from '../Common/Toaster'
+import { setMonths, setYears } from '../../utils/formUtils'
 
 const DOWNLOAD_REPORT = gql`
-mutation FuelSaleDownload($date: String!, $stationID: String!) {
-  fuelSaleDownload(date: $date, stationID: $stationID) {
+mutation PropaneSignedURL($date: String!) {
+  propaneSignedURL(date: $date) {
     date
     reportLink
-    stationID
   }
 }
 `
 
-class ReportDownload extends Component {
+class PropaneReportDownload extends Component {
 
-  constructor(props) {
-    super(props)
-    
-    this.state = {
-      month: moment(new Date()).subtract(1, 'months').format('MM'),
-      stationID: '',
-      toasterMsg: '',
-      year: (new Date()).getFullYear(),
-    }
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-   setMonths = () => {
-    let months = []
-    for (let i=0; i < 12; i++) {
-      const dte = moment(new Date(0, i))
-      months.push({key: dte.format('MM'), label: dte.format('MMMM')})
-    }
-    return months
-  }
-
-  setYears = () => {
-    const curYear = (new Date()).getFullYear()
-    const years = Array.range(startYear, curYear)
-    return years.reverse()
+  state = {
+    month: moment(new Date()).subtract(1, 'months').format('MM'),
+    toasterMsg: '',
+    year: (new Date()).getFullYear(),
   }
 
   handleChange = event => {
     this.setState(() => ({ [event.target.name]: event.target.value , toasterMsg: ''}))
   }
 
-  handleStationChange = value => {
-    this.setState(() => ({ stationID: value, toasterMsg: '' }))
-  }
-
-  // handleSubmit = async () => {
   handleSubmit = () => {
 
-    if (!this.state.stationID) {
-      this.setState(() => ({toasterMsg: 'Missing Station'}))
-      return
-    }
     const yr = this.state.year.toString()
     const date = `${yr}-${this.state.month}-01`
     const m = moment(date)
@@ -87,19 +52,16 @@ class ReportDownload extends Component {
       this.setState(() => ({toasterMsg: 'Invalid date. Select an earlier date.'}))
       return
     }
-    const { stationID } = this.state
     const variables = {
       date,
-      stationID,
     }
     const tabOpen = window.open(`${window.location.origin}/download`, '_new')
-    // let tabOpen = window.open("localhost:blank", 'ReportDownload')
 
     this.props.mutate({
       variables,
     })
     .then(({ data }) => {
-      tabOpen.location = data.fuelSaleDownload.reportLink
+      tabOpen.location = data.propaneSignedURL.reportLink
     }).catch((error) => {
       const errMsg = `There was an error sending the query: ${error}`
       console.error('error: ', errMsg) // eslint-disable-line
@@ -114,20 +76,10 @@ class ReportDownload extends Component {
     return (
       <div className={classes.container}>
         <Typography
-            className={classes.title}
             gutterBottom
             variant="title"
-        >Report Download</Typography>
+        >Propane Report Download</Typography>
         <div className={classes.selectRow}>
-
-          <div className={classes.selectCell}>
-            <FormControl className={classes.formControl}>
-              <StationSelector
-                  onStationChange={this.handleStationChange}
-                  stationID={this.state.stationID}
-              />
-            </FormControl>
-          </div>
 
           <div className={classes.selectCell}>
             <FormControl className={classes.formControl}>
@@ -140,7 +92,7 @@ class ReportDownload extends Component {
                   onChange={this.handleChange}
                   value={this.state.year}
               >
-                {this.setYears().map(yr => (
+                {setYears().map(yr => (
                   <MenuItem
                       key={yr}
                       value={yr}
@@ -161,7 +113,7 @@ class ReportDownload extends Component {
                   onChange={this.handleChange}
                   value={this.state.month}
               >
-                {this.setMonths().map(m => (
+                {setMonths().map(m => (
                   <MenuItem
                       key={m.key}
                       value={m.key}
@@ -183,21 +135,15 @@ class ReportDownload extends Component {
           </div>
 
         </div>
+
         <div className={classes.reportDetails}>
-          This report file download is a "xlsx" spreadsheet file and consists of the following station details:
-          <ul>
-            <li>Fuel Sales</li>
-            <li>Fuel Deliveries</li>
-            <li>Over-Short Monthly</li>
-            <li>Over-Short Annual</li>
-          </ul>
+          This report file download is a "xlsx" spreadsheet file and consists of Propane Sales and Delivery information
         </div>
-        <Toaster message={this.state.toasterMsg} />
       </div>
     )
   }
 }
-ReportDownload.propTypes = {
+PropaneReportDownload.propTypes = {
   classes:  PropTypes.object.isRequired,
   mutate:   PropTypes.func.isRequired,
 }
@@ -208,17 +154,17 @@ const styles =  theme => ({
     flexDirection:  'column',
     fontFamily:     theme.typography.fontFamily,
     margin:         'auto',
-    width:          600,
+    width:          450,
   },
   leftIcon: {
     marginRight: theme.spacing.unit,
   },
   reportDetails: {
-    color: theme.palette.grey['700'],
-    fontSize: 15,
-    fontStyle: 'italic',
-    marginTop: theme.spacing.unit * 4,
-    width: 400,
+    color:      theme.palette.grey['700'],
+    fontSize:   15,
+    fontStyle:  'italic',
+    marginTop:  theme.spacing.unit * 4,
+    width:      400,
     '& li': {
       marginBottom: 6,
     },
@@ -232,7 +178,7 @@ const styles =  theme => ({
   },
 })
 
-const styledForm = withStyles(styles)(ReportDownload)
+const styledForm = withStyles(styles)(PropaneReportDownload)
 
 export default graphql(DOWNLOAD_REPORT, {
   skip: true,

@@ -46,7 +46,7 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@babel/runtime@7.0.0", "@babel/runtime@^7.0.0":
+"@babel/runtime@7.0.0", "@babel/runtime@^7.0.0", "@babel/runtime@^7.0.0-beta.42":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0.tgz#adeb78fedfc855aa05bc041640f3f6f98e85424c"
   dependencies:
@@ -59,18 +59,18 @@
     core-js "^2.5.7"
     regenerator-runtime "^0.12.0"
 
+"@babel/runtime@7.0.0-beta.55":
+  version "7.0.0-beta.55"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0-beta.55.tgz#0bc33aa5a6ac0b012f37e25b9e6aaa2e489a916b"
+  dependencies:
+    core-js "^2.5.7"
+    regenerator-runtime "^0.12.0"
+
 "@babel/runtime@7.0.0-rc.1":
   version "7.0.0-rc.1"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0-rc.1.tgz#42f36fc5817911c89ea75da2b874054922967616"
   dependencies:
     regenerator-runtime "^0.12.0"
-
-"@babel/runtime@^7.0.0-beta.42":
-  version "7.0.0-beta.51"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0-beta.51.tgz#48b8ed18307034c6620f643514650ca2ccc0165a"
-  dependencies:
-    core-js "^2.5.7"
-    regenerator-runtime "^0.11.1"
 
 "@babel/template@7.0.0-beta.44":
   version "7.0.0-beta.44"
@@ -311,9 +311,9 @@ amazon-cognito-auth-js@^1.1.9:
   dependencies:
     js-cookie "^2.1.4"
 
-amazon-cognito-identity-js@^2.0.9:
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/amazon-cognito-identity-js/-/amazon-cognito-identity-js-2.0.9.tgz#5a8fd6e97c513d753c14cc9e17091b105fb65d22"
+amazon-cognito-identity-js@^2.0.13, amazon-cognito-identity-js@^2.0.9:
+  version "2.0.29"
+  resolved "https://registry.yarnpkg.com/amazon-cognito-identity-js/-/amazon-cognito-identity-js-2.0.29.tgz#0d02b836432ed22725b97963ff7dbfe3db02f9e8"
   dependencies:
     buffer "4.9.1"
     crypto-browserify "1.0.9"
@@ -396,10 +396,10 @@ apollo-cache@1.1.16:
     apollo-utilities "^1.0.20"
 
 apollo-cache@^1.1.14:
-  version "1.1.14"
-  resolved "https://registry.yarnpkg.com/apollo-cache/-/apollo-cache-1.1.14.tgz#c7d54cdbc7f544161f78fa5e4bae56650e22f7ad"
+  version "1.1.17"
+  resolved "https://registry.yarnpkg.com/apollo-cache/-/apollo-cache-1.1.17.tgz#1fcca8423125223723b97fd72808be91a1a76490"
   dependencies:
-    apollo-utilities "^1.0.18"
+    apollo-utilities "^1.0.21"
 
 apollo-client@2.4.1:
   version "2.4.1"
@@ -417,7 +417,7 @@ apollo-client@2.4.1:
 
 apollo-link-context@1.0.8:
   version "1.0.8"
-  resolved "https://registry.yarnpkg.com/apollo-link-context/-/apollo-link-context-1.0.8.tgz#c967a56ac6ed32add748937735bcb57c5cc64c95"
+  resolved "http://registry.npmjs.org/apollo-link-context/-/apollo-link-context-1.0.8.tgz#c967a56ac6ed32add748937735bcb57c5cc64c95"
   dependencies:
     apollo-link "^1.2.2"
 
@@ -454,7 +454,7 @@ apollo-link@^1.0.0, apollo-link@^1.2.2:
     apollo-utilities "^1.0.0"
     zen-observable-ts "^0.8.9"
 
-apollo-utilities@1.0.20, apollo-utilities@^1.0.20:
+apollo-utilities@1.0.20:
   version "1.0.20"
   resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.20.tgz#b14318686cb67838279fb5f009cca0ec97a4d140"
   dependencies:
@@ -466,11 +466,12 @@ apollo-utilities@^1.0.0:
   dependencies:
     fast-json-stable-stringify "^2.0.0"
 
-apollo-utilities@^1.0.18:
-  version "1.0.18"
-  resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.18.tgz#e4ee91534283fde2b744a26caaea120fe6a94f67"
+apollo-utilities@^1.0.18, apollo-utilities@^1.0.20, apollo-utilities@^1.0.21:
+  version "1.0.21"
+  resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.21.tgz#cb8b5779fe275850b16046ff8373f4af2de90765"
   dependencies:
     fast-json-stable-stringify "^2.0.0"
+    fclone "^1.0.11"
 
 append-transform@^1.0.0:
   version "1.0.0"
@@ -675,7 +676,7 @@ aws-amplify-react@0.1.50:
     qrcode.react "^0.8.0"
     regenerator-runtime "^0.11.1"
 
-aws-amplify@0.4.4, aws-amplify@^0.4.4:
+aws-amplify@0.4.4:
   version "0.4.4"
   resolved "https://registry.yarnpkg.com/aws-amplify/-/aws-amplify-0.4.4.tgz#b1839c07dd2bcc93adbf9c53050650551154db85"
   dependencies:
@@ -686,6 +687,22 @@ aws-amplify@0.4.4, aws-amplify@^0.4.4:
     aws-sdk "2.198.0"
     axios "^0.17.0"
     graphql "0.13.0"
+    paho-mqtt "^1.0.4"
+    url "^0.11.0"
+    uuid "^3.2.1"
+    zen-observable "^0.8.6"
+
+aws-amplify@^0.4.4:
+  version "0.4.8"
+  resolved "https://registry.yarnpkg.com/aws-amplify/-/aws-amplify-0.4.8.tgz#82b9028d80fa83597c25eaaeadbfcc3761d4d967"
+  dependencies:
+    "@types/paho-mqtt" "^1.0.3"
+    "@types/zen-observable" "^0.5.3"
+    amazon-cognito-auth-js "^1.1.9"
+    amazon-cognito-identity-js "^2.0.13"
+    aws-sdk "2.198.0"
+    axios "^0.17.0"
+    graphql "0.11.7"
     paho-mqtt "^1.0.4"
     url "^0.11.0"
     uuid "^3.2.1"
@@ -1963,8 +1980,8 @@ center-align@^0.1.1:
     lazy-cache "^1.0.3"
 
 chain-function@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/chain-function/-/chain-function-1.0.0.tgz#0d4ab37e7e18ead0bdc47b920764118ce58733dc"
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/chain-function/-/chain-function-1.0.1.tgz#c63045e5b4b663fb86f1c6e186adaf1de402a1cc"
 
 chalk@1.1.3, chalk@^1.1.0, chalk@^1.1.1, chalk@^1.1.3:
   version "1.1.3"
@@ -3648,6 +3665,10 @@ fbjs@^0.8.0, fbjs@^0.8.1, fbjs@^0.8.16:
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.18"
 
+fclone@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/fclone/-/fclone-1.0.11.tgz#10e85da38bfea7fc599341c296ee1d77266ee640"
+
 figures@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/figures/-/figures-2.0.0.tgz#3ab1a2d2a62c8bfb431a0c94cb797a2fce27c962"
@@ -4101,14 +4122,20 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.1.9:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
 graphql-anywhere@^4.1.16:
-  version "4.1.16"
-  resolved "https://registry.yarnpkg.com/graphql-anywhere/-/graphql-anywhere-4.1.16.tgz#82bb59643e30183cfb7b485ed4262a7b39d8a6c1"
+  version "4.1.19"
+  resolved "https://registry.yarnpkg.com/graphql-anywhere/-/graphql-anywhere-4.1.19.tgz#5f6ca3b58218e5449f4798e3c6d942fcd2fef082"
   dependencies:
-    apollo-utilities "^1.0.18"
+    apollo-utilities "^1.0.21"
 
 graphql-tag@2.9.2:
   version "2.9.2"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.9.2.tgz#2f60a5a981375f430bf1e6e95992427dc18af686"
+
+graphql@0.11.7:
+  version "0.11.7"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.11.7.tgz#e5abaa9cb7b7cccb84e9f0836bf4370d268750c6"
+  dependencies:
+    iterall "1.1.3"
 
 graphql@0.13.0:
   version "0.13.0"
@@ -4118,7 +4145,7 @@ graphql@0.13.0:
 
 graphql@0.13.2:
   version "0.13.2"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.13.2.tgz#4c740ae3c222823e7004096f832e7b93b2108270"
+  resolved "http://registry.npmjs.org/graphql/-/graphql-0.13.2.tgz#4c740ae3c222823e7004096f832e7b93b2108270"
   dependencies:
     iterall "^1.2.1"
 
@@ -5063,6 +5090,10 @@ istanbul-reports@^1.3.0:
   dependencies:
     handlebars "^4.0.3"
 
+iterall@1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.1.3.tgz#1cbbff96204056dde6656e2ed2e2226d0e6d72c9"
+
 iterall@1.1.x:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.1.4.tgz#0db40d38fdcf53ae14dc8ec674e62ab190d52cfc"
@@ -5644,7 +5675,11 @@ locate-path@^2.0.0:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
 
-lodash-es@^4.17.10, lodash-es@^4.17.5:
+lodash-es@^4.17.10:
+  version "4.17.11"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.11.tgz#145ab4a7ac5c5e52a3531fb4f310255a152b4be0"
+
+lodash-es@^4.17.5:
   version "4.17.10"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.10.tgz#62cd7104cdf5dd87f235a837f0ede0e8e5117e05"
 
@@ -7083,7 +7118,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1:
+prop-types@^15.5.0, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   dependencies:
@@ -7310,10 +7345,10 @@ react-error-overlay@^1.0.10:
     source-map "0.5.6"
 
 react-event-listener@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/react-event-listener/-/react-event-listener-0.6.1.tgz#41c7a80a66b398c27dd511e22712b02f3d4eccca"
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/react-event-listener/-/react-event-listener-0.6.4.tgz#d0ea5ed897da1a796616c44b5a8758898140f203"
   dependencies:
-    "@babel/runtime" "^7.0.0-beta.42"
+    "@babel/runtime" "7.0.0"
     prop-types "^15.6.0"
     warning "^4.0.1"
 
@@ -7356,6 +7391,12 @@ react-jss@^8.1.0:
 react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
+
+react-loadable@5.5.0:
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/react-loadable/-/react-loadable-5.5.0.tgz#582251679d3da86c32aae2c8e689c59f1196d8c4"
+  dependencies:
+    prop-types "^15.5.0"
 
 react-popper@1.0.2:
   version "1.0.2"

@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import gql from 'graphql-tag'
-import { graphql, Mutation } from 'react-apollo'
-
 import classNames from 'classnames'
 
 import Button from '@material-ui/core/Button'
@@ -14,170 +11,104 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
 import PropaneSelectors from './PropaneSelectors'
-import { extractPathParts, dateToInt } from '../../utils/utils'
+import { dateToInt } from '../../utils/utils'
 
-
-const DELIVERY_QUERY = gql`
-query PropaneDelivery($date: Int!) {
-  propaneDelivery(date: $date) {
-    date
-    litres
-  }
-}
-`
-
-const CREATE_DELIVERY = gql`
-mutation CreatePropaneDelivery($fields: PropaneDeliverInput!) {
-  createPropaneDelivery(input: $fields) {
-    ok
-    nModified
-  }
-}
-`
-
-const REMOVE_DELIVERY = gql`
-mutation RemovePropaneDelivery($fields: PropaneRemoveDeliverInput!) {
-  removePropaneDelivery(input: $fields) {
-    ok
-    nModified
-  }
-}
-`
 
 class PropaneForm extends Component {
 
-  state = {
-    litres: '',
-  }
-
-  componentDidUpdate = (prevProps) => {
-    const { data, location } = this.props
-    // When changing dates and no delivery, remove litres
-    if (!data.propaneDelivery && location !== prevProps.location) {
-      this.setState({litres: ''})
+  removeDelivery = async () => {
+    const { actions, RemoveDelivery, match: { params }} = this.props
+    const input = {
+      date: dateToInt(params.date),
     }
-    // First time we get delivery set litres
-    if (prevProps.data && !prevProps.data.propaneDelivery && data.propaneDelivery) {
-      this.setState({litres: data.propaneDelivery.litres})
-    }
-    // When moving between dates and we have deliver set litres
-    if (prevProps.data && data.propaneDelivery && prevProps.data.propaneDelivery !== data.propaneDelivery) {
-      this.setState({litres: data.propaneDelivery.litres})
-    }
-    /*if (location !== prevProps.location) {
-      console.log('data.propaneDelivery: ', data.propaneDelivery)
-    }*/
-  }
-
-  createDeliveryParams = () => {
-    const prts = extractPathParts(this.props.location.pathname)
-    if (!prts) return null
-    const date = dateToInt(prts[0])
-    if (!this.state.litres) return null
-    return {
-      fields: {
-        date,
-        litres: Number(this.state.litres),
-      },
+    let graphqlReturn
+    try {
+      graphqlReturn = await RemoveDelivery(input)
+      if (graphqlReturn && graphqlReturn.errors) {
+        actions.errorSend({message: graphqlReturn.errors[0].message, type: 'danger'})
+      }
+    } catch (error) {
+       actions.errorSend({message: error.message, type: 'danger'})
     }
   }
 
-  handleChange = prop => event => {
-    this.setState({ [prop]: parseInt(event.target.value, 10) })
-  }
-
-  removeDeliveryParams = () => {
-    const prts = extractPathParts(this.props.location.pathname)
-    if (!prts) return null
-    const date = dateToInt(prts[0])
-    if (!this.state.litres) return null
-    return {
-      fields: {
-        date,
-      },
-    }
-  }
-
-  removeLitresState = () => {
-    this.setState({litres: ''})
+  handleSubmit = e => {
+    e.preventDefault()
+    this.props.handleSubmit(e)
   }
 
   render() {
 
-    const { classes } = this.props
-    const { litres } = this.state
+    const {
+      classes,
+      dirty,
+      handleChange,
+      isSubmitting,
+      values,
+    } = this.props
 
     return (
       <div className={classes.container}>
         <Typography
             gutterBottom
             variant="title"
-        >Delivery</Typography>
+        >Propane Delivery</Typography>
         <PropaneSelectors />
 
-        <div className={classes.dataRow}>
-          <div className={classes.dataCell}>
-            <Input
-                autoFocus
-                name="litres"
-                onChange={this.handleChange('litres')}
-                placeholder="Litres"
-                type="number"
-                value={litres}
-            />
-          </div>
-          <Mutation
-              mutation={REMOVE_DELIVERY}
-              onCompleted={this.removeLitresState}
-              variables={this.removeDeliveryParams()}
-          >
-            {(removeDelivery, { loading, error }) => (
-              <div className={classNames([classes.dataCell], [classes.narrowCell])}>
-                <Button
-                    className={classes.delButton}
-                    color="secondary"
-                    disabled={!this.state.litres}
-                    onClick={removeDelivery}
-                >
-                  <Delete style={{padding: 0}} />
-                </Button>
-                {loading && <div>Processing...</div>}
-                {error && <div>Error :( Please try again</div>}
-              </div>
-            )}
-          </Mutation>
-        </div>
-
-        <Mutation
-            mutation={CREATE_DELIVERY}
-            variables={this.createDeliveryParams()}
+        <form
+            autoComplete="off"
+            className={classes.form}
+            noValidate
+            onSubmit={this.handleSubmit}
         >
-          {(createDelivery, { loading, error }) => (
+          <div className={classes.dataRow}>
+            <div className={classes.dataCell}>
+              <Input
+                  autoFocus
+                  name="litres"
+                  onChange={handleChange}
+                  placeholder="Litres"
+                  type="number"
+                  value={values.litres}
+              />
+            </div>
+            <div className={classNames([classes.dataCell], [classes.narrowCell])}>
+              <Button
+                  className={classes.delButton}
+                  color="secondary"
+                  disabled={!values.litres}
+                  onClick={this.removeDelivery}
+              >
+                <Delete style={{padding: 0}} />
+              </Button>
+            </div>
+          </div>
+
             <div>
               <Button
                   className={classes.submitButton}
                   color="primary"
-                  disabled={!this.state.litres}
-                  onClick={createDelivery}
+                  disabled={!dirty || isSubmitting}
+                  type="submit"
                   variant="raised"
               >
                 <Save className={classNames(classes.leftIcon, classes.iconSmall)} />
                 Save Propane Delivery
               </Button>
-              {loading && <div>Processing...</div>}
-              {error && <div>Error :( Please try again</div>}
             </div>
-          )}
-        </Mutation>
+        </form>
       </div>
     )
   }
 }
 
 PropaneForm.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.object,
-  location: PropTypes.object.isRequired,
+  classes:      PropTypes.object.isRequired,
+  dirty:        PropTypes.bool.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  isSubmitting: PropTypes.bool.isRequired,
+  values:       PropTypes.object.isRequired,
 }
 
 const styles =  theme => ({
@@ -219,16 +150,4 @@ const styles =  theme => ({
   },
 })
 
-const styledForm = withStyles(styles)(PropaneForm)
-
-export default graphql(DELIVERY_QUERY, {
-  skip: props => props.location.pathname.split('/').length <= 2,
-  options: (props) => {
-    const prts = extractPathParts(props.location.pathname)
-    return ({
-      variables: {
-        date: prts ? dateToInt(prts[0]) : null,
-      },
-    })
-  },
-})(styledForm)
+export default withStyles(styles)(PropaneForm)
