@@ -26,7 +26,7 @@ class DipForm extends Component {
       haveErrors: false,
       toasterMsg: '',
     }
-    this.handleCalculateLitres = debounce(this.handleCalculateLitres, 750)
+    this.handleCalculateLitres = debounce(this.handleCalculateLitres, 500)
   }
 
   // see: https://stackoverflow.com/questions/23123138/perform-debounce-in-react-js for explanation on debounce
