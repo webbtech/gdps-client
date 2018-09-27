@@ -51,14 +51,11 @@ class Header extends React.Component {
         LogRocket.identify(id, {
           name: user.attributes.name,
           email: user.attributes.email,
-          environment: 'dev',
+          environment: 'prod',
         })
       }
     })
     .catch(err => console.log(err)) // eslint-disable-line
-
-
-
   }
 
   handleChange = (event, checked) => {
@@ -89,7 +86,9 @@ class Header extends React.Component {
   handleLogout = () => {
     Auth.signOut()
     .then(() => {
-      this.props.history.push('/')
+      // this.props.history.push('/')
+      // window.open('/')
+      window.location.replace ('/')
     })
     .catch(err => console.error(err)) // eslint-disable-line
   }

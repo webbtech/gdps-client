@@ -10,25 +10,24 @@ import { Authenticator } from 'aws-amplify-react'
 import { ConnectedRouter } from 'react-router-redux'
 import { Switch, Route } from 'react-router'
 
-// import Admin from '../Admin/Admin'
 import aws_exports from '../Auth/aws-exports'
 import ChangePassword from '../Profile/ChangePassword'
+import client from '../../apollo.js'
 import Dashboard from './Dashboard'
-import Download from '../Common/Download'
 import Dips from '../Dips/Dips.cont'
+import Download from '../Common/Download'
+import Errors from '../Error/Error.cont'
 import ImportData from '../ImportData/ImportData'
 import Profile from '../Profile/Profile'
 import Propane from '../Propane/Propane'
-// import Reports from '../Reports/Reports'
 import withRoot from '../../withRoot'
 
+// Authentication components
 import ConfirmSignIn from '../Auth/ConfirmSignIn'
 import SignIn from '../Auth/SignIn'
 import ForgotPassword from '../Auth/ForgotPassword'
 import RequireNewPassword from '../Auth/RequireNewPassword'
-import Errors from '../Error/Error.cont'
 
-import client from '../../apollo.js'
 
 Amplify.configure(aws_exports)
 const history = createHistory()
@@ -126,7 +125,7 @@ class AppWithAuth extends Component { // eslint-disable-line react/no-multi-comp
     const user = await Auth.currentAuthenticatedUser()
     if (user) {
       // this.setState({user})
-      console.log('fetching user from Auth', user) // eslint-disable-line
+      // console.log('fetching user from Auth', user) // eslint-disable-line
       const storage = window.localStorage
       // console.log('user in componentDidMount: ', user.signInUserSession.accessToken.jwtToken)
       storage.setItem('userToken', user.signInUserSession.accessToken.jwtToken)
@@ -134,7 +133,7 @@ class AppWithAuth extends Component { // eslint-disable-line react/no-multi-comp
   }
 
   handleAuthStateChange(state) { // eslint-disable-line
-    console.log('state in handleAuthStateChange: ', state) // eslint-disable-line
+    // console.log('state in handleAuthStateChange: ', state) // eslint-disable-line
     // if (state === 'signedIn') {
         // Do something when the user has signed-in
     // }
@@ -147,8 +146,10 @@ class AppWithAuth extends Component { // eslint-disable-line react/no-multi-comp
       <div>
         <Authenticator
             hideDefault
+            // hide={"SignUp"}
+            // hide={['SignUp', 'ForgotPassword', 'FederatedSignIn']}
             onStateChange={this.handleAuthStateChange}
-            theme={{}}
+            // theme={AmplifyTheme}
         >
           <Index />
           <SignIn/>
