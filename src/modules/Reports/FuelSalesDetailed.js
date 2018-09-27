@@ -243,7 +243,7 @@ export default graphql(FSD_REPORT_QUERY, {
     const prts = utils.extractPathParts(props.location.pathname, 3)
     return ({
       variables: {
-        date:       utils.dateToInt(prts[0]),
+        date:       moment(prts[0]).format('YYYY-MM-DD'),
         stationID:  prts[1],
       },
     })

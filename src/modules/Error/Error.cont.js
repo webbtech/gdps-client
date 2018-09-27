@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { errorDismiss } from './errorActions'
 
-import { CSSTransitionGroup } from 'react-transition-group'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { withStyles } from '@material-ui/core/styles'
 
 import Error from './Error'
@@ -17,31 +17,32 @@ class ErrorContainer extends Component {
 
     const items = errors.map(err => {
       return (
-        <Error
+        <CSSTransition
+            classNames={{
+              appear:       classes.appear,
+              appearActive: classes.appearActive,
+              enter:        classes.enter,
+              enterActive:  classes.enterActive,
+              exit:         classes.exit,
+              exitActive:   classes.exitActive,
+            }}
             key={err.id}
+            timeout={{ enter: 500, exit: 300 }}
+        >
+        <Error
             message={err.message}
             onClick={() => this.props.dismissError(err.id)}
             type={err.type}
         />
+        </CSSTransition>
       )
     })
 
     return (
       <div className={classes.errContainer}>
-        <CSSTransitionGroup
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={300}
-            transitionName={{
-              enter: classes.enter,
-              enterActive: classes.enterActive,
-              leave: classes.leave,
-              leaveActive: classes.leaveActive,
-              appear: classes.appear,
-              appearActive: classes.appearActive,
-            }}
-        >
+        <TransitionGroup>
           {items}
-        </CSSTransitionGroup>
+        </TransitionGroup>
       </div>
     )
   }
@@ -80,10 +81,10 @@ const styles = theme => ({
     opacity:    1,
     transition: 'opacity 500ms ease-in',
   },
-  leave: {
+  exit: {
     opacity: 1,
   },
-  leaveActive: {
+  exitActive: {
     opacity:    0.01,
     transition: 'opacity 300ms ease-in',
   },

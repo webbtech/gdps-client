@@ -1,11 +1,27 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+/*
+ * Copyright 2017-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
+ * the License. A copy of the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
+ * and limitations under the License.
+ */
 
-import { Auth } from 'aws-amplify'
+import React from 'react'
+import { JS, ConsoleLogger as Logger } from '@aws-amplify/core'
+import Auth from '@aws-amplify/auth'
+
+import AuthPiece from './AuthPiece'
 
 import AppBar from '@material-ui/core/AppBar'
 import Button from '@material-ui/core/Button'
+import CloseIcon from '@material-ui/icons/Close'
 import FormControl from '@material-ui/core/FormControl'
+import IconButton from '@material-ui/core/IconButton'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 import Paper from '@material-ui/core/Paper'
@@ -14,24 +30,42 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
+const logger = new Logger('SignIn')
 
-class SignIn extends Component {
+class SignIn extends AuthPiece {
 
-  state = {
-    error:      '',
-    loading:    false,
-    name:       '',
-    password:   '',
-    snackMsg:   '',
-    snackOpen:  false,
-    username:   '',
+  constructor(props) {
+    super(props)
+    this.checkContact = this.checkContact.bind(this)
+    this.signIn = this.signIn.bind(this)
+    this.onKeyDown = this.onKeyDown.bind(this)
+    this.handleOpen = this.handleOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+    this._validAuthStates = ['signIn', 'signedOut', 'signedUp']
+    this.state = {
+      loading: false,
+      snackOpen: false,
+      snackMsg: '',
+    }
   }
 
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value })
+  componentDidMount = () => {
+    window.addEventListener('keydown', this.onKeyDown)
   }
 
-  handleOpenSnack = msg => {
+  componentWillUnmount = () => {
+    window.removeEventListener('keydown', this.onKeyDown)
+  }
+
+  onKeyDown = e => {
+    if (this.props.authState === 'signIn') {
+      if (e.keyCode === 13) { // when press enter
+        this.signIn()
+      }
+    }
+  }
+
+  handleOpen = msg => {
     this.setState({ snackOpen: true, snackMsg: msg})
   }
 
@@ -39,51 +73,65 @@ class SignIn extends Component {
     this.setState({ snackOpen: false })
   }
 
-  async onSignIn() {
-    this.setState({ loading: true })
-    try {
-      const authData = await Auth.signIn(this.state.username, this.state.password)
-      // console.log(`onSignIn::Response#1: ${JSON.stringify(authData, null, 2)}`) // eslint-disable-line
-      this.setState({
-        error: '',
-        loading: false,
-        snackMsg: '',
-        snackOpen: false,
-        username: '',
-      })
-
-      // If the user session is not null, then we are authenticated
-      if (authData.signInUserSession !== null) {
-        console.log('authData.signInUserSession: ', authData.signInUserSession) // eslint-disable-line
-        return
-      }
-
-      // If there is a challenge, then show the modal
-      if ('challengeName' in authData) {
-        console.log(`onSignIn: Expecting challenge to be recieved via ${authData.challengeName}`) // eslint-disable-line
-        if (authData.challengeName === 'NEW_PASSWORD_REQUIRED') {
-          this.props.onStateChange('requireNewPassword', authData)
-        } else if (authData.challengeName === 'SMS_MFA') {
-          this.props.onStateChange('confirmSignIn', authData)
-        }
-        return
-      }
-
-      // Anything else and there is a problem
-      throw new Error('Invalid response from server')
-    } catch (err) {
-      const errMsg = err.message || err
-      console.log(`Error: ${JSON.stringify(err, null, 2)}`) // eslint-disable-line
-      this.setState({ error: err.message, loading: false, snackMsg: errMsg, snackOpen: true })
+  checkContact = user => {
+    if (!Auth || typeof Auth.verifiedContact !== 'function') {
+      throw new Error('No Auth module found, please ensure @aws-amplify/auth is imported')
     }
+    Auth.verifiedContact(user)
+      .then(data => {
+        if (!JS.isEmpty(data.verified)) {
+          this.changeState('signedIn', user)
+        } else {
+          user = Object.assign(user, data)
+          this.changeState('verifyContact', user)
+        }
+      })
   }
 
-  render() {
+  signIn = () => {
+    const { username, password } = this.inputs
+    this.setState({ loading: true })
 
-    const { authState, classes, onStateChange } = this.props
-    const { loading, password, snackOpen, snackMsg, username } = this.state
+    if (!Auth || typeof Auth.signIn !== 'function') {
+      throw new Error('No Auth module found, please ensure @aws-amplify/auth is imported')
+    }
+    Auth.signIn(username, password)
+      .then(user => {
+        this.setState({ loading: false })
+        logger.debug(user)
+        if (user.challengeName === 'SMS_MFA' || user.challengeName === 'SOFTWARE_TOKEN_MFA') {
+          logger.debug(`confirm user with ${user.challengeName}`)
+          this.changeState('confirmSignIn', user)
+        } else if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
+          logger.debug('require new password', user.challengeParam)
+          this.changeState('requireNewPassword', user)
+        } else if (user.challengeName === 'MFA_SETUP') {
+          logger.debug('TOTP setup', user.challengeParam)
+          this.changeState('TOTPSetup', user)
+        }
+        else {
+          this.checkContact(user)
+        }
+      })
+      .catch(err => {
+        this.setState({ loading: false })
+        if (err.code === 'UserNotConfirmedException') {
+          logger.debug('the user is not confirmed')
+          this.changeState('confirmSignUp')
+        }
+        else if (err.code === 'PasswordResetRequiredException') {
+          logger.debug('the user requires a new password')
+          this.changeState('requireNewPassword')
+        } else {
+          const errMsg = typeof err === 'object' ? err.message : err
+          this.setState({ loading: false, snackMsg: errMsg, snackOpen: true })
+        }
+      })
+  }
 
-    if (authState !== 'signIn') return null
+  showComponent = () => {
+    const { classes, onStateChange } = this.props
+    const { loading, snackMsg, snackOpen } = this.state
 
     return (
       <div>
@@ -97,19 +145,18 @@ class SignIn extends Component {
                   color="inherit"
                   variant="title"
               >
-                Sign In Account
+                Sign In To Your Account
               </Typography>
             </Toolbar>
           </AppBar>
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="username">Username</InputLabel>
             <Input
-                autoFocus={username === ''}
+                autoFocus
                 id="username"
+                key="username"
                 name="username"
-                onChange={this.handleChange}
-                type="email"
-                value={username}
+                onChange={this.handleInputChange}
             />
           </FormControl>
 
@@ -117,37 +164,49 @@ class SignIn extends Component {
             <InputLabel htmlFor="password">Password</InputLabel>
             <Input
                 id="password"
+                key="password"
                 name="password"
-                onChange={this.handleChange}
+                onChange={this.handleInputChange}
                 type="password"
-                value={password}
             />
           </FormControl>
 
           <Button
               className={classes.submitButton}
               color="primary"
-              disabled={loading}
-              onClick={() => this.onSignIn()}
+              onClick={this.signIn}
               variant="raised"
           >
             {loading ? ('Stand by...') : ('Sign In')}
           </Button>
+
           <Button
               className={classes.forgotButton}
               onClick={() => onStateChange('forgotPassword')}
               size="small"
           >
-            <Typography
-                color="inherit"
-                variant="body1"
-            >
               Forgot Password
-            </Typography>
           </Button>
+
         </Paper>
+
         <Snackbar
+            ContentProps={{
+              'aria-describedby': 'message-id',
+            }}
+            action={[
+              <IconButton
+                  aria-label="Close"
+                  className={classes.close}
+                  color="inherit"
+                  key="close"
+                  onClick={this.handleClose}
+              >
+                <CloseIcon />
+              </IconButton>,
+            ]}
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            autoHideDuration={6000}
             message={<span id="message-id">{snackMsg}</span>}
             onClose={this.handleClose}
             open={snackOpen}
@@ -157,13 +216,7 @@ class SignIn extends Component {
   }
 }
 
-SignIn.propTypes = {
-  authState:      PropTypes.string,
-  classes:        PropTypes.object.isRequired,
-  onStateChange:  PropTypes.func.isRequired,
-}
-
-const styles =  theme => ({
+const styles = theme => ({
   container: {
     display:        'flex',
     flexDirection:  'column',
@@ -173,11 +226,11 @@ const styles =  theme => ({
     marginTop:      theme.spacing.unit * 2,
   },
   forgotButton: {
-    margin:     theme.spacing.unit,
-    marginLeft: theme.spacing.unit * 2,
-    marginTop:  0,
-    width:      theme.spacing.unit * 20,
-    padding:    0,
+    margin:       'auto',
+    marginBottom: theme.spacing.unit,
+    width:        theme.spacing.unit * 20,
+    padding:      0,
+    color:        theme.palette.secondary.main,
   },
   formContainer: {
     display:        'flex',
