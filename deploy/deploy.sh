@@ -25,7 +25,7 @@ $ECHO `yarn build`
 $RM -f ./artifacts/*.js
 $RM -fr ./artifacts/static/js/*
 $CP -a ../build/* ./artifacts/
-$CP ./appspec.yml ./artifacts/
+# $CP ./appspec.yml ./artifacts/
 
 $PRT "\nFinished build stage\n"
 

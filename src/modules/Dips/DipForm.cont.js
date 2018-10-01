@@ -64,7 +64,7 @@ const validateInput = fields => {
     if (f.level > f.prevLevel && !deliveries[f.tank.fuelType]) {
       errors.push({
         tankID: id,
-        message: 'Tank level cannot be higher than previous day without a fuel delivery',
+        message: `Tank level cannot be higher than previous day (${f.prevLevel}) without a fuel delivery`,
       })
     }
     if (f.level > 0 && f.litres <= 0) {
