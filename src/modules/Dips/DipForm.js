@@ -26,7 +26,7 @@ class DipForm extends Component {
       haveErrors: false,
       toasterMsg: '',
     }
-    this.handleCalculateLitres = debounce(this.handleCalculateLitres, 500)
+    this.handleCalculateLitres = debounce(this.handleCalculateLitres, 350)
   }
 
   // see: https://stackoverflow.com/questions/23123138/perform-debounce-in-react-js for explanation on debounce
@@ -35,13 +35,21 @@ class DipForm extends Component {
     const inputId = e.target.id
     const val     = e.target.value
     const pcs     = inputId.split('_')
-    const id      = pcs[0]
+    const tankID  = pcs[0]
     const field   = pcs[1]
 
-    this.props.setFieldValue(`tanks.${id}.${field}`, Number(val), false)
+    // Clear any previous tank errors
+    delete this.props.errors[tankID]
+    this.props.actions.errorClear()
+
+    if (val) {
+      this.props.setFieldValue(`tanks.${tankID}.${field}`, Number(val), false)
+    } else {
+      this.props.setFieldValue(`tanks.${tankID}.${field}`, '', false)
+    }
 
     if (field === 'level') {
-      this.handleCalculateLitres(id, val)
+      this.handleCalculateLitres(tankID, val)
     }
   }
 
@@ -52,7 +60,6 @@ class DipForm extends Component {
 
     // Clear any old errors related this this tank
     delete errors[`${tankID}_level`]
-    delete errors[tankID]
 
     if (!val || val === '0') {
       this.props.setFieldValue(`tanks.${tankID}.level`, 0, false)
