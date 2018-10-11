@@ -85,10 +85,10 @@ class Dips extends Component {
     let haveCurDips = false
     let haveFSImport = true
 
-    let lastFSDate = ''
+    let fsDate = ''
     if (fuelSaleLatest && fuelSaleLatest.fuelSaleLatest) {
-      let fsDate = moment(fuelSaleLatest.fuelSaleLatest.date.toString())
-      lastFSDate = fsDate.format('MMM DD, YYYY')
+      fsDate = moment(fuelSaleLatest.fuelSaleLatest.date.toString())
+      // lastFSDate = fsDate.format('MMM DD, YYYY')
     }
 
     if (dips && dips.error) {
@@ -96,7 +96,7 @@ class Dips extends Component {
     }
 
     // Compare last imported with current date
-    if (dateObj.isAfter(lastFSDate)) {
+    if (dateObj.isAfter(fsDate)) {
       haveFSImport = false
     }
 
@@ -125,7 +125,7 @@ class Dips extends Component {
         <Paper className={classes.container}>
           <Typography
               gutterBottom
-              variant="headline"
+              variant="h5"
           >Dip Entries</Typography>
           <Divider /><br />
           <div className={classes.secondaryContainer}>
@@ -143,7 +143,7 @@ class Dips extends Component {
                 >
                   Import Data
                 </Button>
-                <br />Date of last Fuel Sale import: {lastFSDate}
+                <br />Date of last Fuel Sale import: {fsDate.format('MMM DD, YYYY')}
               </div>
             }
 

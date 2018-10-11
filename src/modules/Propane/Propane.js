@@ -23,7 +23,7 @@ class Propane extends Component {
         <Paper className={classes.paper}>
           <Typography
               gutterBottom
-              variant="headline"
+              variant="h5"
           >Propane Entries</Typography>
           <Divider /><br />
           <PropaneForm />

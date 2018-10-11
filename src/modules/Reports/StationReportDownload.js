@@ -97,9 +97,8 @@ class StationReportDownload extends Component {
     return (
       <div className={classes.container}>
         <Typography
-            // className={classes.title}
             gutterBottom
-            variant="title"
+            variant="h6"
         >Station Report Download</Typography>
         <div className={classes.selectRow}>
 
@@ -158,7 +157,7 @@ class StationReportDownload extends Component {
             <Button
                 color="primary"
                 onClick={() => this.handleSubmit()}
-                variant="raised"
+                variant="contained"
             >
             <Save className={classes.leftIcon} />
             Download Report

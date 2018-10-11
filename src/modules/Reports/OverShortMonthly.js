@@ -56,7 +56,7 @@ const Report = ({ classes, data }) => {
         <Typography
             className={classes.title}
             gutterBottom
-            variant="title"
+            variant="h6"
         >OverShort Monthly</Typography>
         <br />
         <ReportHeading

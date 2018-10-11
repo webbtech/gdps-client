@@ -102,7 +102,7 @@ class Profile extends Component {
           >
             <Typography
                 color="inherit"
-                variant="title"
+                variant="h6"
             >
               {user.name} Profile
             </Typography>
@@ -136,7 +136,7 @@ class Profile extends Component {
                 color="primary"
                 disabled={loading}
                 onClick={() => this.onSubmitForm()}
-                variant="raised"
+                variant="contained"
             >
               {loading ? 'Stand by...' : 'Update Profile'}
             </Button>

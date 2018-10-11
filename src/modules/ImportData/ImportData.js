@@ -23,7 +23,7 @@ class ImportData extends Component {
         <Paper className={classes.paper}>
           <Typography
               gutterBottom
-              variant="headline"
+              variant="h5"
           >
             Import Sales Data
           </Typography>

@@ -89,7 +89,7 @@ class ForgotPassword extends Component {
             color="primary"
             disabled={loading}
             onClick={() => this.onSubmitForm()}
-            variant="raised"
+            variant="contained"
         >
           {loading ? ('Stand by...') : ('Send Code')}
         </Button>
@@ -144,7 +144,7 @@ class ForgotPassword extends Component {
               color="primary"
               disabled={loading}
               onClick={() => this.onConfirmSubmitted()}
-              variant="raised"
+              variant="contained"
           >
             {loading ? ('Stand by...') : ('Confirm')}
           </Button>
@@ -169,7 +169,7 @@ class ForgotPassword extends Component {
             <Toolbar>
               <Typography
                   color="inherit"
-                  variant="title"
+                  variant="h6"
               >
                 Forgot Password
               </Typography>

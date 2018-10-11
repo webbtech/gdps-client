@@ -189,7 +189,7 @@ class ImportForm extends Component {
                         color="primary"
                         disabled={this.state.skipQuery}
                         onClick={importData}
-                        variant="raised"
+                        variant="contained"
                     >Import Data
                       <Create className={classes.rightIcon} />
                     </Button>

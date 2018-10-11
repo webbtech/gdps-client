@@ -24,7 +24,7 @@ class Dashboard extends Component {
         <Paper className={classes.paper}>
           <Typography
               gutterBottom
-              variant="headline"
+              variant="h5"
           >
             Select Activity
           </Typography>

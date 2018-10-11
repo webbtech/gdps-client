@@ -60,7 +60,7 @@ const Report = ({ classes, data }) => {
         <div className={classes.reportTitleContainer}>
           <Typography
               gutterBottom
-              variant="title"
+              variant="h6"
           >Propane Monthly Sales Detail</Typography>
           <br />
           <ReportHeading classes={classes} />
@@ -79,7 +79,7 @@ const Report = ({ classes, data }) => {
         <div className={classes.reportTitleContainer}>
           <Typography
               gutterBottom
-              variant="title"
+              variant="h6"
           >Propane Deliveries</Typography>
         </div>
         <ReportDeliveries

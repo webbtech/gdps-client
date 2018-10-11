@@ -143,7 +143,7 @@ class SignIn extends AuthPiece {
             <Toolbar>
               <Typography
                   color="inherit"
-                  variant="title"
+                  variant="h6"
               >
                 Sign In To Your Account
               </Typography>
@@ -175,7 +175,7 @@ class SignIn extends AuthPiece {
               className={classes.submitButton}
               color="primary"
               onClick={this.signIn}
-              variant="raised"
+              variant="contained"
           >
             {loading ? ('Stand by...') : ('Sign In')}
           </Button>

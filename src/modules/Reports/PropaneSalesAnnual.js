@@ -51,7 +51,7 @@ const Report = ({ classes, data }) => {
         <div className={classes.reportTitleContainer}>
           <Typography
               gutterBottom
-              variant="title"
+              variant="h6"
           >Propane Annual Sales</Typography>
           <br />
         </div>

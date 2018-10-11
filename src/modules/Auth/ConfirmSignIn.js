@@ -69,7 +69,7 @@ class ConfirmSignIn extends Component {
             <Toolbar>
               <Typography
                   color="inherit"
-                  variant="title"
+                  variant="h6"
               >
                 Confirm Code
               </Typography>
@@ -92,7 +92,7 @@ class ConfirmSignIn extends Component {
               color="primary"
               disabled={loading}
               onClick={() => this.onSubmit()}
-              variant="raised"
+              variant="contained"
           >
             {loading ? 'Stand by...' : 'Confirm'}
           </Button>

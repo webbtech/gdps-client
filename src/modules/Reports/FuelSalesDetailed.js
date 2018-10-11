@@ -53,7 +53,7 @@ const Report = ({ data, classes }) => {
     <div className={classes.container}>
       <Typography
           gutterBottom
-          variant="headline"
+          variant="h5"
       >Fuel Sales Station Detail</Typography>
       {data.fuelSaleDetailedReport.weekSales.map((sale, i) => (
         <Week
