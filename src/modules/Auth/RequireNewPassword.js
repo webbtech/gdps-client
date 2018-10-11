@@ -117,18 +117,6 @@ class SignIn extends Component {
           >
             {loading ? ('Stand by...') : ('Submit Name & Password')}
           </Button>
-          {/*<Button
-              className={classes.returnButton}
-              onClick={() => onStateChange('forgotPassword')}
-              size="small"
-          >
-            <Typography
-                color="inherit"
-                variant="body1"
-            >
-              Forgot Password
-            </Typography>
-          </Button>*/}
         </Paper>
         <Snackbar
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}

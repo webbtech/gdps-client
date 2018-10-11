@@ -101,7 +101,6 @@ class ForgotPassword extends Component {
         >
           <Typography
               color="inherit"
-              variant="body1"
           >
             Return to Sign In
           </Typography>

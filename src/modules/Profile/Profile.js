@@ -148,7 +148,6 @@ class Profile extends Component {
             >
               <Typography
                   color="inherit"
-                  variant="body1"
               >
                 Change Password
               </Typography>
