@@ -78,7 +78,7 @@ class SignIn extends Component {
             <Toolbar>
               <Typography
                   color="inherit"
-                  variant="title"
+                  variant="h6"
               >
                 Set Name and Password
               </Typography>
@@ -113,22 +113,10 @@ class SignIn extends Component {
               color="primary"
               disabled={loading}
               onClick={() => this.onSubmit()}
-              variant="raised"
+              variant="contained"
           >
             {loading ? ('Stand by...') : ('Submit Name & Password')}
           </Button>
-          {/*<Button
-              className={classes.returnButton}
-              onClick={() => onStateChange('forgotPassword')}
-              size="small"
-          >
-            <Typography
-                color="inherit"
-                variant="body1"
-            >
-              Forgot Password
-            </Typography>
-          </Button>*/}
         </Paper>
         <Snackbar
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}

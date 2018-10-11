@@ -28,13 +28,13 @@ class Download extends Component {
             className={classes.title}
             gutterBottom
             onClick={this.handleCloseWindow}
-            variant="title"
+            variant="h6"
         >Gales Dips - File Download</Typography>
         </AppBar>
       <div className={classes.container}>
         <Typography
             gutterBottom
-            variant="title"
+            variant="h6"
         >File Download</Typography>
         <div className={classes.message}>Stand by your file is being prepared and will download shortly.</div>
         <Button

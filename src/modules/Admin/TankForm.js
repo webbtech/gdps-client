@@ -58,7 +58,7 @@ class TankForm extends Component {
             <Typography
                 className={classes.title}
                 gutterBottom
-                variant="title"
+                variant="h6"
             >{formTitle}</Typography>
             {isEditMode &&
               <TankLevelsDialog
@@ -151,7 +151,7 @@ class TankForm extends Component {
               color="primary"
               disabled={!dirty || isSubmitting}
               type="submit"
-              variant="raised"
+              variant="contained"
           >
           Submit
           </Button>

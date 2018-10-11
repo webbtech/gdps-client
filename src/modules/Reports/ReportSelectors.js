@@ -208,7 +208,7 @@ class Reports extends Component {
             <Button
                 color="primary"
                 onClick={this.submitReport}
-                variant="raised"
+                variant="contained"
             >Create Report
             <Create className={classes.rightIcon} />
             </Button>

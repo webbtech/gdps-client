@@ -53,7 +53,7 @@ const Report = ({ classes, data }) => {
         <Typography
             className={classes.title}
             gutterBottom
-            variant="title"
+            variant="h6"
         >Fuel Deliveries</Typography>
         <br />
         <ReportHeading

@@ -47,7 +47,7 @@ class StationInfo extends Component {
       <div className={classes.container}>
         <Typography
             gutterBottom
-            variant="title"
+            variant="h6"
         >Tanks</Typography>
         <Table className={classes.table}>
         <TableHead>
@@ -70,9 +70,7 @@ class StationInfo extends Component {
         <Button
             className={classes.submitButton}
             color="primary"
-            // disabled={loading}
             onClick={() => this.onHandleShowForm()}
-            // variant="raised"
         >
           Modify Station Tanks
         </Button>
@@ -81,8 +79,6 @@ class StationInfo extends Component {
   }
 
   render() {
-
-    // const { classes } = this.props
 
     if (!this.state.stationID) return null
 

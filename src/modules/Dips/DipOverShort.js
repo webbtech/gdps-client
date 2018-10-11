@@ -46,7 +46,7 @@ class DipOverShort extends Component {
       <div className={classes.container}>
         <Typography
             gutterBottom
-            variant="title"
+            variant="h6"
         >Overshort</Typography>
         {haveData &&
           <div className={classes.tblContainer}>
@@ -74,7 +74,7 @@ class DipOverShort extends Component {
         <div className={classes.fuelPrice}>
         <Typography
             gutterBottom
-            variant="subheading"
+            variant="subtitle1"
         >Fuel Price: {fuelPrice} - ({displayDate})</Typography>
         </div>
         }
