@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImportLog matches snapshot 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <WithStyles(ImportLog)
+    importType=""
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "classes": Object {
+        "container": "ImportLog-container-1",
+        "headerCell": "ImportLog-headerCell-3",
+        "headerCellRt": "ImportLog-headerCellRt-4",
+        "headerRow": "ImportLog-headerRow-2",
+        "reportContainer": "ImportLog-reportContainer-5",
+        "reportDataCell": "ImportLog-reportDataCell-7",
+        "reportDataRow": "ImportLog-reportDataRow-6",
+        "title": "ImportLog-title-8",
+      },
+      "importType": "",
+    },
+    "ref": null,
+    "rendered": null,
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "classes": Object {
+          "container": "ImportLog-container-1",
+          "headerCell": "ImportLog-headerCell-3",
+          "headerCellRt": "ImportLog-headerCellRt-4",
+          "headerRow": "ImportLog-headerRow-2",
+          "reportContainer": "ImportLog-reportContainer-5",
+          "reportDataCell": "ImportLog-reportDataCell-7",
+          "reportDataRow": "ImportLog-reportDataRow-6",
+          "title": "ImportLog-title-8",
+        },
+        "importType": "",
+      },
+      "ref": null,
+      "rendered": null,
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

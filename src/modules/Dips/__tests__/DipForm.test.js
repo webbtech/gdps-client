@@ -1,10 +1,9 @@
 /* eslint no-undef: "off" */
 
 import React from 'react'
-import { MemoryRouter as Router } from 'react-router-dom'
 import { shallow } from 'enzyme'
 
-import DipForm from '../DipForm'
+import DipForm from '../DipForm.cntr'
 
 describe('DipForm', () => {
 
@@ -13,7 +12,7 @@ describe('DipForm', () => {
   const reportC = () => {
     if (!mountedC) {
       mountedC = shallow(
-        <Router><DipForm {...props} /></Router>
+        <DipForm {...props} />
       )
     }
     return mountedC
@@ -27,11 +26,6 @@ describe('DipForm', () => {
     }
     mountedC = undefined
   })
-
-  /*it('always renders a div', () => {
-    const divs = reportC().find('div')
-    expect(divs.length).toBeGreaterThan(0)
-  })*/
 
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()

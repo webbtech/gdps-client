@@ -12,28 +12,28 @@ initialize {
         "children": Array [
           Object {
             "attribs": Object {
-              "class": "MuiPaper-root-6 MuiPaper-elevation4-12 MuiAppBar-root-33 MuiAppBar-positionStatic-37 MuiAppBar-colorSecondary-40",
+              "class": "MuiPaper-root-6 MuiPaper-elevation4-12 MuiAppBar-root-33 MuiAppBar-positionStatic-37 MuiAppBar-colorSecondary-41",
             },
             "children": Array [
               Object {
                 "attribs": Object {
-                  "class": "MuiToolbar-root-41 MuiToolbar-gutters-42",
+                  "class": "MuiToolbar-root-42 MuiToolbar-regular-44 MuiToolbar-gutters-43",
                 },
                 "children": Array [
                   Object {
                     "attribs": Object {
-                      "class": "MuiTypography-root-43 MuiTypography-title-49 MuiTypography-colorInherit-62",
+                      "class": "MuiTypography-root-46 MuiTypography-h6-63 MuiTypography-colorInherit-75",
                     },
                     "children": Array [
                       Object {
-                        "data": "Sign In Account",
+                        "data": "Sign In To Your Account",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
                         "type": "text",
                       },
                     ],
-                    "name": "h2",
+                    "name": "h6",
                     "namespace": "http://www.w3.org/1999/xhtml",
                     "next": null,
                     "parent": [Circular],
@@ -65,12 +65,12 @@ initialize {
             "namespace": "http://www.w3.org/1999/xhtml",
             "next": Object {
               "attribs": Object {
-                "class": "MuiFormControl-root-67 SignIn-formControl-4",
+                "class": "MuiFormControl-root-81 SignIn-formControl-4",
               },
               "children": Array [
                 Object {
                   "attribs": Object {
-                    "class": "MuiFormLabel-root-76 MuiInputLabel-root-71 MuiInputLabel-formControl-72 MuiInputLabel-animated-75",
+                    "class": "MuiFormLabel-root-92 MuiInputLabel-root-85 MuiInputLabel-formControl-86 MuiInputLabel-animated-89",
                     "data-shrink": "false",
                     "for": "username",
                   },
@@ -87,19 +87,17 @@ initialize {
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": Object {
                     "attribs": Object {
-                      "class": "MuiInput-root-81 MuiInput-formControl-82 MuiInput-underline-85",
+                      "class": "MuiInputBase-root-112 MuiInput-root-99 MuiInput-underline-103 MuiInputBase-formControl-113 MuiInput-formControl-100",
                     },
                     "children": Array [
                       Object {
                         "attribs": Object {
                           "aria-invalid": "false",
-                          "aria-required": "false",
                           "autofocus": "",
-                          "class": "MuiInput-input-89 MuiInput-inputType-92",
+                          "class": "MuiInputBase-input-122 MuiInput-input-107",
                           "id": "username",
                           "name": "username",
-                          "type": "email",
-                          "value": "",
+                          "type": "text",
                         },
                         "children": Array [],
                         "name": "input",
@@ -110,23 +108,19 @@ initialize {
                         "type": "tag",
                         "x-attribsNamespace": Object {
                           "aria-invalid": undefined,
-                          "aria-required": undefined,
                           "autofocus": undefined,
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
                           "type": undefined,
-                          "value": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-invalid": undefined,
-                          "aria-required": undefined,
                           "autofocus": undefined,
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
                           "type": undefined,
-                          "value": undefined,
                         },
                       },
                     ],
@@ -159,19 +153,17 @@ initialize {
                 },
                 Object {
                   "attribs": Object {
-                    "class": "MuiInput-root-81 MuiInput-formControl-82 MuiInput-underline-85",
+                    "class": "MuiInputBase-root-112 MuiInput-root-99 MuiInput-underline-103 MuiInputBase-formControl-113 MuiInput-formControl-100",
                   },
                   "children": Array [
                     Object {
                       "attribs": Object {
                         "aria-invalid": "false",
-                        "aria-required": "false",
                         "autofocus": "",
-                        "class": "MuiInput-input-89 MuiInput-inputType-92",
+                        "class": "MuiInputBase-input-122 MuiInput-input-107",
                         "id": "username",
                         "name": "username",
-                        "type": "email",
-                        "value": "",
+                        "type": "text",
                       },
                       "children": Array [],
                       "name": "input",
@@ -182,23 +174,19 @@ initialize {
                       "type": "tag",
                       "x-attribsNamespace": Object {
                         "aria-invalid": undefined,
-                        "aria-required": undefined,
                         "autofocus": undefined,
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
                         "type": undefined,
-                        "value": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-invalid": undefined,
-                        "aria-required": undefined,
                         "autofocus": undefined,
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
                         "type": undefined,
-                        "value": undefined,
                       },
                     },
                   ],
@@ -208,7 +196,7 @@ initialize {
                   "parent": [Circular],
                   "prev": Object {
                     "attribs": Object {
-                      "class": "MuiFormLabel-root-76 MuiInputLabel-root-71 MuiInputLabel-formControl-72 MuiInputLabel-animated-75",
+                      "class": "MuiFormLabel-root-92 MuiInputLabel-root-85 MuiInputLabel-formControl-86 MuiInputLabel-animated-89",
                       "data-shrink": "false",
                       "for": "username",
                     },
@@ -251,12 +239,12 @@ initialize {
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": Object {
                 "attribs": Object {
-                  "class": "MuiFormControl-root-67 SignIn-formControl-4",
+                  "class": "MuiFormControl-root-81 SignIn-formControl-4",
                 },
                 "children": Array [
                   Object {
                     "attribs": Object {
-                      "class": "MuiFormLabel-root-76 MuiInputLabel-root-71 MuiInputLabel-formControl-72 MuiInputLabel-animated-75",
+                      "class": "MuiFormLabel-root-92 MuiInputLabel-root-85 MuiInputLabel-formControl-86 MuiInputLabel-animated-89",
                       "data-shrink": "false",
                       "for": "password",
                     },
@@ -273,18 +261,16 @@ initialize {
                     "namespace": "http://www.w3.org/1999/xhtml",
                     "next": Object {
                       "attribs": Object {
-                        "class": "MuiInput-root-81 MuiInput-formControl-82 MuiInput-underline-85",
+                        "class": "MuiInputBase-root-112 MuiInput-root-99 MuiInput-underline-103 MuiInputBase-formControl-113 MuiInput-formControl-100",
                       },
                       "children": Array [
                         Object {
                           "attribs": Object {
                             "aria-invalid": "false",
-                            "aria-required": "false",
-                            "class": "MuiInput-input-89 MuiInput-inputType-92",
+                            "class": "MuiInputBase-input-122 MuiInput-input-107 MuiInputBase-inputType-125 MuiInput-inputType-110",
                             "id": "password",
                             "name": "password",
                             "type": "password",
-                            "value": "",
                           },
                           "children": Array [],
                           "name": "input",
@@ -295,21 +281,17 @@ initialize {
                           "type": "tag",
                           "x-attribsNamespace": Object {
                             "aria-invalid": undefined,
-                            "aria-required": undefined,
                             "class": undefined,
                             "id": undefined,
                             "name": undefined,
                             "type": undefined,
-                            "value": undefined,
                           },
                           "x-attribsPrefix": Object {
                             "aria-invalid": undefined,
-                            "aria-required": undefined,
                             "class": undefined,
                             "id": undefined,
                             "name": undefined,
                             "type": undefined,
-                            "value": undefined,
                           },
                         },
                       ],
@@ -342,18 +324,16 @@ initialize {
                   },
                   Object {
                     "attribs": Object {
-                      "class": "MuiInput-root-81 MuiInput-formControl-82 MuiInput-underline-85",
+                      "class": "MuiInputBase-root-112 MuiInput-root-99 MuiInput-underline-103 MuiInputBase-formControl-113 MuiInput-formControl-100",
                     },
                     "children": Array [
                       Object {
                         "attribs": Object {
                           "aria-invalid": "false",
-                          "aria-required": "false",
-                          "class": "MuiInput-input-89 MuiInput-inputType-92",
+                          "class": "MuiInputBase-input-122 MuiInput-input-107 MuiInputBase-inputType-125 MuiInput-inputType-110",
                           "id": "password",
                           "name": "password",
                           "type": "password",
-                          "value": "",
                         },
                         "children": Array [],
                         "name": "input",
@@ -364,21 +344,17 @@ initialize {
                         "type": "tag",
                         "x-attribsNamespace": Object {
                           "aria-invalid": undefined,
-                          "aria-required": undefined,
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
                           "type": undefined,
-                          "value": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-invalid": undefined,
-                          "aria-required": undefined,
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
                           "type": undefined,
-                          "value": undefined,
                         },
                       },
                     ],
@@ -388,7 +364,7 @@ initialize {
                     "parent": [Circular],
                     "prev": Object {
                       "attribs": Object {
-                        "class": "MuiFormLabel-root-76 MuiInputLabel-root-71 MuiInputLabel-formControl-72 MuiInputLabel-animated-75",
+                        "class": "MuiFormLabel-root-92 MuiInputLabel-root-85 MuiInputLabel-formControl-86 MuiInputLabel-animated-89",
                         "data-shrink": "false",
                         "for": "password",
                       },
@@ -431,14 +407,14 @@ initialize {
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": Object {
                   "attribs": Object {
-                    "class": "MuiButtonBase-root-110 MuiButton-root-94 MuiButton-raised-100 MuiButton-raisedPrimary-101 SignIn-submitButton-5",
+                    "class": "MuiButtonBase-root-155 MuiButton-root-129 MuiButton-contained-140 MuiButton-containedPrimary-141 MuiButton-raised-143 MuiButton-raisedPrimary-144 SignIn-submitButton-5",
                     "tabindex": "0",
                     "type": "button",
                   },
                   "children": Array [
                     Object {
                       "attribs": Object {
-                        "class": "MuiButton-label-95",
+                        "class": "MuiButton-label-130",
                       },
                       "children": Array [
                         Object {
@@ -453,7 +429,7 @@ initialize {
                       "namespace": "http://www.w3.org/1999/xhtml",
                       "next": Object {
                         "attribs": Object {
-                          "class": "MuiTouchRipple-root-113",
+                          "class": "MuiTouchRipple-root-158",
                         },
                         "children": Array [],
                         "name": "span",
@@ -481,7 +457,7 @@ initialize {
                     },
                     Object {
                       "attribs": Object {
-                        "class": "MuiTouchRipple-root-113",
+                        "class": "MuiTouchRipple-root-158",
                       },
                       "children": Array [],
                       "name": "span",
@@ -490,7 +466,7 @@ initialize {
                       "parent": [Circular],
                       "prev": Object {
                         "attribs": Object {
-                          "class": "MuiButton-label-95",
+                          "class": "MuiButton-label-130",
                         },
                         "children": Array [
                           Object {
@@ -527,48 +503,29 @@ initialize {
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": Object {
                     "attribs": Object {
-                      "class": "MuiButtonBase-root-110 MuiButton-root-94 MuiButton-sizeSmall-107 SignIn-forgotButton-2",
+                      "class": "MuiButtonBase-root-155 MuiButton-root-129 MuiButton-text-131 MuiButton-flat-134 MuiButton-sizeSmall-152 SignIn-forgotButton-2",
                       "tabindex": "0",
                       "type": "button",
                     },
                     "children": Array [
                       Object {
                         "attribs": Object {
-                          "class": "MuiButton-label-95",
+                          "class": "MuiButton-label-130",
                         },
                         "children": Array [
                           Object {
-                            "attribs": Object {
-                              "class": "MuiTypography-root-43 MuiTypography-body1-52 MuiTypography-colorInherit-62",
-                            },
-                            "children": Array [
-                              Object {
-                                "data": "Forgot Password",
-                                "next": null,
-                                "parent": [Circular],
-                                "prev": null,
-                                "type": "text",
-                              },
-                            ],
-                            "name": "p",
-                            "namespace": "http://www.w3.org/1999/xhtml",
+                            "data": "Forgot Password",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
-                            "type": "tag",
-                            "x-attribsNamespace": Object {
-                              "class": undefined,
-                            },
-                            "x-attribsPrefix": Object {
-                              "class": undefined,
-                            },
+                            "type": "text",
                           },
                         ],
                         "name": "span",
                         "namespace": "http://www.w3.org/1999/xhtml",
                         "next": Object {
                           "attribs": Object {
-                            "class": "MuiTouchRipple-root-113",
+                            "class": "MuiTouchRipple-root-158",
                           },
                           "children": Array [],
                           "name": "span",
@@ -596,7 +553,7 @@ initialize {
                       },
                       Object {
                         "attribs": Object {
-                          "class": "MuiTouchRipple-root-113",
+                          "class": "MuiTouchRipple-root-158",
                         },
                         "children": Array [],
                         "name": "span",
@@ -605,34 +562,15 @@ initialize {
                         "parent": [Circular],
                         "prev": Object {
                           "attribs": Object {
-                            "class": "MuiButton-label-95",
+                            "class": "MuiButton-label-130",
                           },
                           "children": Array [
                             Object {
-                              "attribs": Object {
-                                "class": "MuiTypography-root-43 MuiTypography-body1-52 MuiTypography-colorInherit-62",
-                              },
-                              "children": Array [
-                                Object {
-                                  "data": "Forgot Password",
-                                  "next": null,
-                                  "parent": [Circular],
-                                  "prev": null,
-                                  "type": "text",
-                                },
-                              ],
-                              "name": "p",
-                              "namespace": "http://www.w3.org/1999/xhtml",
+                              "data": "Forgot Password",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
-                              "type": "tag",
-                              "x-attribsNamespace": Object {
-                                "class": undefined,
-                              },
-                              "x-attribsPrefix": Object {
-                                "class": undefined,
-                              },
+                              "type": "text",
                             },
                           ],
                           "name": "span",
@@ -720,12 +658,12 @@ initialize {
           },
           Object {
             "attribs": Object {
-              "class": "MuiFormControl-root-67 SignIn-formControl-4",
+              "class": "MuiFormControl-root-81 SignIn-formControl-4",
             },
             "children": Array [
               Object {
                 "attribs": Object {
-                  "class": "MuiFormLabel-root-76 MuiInputLabel-root-71 MuiInputLabel-formControl-72 MuiInputLabel-animated-75",
+                  "class": "MuiFormLabel-root-92 MuiInputLabel-root-85 MuiInputLabel-formControl-86 MuiInputLabel-animated-89",
                   "data-shrink": "false",
                   "for": "username",
                 },
@@ -742,19 +680,17 @@ initialize {
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": Object {
                   "attribs": Object {
-                    "class": "MuiInput-root-81 MuiInput-formControl-82 MuiInput-underline-85",
+                    "class": "MuiInputBase-root-112 MuiInput-root-99 MuiInput-underline-103 MuiInputBase-formControl-113 MuiInput-formControl-100",
                   },
                   "children": Array [
                     Object {
                       "attribs": Object {
                         "aria-invalid": "false",
-                        "aria-required": "false",
                         "autofocus": "",
-                        "class": "MuiInput-input-89 MuiInput-inputType-92",
+                        "class": "MuiInputBase-input-122 MuiInput-input-107",
                         "id": "username",
                         "name": "username",
-                        "type": "email",
-                        "value": "",
+                        "type": "text",
                       },
                       "children": Array [],
                       "name": "input",
@@ -765,23 +701,19 @@ initialize {
                       "type": "tag",
                       "x-attribsNamespace": Object {
                         "aria-invalid": undefined,
-                        "aria-required": undefined,
                         "autofocus": undefined,
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
                         "type": undefined,
-                        "value": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-invalid": undefined,
-                        "aria-required": undefined,
                         "autofocus": undefined,
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
                         "type": undefined,
-                        "value": undefined,
                       },
                     },
                   ],
@@ -814,19 +746,17 @@ initialize {
               },
               Object {
                 "attribs": Object {
-                  "class": "MuiInput-root-81 MuiInput-formControl-82 MuiInput-underline-85",
+                  "class": "MuiInputBase-root-112 MuiInput-root-99 MuiInput-underline-103 MuiInputBase-formControl-113 MuiInput-formControl-100",
                 },
                 "children": Array [
                   Object {
                     "attribs": Object {
                       "aria-invalid": "false",
-                      "aria-required": "false",
                       "autofocus": "",
-                      "class": "MuiInput-input-89 MuiInput-inputType-92",
+                      "class": "MuiInputBase-input-122 MuiInput-input-107",
                       "id": "username",
                       "name": "username",
-                      "type": "email",
-                      "value": "",
+                      "type": "text",
                     },
                     "children": Array [],
                     "name": "input",
@@ -837,23 +767,19 @@ initialize {
                     "type": "tag",
                     "x-attribsNamespace": Object {
                       "aria-invalid": undefined,
-                      "aria-required": undefined,
                       "autofocus": undefined,
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
                       "type": undefined,
-                      "value": undefined,
                     },
                     "x-attribsPrefix": Object {
                       "aria-invalid": undefined,
-                      "aria-required": undefined,
                       "autofocus": undefined,
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
                       "type": undefined,
-                      "value": undefined,
                     },
                   },
                 ],
@@ -863,7 +789,7 @@ initialize {
                 "parent": [Circular],
                 "prev": Object {
                   "attribs": Object {
-                    "class": "MuiFormLabel-root-76 MuiInputLabel-root-71 MuiInputLabel-formControl-72 MuiInputLabel-animated-75",
+                    "class": "MuiFormLabel-root-92 MuiInputLabel-root-85 MuiInputLabel-formControl-86 MuiInputLabel-animated-89",
                     "data-shrink": "false",
                     "for": "username",
                   },
@@ -906,12 +832,12 @@ initialize {
             "namespace": "http://www.w3.org/1999/xhtml",
             "next": Object {
               "attribs": Object {
-                "class": "MuiFormControl-root-67 SignIn-formControl-4",
+                "class": "MuiFormControl-root-81 SignIn-formControl-4",
               },
               "children": Array [
                 Object {
                   "attribs": Object {
-                    "class": "MuiFormLabel-root-76 MuiInputLabel-root-71 MuiInputLabel-formControl-72 MuiInputLabel-animated-75",
+                    "class": "MuiFormLabel-root-92 MuiInputLabel-root-85 MuiInputLabel-formControl-86 MuiInputLabel-animated-89",
                     "data-shrink": "false",
                     "for": "password",
                   },
@@ -928,18 +854,16 @@ initialize {
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": Object {
                     "attribs": Object {
-                      "class": "MuiInput-root-81 MuiInput-formControl-82 MuiInput-underline-85",
+                      "class": "MuiInputBase-root-112 MuiInput-root-99 MuiInput-underline-103 MuiInputBase-formControl-113 MuiInput-formControl-100",
                     },
                     "children": Array [
                       Object {
                         "attribs": Object {
                           "aria-invalid": "false",
-                          "aria-required": "false",
-                          "class": "MuiInput-input-89 MuiInput-inputType-92",
+                          "class": "MuiInputBase-input-122 MuiInput-input-107 MuiInputBase-inputType-125 MuiInput-inputType-110",
                           "id": "password",
                           "name": "password",
                           "type": "password",
-                          "value": "",
                         },
                         "children": Array [],
                         "name": "input",
@@ -950,21 +874,17 @@ initialize {
                         "type": "tag",
                         "x-attribsNamespace": Object {
                           "aria-invalid": undefined,
-                          "aria-required": undefined,
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
                           "type": undefined,
-                          "value": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-invalid": undefined,
-                          "aria-required": undefined,
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
                           "type": undefined,
-                          "value": undefined,
                         },
                       },
                     ],
@@ -997,18 +917,16 @@ initialize {
                 },
                 Object {
                   "attribs": Object {
-                    "class": "MuiInput-root-81 MuiInput-formControl-82 MuiInput-underline-85",
+                    "class": "MuiInputBase-root-112 MuiInput-root-99 MuiInput-underline-103 MuiInputBase-formControl-113 MuiInput-formControl-100",
                   },
                   "children": Array [
                     Object {
                       "attribs": Object {
                         "aria-invalid": "false",
-                        "aria-required": "false",
-                        "class": "MuiInput-input-89 MuiInput-inputType-92",
+                        "class": "MuiInputBase-input-122 MuiInput-input-107 MuiInputBase-inputType-125 MuiInput-inputType-110",
                         "id": "password",
                         "name": "password",
                         "type": "password",
-                        "value": "",
                       },
                       "children": Array [],
                       "name": "input",
@@ -1019,21 +937,17 @@ initialize {
                       "type": "tag",
                       "x-attribsNamespace": Object {
                         "aria-invalid": undefined,
-                        "aria-required": undefined,
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
                         "type": undefined,
-                        "value": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-invalid": undefined,
-                        "aria-required": undefined,
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
                         "type": undefined,
-                        "value": undefined,
                       },
                     },
                   ],
@@ -1043,7 +957,7 @@ initialize {
                   "parent": [Circular],
                   "prev": Object {
                     "attribs": Object {
-                      "class": "MuiFormLabel-root-76 MuiInputLabel-root-71 MuiInputLabel-formControl-72 MuiInputLabel-animated-75",
+                      "class": "MuiFormLabel-root-92 MuiInputLabel-root-85 MuiInputLabel-formControl-86 MuiInputLabel-animated-89",
                       "data-shrink": "false",
                       "for": "password",
                     },
@@ -1086,14 +1000,14 @@ initialize {
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": Object {
                 "attribs": Object {
-                  "class": "MuiButtonBase-root-110 MuiButton-root-94 MuiButton-raised-100 MuiButton-raisedPrimary-101 SignIn-submitButton-5",
+                  "class": "MuiButtonBase-root-155 MuiButton-root-129 MuiButton-contained-140 MuiButton-containedPrimary-141 MuiButton-raised-143 MuiButton-raisedPrimary-144 SignIn-submitButton-5",
                   "tabindex": "0",
                   "type": "button",
                 },
                 "children": Array [
                   Object {
                     "attribs": Object {
-                      "class": "MuiButton-label-95",
+                      "class": "MuiButton-label-130",
                     },
                     "children": Array [
                       Object {
@@ -1108,7 +1022,7 @@ initialize {
                     "namespace": "http://www.w3.org/1999/xhtml",
                     "next": Object {
                       "attribs": Object {
-                        "class": "MuiTouchRipple-root-113",
+                        "class": "MuiTouchRipple-root-158",
                       },
                       "children": Array [],
                       "name": "span",
@@ -1136,7 +1050,7 @@ initialize {
                   },
                   Object {
                     "attribs": Object {
-                      "class": "MuiTouchRipple-root-113",
+                      "class": "MuiTouchRipple-root-158",
                     },
                     "children": Array [],
                     "name": "span",
@@ -1145,7 +1059,7 @@ initialize {
                     "parent": [Circular],
                     "prev": Object {
                       "attribs": Object {
-                        "class": "MuiButton-label-95",
+                        "class": "MuiButton-label-130",
                       },
                       "children": Array [
                         Object {
@@ -1182,48 +1096,29 @@ initialize {
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": Object {
                   "attribs": Object {
-                    "class": "MuiButtonBase-root-110 MuiButton-root-94 MuiButton-sizeSmall-107 SignIn-forgotButton-2",
+                    "class": "MuiButtonBase-root-155 MuiButton-root-129 MuiButton-text-131 MuiButton-flat-134 MuiButton-sizeSmall-152 SignIn-forgotButton-2",
                     "tabindex": "0",
                     "type": "button",
                   },
                   "children": Array [
                     Object {
                       "attribs": Object {
-                        "class": "MuiButton-label-95",
+                        "class": "MuiButton-label-130",
                       },
                       "children": Array [
                         Object {
-                          "attribs": Object {
-                            "class": "MuiTypography-root-43 MuiTypography-body1-52 MuiTypography-colorInherit-62",
-                          },
-                          "children": Array [
-                            Object {
-                              "data": "Forgot Password",
-                              "next": null,
-                              "parent": [Circular],
-                              "prev": null,
-                              "type": "text",
-                            },
-                          ],
-                          "name": "p",
-                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "data": "Forgot Password",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
-                          "type": "tag",
-                          "x-attribsNamespace": Object {
-                            "class": undefined,
-                          },
-                          "x-attribsPrefix": Object {
-                            "class": undefined,
-                          },
+                          "type": "text",
                         },
                       ],
                       "name": "span",
                       "namespace": "http://www.w3.org/1999/xhtml",
                       "next": Object {
                         "attribs": Object {
-                          "class": "MuiTouchRipple-root-113",
+                          "class": "MuiTouchRipple-root-158",
                         },
                         "children": Array [],
                         "name": "span",
@@ -1251,7 +1146,7 @@ initialize {
                     },
                     Object {
                       "attribs": Object {
-                        "class": "MuiTouchRipple-root-113",
+                        "class": "MuiTouchRipple-root-158",
                       },
                       "children": Array [],
                       "name": "span",
@@ -1260,34 +1155,15 @@ initialize {
                       "parent": [Circular],
                       "prev": Object {
                         "attribs": Object {
-                          "class": "MuiButton-label-95",
+                          "class": "MuiButton-label-130",
                         },
                         "children": Array [
                           Object {
-                            "attribs": Object {
-                              "class": "MuiTypography-root-43 MuiTypography-body1-52 MuiTypography-colorInherit-62",
-                            },
-                            "children": Array [
-                              Object {
-                                "data": "Forgot Password",
-                                "next": null,
-                                "parent": [Circular],
-                                "prev": null,
-                                "type": "text",
-                              },
-                            ],
-                            "name": "p",
-                            "namespace": "http://www.w3.org/1999/xhtml",
+                            "data": "Forgot Password",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
-                            "type": "tag",
-                            "x-attribsNamespace": Object {
-                              "class": undefined,
-                            },
-                            "x-attribsPrefix": Object {
-                              "class": undefined,
-                            },
+                            "type": "text",
                           },
                         ],
                         "name": "span",
@@ -1356,28 +1232,28 @@ initialize {
             "parent": [Circular],
             "prev": Object {
               "attribs": Object {
-                "class": "MuiPaper-root-6 MuiPaper-elevation4-12 MuiAppBar-root-33 MuiAppBar-positionStatic-37 MuiAppBar-colorSecondary-40",
+                "class": "MuiPaper-root-6 MuiPaper-elevation4-12 MuiAppBar-root-33 MuiAppBar-positionStatic-37 MuiAppBar-colorSecondary-41",
               },
               "children": Array [
                 Object {
                   "attribs": Object {
-                    "class": "MuiToolbar-root-41 MuiToolbar-gutters-42",
+                    "class": "MuiToolbar-root-42 MuiToolbar-regular-44 MuiToolbar-gutters-43",
                   },
                   "children": Array [
                     Object {
                       "attribs": Object {
-                        "class": "MuiTypography-root-43 MuiTypography-title-49 MuiTypography-colorInherit-62",
+                        "class": "MuiTypography-root-46 MuiTypography-h6-63 MuiTypography-colorInherit-75",
                       },
                       "children": Array [
                         Object {
-                          "data": "Sign In Account",
+                          "data": "Sign In To Your Account",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
                           "type": "text",
                         },
                       ],
-                      "name": "h2",
+                      "name": "h6",
                       "namespace": "http://www.w3.org/1999/xhtml",
                       "next": null,
                       "parent": [Circular],
@@ -1428,12 +1304,12 @@ initialize {
           },
           Object {
             "attribs": Object {
-              "class": "MuiFormControl-root-67 SignIn-formControl-4",
+              "class": "MuiFormControl-root-81 SignIn-formControl-4",
             },
             "children": Array [
               Object {
                 "attribs": Object {
-                  "class": "MuiFormLabel-root-76 MuiInputLabel-root-71 MuiInputLabel-formControl-72 MuiInputLabel-animated-75",
+                  "class": "MuiFormLabel-root-92 MuiInputLabel-root-85 MuiInputLabel-formControl-86 MuiInputLabel-animated-89",
                   "data-shrink": "false",
                   "for": "password",
                 },
@@ -1450,18 +1326,16 @@ initialize {
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": Object {
                   "attribs": Object {
-                    "class": "MuiInput-root-81 MuiInput-formControl-82 MuiInput-underline-85",
+                    "class": "MuiInputBase-root-112 MuiInput-root-99 MuiInput-underline-103 MuiInputBase-formControl-113 MuiInput-formControl-100",
                   },
                   "children": Array [
                     Object {
                       "attribs": Object {
                         "aria-invalid": "false",
-                        "aria-required": "false",
-                        "class": "MuiInput-input-89 MuiInput-inputType-92",
+                        "class": "MuiInputBase-input-122 MuiInput-input-107 MuiInputBase-inputType-125 MuiInput-inputType-110",
                         "id": "password",
                         "name": "password",
                         "type": "password",
-                        "value": "",
                       },
                       "children": Array [],
                       "name": "input",
@@ -1472,21 +1346,17 @@ initialize {
                       "type": "tag",
                       "x-attribsNamespace": Object {
                         "aria-invalid": undefined,
-                        "aria-required": undefined,
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
                         "type": undefined,
-                        "value": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-invalid": undefined,
-                        "aria-required": undefined,
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
                         "type": undefined,
-                        "value": undefined,
                       },
                     },
                   ],
@@ -1519,18 +1389,16 @@ initialize {
               },
               Object {
                 "attribs": Object {
-                  "class": "MuiInput-root-81 MuiInput-formControl-82 MuiInput-underline-85",
+                  "class": "MuiInputBase-root-112 MuiInput-root-99 MuiInput-underline-103 MuiInputBase-formControl-113 MuiInput-formControl-100",
                 },
                 "children": Array [
                   Object {
                     "attribs": Object {
                       "aria-invalid": "false",
-                      "aria-required": "false",
-                      "class": "MuiInput-input-89 MuiInput-inputType-92",
+                      "class": "MuiInputBase-input-122 MuiInput-input-107 MuiInputBase-inputType-125 MuiInput-inputType-110",
                       "id": "password",
                       "name": "password",
                       "type": "password",
-                      "value": "",
                     },
                     "children": Array [],
                     "name": "input",
@@ -1541,21 +1409,17 @@ initialize {
                     "type": "tag",
                     "x-attribsNamespace": Object {
                       "aria-invalid": undefined,
-                      "aria-required": undefined,
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
                       "type": undefined,
-                      "value": undefined,
                     },
                     "x-attribsPrefix": Object {
                       "aria-invalid": undefined,
-                      "aria-required": undefined,
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
                       "type": undefined,
-                      "value": undefined,
                     },
                   },
                 ],
@@ -1565,7 +1429,7 @@ initialize {
                 "parent": [Circular],
                 "prev": Object {
                   "attribs": Object {
-                    "class": "MuiFormLabel-root-76 MuiInputLabel-root-71 MuiInputLabel-formControl-72 MuiInputLabel-animated-75",
+                    "class": "MuiFormLabel-root-92 MuiInputLabel-root-85 MuiInputLabel-formControl-86 MuiInputLabel-animated-89",
                     "data-shrink": "false",
                     "for": "password",
                   },
@@ -1608,14 +1472,14 @@ initialize {
             "namespace": "http://www.w3.org/1999/xhtml",
             "next": Object {
               "attribs": Object {
-                "class": "MuiButtonBase-root-110 MuiButton-root-94 MuiButton-raised-100 MuiButton-raisedPrimary-101 SignIn-submitButton-5",
+                "class": "MuiButtonBase-root-155 MuiButton-root-129 MuiButton-contained-140 MuiButton-containedPrimary-141 MuiButton-raised-143 MuiButton-raisedPrimary-144 SignIn-submitButton-5",
                 "tabindex": "0",
                 "type": "button",
               },
               "children": Array [
                 Object {
                   "attribs": Object {
-                    "class": "MuiButton-label-95",
+                    "class": "MuiButton-label-130",
                   },
                   "children": Array [
                     Object {
@@ -1630,7 +1494,7 @@ initialize {
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": Object {
                     "attribs": Object {
-                      "class": "MuiTouchRipple-root-113",
+                      "class": "MuiTouchRipple-root-158",
                     },
                     "children": Array [],
                     "name": "span",
@@ -1658,7 +1522,7 @@ initialize {
                 },
                 Object {
                   "attribs": Object {
-                    "class": "MuiTouchRipple-root-113",
+                    "class": "MuiTouchRipple-root-158",
                   },
                   "children": Array [],
                   "name": "span",
@@ -1667,7 +1531,7 @@ initialize {
                   "parent": [Circular],
                   "prev": Object {
                     "attribs": Object {
-                      "class": "MuiButton-label-95",
+                      "class": "MuiButton-label-130",
                     },
                     "children": Array [
                       Object {
@@ -1704,48 +1568,29 @@ initialize {
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": Object {
                 "attribs": Object {
-                  "class": "MuiButtonBase-root-110 MuiButton-root-94 MuiButton-sizeSmall-107 SignIn-forgotButton-2",
+                  "class": "MuiButtonBase-root-155 MuiButton-root-129 MuiButton-text-131 MuiButton-flat-134 MuiButton-sizeSmall-152 SignIn-forgotButton-2",
                   "tabindex": "0",
                   "type": "button",
                 },
                 "children": Array [
                   Object {
                     "attribs": Object {
-                      "class": "MuiButton-label-95",
+                      "class": "MuiButton-label-130",
                     },
                     "children": Array [
                       Object {
-                        "attribs": Object {
-                          "class": "MuiTypography-root-43 MuiTypography-body1-52 MuiTypography-colorInherit-62",
-                        },
-                        "children": Array [
-                          Object {
-                            "data": "Forgot Password",
-                            "next": null,
-                            "parent": [Circular],
-                            "prev": null,
-                            "type": "text",
-                          },
-                        ],
-                        "name": "p",
-                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "data": "Forgot Password",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
-                        "type": "tag",
-                        "x-attribsNamespace": Object {
-                          "class": undefined,
-                        },
-                        "x-attribsPrefix": Object {
-                          "class": undefined,
-                        },
+                        "type": "text",
                       },
                     ],
                     "name": "span",
                     "namespace": "http://www.w3.org/1999/xhtml",
                     "next": Object {
                       "attribs": Object {
-                        "class": "MuiTouchRipple-root-113",
+                        "class": "MuiTouchRipple-root-158",
                       },
                       "children": Array [],
                       "name": "span",
@@ -1773,7 +1618,7 @@ initialize {
                   },
                   Object {
                     "attribs": Object {
-                      "class": "MuiTouchRipple-root-113",
+                      "class": "MuiTouchRipple-root-158",
                     },
                     "children": Array [],
                     "name": "span",
@@ -1782,34 +1627,15 @@ initialize {
                     "parent": [Circular],
                     "prev": Object {
                       "attribs": Object {
-                        "class": "MuiButton-label-95",
+                        "class": "MuiButton-label-130",
                       },
                       "children": Array [
                         Object {
-                          "attribs": Object {
-                            "class": "MuiTypography-root-43 MuiTypography-body1-52 MuiTypography-colorInherit-62",
-                          },
-                          "children": Array [
-                            Object {
-                              "data": "Forgot Password",
-                              "next": null,
-                              "parent": [Circular],
-                              "prev": null,
-                              "type": "text",
-                            },
-                          ],
-                          "name": "p",
-                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "data": "Forgot Password",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
-                          "type": "tag",
-                          "x-attribsNamespace": Object {
-                            "class": undefined,
-                          },
-                          "x-attribsPrefix": Object {
-                            "class": undefined,
-                          },
+                          "type": "text",
                         },
                       ],
                       "name": "span",
@@ -1868,12 +1694,12 @@ initialize {
             "parent": [Circular],
             "prev": Object {
               "attribs": Object {
-                "class": "MuiFormControl-root-67 SignIn-formControl-4",
+                "class": "MuiFormControl-root-81 SignIn-formControl-4",
               },
               "children": Array [
                 Object {
                   "attribs": Object {
-                    "class": "MuiFormLabel-root-76 MuiInputLabel-root-71 MuiInputLabel-formControl-72 MuiInputLabel-animated-75",
+                    "class": "MuiFormLabel-root-92 MuiInputLabel-root-85 MuiInputLabel-formControl-86 MuiInputLabel-animated-89",
                     "data-shrink": "false",
                     "for": "username",
                   },
@@ -1890,19 +1716,17 @@ initialize {
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": Object {
                     "attribs": Object {
-                      "class": "MuiInput-root-81 MuiInput-formControl-82 MuiInput-underline-85",
+                      "class": "MuiInputBase-root-112 MuiInput-root-99 MuiInput-underline-103 MuiInputBase-formControl-113 MuiInput-formControl-100",
                     },
                     "children": Array [
                       Object {
                         "attribs": Object {
                           "aria-invalid": "false",
-                          "aria-required": "false",
                           "autofocus": "",
-                          "class": "MuiInput-input-89 MuiInput-inputType-92",
+                          "class": "MuiInputBase-input-122 MuiInput-input-107",
                           "id": "username",
                           "name": "username",
-                          "type": "email",
-                          "value": "",
+                          "type": "text",
                         },
                         "children": Array [],
                         "name": "input",
@@ -1913,23 +1737,19 @@ initialize {
                         "type": "tag",
                         "x-attribsNamespace": Object {
                           "aria-invalid": undefined,
-                          "aria-required": undefined,
                           "autofocus": undefined,
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
                           "type": undefined,
-                          "value": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-invalid": undefined,
-                          "aria-required": undefined,
                           "autofocus": undefined,
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
                           "type": undefined,
-                          "value": undefined,
                         },
                       },
                     ],
@@ -1962,19 +1782,17 @@ initialize {
                 },
                 Object {
                   "attribs": Object {
-                    "class": "MuiInput-root-81 MuiInput-formControl-82 MuiInput-underline-85",
+                    "class": "MuiInputBase-root-112 MuiInput-root-99 MuiInput-underline-103 MuiInputBase-formControl-113 MuiInput-formControl-100",
                   },
                   "children": Array [
                     Object {
                       "attribs": Object {
                         "aria-invalid": "false",
-                        "aria-required": "false",
                         "autofocus": "",
-                        "class": "MuiInput-input-89 MuiInput-inputType-92",
+                        "class": "MuiInputBase-input-122 MuiInput-input-107",
                         "id": "username",
                         "name": "username",
-                        "type": "email",
-                        "value": "",
+                        "type": "text",
                       },
                       "children": Array [],
                       "name": "input",
@@ -1985,23 +1803,19 @@ initialize {
                       "type": "tag",
                       "x-attribsNamespace": Object {
                         "aria-invalid": undefined,
-                        "aria-required": undefined,
                         "autofocus": undefined,
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
                         "type": undefined,
-                        "value": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-invalid": undefined,
-                        "aria-required": undefined,
                         "autofocus": undefined,
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
                         "type": undefined,
-                        "value": undefined,
                       },
                     },
                   ],
@@ -2011,7 +1825,7 @@ initialize {
                   "parent": [Circular],
                   "prev": Object {
                     "attribs": Object {
-                      "class": "MuiFormLabel-root-76 MuiInputLabel-root-71 MuiInputLabel-formControl-72 MuiInputLabel-animated-75",
+                      "class": "MuiFormLabel-root-92 MuiInputLabel-root-85 MuiInputLabel-formControl-86 MuiInputLabel-animated-89",
                       "data-shrink": "false",
                       "for": "username",
                     },
@@ -2056,28 +1870,28 @@ initialize {
               "parent": [Circular],
               "prev": Object {
                 "attribs": Object {
-                  "class": "MuiPaper-root-6 MuiPaper-elevation4-12 MuiAppBar-root-33 MuiAppBar-positionStatic-37 MuiAppBar-colorSecondary-40",
+                  "class": "MuiPaper-root-6 MuiPaper-elevation4-12 MuiAppBar-root-33 MuiAppBar-positionStatic-37 MuiAppBar-colorSecondary-41",
                 },
                 "children": Array [
                   Object {
                     "attribs": Object {
-                      "class": "MuiToolbar-root-41 MuiToolbar-gutters-42",
+                      "class": "MuiToolbar-root-42 MuiToolbar-regular-44 MuiToolbar-gutters-43",
                     },
                     "children": Array [
                       Object {
                         "attribs": Object {
-                          "class": "MuiTypography-root-43 MuiTypography-title-49 MuiTypography-colorInherit-62",
+                          "class": "MuiTypography-root-46 MuiTypography-h6-63 MuiTypography-colorInherit-75",
                         },
                         "children": Array [
                           Object {
-                            "data": "Sign In Account",
+                            "data": "Sign In To Your Account",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
                             "type": "text",
                           },
                         ],
-                        "name": "h2",
+                        "name": "h6",
                         "namespace": "http://www.w3.org/1999/xhtml",
                         "next": null,
                         "parent": [Circular],
@@ -2136,14 +1950,14 @@ initialize {
           },
           Object {
             "attribs": Object {
-              "class": "MuiButtonBase-root-110 MuiButton-root-94 MuiButton-raised-100 MuiButton-raisedPrimary-101 SignIn-submitButton-5",
+              "class": "MuiButtonBase-root-155 MuiButton-root-129 MuiButton-contained-140 MuiButton-containedPrimary-141 MuiButton-raised-143 MuiButton-raisedPrimary-144 SignIn-submitButton-5",
               "tabindex": "0",
               "type": "button",
             },
             "children": Array [
               Object {
                 "attribs": Object {
-                  "class": "MuiButton-label-95",
+                  "class": "MuiButton-label-130",
                 },
                 "children": Array [
                   Object {
@@ -2158,7 +1972,7 @@ initialize {
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": Object {
                   "attribs": Object {
-                    "class": "MuiTouchRipple-root-113",
+                    "class": "MuiTouchRipple-root-158",
                   },
                   "children": Array [],
                   "name": "span",
@@ -2186,7 +2000,7 @@ initialize {
               },
               Object {
                 "attribs": Object {
-                  "class": "MuiTouchRipple-root-113",
+                  "class": "MuiTouchRipple-root-158",
                 },
                 "children": Array [],
                 "name": "span",
@@ -2195,7 +2009,7 @@ initialize {
                 "parent": [Circular],
                 "prev": Object {
                   "attribs": Object {
-                    "class": "MuiButton-label-95",
+                    "class": "MuiButton-label-130",
                   },
                   "children": Array [
                     Object {
@@ -2232,48 +2046,29 @@ initialize {
             "namespace": "http://www.w3.org/1999/xhtml",
             "next": Object {
               "attribs": Object {
-                "class": "MuiButtonBase-root-110 MuiButton-root-94 MuiButton-sizeSmall-107 SignIn-forgotButton-2",
+                "class": "MuiButtonBase-root-155 MuiButton-root-129 MuiButton-text-131 MuiButton-flat-134 MuiButton-sizeSmall-152 SignIn-forgotButton-2",
                 "tabindex": "0",
                 "type": "button",
               },
               "children": Array [
                 Object {
                   "attribs": Object {
-                    "class": "MuiButton-label-95",
+                    "class": "MuiButton-label-130",
                   },
                   "children": Array [
                     Object {
-                      "attribs": Object {
-                        "class": "MuiTypography-root-43 MuiTypography-body1-52 MuiTypography-colorInherit-62",
-                      },
-                      "children": Array [
-                        Object {
-                          "data": "Forgot Password",
-                          "next": null,
-                          "parent": [Circular],
-                          "prev": null,
-                          "type": "text",
-                        },
-                      ],
-                      "name": "p",
-                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "data": "Forgot Password",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
-                      "type": "tag",
-                      "x-attribsNamespace": Object {
-                        "class": undefined,
-                      },
-                      "x-attribsPrefix": Object {
-                        "class": undefined,
-                      },
+                      "type": "text",
                     },
                   ],
                   "name": "span",
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": Object {
                     "attribs": Object {
-                      "class": "MuiTouchRipple-root-113",
+                      "class": "MuiTouchRipple-root-158",
                     },
                     "children": Array [],
                     "name": "span",
@@ -2301,7 +2096,7 @@ initialize {
                 },
                 Object {
                   "attribs": Object {
-                    "class": "MuiTouchRipple-root-113",
+                    "class": "MuiTouchRipple-root-158",
                   },
                   "children": Array [],
                   "name": "span",
@@ -2310,34 +2105,15 @@ initialize {
                   "parent": [Circular],
                   "prev": Object {
                     "attribs": Object {
-                      "class": "MuiButton-label-95",
+                      "class": "MuiButton-label-130",
                     },
                     "children": Array [
                       Object {
-                        "attribs": Object {
-                          "class": "MuiTypography-root-43 MuiTypography-body1-52 MuiTypography-colorInherit-62",
-                        },
-                        "children": Array [
-                          Object {
-                            "data": "Forgot Password",
-                            "next": null,
-                            "parent": [Circular],
-                            "prev": null,
-                            "type": "text",
-                          },
-                        ],
-                        "name": "p",
-                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "data": "Forgot Password",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
-                        "type": "tag",
-                        "x-attribsNamespace": Object {
-                          "class": undefined,
-                        },
-                        "x-attribsPrefix": Object {
-                          "class": undefined,
-                        },
+                        "type": "text",
                       },
                     ],
                     "name": "span",
@@ -2382,12 +2158,12 @@ initialize {
             "parent": [Circular],
             "prev": Object {
               "attribs": Object {
-                "class": "MuiFormControl-root-67 SignIn-formControl-4",
+                "class": "MuiFormControl-root-81 SignIn-formControl-4",
               },
               "children": Array [
                 Object {
                   "attribs": Object {
-                    "class": "MuiFormLabel-root-76 MuiInputLabel-root-71 MuiInputLabel-formControl-72 MuiInputLabel-animated-75",
+                    "class": "MuiFormLabel-root-92 MuiInputLabel-root-85 MuiInputLabel-formControl-86 MuiInputLabel-animated-89",
                     "data-shrink": "false",
                     "for": "password",
                   },
@@ -2404,18 +2180,16 @@ initialize {
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": Object {
                     "attribs": Object {
-                      "class": "MuiInput-root-81 MuiInput-formControl-82 MuiInput-underline-85",
+                      "class": "MuiInputBase-root-112 MuiInput-root-99 MuiInput-underline-103 MuiInputBase-formControl-113 MuiInput-formControl-100",
                     },
                     "children": Array [
                       Object {
                         "attribs": Object {
                           "aria-invalid": "false",
-                          "aria-required": "false",
-                          "class": "MuiInput-input-89 MuiInput-inputType-92",
+                          "class": "MuiInputBase-input-122 MuiInput-input-107 MuiInputBase-inputType-125 MuiInput-inputType-110",
                           "id": "password",
                           "name": "password",
                           "type": "password",
-                          "value": "",
                         },
                         "children": Array [],
                         "name": "input",
@@ -2426,21 +2200,17 @@ initialize {
                         "type": "tag",
                         "x-attribsNamespace": Object {
                           "aria-invalid": undefined,
-                          "aria-required": undefined,
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
                           "type": undefined,
-                          "value": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-invalid": undefined,
-                          "aria-required": undefined,
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
                           "type": undefined,
-                          "value": undefined,
                         },
                       },
                     ],
@@ -2473,18 +2243,16 @@ initialize {
                 },
                 Object {
                   "attribs": Object {
-                    "class": "MuiInput-root-81 MuiInput-formControl-82 MuiInput-underline-85",
+                    "class": "MuiInputBase-root-112 MuiInput-root-99 MuiInput-underline-103 MuiInputBase-formControl-113 MuiInput-formControl-100",
                   },
                   "children": Array [
                     Object {
                       "attribs": Object {
                         "aria-invalid": "false",
-                        "aria-required": "false",
-                        "class": "MuiInput-input-89 MuiInput-inputType-92",
+                        "class": "MuiInputBase-input-122 MuiInput-input-107 MuiInputBase-inputType-125 MuiInput-inputType-110",
                         "id": "password",
                         "name": "password",
                         "type": "password",
-                        "value": "",
                       },
                       "children": Array [],
                       "name": "input",
@@ -2495,21 +2263,17 @@ initialize {
                       "type": "tag",
                       "x-attribsNamespace": Object {
                         "aria-invalid": undefined,
-                        "aria-required": undefined,
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
                         "type": undefined,
-                        "value": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-invalid": undefined,
-                        "aria-required": undefined,
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
                         "type": undefined,
-                        "value": undefined,
                       },
                     },
                   ],
@@ -2519,7 +2283,7 @@ initialize {
                   "parent": [Circular],
                   "prev": Object {
                     "attribs": Object {
-                      "class": "MuiFormLabel-root-76 MuiInputLabel-root-71 MuiInputLabel-formControl-72 MuiInputLabel-animated-75",
+                      "class": "MuiFormLabel-root-92 MuiInputLabel-root-85 MuiInputLabel-formControl-86 MuiInputLabel-animated-89",
                       "data-shrink": "false",
                       "for": "password",
                     },
@@ -2564,12 +2328,12 @@ initialize {
               "parent": [Circular],
               "prev": Object {
                 "attribs": Object {
-                  "class": "MuiFormControl-root-67 SignIn-formControl-4",
+                  "class": "MuiFormControl-root-81 SignIn-formControl-4",
                 },
                 "children": Array [
                   Object {
                     "attribs": Object {
-                      "class": "MuiFormLabel-root-76 MuiInputLabel-root-71 MuiInputLabel-formControl-72 MuiInputLabel-animated-75",
+                      "class": "MuiFormLabel-root-92 MuiInputLabel-root-85 MuiInputLabel-formControl-86 MuiInputLabel-animated-89",
                       "data-shrink": "false",
                       "for": "username",
                     },
@@ -2586,19 +2350,17 @@ initialize {
                     "namespace": "http://www.w3.org/1999/xhtml",
                     "next": Object {
                       "attribs": Object {
-                        "class": "MuiInput-root-81 MuiInput-formControl-82 MuiInput-underline-85",
+                        "class": "MuiInputBase-root-112 MuiInput-root-99 MuiInput-underline-103 MuiInputBase-formControl-113 MuiInput-formControl-100",
                       },
                       "children": Array [
                         Object {
                           "attribs": Object {
                             "aria-invalid": "false",
-                            "aria-required": "false",
                             "autofocus": "",
-                            "class": "MuiInput-input-89 MuiInput-inputType-92",
+                            "class": "MuiInputBase-input-122 MuiInput-input-107",
                             "id": "username",
                             "name": "username",
-                            "type": "email",
-                            "value": "",
+                            "type": "text",
                           },
                           "children": Array [],
                           "name": "input",
@@ -2609,23 +2371,19 @@ initialize {
                           "type": "tag",
                           "x-attribsNamespace": Object {
                             "aria-invalid": undefined,
-                            "aria-required": undefined,
                             "autofocus": undefined,
                             "class": undefined,
                             "id": undefined,
                             "name": undefined,
                             "type": undefined,
-                            "value": undefined,
                           },
                           "x-attribsPrefix": Object {
                             "aria-invalid": undefined,
-                            "aria-required": undefined,
                             "autofocus": undefined,
                             "class": undefined,
                             "id": undefined,
                             "name": undefined,
                             "type": undefined,
-                            "value": undefined,
                           },
                         },
                       ],
@@ -2658,19 +2416,17 @@ initialize {
                   },
                   Object {
                     "attribs": Object {
-                      "class": "MuiInput-root-81 MuiInput-formControl-82 MuiInput-underline-85",
+                      "class": "MuiInputBase-root-112 MuiInput-root-99 MuiInput-underline-103 MuiInputBase-formControl-113 MuiInput-formControl-100",
                     },
                     "children": Array [
                       Object {
                         "attribs": Object {
                           "aria-invalid": "false",
-                          "aria-required": "false",
                           "autofocus": "",
-                          "class": "MuiInput-input-89 MuiInput-inputType-92",
+                          "class": "MuiInputBase-input-122 MuiInput-input-107",
                           "id": "username",
                           "name": "username",
-                          "type": "email",
-                          "value": "",
+                          "type": "text",
                         },
                         "children": Array [],
                         "name": "input",
@@ -2681,23 +2437,19 @@ initialize {
                         "type": "tag",
                         "x-attribsNamespace": Object {
                           "aria-invalid": undefined,
-                          "aria-required": undefined,
                           "autofocus": undefined,
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
                           "type": undefined,
-                          "value": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-invalid": undefined,
-                          "aria-required": undefined,
                           "autofocus": undefined,
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
                           "type": undefined,
-                          "value": undefined,
                         },
                       },
                     ],
@@ -2707,7 +2459,7 @@ initialize {
                     "parent": [Circular],
                     "prev": Object {
                       "attribs": Object {
-                        "class": "MuiFormLabel-root-76 MuiInputLabel-root-71 MuiInputLabel-formControl-72 MuiInputLabel-animated-75",
+                        "class": "MuiFormLabel-root-92 MuiInputLabel-root-85 MuiInputLabel-formControl-86 MuiInputLabel-animated-89",
                         "data-shrink": "false",
                         "for": "username",
                       },
@@ -2752,28 +2504,28 @@ initialize {
                 "parent": [Circular],
                 "prev": Object {
                   "attribs": Object {
-                    "class": "MuiPaper-root-6 MuiPaper-elevation4-12 MuiAppBar-root-33 MuiAppBar-positionStatic-37 MuiAppBar-colorSecondary-40",
+                    "class": "MuiPaper-root-6 MuiPaper-elevation4-12 MuiAppBar-root-33 MuiAppBar-positionStatic-37 MuiAppBar-colorSecondary-41",
                   },
                   "children": Array [
                     Object {
                       "attribs": Object {
-                        "class": "MuiToolbar-root-41 MuiToolbar-gutters-42",
+                        "class": "MuiToolbar-root-42 MuiToolbar-regular-44 MuiToolbar-gutters-43",
                       },
                       "children": Array [
                         Object {
                           "attribs": Object {
-                            "class": "MuiTypography-root-43 MuiTypography-title-49 MuiTypography-colorInherit-62",
+                            "class": "MuiTypography-root-46 MuiTypography-h6-63 MuiTypography-colorInherit-75",
                           },
                           "children": Array [
                             Object {
-                              "data": "Sign In Account",
+                              "data": "Sign In To Your Account",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
                               "type": "text",
                             },
                           ],
-                          "name": "h2",
+                          "name": "h6",
                           "namespace": "http://www.w3.org/1999/xhtml",
                           "next": null,
                           "parent": [Circular],
@@ -2844,48 +2596,29 @@ initialize {
           },
           Object {
             "attribs": Object {
-              "class": "MuiButtonBase-root-110 MuiButton-root-94 MuiButton-sizeSmall-107 SignIn-forgotButton-2",
+              "class": "MuiButtonBase-root-155 MuiButton-root-129 MuiButton-text-131 MuiButton-flat-134 MuiButton-sizeSmall-152 SignIn-forgotButton-2",
               "tabindex": "0",
               "type": "button",
             },
             "children": Array [
               Object {
                 "attribs": Object {
-                  "class": "MuiButton-label-95",
+                  "class": "MuiButton-label-130",
                 },
                 "children": Array [
                   Object {
-                    "attribs": Object {
-                      "class": "MuiTypography-root-43 MuiTypography-body1-52 MuiTypography-colorInherit-62",
-                    },
-                    "children": Array [
-                      Object {
-                        "data": "Forgot Password",
-                        "next": null,
-                        "parent": [Circular],
-                        "prev": null,
-                        "type": "text",
-                      },
-                    ],
-                    "name": "p",
-                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "data": "Forgot Password",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
-                    "type": "tag",
-                    "x-attribsNamespace": Object {
-                      "class": undefined,
-                    },
-                    "x-attribsPrefix": Object {
-                      "class": undefined,
-                    },
+                    "type": "text",
                   },
                 ],
                 "name": "span",
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": Object {
                   "attribs": Object {
-                    "class": "MuiTouchRipple-root-113",
+                    "class": "MuiTouchRipple-root-158",
                   },
                   "children": Array [],
                   "name": "span",
@@ -2913,7 +2646,7 @@ initialize {
               },
               Object {
                 "attribs": Object {
-                  "class": "MuiTouchRipple-root-113",
+                  "class": "MuiTouchRipple-root-158",
                 },
                 "children": Array [],
                 "name": "span",
@@ -2922,34 +2655,15 @@ initialize {
                 "parent": [Circular],
                 "prev": Object {
                   "attribs": Object {
-                    "class": "MuiButton-label-95",
+                    "class": "MuiButton-label-130",
                   },
                   "children": Array [
                     Object {
-                      "attribs": Object {
-                        "class": "MuiTypography-root-43 MuiTypography-body1-52 MuiTypography-colorInherit-62",
-                      },
-                      "children": Array [
-                        Object {
-                          "data": "Forgot Password",
-                          "next": null,
-                          "parent": [Circular],
-                          "prev": null,
-                          "type": "text",
-                        },
-                      ],
-                      "name": "p",
-                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "data": "Forgot Password",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
-                      "type": "tag",
-                      "x-attribsNamespace": Object {
-                        "class": undefined,
-                      },
-                      "x-attribsPrefix": Object {
-                        "class": undefined,
-                      },
+                      "type": "text",
                     },
                   ],
                   "name": "span",
@@ -2980,14 +2694,14 @@ initialize {
             "parent": [Circular],
             "prev": Object {
               "attribs": Object {
-                "class": "MuiButtonBase-root-110 MuiButton-root-94 MuiButton-raised-100 MuiButton-raisedPrimary-101 SignIn-submitButton-5",
+                "class": "MuiButtonBase-root-155 MuiButton-root-129 MuiButton-contained-140 MuiButton-containedPrimary-141 MuiButton-raised-143 MuiButton-raisedPrimary-144 SignIn-submitButton-5",
                 "tabindex": "0",
                 "type": "button",
               },
               "children": Array [
                 Object {
                   "attribs": Object {
-                    "class": "MuiButton-label-95",
+                    "class": "MuiButton-label-130",
                   },
                   "children": Array [
                     Object {
@@ -3002,7 +2716,7 @@ initialize {
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": Object {
                     "attribs": Object {
-                      "class": "MuiTouchRipple-root-113",
+                      "class": "MuiTouchRipple-root-158",
                     },
                     "children": Array [],
                     "name": "span",
@@ -3030,7 +2744,7 @@ initialize {
                 },
                 Object {
                   "attribs": Object {
-                    "class": "MuiTouchRipple-root-113",
+                    "class": "MuiTouchRipple-root-158",
                   },
                   "children": Array [],
                   "name": "span",
@@ -3039,7 +2753,7 @@ initialize {
                   "parent": [Circular],
                   "prev": Object {
                     "attribs": Object {
-                      "class": "MuiButton-label-95",
+                      "class": "MuiButton-label-130",
                     },
                     "children": Array [
                       Object {
@@ -3078,12 +2792,12 @@ initialize {
               "parent": [Circular],
               "prev": Object {
                 "attribs": Object {
-                  "class": "MuiFormControl-root-67 SignIn-formControl-4",
+                  "class": "MuiFormControl-root-81 SignIn-formControl-4",
                 },
                 "children": Array [
                   Object {
                     "attribs": Object {
-                      "class": "MuiFormLabel-root-76 MuiInputLabel-root-71 MuiInputLabel-formControl-72 MuiInputLabel-animated-75",
+                      "class": "MuiFormLabel-root-92 MuiInputLabel-root-85 MuiInputLabel-formControl-86 MuiInputLabel-animated-89",
                       "data-shrink": "false",
                       "for": "password",
                     },
@@ -3100,18 +2814,16 @@ initialize {
                     "namespace": "http://www.w3.org/1999/xhtml",
                     "next": Object {
                       "attribs": Object {
-                        "class": "MuiInput-root-81 MuiInput-formControl-82 MuiInput-underline-85",
+                        "class": "MuiInputBase-root-112 MuiInput-root-99 MuiInput-underline-103 MuiInputBase-formControl-113 MuiInput-formControl-100",
                       },
                       "children": Array [
                         Object {
                           "attribs": Object {
                             "aria-invalid": "false",
-                            "aria-required": "false",
-                            "class": "MuiInput-input-89 MuiInput-inputType-92",
+                            "class": "MuiInputBase-input-122 MuiInput-input-107 MuiInputBase-inputType-125 MuiInput-inputType-110",
                             "id": "password",
                             "name": "password",
                             "type": "password",
-                            "value": "",
                           },
                           "children": Array [],
                           "name": "input",
@@ -3122,21 +2834,17 @@ initialize {
                           "type": "tag",
                           "x-attribsNamespace": Object {
                             "aria-invalid": undefined,
-                            "aria-required": undefined,
                             "class": undefined,
                             "id": undefined,
                             "name": undefined,
                             "type": undefined,
-                            "value": undefined,
                           },
                           "x-attribsPrefix": Object {
                             "aria-invalid": undefined,
-                            "aria-required": undefined,
                             "class": undefined,
                             "id": undefined,
                             "name": undefined,
                             "type": undefined,
-                            "value": undefined,
                           },
                         },
                       ],
@@ -3169,18 +2877,16 @@ initialize {
                   },
                   Object {
                     "attribs": Object {
-                      "class": "MuiInput-root-81 MuiInput-formControl-82 MuiInput-underline-85",
+                      "class": "MuiInputBase-root-112 MuiInput-root-99 MuiInput-underline-103 MuiInputBase-formControl-113 MuiInput-formControl-100",
                     },
                     "children": Array [
                       Object {
                         "attribs": Object {
                           "aria-invalid": "false",
-                          "aria-required": "false",
-                          "class": "MuiInput-input-89 MuiInput-inputType-92",
+                          "class": "MuiInputBase-input-122 MuiInput-input-107 MuiInputBase-inputType-125 MuiInput-inputType-110",
                           "id": "password",
                           "name": "password",
                           "type": "password",
-                          "value": "",
                         },
                         "children": Array [],
                         "name": "input",
@@ -3191,21 +2897,17 @@ initialize {
                         "type": "tag",
                         "x-attribsNamespace": Object {
                           "aria-invalid": undefined,
-                          "aria-required": undefined,
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
                           "type": undefined,
-                          "value": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-invalid": undefined,
-                          "aria-required": undefined,
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
                           "type": undefined,
-                          "value": undefined,
                         },
                       },
                     ],
@@ -3215,7 +2917,7 @@ initialize {
                     "parent": [Circular],
                     "prev": Object {
                       "attribs": Object {
-                        "class": "MuiFormLabel-root-76 MuiInputLabel-root-71 MuiInputLabel-formControl-72 MuiInputLabel-animated-75",
+                        "class": "MuiFormLabel-root-92 MuiInputLabel-root-85 MuiInputLabel-formControl-86 MuiInputLabel-animated-89",
                         "data-shrink": "false",
                         "for": "password",
                       },
@@ -3260,12 +2962,12 @@ initialize {
                 "parent": [Circular],
                 "prev": Object {
                   "attribs": Object {
-                    "class": "MuiFormControl-root-67 SignIn-formControl-4",
+                    "class": "MuiFormControl-root-81 SignIn-formControl-4",
                   },
                   "children": Array [
                     Object {
                       "attribs": Object {
-                        "class": "MuiFormLabel-root-76 MuiInputLabel-root-71 MuiInputLabel-formControl-72 MuiInputLabel-animated-75",
+                        "class": "MuiFormLabel-root-92 MuiInputLabel-root-85 MuiInputLabel-formControl-86 MuiInputLabel-animated-89",
                         "data-shrink": "false",
                         "for": "username",
                       },
@@ -3282,19 +2984,17 @@ initialize {
                       "namespace": "http://www.w3.org/1999/xhtml",
                       "next": Object {
                         "attribs": Object {
-                          "class": "MuiInput-root-81 MuiInput-formControl-82 MuiInput-underline-85",
+                          "class": "MuiInputBase-root-112 MuiInput-root-99 MuiInput-underline-103 MuiInputBase-formControl-113 MuiInput-formControl-100",
                         },
                         "children": Array [
                           Object {
                             "attribs": Object {
                               "aria-invalid": "false",
-                              "aria-required": "false",
                               "autofocus": "",
-                              "class": "MuiInput-input-89 MuiInput-inputType-92",
+                              "class": "MuiInputBase-input-122 MuiInput-input-107",
                               "id": "username",
                               "name": "username",
-                              "type": "email",
-                              "value": "",
+                              "type": "text",
                             },
                             "children": Array [],
                             "name": "input",
@@ -3305,23 +3005,19 @@ initialize {
                             "type": "tag",
                             "x-attribsNamespace": Object {
                               "aria-invalid": undefined,
-                              "aria-required": undefined,
                               "autofocus": undefined,
                               "class": undefined,
                               "id": undefined,
                               "name": undefined,
                               "type": undefined,
-                              "value": undefined,
                             },
                             "x-attribsPrefix": Object {
                               "aria-invalid": undefined,
-                              "aria-required": undefined,
                               "autofocus": undefined,
                               "class": undefined,
                               "id": undefined,
                               "name": undefined,
                               "type": undefined,
-                              "value": undefined,
                             },
                           },
                         ],
@@ -3354,19 +3050,17 @@ initialize {
                     },
                     Object {
                       "attribs": Object {
-                        "class": "MuiInput-root-81 MuiInput-formControl-82 MuiInput-underline-85",
+                        "class": "MuiInputBase-root-112 MuiInput-root-99 MuiInput-underline-103 MuiInputBase-formControl-113 MuiInput-formControl-100",
                       },
                       "children": Array [
                         Object {
                           "attribs": Object {
                             "aria-invalid": "false",
-                            "aria-required": "false",
                             "autofocus": "",
-                            "class": "MuiInput-input-89 MuiInput-inputType-92",
+                            "class": "MuiInputBase-input-122 MuiInput-input-107",
                             "id": "username",
                             "name": "username",
-                            "type": "email",
-                            "value": "",
+                            "type": "text",
                           },
                           "children": Array [],
                           "name": "input",
@@ -3377,23 +3071,19 @@ initialize {
                           "type": "tag",
                           "x-attribsNamespace": Object {
                             "aria-invalid": undefined,
-                            "aria-required": undefined,
                             "autofocus": undefined,
                             "class": undefined,
                             "id": undefined,
                             "name": undefined,
                             "type": undefined,
-                            "value": undefined,
                           },
                           "x-attribsPrefix": Object {
                             "aria-invalid": undefined,
-                            "aria-required": undefined,
                             "autofocus": undefined,
                             "class": undefined,
                             "id": undefined,
                             "name": undefined,
                             "type": undefined,
-                            "value": undefined,
                           },
                         },
                       ],
@@ -3403,7 +3093,7 @@ initialize {
                       "parent": [Circular],
                       "prev": Object {
                         "attribs": Object {
-                          "class": "MuiFormLabel-root-76 MuiInputLabel-root-71 MuiInputLabel-formControl-72 MuiInputLabel-animated-75",
+                          "class": "MuiFormLabel-root-92 MuiInputLabel-root-85 MuiInputLabel-formControl-86 MuiInputLabel-animated-89",
                           "data-shrink": "false",
                           "for": "username",
                         },
@@ -3448,28 +3138,28 @@ initialize {
                   "parent": [Circular],
                   "prev": Object {
                     "attribs": Object {
-                      "class": "MuiPaper-root-6 MuiPaper-elevation4-12 MuiAppBar-root-33 MuiAppBar-positionStatic-37 MuiAppBar-colorSecondary-40",
+                      "class": "MuiPaper-root-6 MuiPaper-elevation4-12 MuiAppBar-root-33 MuiAppBar-positionStatic-37 MuiAppBar-colorSecondary-41",
                     },
                     "children": Array [
                       Object {
                         "attribs": Object {
-                          "class": "MuiToolbar-root-41 MuiToolbar-gutters-42",
+                          "class": "MuiToolbar-root-42 MuiToolbar-regular-44 MuiToolbar-gutters-43",
                         },
                         "children": Array [
                           Object {
                             "attribs": Object {
-                              "class": "MuiTypography-root-43 MuiTypography-title-49 MuiTypography-colorInherit-62",
+                              "class": "MuiTypography-root-46 MuiTypography-h6-63 MuiTypography-colorInherit-75",
                             },
                             "children": Array [
                               Object {
-                                "data": "Sign In Account",
+                                "data": "Sign In To Your Account",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": null,
                                 "type": "text",
                               },
                             ],
-                            "name": "h2",
+                            "name": "h6",
                             "namespace": "http://www.w3.org/1999/xhtml",
                             "next": null,
                             "parent": [Circular],

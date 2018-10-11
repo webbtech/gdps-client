@@ -34,7 +34,7 @@ describe('ReportMenu', () => {
 
   it('renders correct number of buttons', () => {
     const buttons = reportC().find('button')
-    expect(buttons).toHaveLength(4)
+    expect(buttons).toHaveLength(5)
 
   })
 

@@ -1,8 +1,7 @@
 /* eslint no-undef: "off" */
 
 import React from 'react'
-import { MemoryRouter as Router } from 'react-router-dom'
-import { render } from 'enzyme'
+import { shallow } from 'enzyme'
 
 import PropaneForm from '../PropaneForm'
 
@@ -12,8 +11,8 @@ describe('PropaneForm', () => {
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = render(
-        <Router><PropaneForm {...props} /></Router>
+      mountedC = shallow(
+        <PropaneForm {...props} />
       )
     }
     return mountedC
@@ -21,15 +20,15 @@ describe('PropaneForm', () => {
 
   beforeEach(() => {
     props = {
+      dirty: false,
+      handleChange: jest.fn(),
+      handleSubmit: jest.fn(),
       history: {},
+      isSubmitting: false,
       location: {},
+      values: {},
     }
     mountedC = undefined
-  })
-
-  it('always renders a div', () => {
-    const divs = reportC().find('div')
-    expect(divs.length).toBeGreaterThan(0)
   })
 
   it('matches snapshot', () => {

@@ -12,7 +12,7 @@ describe('Reports', () => {
   const reportsC = () => {
     if (!mountedC) {
       mountedC = shallow(
-        <Router><Reports {...props} /></Router>
+        <Reports {...props} />
       )
     }
     return mountedC

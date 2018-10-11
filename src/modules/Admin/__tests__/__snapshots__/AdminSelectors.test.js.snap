@@ -12,7 +12,7 @@ initialize {
         "children": Array [
           Object {
             "attribs": Object {
-              "class": "MuiFormLabel-root-11 MuiInputLabel-root-6 MuiInputLabel-formControl-7 MuiInputLabel-animated-10",
+              "class": "MuiFormLabel-root-13 MuiInputLabel-root-6 MuiInputLabel-formControl-7 MuiInputLabel-animated-10",
               "data-shrink": "false",
               "for": "station-select",
             },
@@ -29,19 +29,19 @@ initialize {
             "namespace": "http://www.w3.org/1999/xhtml",
             "next": Object {
               "attribs": Object {
-                "class": "MuiInput-root-21 MuiInput-formControl-22 MuiInput-underline-25",
+                "class": "MuiInputBase-root-40 MuiInput-root-27 MuiInput-underline-31 MuiInputBase-formControl-41 MuiInput-formControl-28",
               },
               "children": Array [
                 Object {
                   "attribs": Object {
-                    "class": "MuiSelect-root-16",
+                    "class": "MuiSelect-root-20",
                   },
                   "children": Array [
                     Object {
                       "attribs": Object {
                         "aria-haspopup": "true",
                         "aria-pressed": "false",
-                        "class": "MuiSelect-select-17 MuiSelect-selectMenu-18 MuiInput-input-29",
+                        "class": "MuiSelect-select-21 MuiSelect-selectMenu-24 MuiInputBase-input-50 MuiInput-input-35",
                         "role": "button",
                         "tabindex": "0",
                       },
@@ -71,8 +71,6 @@ initialize {
                       "namespace": "http://www.w3.org/1999/xhtml",
                       "next": Object {
                         "attribs": Object {
-                          "aria-invalid": "false",
-                          "aria-required": "false",
                           "id": "station-select",
                           "name": "stationID",
                           "type": "hidden",
@@ -84,8 +82,9 @@ initialize {
                         "next": Object {
                           "attribs": Object {
                             "aria-hidden": "true",
-                            "class": "MuiSvgIcon-root-34 MuiSelect-icon-20",
+                            "class": "MuiSvgIcon-root-57 MuiSelect-icon-26",
                             "focusable": "false",
+                            "role": "presentation",
                             "viewBox": "0 0 24 24",
                           },
                           "children": Array [
@@ -118,12 +117,14 @@ initialize {
                             "aria-hidden": undefined,
                             "class": undefined,
                             "focusable": undefined,
+                            "role": undefined,
                             "viewBox": undefined,
                           },
                           "x-attribsPrefix": Object {
                             "aria-hidden": undefined,
                             "class": undefined,
                             "focusable": undefined,
+                            "role": undefined,
                             "viewBox": undefined,
                           },
                         },
@@ -131,16 +132,12 @@ initialize {
                         "prev": [Circular],
                         "type": "tag",
                         "x-attribsNamespace": Object {
-                          "aria-invalid": undefined,
-                          "aria-required": undefined,
                           "id": undefined,
                           "name": undefined,
                           "type": undefined,
                           "value": undefined,
                         },
                         "x-attribsPrefix": Object {
-                          "aria-invalid": undefined,
-                          "aria-required": undefined,
                           "id": undefined,
                           "name": undefined,
                           "type": undefined,
@@ -167,8 +164,6 @@ initialize {
                     },
                     Object {
                       "attribs": Object {
-                        "aria-invalid": "false",
-                        "aria-required": "false",
                         "id": "station-select",
                         "name": "stationID",
                         "type": "hidden",
@@ -180,8 +175,9 @@ initialize {
                       "next": Object {
                         "attribs": Object {
                           "aria-hidden": "true",
-                          "class": "MuiSvgIcon-root-34 MuiSelect-icon-20",
+                          "class": "MuiSvgIcon-root-57 MuiSelect-icon-26",
                           "focusable": "false",
+                          "role": "presentation",
                           "viewBox": "0 0 24 24",
                         },
                         "children": Array [
@@ -214,12 +210,14 @@ initialize {
                           "aria-hidden": undefined,
                           "class": undefined,
                           "focusable": undefined,
+                          "role": undefined,
                           "viewBox": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-hidden": undefined,
                           "class": undefined,
                           "focusable": undefined,
+                          "role": undefined,
                           "viewBox": undefined,
                         },
                       },
@@ -228,7 +226,7 @@ initialize {
                         "attribs": Object {
                           "aria-haspopup": "true",
                           "aria-pressed": "false",
-                          "class": "MuiSelect-select-17 MuiSelect-selectMenu-18 MuiInput-input-29",
+                          "class": "MuiSelect-select-21 MuiSelect-selectMenu-24 MuiInputBase-input-50 MuiInput-input-35",
                           "role": "button",
                           "tabindex": "0",
                         },
@@ -277,16 +275,12 @@ initialize {
                       },
                       "type": "tag",
                       "x-attribsNamespace": Object {
-                        "aria-invalid": undefined,
-                        "aria-required": undefined,
                         "id": undefined,
                         "name": undefined,
                         "type": undefined,
                         "value": undefined,
                       },
                       "x-attribsPrefix": Object {
-                        "aria-invalid": undefined,
-                        "aria-required": undefined,
                         "id": undefined,
                         "name": undefined,
                         "type": undefined,
@@ -296,8 +290,9 @@ initialize {
                     Object {
                       "attribs": Object {
                         "aria-hidden": "true",
-                        "class": "MuiSvgIcon-root-34 MuiSelect-icon-20",
+                        "class": "MuiSvgIcon-root-57 MuiSelect-icon-26",
                         "focusable": "false",
+                        "role": "presentation",
                         "viewBox": "0 0 24 24",
                       },
                       "children": Array [
@@ -326,8 +321,6 @@ initialize {
                       "parent": [Circular],
                       "prev": Object {
                         "attribs": Object {
-                          "aria-invalid": "false",
-                          "aria-required": "false",
                           "id": "station-select",
                           "name": "stationID",
                           "type": "hidden",
@@ -342,7 +335,7 @@ initialize {
                           "attribs": Object {
                             "aria-haspopup": "true",
                             "aria-pressed": "false",
-                            "class": "MuiSelect-select-17 MuiSelect-selectMenu-18 MuiInput-input-29",
+                            "class": "MuiSelect-select-21 MuiSelect-selectMenu-24 MuiInputBase-input-50 MuiInput-input-35",
                             "role": "button",
                             "tabindex": "0",
                           },
@@ -391,16 +384,12 @@ initialize {
                         },
                         "type": "tag",
                         "x-attribsNamespace": Object {
-                          "aria-invalid": undefined,
-                          "aria-required": undefined,
                           "id": undefined,
                           "name": undefined,
                           "type": undefined,
                           "value": undefined,
                         },
                         "x-attribsPrefix": Object {
-                          "aria-invalid": undefined,
-                          "aria-required": undefined,
                           "id": undefined,
                           "name": undefined,
                           "type": undefined,
@@ -412,12 +401,14 @@ initialize {
                         "aria-hidden": undefined,
                         "class": undefined,
                         "focusable": undefined,
+                        "role": undefined,
                         "viewBox": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-hidden": undefined,
                         "class": undefined,
                         "focusable": undefined,
+                        "role": undefined,
                         "viewBox": undefined,
                       },
                     },
@@ -465,19 +456,19 @@ initialize {
           },
           Object {
             "attribs": Object {
-              "class": "MuiInput-root-21 MuiInput-formControl-22 MuiInput-underline-25",
+              "class": "MuiInputBase-root-40 MuiInput-root-27 MuiInput-underline-31 MuiInputBase-formControl-41 MuiInput-formControl-28",
             },
             "children": Array [
               Object {
                 "attribs": Object {
-                  "class": "MuiSelect-root-16",
+                  "class": "MuiSelect-root-20",
                 },
                 "children": Array [
                   Object {
                     "attribs": Object {
                       "aria-haspopup": "true",
                       "aria-pressed": "false",
-                      "class": "MuiSelect-select-17 MuiSelect-selectMenu-18 MuiInput-input-29",
+                      "class": "MuiSelect-select-21 MuiSelect-selectMenu-24 MuiInputBase-input-50 MuiInput-input-35",
                       "role": "button",
                       "tabindex": "0",
                     },
@@ -507,8 +498,6 @@ initialize {
                     "namespace": "http://www.w3.org/1999/xhtml",
                     "next": Object {
                       "attribs": Object {
-                        "aria-invalid": "false",
-                        "aria-required": "false",
                         "id": "station-select",
                         "name": "stationID",
                         "type": "hidden",
@@ -520,8 +509,9 @@ initialize {
                       "next": Object {
                         "attribs": Object {
                           "aria-hidden": "true",
-                          "class": "MuiSvgIcon-root-34 MuiSelect-icon-20",
+                          "class": "MuiSvgIcon-root-57 MuiSelect-icon-26",
                           "focusable": "false",
+                          "role": "presentation",
                           "viewBox": "0 0 24 24",
                         },
                         "children": Array [
@@ -554,12 +544,14 @@ initialize {
                           "aria-hidden": undefined,
                           "class": undefined,
                           "focusable": undefined,
+                          "role": undefined,
                           "viewBox": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-hidden": undefined,
                           "class": undefined,
                           "focusable": undefined,
+                          "role": undefined,
                           "viewBox": undefined,
                         },
                       },
@@ -567,16 +559,12 @@ initialize {
                       "prev": [Circular],
                       "type": "tag",
                       "x-attribsNamespace": Object {
-                        "aria-invalid": undefined,
-                        "aria-required": undefined,
                         "id": undefined,
                         "name": undefined,
                         "type": undefined,
                         "value": undefined,
                       },
                       "x-attribsPrefix": Object {
-                        "aria-invalid": undefined,
-                        "aria-required": undefined,
                         "id": undefined,
                         "name": undefined,
                         "type": undefined,
@@ -603,8 +591,6 @@ initialize {
                   },
                   Object {
                     "attribs": Object {
-                      "aria-invalid": "false",
-                      "aria-required": "false",
                       "id": "station-select",
                       "name": "stationID",
                       "type": "hidden",
@@ -616,8 +602,9 @@ initialize {
                     "next": Object {
                       "attribs": Object {
                         "aria-hidden": "true",
-                        "class": "MuiSvgIcon-root-34 MuiSelect-icon-20",
+                        "class": "MuiSvgIcon-root-57 MuiSelect-icon-26",
                         "focusable": "false",
+                        "role": "presentation",
                         "viewBox": "0 0 24 24",
                       },
                       "children": Array [
@@ -650,12 +637,14 @@ initialize {
                         "aria-hidden": undefined,
                         "class": undefined,
                         "focusable": undefined,
+                        "role": undefined,
                         "viewBox": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-hidden": undefined,
                         "class": undefined,
                         "focusable": undefined,
+                        "role": undefined,
                         "viewBox": undefined,
                       },
                     },
@@ -664,7 +653,7 @@ initialize {
                       "attribs": Object {
                         "aria-haspopup": "true",
                         "aria-pressed": "false",
-                        "class": "MuiSelect-select-17 MuiSelect-selectMenu-18 MuiInput-input-29",
+                        "class": "MuiSelect-select-21 MuiSelect-selectMenu-24 MuiInputBase-input-50 MuiInput-input-35",
                         "role": "button",
                         "tabindex": "0",
                       },
@@ -713,16 +702,12 @@ initialize {
                     },
                     "type": "tag",
                     "x-attribsNamespace": Object {
-                      "aria-invalid": undefined,
-                      "aria-required": undefined,
                       "id": undefined,
                       "name": undefined,
                       "type": undefined,
                       "value": undefined,
                     },
                     "x-attribsPrefix": Object {
-                      "aria-invalid": undefined,
-                      "aria-required": undefined,
                       "id": undefined,
                       "name": undefined,
                       "type": undefined,
@@ -732,8 +717,9 @@ initialize {
                   Object {
                     "attribs": Object {
                       "aria-hidden": "true",
-                      "class": "MuiSvgIcon-root-34 MuiSelect-icon-20",
+                      "class": "MuiSvgIcon-root-57 MuiSelect-icon-26",
                       "focusable": "false",
+                      "role": "presentation",
                       "viewBox": "0 0 24 24",
                     },
                     "children": Array [
@@ -762,8 +748,6 @@ initialize {
                     "parent": [Circular],
                     "prev": Object {
                       "attribs": Object {
-                        "aria-invalid": "false",
-                        "aria-required": "false",
                         "id": "station-select",
                         "name": "stationID",
                         "type": "hidden",
@@ -778,7 +762,7 @@ initialize {
                         "attribs": Object {
                           "aria-haspopup": "true",
                           "aria-pressed": "false",
-                          "class": "MuiSelect-select-17 MuiSelect-selectMenu-18 MuiInput-input-29",
+                          "class": "MuiSelect-select-21 MuiSelect-selectMenu-24 MuiInputBase-input-50 MuiInput-input-35",
                           "role": "button",
                           "tabindex": "0",
                         },
@@ -827,16 +811,12 @@ initialize {
                       },
                       "type": "tag",
                       "x-attribsNamespace": Object {
-                        "aria-invalid": undefined,
-                        "aria-required": undefined,
                         "id": undefined,
                         "name": undefined,
                         "type": undefined,
                         "value": undefined,
                       },
                       "x-attribsPrefix": Object {
-                        "aria-invalid": undefined,
-                        "aria-required": undefined,
                         "id": undefined,
                         "name": undefined,
                         "type": undefined,
@@ -848,12 +828,14 @@ initialize {
                       "aria-hidden": undefined,
                       "class": undefined,
                       "focusable": undefined,
+                      "role": undefined,
                       "viewBox": undefined,
                     },
                     "x-attribsPrefix": Object {
                       "aria-hidden": undefined,
                       "class": undefined,
                       "focusable": undefined,
+                      "role": undefined,
                       "viewBox": undefined,
                     },
                   },
@@ -878,7 +860,7 @@ initialize {
             "parent": [Circular],
             "prev": Object {
               "attribs": Object {
-                "class": "MuiFormLabel-root-11 MuiInputLabel-root-6 MuiInputLabel-formControl-7 MuiInputLabel-animated-10",
+                "class": "MuiFormLabel-root-13 MuiInputLabel-root-6 MuiInputLabel-formControl-7 MuiInputLabel-animated-10",
                 "data-shrink": "false",
                 "for": "station-select",
               },

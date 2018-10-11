@@ -21,7 +21,7 @@ describe('Admin', () => {
 
   beforeEach(() => {
     props = {
-      // authState: 'confirmSignIn',
+      match: {},
     }
     mountedC = undefined
   })

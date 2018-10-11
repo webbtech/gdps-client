@@ -1,10 +1,9 @@
 /* eslint no-undef: "off" */
 
 import React from 'react'
-import { MemoryRouter as Router } from 'react-router-dom'
 
 import PropaneSalesMonthly from '../PropaneSalesMonthly'
-import { render } from 'enzyme'
+import { shallow } from 'enzyme'
 
 describe('PropaneSalesMonthly', () => {
 
@@ -12,8 +11,8 @@ describe('PropaneSalesMonthly', () => {
   let props
   const testC = () => {
     if (!mountedC) {
-      mountedC = render(
-        <Router><PropaneSalesMonthly {...props} /></Router>
+      mountedC = shallow(
+        <PropaneSalesMonthly {...props} />
       )
     }
     return mountedC

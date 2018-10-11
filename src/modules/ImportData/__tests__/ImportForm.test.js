@@ -3,21 +3,25 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import StationInfo from '../StationInfo'
+import ImportForm from '../ImportForm'
 
-describe('StationInfo', () => {
+describe('ImportForm', () => {
 
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = shallow(<StationInfo {...props} />)
+      mountedC = shallow(
+        <ImportForm {...props} />
+      )
     }
     return mountedC
   }
 
   beforeEach(() => {
-    props = {}
+    props = {
+      history: {location: {pathname: '/'}},
+    }
     mountedC = undefined
   })
 

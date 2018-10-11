@@ -28,11 +28,6 @@ describe('DipOverShort', () => {
     mountedC = undefined
   })
 
-  it('always renders a div', () => {
-    const divs = reportC().find('div')
-    expect(divs.length).toBeGreaterThan(0)
-  })
-
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })

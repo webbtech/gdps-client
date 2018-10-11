@@ -121,7 +121,6 @@ describe('setOrderedFuelTypes', () => {
 
   it('return 3 ordered fuel types', () => {
     const fts = setOrderedFuelTypes(fuelTypes2, FUEL_TYPE_LIST)
-    console.log('fts: ', fts)
     expect(fts).toEqual(['NL', 'SNL', 'DSL'])
   })
 })

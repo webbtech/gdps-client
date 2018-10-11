@@ -1,8 +1,7 @@
 /* eslint no-undef: "off" */
 
 import React from 'react'
-import { MemoryRouter as Router } from 'react-router-dom'
-import { render } from 'enzyme'
+import { shallow } from 'enzyme'
 
 import Profile from '../Profile'
 
@@ -12,8 +11,8 @@ describe('Profile', () => {
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = render(
-        <Router><Profile {...props} /></Router>
+      mountedC = shallow(
+        <Profile {...props} />
       )
     }
     return mountedC
@@ -24,11 +23,6 @@ describe('Profile', () => {
       history: {location: {pathname: '/'}},
     }
     mountedC = undefined
-  })
-
-  it('always renders a div', () => {
-    const divs = reportC().find('div')
-    expect(divs.length).toBeGreaterThan(0)
   })
 
   it('matches snapshot', () => {

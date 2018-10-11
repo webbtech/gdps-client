@@ -1,10 +1,8 @@
 
 import AWS from 'aws-sdk'
 
-// const bucketName = 'ca-gales'
 const bucketName = 'gdps-tank-files-srcbucket-1b4usmv6ms16v'
 const bucketRegion = 'ca-central-1'
-// const bucketPrefix = 'tankFiles'
 const IdentityPoolId = 'us-east-1:9fef8114-2894-4d3d-a060-46e72a50a479'
 
 AWS.config.update({
@@ -38,7 +36,6 @@ export async function uploadTankFile(file, fileName) {
     return retMsg
   }
 
-  // const fileKey = `${bucketPrefix}/${fileName}`
   const fileKey = `${fileName}`
   const params = {
     Key: fileKey,
