@@ -34,7 +34,9 @@ class StationSelector extends React.Component {
     const { data, stationID } = this.props
 
     if (data.loading) return <p>Loading...</p>
-    if (data.error) return <p>Error :(</p>
+    if (data.error) {
+      return <p>Error :(</p>
+    }
 
     return (
       <div>

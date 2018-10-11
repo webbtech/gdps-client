@@ -137,7 +137,7 @@ class Header extends React.Component {
             <Typography
                 className={classes.flex}
                 color="inherit"
-                variant="title"
+                variant="h6"
             >
               <Link
                   className={classes.titleLink}

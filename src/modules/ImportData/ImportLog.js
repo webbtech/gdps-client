@@ -91,7 +91,7 @@ class ImportLog extends Component {
         <Typography
             className={classes.title}
             gutterBottom
-            variant="title"
+            variant="h6"
         >
           Import Log ({ucFirst(importType)})
         </Typography>

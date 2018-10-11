@@ -2,15 +2,17 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import moment from 'moment'
+import { Link } from 'react-router-dom'
 
+import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
-import DipForm from './DipForm.cont'
+import DipForm from './DipForm.cntr'
 import DipOverShort from './DipOverShort'
-import DipSelectors from './DipSelectors'
+import DipSelectors from './DipSelectors.cntr'
 import Header from '../Header/Header'
 import Loader from '../Common/Loader'
 import { datePrevDay, dateToInt } from '../../utils/utils'
@@ -55,22 +57,47 @@ const populateTanks = (dips, tanks) => {
 
 class Dips extends Component {
 
+  componentDidUpdate = prevProps => {
+    if (!prevProps.dips) return
+    if (!prevProps.dips.error && this.props.dips.error) {
+      const errMsg = this.props.dips.error.message
+      const ts = moment.utc().format()
+      const msg = `${errMsg} -- ${ts}`
+      this.props.actions.errorSend({message: msg, type: 'danger'})
+    }
+  }
+
   render() {
 
-    const { classes, dips, fuelSaleLatest, history, match: { params }, tanks } = this.props
+    const {
+      classes,
+      dips,
+      fuelSaleLatest,
+      history,
+      match: { params },
+      tanks,
+    } = this.props
+
     const requestDate = params.date
-    const dateObj = moment(params.date)
+    const dateObj = moment(requestDate)
     let havePrevDayDips = false
     let editMode = false
+    let haveCurDips = false
+    let haveFSImport = true
 
-    let lastFSDate = ''
+    let fsDate = ''
     if (fuelSaleLatest && fuelSaleLatest.fuelSaleLatest) {
-      let fsDate = moment(fuelSaleLatest.fuelSaleLatest.date.toString())
-      lastFSDate = fsDate.format('YYYY-MM-DD')
+      fsDate = moment(fuelSaleLatest.fuelSaleLatest.date.toString())
+      // lastFSDate = fsDate.format('MMM DD, YYYY')
     }
 
     if (dips && dips.error) {
-      return <p>Data Error :(</p>
+      haveCurDips = false
+    }
+
+    // Compare last imported with current date
+    if (dateObj.isAfter(fsDate)) {
+      haveFSImport = false
     }
 
     let waitComponent
@@ -80,7 +107,8 @@ class Dips extends Component {
       waitComponent = <Loader />
     }
 
-    if (dips && dips.loading === false && dips.dipOverShortRange) {
+    if (dips && dips.loading === false && dips.dipOverShortRange && !dips.error) {
+      haveCurDips = true
       const curDay = dateToInt(requestDate)
       const prevDay = datePrevDay(requestDate)
       if (dips.dipOverShortRange[0].date === prevDay) {
@@ -97,39 +125,51 @@ class Dips extends Component {
         <Paper className={classes.container}>
           <Typography
               gutterBottom
-              variant="headline"
+              variant="h5"
           >Dip Entries</Typography>
           <Divider /><br />
           <div className={classes.secondaryContainer}>
             <DipSelectors />
 
-            {lastFSDate &&
-            <div className={classes.lastFS}>
-              Last imported Fuel Sale date: {lastFSDate}
-            </div>
+            {!haveFSImport &&
+              <div className={classes.lastFS}>
+                <Button
+                    className={classes.lastFSButton}
+                    color="secondary"
+                    component={Link}
+                    size="small"
+                    to="/import-data"
+                    variant="outlined"
+                >
+                  Import Data
+                </Button>
+                <br />Date of last Fuel Sale import: {fsDate.format('MMM DD, YYYY')}
+              </div>
             }
 
-            <div style={{display: 'flex', flexDirection: 'row', marginTop: 20}}>
-              <div style={{flex: 1}}>
-              {tanks && tanks.stationTanks && tanks.loading === false && dips && dips.loading === false ? (
-                <DipForm
-                    editMode={editMode}
-                    havePrevDayDips={havePrevDayDips}
-                    tankDips={populateTanks(dips, tanks.stationTanks)}
-                />
-              ) : (
-                waitComponent
-              )}
+            {haveCurDips && haveFSImport &&
+              <div style={{display: 'flex', flexDirection: 'row', marginTop: 20}}>
+                <div style={{flex: 1}}>
+                {tanks && tanks.stationTanks && tanks.loading === false && dips && dips.loading === false ? (
+                  <DipForm
+                      editMode={editMode}
+                      havePrevDayDips={havePrevDayDips}
+                      tankDips={populateTanks(dips, tanks.stationTanks)}
+                  />
+                ) : (
+                  waitComponent
+                )}
+                </div>
+                <div style={{flex: .7}}>
+                {dips &&
+                  <DipOverShort
+                      dateObj={dateObj}
+                      dips={dips}
+                  />
+                }
+                </div>
               </div>
-              <div style={{flex: .7}}>
-              {dips &&
-                <DipOverShort
-                    dateObj={dateObj}
-                    dips={dips}
-                />
-              }
-              </div>
-            </div>
+            }
           </div>
         </Paper>
       </div>
@@ -138,6 +178,7 @@ class Dips extends Component {
 }
 
 Dips.propTypes = {
+  actions:        PropTypes.object.isRequired,
   classes:        PropTypes.object.isRequired,
   data:           PropTypes.object,
   dips:           PropTypes.object,
@@ -157,9 +198,11 @@ const styles =  theme => ({
   },
   lastFS: {
     color:      theme.palette.secondary.main,
-    marginTop:  -(theme.spacing.unit),
-    marginLeft: theme.spacing.unit,
-    fontSize:   12,
+    marginTop:  theme.spacing.unit,
+    fontSize:   14,
+  },
+  lastFSButton: {
+    marginBottom: theme.spacing.unit,
   },
   secondaryContainer: {
     display:        'flex',

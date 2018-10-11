@@ -10,13 +10,14 @@ import { Authenticator } from 'aws-amplify-react'
 import { ConnectedRouter } from 'react-router-redux'
 import { Switch, Route } from 'react-router'
 
+import Alert from '../Common/Alert'
 import aws_exports from '../Auth/aws-exports'
 import ChangePassword from '../Profile/ChangePassword'
 import client from '../../apollo.js'
 import Dashboard from './Dashboard'
-import Dips from '../Dips/Dips.cont'
+import Dips from '../Dips/Dips.cntr'
 import Download from '../Common/Download'
-import Errors from '../Error/Error.cont'
+import Errors from '../Error/Error.cntr'
 import ImportData from '../ImportData/ImportData'
 import Profile from '../Profile/Profile'
 import Propane from '../Propane/Propane'
@@ -27,6 +28,10 @@ import ConfirmSignIn from '../Auth/ConfirmSignIn'
 import SignIn from '../Auth/SignIn'
 import ForgotPassword from '../Auth/ForgotPassword'
 import RequireNewPassword from '../Auth/RequireNewPassword'
+
+// Sentry
+import * as Sentry from '@sentry/browser'
+import { SENTRY_DSN } from '../../config/constants'
 
 
 Amplify.configure(aws_exports)
@@ -44,11 +49,34 @@ const Reports = Loadable({
   loading: Loading,
 })
 
+Sentry.init({ dsn: SENTRY_DSN })
+
 class Index extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      error: null,
+    }
+  }
+
+  componentDidCatch(error, errorInfo) {
+    this.setState({ error })
+    Sentry.configureScope(scope => {
+      Object.keys(errorInfo).forEach(key => {
+        scope.setExtra(key, errorInfo[key])
+      })
+    })
+    Sentry.captureException(error)
+  }
 
   render() {
 
     if (this.props.authState !== 'signedIn') return null
+
+    if (this.state.error) {
+      return <Alert type="danger">{this.state.error}</Alert>
+    }
 
     return (
       <ApolloProvider client={client}>
@@ -146,10 +174,7 @@ class AppWithAuth extends Component { // eslint-disable-line react/no-multi-comp
       <div>
         <Authenticator
             hideDefault
-            // hide={"SignUp"}
-            // hide={['SignUp', 'ForgotPassword', 'FederatedSignIn']}
             onStateChange={this.handleAuthStateChange}
-            // theme={AmplifyTheme}
         >
           <Index />
           <SignIn/>

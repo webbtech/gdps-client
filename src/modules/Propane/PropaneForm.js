@@ -51,7 +51,7 @@ class PropaneForm extends Component {
       <div className={classes.container}>
         <Typography
             gutterBottom
-            variant="title"
+            variant="h6"
         >Propane Delivery</Typography>
         <PropaneSelectors />
 
@@ -90,7 +90,7 @@ class PropaneForm extends Component {
                   color="primary"
                   disabled={!dirty || isSubmitting}
                   type="submit"
-                  variant="raised"
+                  variant="contained"
               >
                 <Save className={classNames(classes.leftIcon, classes.iconSmall)} />
                 Save Propane Delivery

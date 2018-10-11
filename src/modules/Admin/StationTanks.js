@@ -100,7 +100,7 @@ class StationTanks extends Component {
       <div className={classes.container}>
         <Typography
             gutterBottom
-            variant="headline"
+            variant="h5"
         >Station Tank Administration</Typography>
         <Paper className={classes.dataContainer}>
           <AppBar

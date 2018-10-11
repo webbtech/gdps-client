@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImportData matches snapshot 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <WithStyles(ImportData)
+    history={
+        Object {
+            "location": Object {
+              "pathname": "/",
+            },
+          }
+    }
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "classes": Object {
+        "flex": "ImportData-flex-2",
+        "mainContainer": "ImportData-mainContainer-3",
+        "paper": "ImportData-paper-5",
+        "popperClose": "ImportData-popperClose-6",
+        "root": "ImportData-root-1",
+        "titleLink": "ImportData-titleLink-4",
+      },
+      "history": Object {
+        "location": Object {
+          "pathname": "/",
+        },
+      },
+    },
+    "ref": null,
+    "rendered": null,
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "classes": Object {
+          "flex": "ImportData-flex-2",
+          "mainContainer": "ImportData-mainContainer-3",
+          "paper": "ImportData-paper-5",
+          "popperClose": "ImportData-popperClose-6",
+          "root": "ImportData-root-1",
+          "titleLink": "ImportData-titleLink-4",
+        },
+        "history": Object {
+          "location": Object {
+            "pathname": "/",
+          },
+        },
+      },
+      "ref": null,
+      "rendered": null,
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

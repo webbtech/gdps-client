@@ -8,7 +8,7 @@ import { withRouter } from 'react-router'
 import DipForm from './DipForm'
 import * as errorActions from '../Error/errorActions'
 import { datePrevDay, dateToInt } from '../../utils/utils'
-import { DIP_QUERY } from './Dips.cont'
+import { DIP_QUERY } from './Dips.cntr'
 
 
 const CREATE_DIPS = gql`

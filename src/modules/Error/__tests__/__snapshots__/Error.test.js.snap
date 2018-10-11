@@ -1,76 +1,68 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Error matches snapshot 1`] = `
-initialize {
-  "0": Object {
-    "attribs": Object {
-      "class": "Error-base-1 Error-warning-5",
-    },
-    "children": Array [
-      Object {
-        "attribs": Object {
-          "aria-hidden": "true",
-          "class": "material-icons MuiIcon-root-7 MuiIcon-colorSecondary-9 Error-icon-6",
-        },
-        "children": Array [
-          Object {
-            "data": "close",
-            "next": null,
-            "parent": [Circular],
-            "prev": null,
-            "type": "text",
-          },
-        ],
-        "name": "span",
-        "namespace": "http://www.w3.org/1999/xhtml",
-        "next": null,
-        "parent": [Circular],
-        "prev": null,
-        "type": "tag",
-        "x-attribsNamespace": Object {
-          "aria-hidden": undefined,
-          "class": undefined,
-        },
-        "x-attribsPrefix": Object {
-          "aria-hidden": undefined,
-          "class": undefined,
-        },
-      },
-    ],
-    "name": "div",
-    "namespace": "http://www.w3.org/1999/xhtml",
-    "next": null,
-    "parent": null,
-    "prev": null,
-    "root": Object {
-      "attribs": Object {},
-      "children": Array [
-        [Circular],
-      ],
-      "name": "root",
-      "namespace": "http://www.w3.org/1999/xhtml",
-      "next": null,
-      "parent": null,
-      "prev": null,
-      "type": "root",
-      "x-attribsNamespace": Object {},
-      "x-attribsPrefix": Object {},
-    },
-    "type": "tag",
-    "x-attribsNamespace": Object {
-      "class": undefined,
-    },
-    "x-attribsPrefix": Object {
-      "class": undefined,
-    },
-  },
-  "_root": [Circular],
+ShallowWrapper {
   "length": 1,
-  "options": Object {
-    "decodeEntities": true,
-    "normalizeWhitespace": false,
-    "withDomLvl1": true,
-    "xml": false,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <WithStyles(Error)
+    message=""
+    onClick={[Function]}
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "classes": Object {
+        "base": "Error-base-1",
+        "danger": "Error-danger-2",
+        "icon": "Error-icon-6",
+        "info": "Error-info-4",
+        "success": "Error-success-3",
+        "warning": "Error-warning-5",
+      },
+      "message": "",
+      "onClick": [Function],
+    },
+    "ref": null,
+    "rendered": null,
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "classes": Object {
+          "base": "Error-base-1",
+          "danger": "Error-danger-2",
+          "icon": "Error-icon-6",
+          "info": "Error-info-4",
+          "success": "Error-success-3",
+          "warning": "Error-warning-5",
+        },
+        "message": "",
+        "onClick": [Function],
+      },
+      "ref": null,
+      "rendered": null,
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
   },
 }
 `;

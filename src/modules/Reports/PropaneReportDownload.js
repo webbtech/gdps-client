@@ -77,7 +77,7 @@ class PropaneReportDownload extends Component {
       <div className={classes.container}>
         <Typography
             gutterBottom
-            variant="title"
+            variant="h6"
         >Propane Report Download</Typography>
         <div className={classes.selectRow}>
 
@@ -127,7 +127,7 @@ class PropaneReportDownload extends Component {
             <Button
                 color="primary"
                 onClick={() => this.handleSubmit()}
-                variant="raised"
+                variant="contained"
             >
             <Save className={classes.leftIcon} />
             Download Report

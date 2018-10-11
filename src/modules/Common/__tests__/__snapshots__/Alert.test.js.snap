@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Alert matches snapshot 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <WithStyles(Alert)
+    authState="forgotPassword"
+    onStateChange={[Function]}
+    type=""
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "authState": "forgotPassword",
+      "children": "",
+      "classes": Object {
+        "base": "Alert-base-1",
+        "danger": "Alert-danger-2",
+        "info": "Alert-info-4",
+        "success": "Alert-success-3",
+        "warning": "Alert-warning-5",
+      },
+      "onStateChange": [Function],
+      "type": "",
+    },
+    "ref": null,
+    "rendered": "",
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "authState": "forgotPassword",
+        "children": "",
+        "classes": Object {
+          "base": "Alert-base-1",
+          "danger": "Alert-danger-2",
+          "info": "Alert-info-4",
+          "success": "Alert-success-3",
+          "warning": "Alert-warning-5",
+        },
+        "onStateChange": [Function],
+        "type": "",
+      },
+      "ref": null,
+      "rendered": "",
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

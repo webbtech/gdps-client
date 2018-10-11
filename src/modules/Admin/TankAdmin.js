@@ -106,7 +106,7 @@ class TankAdmin extends Component {
       <div className={classes.container}>
         <Typography
             gutterBottom
-            variant="headline"
+            variant="h5"
         >Tank Administration</Typography>
         <Paper className={classes.listContainer}>
           <AppBar
@@ -117,7 +117,7 @@ class TankAdmin extends Component {
               <Typography
                   className={classes.title}
                   gutterBottom
-                  variant="title"
+                  variant="h6"
               >
               Tank Listing
               </Typography>

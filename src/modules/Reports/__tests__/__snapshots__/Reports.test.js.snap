@@ -4,12 +4,10 @@ exports[`Reports matches snapshot 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <MemoryRouter>
-    <WithStyles(Reports)
-        history={Object {}}
-        match={Object {}}
-    />
-</MemoryRouter>,
+  Symbol(enzyme.__unrendered__): <WithStyles(Reports)
+    history={Object {}}
+    match={Object {}}
+/>,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -22,54 +20,19 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "class",
     "props": Object {
-      "children": <WithStyles(Reports)
-        history={Object {}}
-        match={Object {}}
-/>,
-      "history": Object {
-        "action": "POP",
-        "block": [Function],
-        "canGo": [Function],
-        "createHref": [Function],
-        "entries": Array [
-          Object {
-            "hash": "",
-            "key": "d90qsw",
-            "pathname": "/",
-            "search": "",
-            "state": undefined,
-          },
-        ],
-        "go": [Function],
-        "goBack": [Function],
-        "goForward": [Function],
-        "index": 0,
-        "length": 1,
-        "listen": [Function],
-        "location": Object {
-          "hash": "",
-          "key": "d90qsw",
-          "pathname": "/",
-          "search": "",
-          "state": undefined,
-        },
-        "push": [Function],
-        "replace": [Function],
+      "classes": Object {
+        "flex": "Reports-flex-2",
+        "mainContainer": "Reports-mainContainer-3",
+        "paper": "Reports-paper-5",
+        "popperClose": "Reports-popperClose-6",
+        "root": "Reports-root-1",
+        "titleLink": "Reports-titleLink-4",
       },
+      "history": Object {},
+      "match": Object {},
     },
     "ref": null,
-    "rendered": Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "class",
-      "props": Object {
-        "history": Object {},
-        "match": Object {},
-      },
-      "ref": null,
-      "rendered": null,
-      "type": [Function],
-    },
+    "rendered": null,
     "type": [Function],
   },
   Symbol(enzyme.__nodes__): Array [
@@ -78,54 +41,19 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
-        "children": <WithStyles(Reports)
-          history={Object {}}
-          match={Object {}}
-/>,
-        "history": Object {
-          "action": "POP",
-          "block": [Function],
-          "canGo": [Function],
-          "createHref": [Function],
-          "entries": Array [
-            Object {
-              "hash": "",
-              "key": "d90qsw",
-              "pathname": "/",
-              "search": "",
-              "state": undefined,
-            },
-          ],
-          "go": [Function],
-          "goBack": [Function],
-          "goForward": [Function],
-          "index": 0,
-          "length": 1,
-          "listen": [Function],
-          "location": Object {
-            "hash": "",
-            "key": "d90qsw",
-            "pathname": "/",
-            "search": "",
-            "state": undefined,
-          },
-          "push": [Function],
-          "replace": [Function],
+        "classes": Object {
+          "flex": "Reports-flex-2",
+          "mainContainer": "Reports-mainContainer-3",
+          "paper": "Reports-paper-5",
+          "popperClose": "Reports-popperClose-6",
+          "root": "Reports-root-1",
+          "titleLink": "Reports-titleLink-4",
         },
+        "history": Object {},
+        "match": Object {},
       },
       "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "history": Object {},
-          "match": Object {},
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
+      "rendered": null,
       "type": [Function],
     },
   ],

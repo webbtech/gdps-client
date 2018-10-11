@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import classNames from 'classnames'
 import moment from 'moment'
-import { withRouter } from 'react-router'
 
 import ArrowBack from '@material-ui/icons/ArrowBack'
 import ArrowForward from '@material-ui/icons/ArrowForward'
@@ -25,8 +24,6 @@ class DipSelectors extends Component {
     this.handleStationChange = this.handleStationChange.bind(this)
 
     this.state = {
-      // openSnackbar: false,
-      // snackbarMessage: '',
       nextDisabled: true,
       selectedDate: moment(),
       stationID: '',
@@ -34,9 +31,8 @@ class DipSelectors extends Component {
   }
 
   componentDidMount = () => {
-    const { pathname } = this.props.location
-    const date = pathname.split('/')[2]
-    const stationID = pathname.split('/')[3]
+    const { params } = this.props.match
+    const { date, stationID } = params
     const setDate = moment(date)
     const newDte = {
       year:   setDate.format('YYYY'),
@@ -52,9 +48,6 @@ class DipSelectors extends Component {
   }
 
   // This could get more involved if state isn't set in time: https://stackoverflow.com/questions/37401635/react-js-wait-for-setstate-to-finish-before-triggering-a-function
-  /*handleStationChange = event => {
-    this.setState({ stationID: event.target.value }, this.handleGetDip)
-  }*/
   handleStationChange = value => {
     this.setState({ stationID: value }, this.handleGetDip)
   }
@@ -74,6 +67,7 @@ class DipSelectors extends Component {
   }
 
   handleGetDip = () => {
+    this.props.actions.errorClear()
     this.setNextDisabled()
     const { history } = this.props
     const { selectedDate, stationID } = this.state
@@ -151,6 +145,7 @@ class DipSelectors extends Component {
 }
 
 DipSelectors.propTypes = {
+  actions:  PropTypes.object.isRequired,
   classes:  PropTypes.object.isRequired,
   history:  PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
@@ -159,8 +154,8 @@ DipSelectors.propTypes = {
 
 const styles =  theme => ({
   cell: {
-    flex: 'flex-grow',
-    alignSelf: 'flex-end',
+    flex:       'flex-grow',
+    alignSelf:  'flex-end',
   },
   container: {
     marginBottom: theme.spacing.unit,
@@ -170,10 +165,10 @@ const styles =  theme => ({
     minWidth: 120,
   },
   navButton: {
-    margin: theme.spacing.unit,
-    height: theme.spacing.unit * 4.5,
-    width: theme.spacing.unit * 4.5,
-    marginRight: 0,
+    margin:       theme.spacing.unit,
+    height:       theme.spacing.unit * 4.5,
+    width:        theme.spacing.unit * 4.5,
+    marginRight:  0,
   },
   selectRow: {
     display:        'inline-flex',
@@ -182,4 +177,4 @@ const styles =  theme => ({
   },
 })
 
-export default withRouter(withStyles(styles)(DipSelectors))
+export default withStyles(styles)(DipSelectors)

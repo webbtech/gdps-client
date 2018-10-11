@@ -26,7 +26,7 @@ class DipForm extends Component {
       haveErrors: false,
       toasterMsg: '',
     }
-    this.handleCalculateLitres = debounce(this.handleCalculateLitres, 350)
+    this.handleCalculateLitres = debounce(this.handleCalculateLitres, 250)
   }
 
   // see: https://stackoverflow.com/questions/23123138/perform-debounce-in-react-js for explanation on debounce
@@ -62,7 +62,7 @@ class DipForm extends Component {
     delete errors[`${tankID}_level`]
 
     if (!val || val === '0') {
-      this.props.setFieldValue(`tanks.${tankID}.level`, 0, false)
+      this.props.setFieldValue(`tanks.${tankID}.level`, '', false)
       this.props.setFieldValue(`tanks.${tankID}.litres`, 0, false)
       return
     }
@@ -71,7 +71,7 @@ class DipForm extends Component {
     const origLevel = clone(inputLevel)
     if (inputLevel <= 1) return
     const levels = tanks[tankID].tank.tank.levels
-    if (!levels[inputLevel]) {
+    if (inputLevel > 9 && !levels[inputLevel]) {
       inputLevel--
     }
 
@@ -122,7 +122,7 @@ class DipForm extends Component {
       <div className={classes.container}>
         <Typography
             gutterBottom
-            variant="title"
+            variant="h6"
         >Dips</Typography>
 
         <form
@@ -197,7 +197,7 @@ class DipForm extends Component {
                   color="primary"
                   disabled={!dirty || isSubmitting || !!errorKeys}
                   type="submit"
-                  variant="raised"
+                  variant="contained"
               >
                 <Save className={classNames(classes.leftIcon, classes.iconSmall)} />
                 {submitLabel}

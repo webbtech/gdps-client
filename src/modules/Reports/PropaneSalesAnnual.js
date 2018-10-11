@@ -51,7 +51,7 @@ const Report = ({ classes, data }) => {
         <div className={classes.reportTitleContainer}>
           <Typography
               gutterBottom
-              variant="title"
+              variant="h6"
           >Propane Annual Sales</Typography>
           <br />
         </div>
@@ -121,7 +121,7 @@ ReportData.propTypes = {
 }
 
 
-class PropaneSalesWeekly extends Component {
+class PropaneSalesAnnual extends Component {
 
   render() {
 
@@ -146,7 +146,7 @@ class PropaneSalesWeekly extends Component {
     )
   }
 }
-PropaneSalesWeekly.propTypes = {
+PropaneSalesAnnual.propTypes = {
   classes:  PropTypes.object.isRequired,
   data:     PropTypes.object,
   location: PropTypes.object.isRequired,
@@ -228,7 +228,7 @@ const styles =  theme => ({
   },
 })
 
-// export default withStyles(styles)(PropaneSalesWeekly)
+// export default withStyles(styles)(PropaneSalesAnnual)
 export default graphql(PSA_REPORT_QUERY, {
   skip: props => props.location.pathname.split('/').length < 4,
   options: (props) => {
@@ -239,4 +239,4 @@ export default graphql(PSA_REPORT_QUERY, {
       },
     })
   },
-})(withStyles(styles)(PropaneSalesWeekly))
+})(withStyles(styles)(PropaneSalesAnnual))
