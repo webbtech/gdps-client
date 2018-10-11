@@ -1,9 +1,10 @@
 import gql from 'graphql-tag'
 import { compose, graphql } from 'react-apollo'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import Dips from './Dips'
-import { errorSend } from '../Error/errorActions'
+import * as errorActions from '../Error/errorActions'
 import { datePrevDay, dateToInt } from '../../utils/utils'
 
 export const DIP_QUERY = gql`
@@ -92,9 +93,16 @@ const FetchFuelSale = graphql(FUEL_SALE_LATEST, {
   }),
 })
 
-const mapDispatchToProps = dispatch => ({
+/*const mapDispatchToProps = dispatch => ({
   sendError: obj => dispatch(errorSend(obj)),
-})
+})*/
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      ...errorActions,
+    }, dispatch),
+  }
+}
 
 export default compose(
   FetchDips,

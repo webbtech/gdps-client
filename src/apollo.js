@@ -4,24 +4,23 @@ import { defaultDataIdFromObject, InMemoryCache } from 'apollo-cache-inmemory'
 import { HttpLink } from 'apollo-link-http'
 import { onError } from 'apollo-link-error'
 import { setContext } from 'apollo-link-context'
+import * as Sentry from '@sentry/browser'
 
 import { config } from './config/config'
 
-// import { errorSend } from './modules/Error/errorActions'
-
 const errorLink = onError(({ networkError, graphQLErrors }) => {
-// const errorLink = onError((props) => {
-  // console.log('props in errorLink: ', props)
-  // console.log('errorSend: ', errorSend)
-  // errorSend({message: 'bogus error message', type: 'danger'})
   if (graphQLErrors) {
-    graphQLErrors.map(({ message, locations, path }) =>
-      console.log( // eslint-disable-line
-        `[GraphQL error]: Message: ${message}, Location: ${JSON.stringify(locations, null, 2)}, Path: ${path}`,
-      )
-    )
+    graphQLErrors.map(({ message, locations, path }) => {
+      const err = `[GraphQL error]: Message: ${message}, Location: ${JSON.stringify(locations, null, 2)}, Path: ${path}`
+      Sentry.captureException(err)
+      console.log(err) // eslint-disable-line
+      return err
+    })
   }
-  if (networkError) console.log(`[Network error]: ${networkError}`) // eslint-disable-line
+  if (networkError) {
+    console.log(`[Network error]: ${networkError}`) // eslint-disable-line
+    Sentry.captureException(networkError)
+  }
 })
 
 const httpLink = new HttpLink({ uri: config.BASE_URL })

@@ -224,6 +224,47 @@
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/@most/prelude/-/prelude-1.7.1.tgz#7c70ab6a68bb20481db51ebfbba23fceb502d239"
 
+"@sentry/browser@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@sentry/browser/-/browser-4.1.0.tgz#f621c40ebc1c8930c76eef00a79992f7e287d00f"
+  dependencies:
+    "@sentry/core" "4.1.0"
+    "@sentry/types" "4.1.0"
+    "@sentry/utils" "4.1.0"
+
+"@sentry/core@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@sentry/core/-/core-4.1.0.tgz#89cbdd4805d2763962e66735d5b540d0e8cbe352"
+  dependencies:
+    "@sentry/hub" "4.1.0"
+    "@sentry/minimal" "4.1.0"
+    "@sentry/types" "4.1.0"
+    "@sentry/utils" "4.1.0"
+
+"@sentry/hub@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@sentry/hub/-/hub-4.1.0.tgz#fc89c0139320fc8a3e124e253dc484316568a6fa"
+  dependencies:
+    "@sentry/types" "4.1.0"
+    "@sentry/utils" "4.1.0"
+
+"@sentry/minimal@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@sentry/minimal/-/minimal-4.1.0.tgz#4af78ff99022dc76d34c8ee486f524e860e4fe45"
+  dependencies:
+    "@sentry/hub" "4.1.0"
+    "@sentry/types" "4.1.0"
+
+"@sentry/types@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@sentry/types/-/types-4.1.0.tgz#ebffb9857abbecaad5d1c00152a50f72ac9757a5"
+
+"@sentry/utils@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@sentry/utils/-/utils-4.1.0.tgz#bda3147b8f4b988680a7415ca64790f91f090acb"
+  dependencies:
+    "@sentry/types" "4.1.0"
+
 "@types/async@2.0.49":
   version "2.0.49"
   resolved "https://registry.yarnpkg.com/@types/async/-/async-2.0.49.tgz#92e33d13f74c895cb9a7f38ba97db8431ed14bc0"
