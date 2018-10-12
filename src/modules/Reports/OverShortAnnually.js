@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import gql from 'graphql-tag'
 import moment from 'moment'
-import { graphql } from 'react-apollo'
 import classNames from 'classnames'
 
 import Paper from '@material-ui/core/Paper'
@@ -16,16 +14,6 @@ import ReportSelectors from './ReportSelectors'
 import { FUEL_TYPE_LIST } from '../../config/constants'
 
 
-const OSA_REPORT_QUERY = gql`
-query DipOSAnnualReport($date: String!, $stationID: String!) {
-  dipOSAnnualReport(date: $date, stationID: $stationID) {
-    fuelTypes
-    months
-    summary
-    year
-  }
-}
-`
 const Report = ({ classes, data }) => {
 
   if (!data) return null
@@ -35,9 +23,7 @@ const Report = ({ classes, data }) => {
   if (!data.dipOSAnnualReport) {
     return (
       <div className={classes.container}>
-        <Typography
-            variant="body2"
-        >There is no data available for the specified date.</Typography>
+        <Typography>There is no data available for the specified date.</Typography>
       </div>
     )
   }
@@ -145,9 +131,23 @@ ReportSummary.propTypes = {
 
 class OverShortAnnually extends Component {
 
+  componentDidUpdate = prevProps => {
+    if (!prevProps.data) return
+    if (!prevProps.data.error && this.props.data.error) {
+      const errMsg = this.props.data.error.message
+      const ts = moment.utc().format()
+      const msg = `${errMsg} -- ${ts}`
+      this.props.actions.errorSend({message: msg, type: 'danger'})
+    }
+  }
+
   render() {
 
     const { classes, data } = this.props
+
+    if (data && data.error) {
+      return <p>Data Error :(</p>
+    }
 
     return (
       <div className={classes.mainContainer}>
@@ -163,6 +163,7 @@ class OverShortAnnually extends Component {
   }
 }
 OverShortAnnually.propTypes = {
+  actions:  PropTypes.object.isRequired,
   classes:  PropTypes.object.isRequired,
   data:     PropTypes.object,
   location: PropTypes.object.isRequired,
@@ -243,15 +244,4 @@ const styles =  theme => ({
   },
 })
 
-export default graphql(OSA_REPORT_QUERY, {
-  skip: props => props.location.pathname.split('/').length < 5,
-  options: (props) => {
-    const prts = utils.extractPathParts(props.location.pathname, 3)
-    return ({
-      variables: {
-        date:       Number(moment().year(prts[0]).format('YYYYMMDD')),
-        stationID:  prts[1],
-      },
-    })
-  },
-})(withStyles(styles)(OverShortAnnually))
+export default withStyles(styles)(OverShortAnnually)
