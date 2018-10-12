@@ -38,9 +38,7 @@ const Report = ({ classes, data }) => {
   if (!data.fuelDeliveryReport) {
     return (
       <div className={classes.container}>
-        <Typography
-            variant="body2"
-        >There is no data available for the specified date.</Typography>
+        <Typography>There is no data available for the specified date.</Typography>
       </div>
     )
   }
@@ -249,7 +247,7 @@ export default graphql(FD_REPORT_QUERY, {
     const prts = utils.extractPathParts(props.location.pathname, 3)
     return ({
       variables: {
-        date:       utils.dateToInt(prts[0]),
+        date:       moment(prts[0]).format('YYYY-MM-DD'),
         stationID:  prts[1],
       },
     })
