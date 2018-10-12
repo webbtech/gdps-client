@@ -34,7 +34,9 @@ const theme = createMuiTheme({
     tonalOffset: 0.2,
     typography: {
       fontFamily: 'Roboto',
-      fontSize: 34,
+      // fontSize: 34,
+      useNextVariants: true,
+      htmlFontSize: 10,
     },
   },
 })

@@ -129,12 +129,13 @@ class Reports extends Component {
   }
 
   submitReport = () => {
-    const { hideMonth, hideStation, history, match } = this.props
+    const { hideMonth, hideStation, history } = this.props
     const { month, stationID, year } = this.state
     const validProps = hideStation ? month && year : month && stationID && year
     if (validProps) {
       const dte = hideMonth ? String(year) : `${year}-${month}-01`
-      const uri = hideStation ? `${match.url}/${dte}` : `${match.url}/${dte}/${stationID}`
+      const reportPath = `/reports/${extractPathParts(this.props.location.pathname)[0]}`
+      const uri = hideStation ? `${reportPath}/${dte}` : `${reportPath}/${dte}/${stationID}`
       history.push(uri)
     } else {
       this.handleOpenSnackbar('Missing Station. Please enter a station.')

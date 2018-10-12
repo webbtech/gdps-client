@@ -12,8 +12,8 @@ import FuelDeliveries from './FuelDeliveries'
 import FuelSalesList from './FuelSalesList'
 import FuelSalesDetailed from './FuelSalesDetailed'
 import Header from '../Header/Header'
-import OverShortMonthly from './OverShortMonthly'
-import OverShortAnnually from './OverShortAnnually'
+import OverShortMonthly from './OverShortMonthly.cntr'
+import OverShortAnnually from './OverShortAnnually.cntr'
 import PropaneSalesMonthly from './PropaneSalesMonthly'
 import PropaneSalesAnnual from './PropaneSalesAnnual'
 import ReportMenu from './ReportMenu'
@@ -50,11 +50,21 @@ class Reports extends Component {
             />
             <Route
                 component={OverShortMonthly}
+                exact
                 path={`${match.url}/overshort-monthly`}
             />
             <Route
+                component={OverShortMonthly}
+                path={`${match.url}/overshort-monthly/:date/:stationID`}
+            />
+            <Route
                 component={OverShortAnnually}
+                exact
                 path={`${match.url}/overshort-annually`}
+            />
+            <Route
+                component={OverShortAnnually}
+                path={`${match.url}/overshort-annually/:year/:stationID`}
             />
             <Route
                 component={FuelDeliveries}
