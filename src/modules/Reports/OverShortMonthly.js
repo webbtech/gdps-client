@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import gql from 'graphql-tag'
 import moment from 'moment'
-import { graphql } from 'react-apollo'
 import classNames from 'classnames'
 
 import Paper from '@material-ui/core/Paper'
@@ -15,21 +13,6 @@ import Loader from '../Common/Loader'
 import ReportSelectors from './ReportSelectors'
 import { FUEL_TYPE_LIST } from '../../config/constants'
 
-
-const OSM_REPORT_QUERY = gql`
-query DipOSMonthReport($date: String!, $stationID: String!) {
-  dipOSMonthReport(date: $date, stationID: $stationID) {
-    stationID
-    fuelTypes
-    period
-    overShort {
-      date
-      data
-    }
-    overShortSummary
-  }
-}
-`
 
 const Report = ({ classes, data }) => {
 
@@ -151,6 +134,16 @@ ReportSummary.propTypes = {
 
 class OverShortMonthly extends Component {
 
+  componentDidUpdate = prevProps => {
+    if (!prevProps.data) return
+    if (!prevProps.data.error && this.props.data.error) {
+      const errMsg = this.props.data.error.message
+      const ts = moment.utc().format()
+      const msg = `${errMsg} -- ${ts}`
+      this.props.actions.errorSend({message: msg, type: 'danger'})
+    }
+  }
+
   render() {
 
     const { classes, data } = this.props
@@ -171,6 +164,7 @@ class OverShortMonthly extends Component {
   }
 }
 OverShortMonthly.propTypes = {
+  actions:  PropTypes.object.isRequired,
   classes:  PropTypes.object.isRequired,
   data:     PropTypes.object,
   history:  PropTypes.object.isRequired,
@@ -253,15 +247,4 @@ const styles =  theme => ({
   },
 })
 
-export default graphql(OSM_REPORT_QUERY, {
-  skip: props => props.location.pathname.split('/').length < 5,
-  options: (props) => {
-    const prts = utils.extractPathParts(props.location.pathname, 3)
-    return ({
-      variables: {
-        date:       utils.dateToInt(prts[0]),
-        stationID:  prts[1],
-      },
-    })
-  },
-})(withStyles(styles)(OverShortMonthly))
+export default withStyles(styles)(OverShortMonthly)
