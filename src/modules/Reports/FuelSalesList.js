@@ -41,9 +41,7 @@ const Report = ({ classes, data, date }) => {
   if (!data.fuelSaleListReport) {
     return (
       <div className={classes.container}>
-        <Typography
-            variant="body2"
-        >There is no data available for the specified date.</Typography>
+        <Typography>There is no data available for the specified date.</Typography>
       </div>
     )
   }
@@ -80,9 +78,7 @@ const Report = ({ classes, data, date }) => {
             data={data.fuelSaleListReport}
             type="NL"
         />
-      <Typography
-          variant="body2"
-      >*NOTE: Values in brackets are fuel price average for period</Typography>
+      <Typography>*NOTE: Values in brackets are fuel price average for period</Typography>
       </Paper>
       <br />
       <Paper className={classes.reportContainer}>
