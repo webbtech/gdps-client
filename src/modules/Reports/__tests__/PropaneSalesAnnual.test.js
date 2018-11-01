@@ -6,14 +6,11 @@ import PropaneSalesAnnual from '../PropaneSalesAnnual'
 import { shallow } from 'enzyme'
 
 describe('PropaneSalesAnnual', () => {
-
   let mountedC
   let props
   const testC = () => {
     if (!mountedC) {
-      mountedC = shallow(
-        <PropaneSalesAnnual {...props} />
-      )
+      mountedC = shallow(<PropaneSalesAnnual {...props} />)
     }
     return mountedC
   }
@@ -21,7 +18,7 @@ describe('PropaneSalesAnnual', () => {
   beforeEach(() => {
     props = {
       history: {},
-      location: {pathname: '/'},
+      location: { pathname: '/' },
       match: {},
     }
     mountedC = undefined
@@ -30,5 +27,4 @@ describe('PropaneSalesAnnual', () => {
   it('matches snapshot', () => {
     expect(testC()).toMatchSnapshot()
   })
-
 })

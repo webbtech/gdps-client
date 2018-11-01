@@ -17,16 +17,15 @@ import Header from '../Header/Header'
 
 
 class Profile extends Component {
-
   state = {
-    error:        '',
-    loading:      false,
-    passwordConfirm:  '',
-    passwordNew:  '',
-    passwordOld:  '',
-    snackMsg:     '',
-    snackOpen:    false,
-    user:         {},
+    error: '',
+    loading: false,
+    passwordConfirm: '',
+    passwordNew: '',
+    passwordOld: '',
+    snackMsg: '',
+    snackOpen: false,
+    user: {},
   }
 
   componentDidMount = () => {
@@ -34,7 +33,7 @@ class Profile extends Component {
       .then(
         (result) => {
           this.setState({
-            user:     result,
+            user: result,
           })
         },
         // Note: it's important to handle errors here
@@ -49,12 +48,12 @@ class Profile extends Component {
       )
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  handleOpenSnack = msg => {
-    this.setState({ snackOpen: true, snackMsg: msg})
+  handleOpenSnack = (msg) => {
+    this.setState({ snackOpen: true, snackMsg: msg })
   }
 
   handleClose = () => {
@@ -62,22 +61,21 @@ class Profile extends Component {
   }
 
   async onSubmitForm() {
-
     this.setState({ loading: true })
     if (this.state.passwordOld === '') {
-      this.setState({ loading: false, snackOpen: true, snackMsg: 'Missing Current Password'} )
+      this.setState({ loading: false, snackOpen: true, snackMsg: 'Missing Current Password' })
       return
     }
 
     if (this.state.passwordNew === '') {
-      this.setState({ loading: false, snackOpen: true, snackMsg: 'Missing New Password'} )
+      this.setState({ loading: false, snackOpen: true, snackMsg: 'Missing New Password' })
       return
     }
 
     // First test new passwords match
     const comp = this.state.passwordNew.localeCompare(this.state.passwordConfirm)
     if (comp !== 0) {
-      this.setState({ loading: false, snackOpen: true, snackMsg: 'New passwords do not match.'} )
+      this.setState({ loading: false, snackOpen: true, snackMsg: 'New passwords do not match.' })
       return
     }
     try {
@@ -86,22 +84,23 @@ class Profile extends Component {
       console.log(`ChangePassword::onSubmitForm(): Result ${JSON.stringify(result, null, 2)}`) // eslint-disable-line
 
       this.setState({
-        loading:          false,
-        passwordConfirm:  '',
-        passwordNew:      '',
-        passwordOld:      '',
-        snackMsg:         'Password Successfully Changed.',
-        snackOpen:        true,
+        loading: false,
+        passwordConfirm: '',
+        passwordNew: '',
+        passwordOld: '',
+        snackMsg: 'Password Successfully Changed.',
+        snackOpen: true,
       })
     } catch (err) {
       const errMsg = err.message || err
       console.log(`ChangePassword::onSubmitForm(): Error ${JSON.stringify(err, null, 2)}`) // eslint-disable-line
-      this.setState({ error: errMsg, loading: false, snackMsg: errMsg, snackOpen: true })
+      this.setState({
+        error: errMsg, loading: false, snackMsg: errMsg, snackOpen: true,
+      })
     }
   }
 
   render() {
-
     const { classes } = this.props
     const { loading, snackMsg, snackOpen } = this.state
 
@@ -110,13 +109,13 @@ class Profile extends Component {
         <Header />
         <Paper className={classes.paper}>
           <AppBar
-              className={classes.appBar}
-              color="secondary"
-              position="static"
+            className={classes.appBar}
+            color="secondary"
+            position="static"
           >
             <Typography
-                color="inherit"
-                variant="h6"
+              color="inherit"
+              variant="h6"
             >
               Change Password
             </Typography>
@@ -127,42 +126,42 @@ class Profile extends Component {
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="passwordOld">Current Password</InputLabel>
               <Input
-                  id="passwordOld"
-                  name="passwordOld"
-                  onChange={this.handleChange}
-                  type="password"
-                  value={this.state.passwordOld}
+                id="passwordOld"
+                name="passwordOld"
+                onChange={this.handleChange}
+                type="password"
+                value={this.state.passwordOld}
               />
             </FormControl>
 
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="passwordNew">New Password</InputLabel>
               <Input
-                  id="passwordNew"
-                  name="passwordNew"
-                  onChange={this.handleChange}
-                  type="password"
-                  value={this.state.passwordNew}
+                id="passwordNew"
+                name="passwordNew"
+                onChange={this.handleChange}
+                type="password"
+                value={this.state.passwordNew}
               />
             </FormControl>
 
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="passwordConfirm">Confirm Password</InputLabel>
               <Input
-                  id="passwordConfirm"
-                  name="passwordConfirm"
-                  onChange={this.handleChange}
-                  type="password"
-                  value={this.state.passwordConfirm}
+                id="passwordConfirm"
+                name="passwordConfirm"
+                onChange={this.handleChange}
+                type="password"
+                value={this.state.passwordConfirm}
               />
             </FormControl>
 
             <Button
-                className={classes.submitButton}
-                color="primary"
-                disabled={loading}
-                onClick={() => this.onSubmitForm()}
-                variant="contained"
+              className={classes.submitButton}
+              color="primary"
+              disabled={loading}
+              onClick={() => this.onSubmitForm()}
+              variant="contained"
             >
               {loading ? 'Stand by...' : 'Submit New Password'}
             </Button>
@@ -170,10 +169,10 @@ class Profile extends Component {
           </div>
         </Paper>
         <Snackbar
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            message={<span id="message-id">{snackMsg}</span>}
-            onClose={this.handleClose}
-            open={snackOpen}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          message={<span id="message-id">{snackMsg}</span>}
+          onClose={this.handleClose}
+          open={snackOpen}
         />
       </div>
     )
@@ -181,27 +180,27 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
-  classes:  PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   appBar: {
     padding: theme.spacing.unit * 1.5,
     paddingLeft: theme.spacing.unit * 3,
   },
   container: {
-    display:        'flex',
-    flexDirection:  'column',
-    fontFamily:     theme.typography.fontFamily,
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: theme.typography.fontFamily,
   },
   paper: {
-    margin:     'auto',
-    marginTop:  theme.spacing.unit * 3,
-    minWidth:   500,
+    margin: 'auto',
+    marginTop: theme.spacing.unit * 3,
+    minWidth: 500,
   },
   formContainer: {
-    display:        'flex',
-    flexDirection:  'column',
+    display: 'flex',
+    flexDirection: 'column',
   },
   formControl: {
     margin: theme.spacing.unit * 2,

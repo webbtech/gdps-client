@@ -9,42 +9,45 @@ import red from '@material-ui/core/colors/red'
 import { withStyles } from '@material-ui/core/styles'
 
 
-const Error = ({ message, classes, type, onClick }) => {
+const Error = ({
+  message, classes, type, onClick,
+}) => {
   type = type || 'warning'
   return (
     <div
-        className={classNames(classes.base, classes[type])}
-        onClick={onClick}
+      className={classNames(classes.base, classes[type])}
+      onClick={onClick}
     >
       {message}
       <Icon
-          className={classes.icon}
-          color="secondary"
-      >close</Icon>
+        className={classes.icon}
+        color="secondary"
+      >close
+      </Icon>
     </div>
   )
 }
 
 Error.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  message:  PropTypes.string.isRequired,
-  onClick:  PropTypes.func.isRequired,
-  type:     PropTypes.string,
+  classes: PropTypes.object.isRequired,
+  message: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  type: PropTypes.string,
 }
 
 const styles = theme => ({
   base: {
-    borderRadius:     4,
+    borderRadius: 4,
     position: 'relative',
-    margin:           theme.spacing.unit,
-    marginBottom:     0,
-    padding:          theme.spacing.unit * 1.2,
-    paddingLeft:      theme.spacing.unit * 1.5,
-    paddingRight:     theme.spacing.unit * 1.5,
-    color:            grey[800],
+    margin: theme.spacing.unit,
+    marginBottom: 0,
+    padding: theme.spacing.unit * 1.2,
+    paddingLeft: theme.spacing.unit * 1.5,
+    paddingRight: theme.spacing.unit * 1.5,
+    color: grey[800],
   },
   danger: {
-    backgroundColor:  red[100],
+    backgroundColor: red[100],
   },
   success: {
     backgroundColor: 'rgba(80, 174, 84, 0.3)',

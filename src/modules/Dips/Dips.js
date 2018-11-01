@@ -21,19 +21,18 @@ import { FUEL_TYPE_LIST as fuelTypeList } from '../../config/constants'
 const R = require('ramda')
 
 const populateTanks = (dips, tanks) => {
-
   const { curDips, prevDips } = dips
-  let tanksObj = {}
+  const tanksObj = {}
 
-  fuelTypeList.forEach(ft => {
-    tanks.forEach(t => {
+  fuelTypeList.forEach((ft) => {
+    tanks.forEach((t) => {
       if (t.fuelType === ft) {
         const tmp = {
-          delivery:   '',
-          level:      '',
-          litres:     null,
-          prevLevel:  '',
-          tank:       t,
+          delivery: '',
+          level: '',
+          litres: null,
+          prevLevel: '',
+          tank: t,
         }
         if (curDips) {
           tmp.dips = R.find(R.propEq('stationTankID', t.id))(curDips)
@@ -56,19 +55,17 @@ const populateTanks = (dips, tanks) => {
 }
 
 class Dips extends Component {
-
-  componentDidUpdate = prevProps => {
+  componentDidUpdate = (prevProps) => {
     if (!prevProps.dips) return
     if (!prevProps.dips.error && this.props.dips.error) {
       const errMsg = this.props.dips.error.message
       const ts = moment.utc().format()
       const msg = `${errMsg} -- ${ts}`
-      this.props.actions.errorSend({message: msg, type: 'danger'})
+      this.props.actions.errorSend({ message: msg, type: 'danger' })
     }
   }
 
   render() {
-
     const {
       classes,
       dips,
@@ -124,9 +121,10 @@ class Dips extends Component {
         <Header history={history} />
         <Paper className={classes.container}>
           <Typography
-              gutterBottom
-              variant="h5"
-          >Dip Entries</Typography>
+            gutterBottom
+            variant="h5"
+          >Dip Entries
+          </Typography>
           <Divider /><br />
           <div className={classes.secondaryContainer}>
             <DipSelectors />
@@ -134,12 +132,12 @@ class Dips extends Component {
             {!haveFSImport &&
               <div className={classes.lastFS}>
                 <Button
-                    className={classes.lastFSButton}
-                    color="secondary"
-                    component={Link}
-                    size="small"
-                    to="/import-data"
-                    variant="outlined"
+                  className={classes.lastFSButton}
+                  color="secondary"
+                  component={Link}
+                  size="small"
+                  to="/import-data"
+                  variant="outlined"
                 >
                   Import Data
                 </Button>
@@ -148,23 +146,23 @@ class Dips extends Component {
             }
 
             {haveCurDips && haveFSImport &&
-              <div style={{display: 'flex', flexDirection: 'row', marginTop: 20}}>
-                <div style={{flex: 1}}>
-                {tanks && tanks.stationTanks && tanks.loading === false && dips && dips.loading === false ? (
-                  <DipForm
+              <div style={{ display: 'flex', flexDirection: 'row', marginTop: 20 }}>
+                <div style={{ flex: 1 }}>
+                  {tanks && tanks.stationTanks && tanks.loading === false && dips && dips.loading === false ? (
+                    <DipForm
                       editMode={editMode}
                       havePrevDayDips={havePrevDayDips}
                       tankDips={populateTanks(dips, tanks.stationTanks)}
-                  />
+                    />
                 ) : (
                   waitComponent
                 )}
                 </div>
-                <div style={{flex: .7}}>
-                {dips &&
+                <div style={{ flex: 0.7 }}>
+                  {dips &&
                   <DipOverShort
-                      dateObj={dateObj}
-                      dips={dips}
+                    dateObj={dateObj}
+                    dips={dips}
                   />
                 }
                 </div>
@@ -178,38 +176,38 @@ class Dips extends Component {
 }
 
 Dips.propTypes = {
-  actions:        PropTypes.object.isRequired,
-  classes:        PropTypes.object.isRequired,
-  data:           PropTypes.object,
-  dips:           PropTypes.object,
+  actions: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object,
+  dips: PropTypes.object,
   fuelSaleLatest: PropTypes.object,
-  history:        PropTypes.object.isRequired,
-  location:       PropTypes.object.isRequired,
-  match:          PropTypes.object.isRequired,
-  tanks:          PropTypes.object,
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+  tanks: PropTypes.object,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   container: {
     fontFamily: theme.typography.fontFamily,
-    minHeight:  600,
-    margin:     theme.spacing.unit * 2,
-    padding:    theme.spacing.unit * 2,
+    minHeight: 600,
+    margin: theme.spacing.unit * 2,
+    padding: theme.spacing.unit * 2,
   },
   lastFS: {
-    color:      theme.palette.secondary.main,
-    marginTop:  theme.spacing.unit,
-    fontSize:   14,
+    color: theme.palette.secondary.main,
+    marginTop: theme.spacing.unit,
+    fontSize: 14,
   },
   lastFSButton: {
     marginBottom: theme.spacing.unit,
   },
   secondaryContainer: {
-    display:        'flex',
-    flex:           1,
-    flexDirection:  'column',
-    margin:         'auto',
-    width:          1200,
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
+    margin: 'auto',
+    width: 1200,
   },
 })
 

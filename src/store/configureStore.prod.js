@@ -9,7 +9,7 @@ import rootReducer from '../reducers'
 const history = createHistory()
 const middleware = routerMiddleware(history)
 
-export default function configureStore(preloadedState={}) {
+export default function configureStore(preloadedState = {}) {
   const store = createStore(
     rootReducer,
     preloadedState,

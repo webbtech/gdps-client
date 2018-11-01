@@ -17,22 +17,21 @@ import { withStyles } from '@material-ui/core/styles'
 
 
 class SignIn extends Component {
-
   state = {
-    error:      '',
-    name:   '',
-    password:   '',
-    loading:    false,
-    snackOpen:  false,
-    snackMsg:   '',
+    error: '',
+    name: '',
+    password: '',
+    loading: false,
+    snackOpen: false,
+    snackMsg: '',
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  handleOpenSnack = msg => {
-    this.setState({ snackOpen: true, snackMsg: msg})
+  handleOpenSnack = (msg) => {
+    this.setState({ snackOpen: true, snackMsg: msg })
   }
 
   handleClose = () => {
@@ -46,25 +45,27 @@ class SignIn extends Component {
       // completeNewPassword(user: any, password: string, requiredAttributes: any)
 
       const { authData } = this.props
-      const response = await Auth.completeNewPassword(authData, this.state.password, {name: this.state.name})
+      const response = await Auth.completeNewPassword(authData, this.state.password, { name: this.state.name })
       console.log(`RequireNewPassword::onSubmit(): Response#2 = ${JSON.stringify(response, null, 2)}`) // eslint-disable-line
       this.setState({ loading: false, name: '' })
 
       if ('challengeName' in authData && authData.challengeName === 'SMS_MFA') {
-          this.props.onStateChange('confirmSignIn', authData)
+        this.props.onStateChange('confirmSignIn', authData)
       }
-
     } catch (err) {
       const errMsg = err.message || err
       console.log(`RequireNewPassword::onSubmit(): Error ${JSON.stringify(err, null, 2)}`) // eslint-disable-line
-      this.setState({ error: errMsg, loading: false, snackMsg: errMsg, snackOpen: true })
+      this.setState({
+        error: errMsg, loading: false, snackMsg: errMsg, snackOpen: true,
+      })
     }
   }
 
   render() {
-
     const { authState, classes } = this.props
-    const { loading, snackOpen, snackMsg, password, name } = this.state
+    const {
+      loading, snackOpen, snackMsg, password, name,
+    } = this.state
 
     if (authState !== 'requireNewPassword') return null
 
@@ -72,13 +73,13 @@ class SignIn extends Component {
       <div>
         <Paper className={classes.container}>
           <AppBar
-              color="secondary"
-              position="static"
+            color="secondary"
+            position="static"
           >
             <Toolbar>
               <Typography
-                  color="inherit"
-                  variant="h6"
+                color="inherit"
+                variant="h6"
               >
                 Set Name and Password
               </Typography>
@@ -88,41 +89,41 @@ class SignIn extends Component {
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="name">Full Name</InputLabel>
             <Input
-                autoFocus={name === ''}
-                id="name"
-                name="name"
-                onChange={this.handleChange}
-                value={name}
+              autoFocus={name === ''}
+              id="name"
+              name="name"
+              onChange={this.handleChange}
+              value={name}
             />
           </FormControl>
 
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="password">New Password</InputLabel>
             <Input
-                id="password"
-                name="password"
-                onChange={this.handleChange}
-                type="password"
-                value={password}
+              id="password"
+              name="password"
+              onChange={this.handleChange}
+              type="password"
+              value={password}
             />
             <FormHelperText id="password-helper-text">Enter new password with min 8 chars, 1 number, 1 upper case, 1 special character</FormHelperText>
           </FormControl>
 
           <Button
-              className={classes.submitButton}
-              color="primary"
-              disabled={loading}
-              onClick={() => this.onSubmit()}
-              variant="contained"
+            className={classes.submitButton}
+            color="primary"
+            disabled={loading}
+            onClick={() => this.onSubmit()}
+            variant="contained"
           >
             {loading ? ('Stand by...') : ('Submit Name & Password')}
           </Button>
         </Paper>
         <Snackbar
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            message={<span id="message-id">{snackMsg}</span>}
-            onClose={this.handleClose}
-            open={snackOpen}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          message={<span id="message-id">{snackMsg}</span>}
+          onClose={this.handleClose}
+          open={snackOpen}
         />
       </div>
     )
@@ -130,27 +131,27 @@ class SignIn extends Component {
 }
 
 SignIn.propTypes = {
-  authData:       PropTypes.object,
-  authState:      PropTypes.string,
-  onSignIn:       PropTypes.func.isRequired,
-  onStateChange:  PropTypes.func.isRequired,
+  authData: PropTypes.object,
+  authState: PropTypes.string,
+  onSignIn: PropTypes.func.isRequired,
+  onStateChange: PropTypes.func.isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   container: {
-    display:        'flex',
-    flexDirection:  'column',
-    fontFamily:     theme.typography.fontFamily,
-    width:          theme.spacing.unit * 50,
-    margin:         'auto',
-    marginTop:      theme.spacing.unit * 2,
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: theme.typography.fontFamily,
+    width: theme.spacing.unit * 50,
+    margin: 'auto',
+    marginTop: theme.spacing.unit * 2,
   },
   returnButton: {
-    margin:     theme.spacing.unit,
+    margin: theme.spacing.unit,
     marginLeft: theme.spacing.unit * 2,
-    marginTop:  0,
-    width:      theme.spacing.unit * 20,
-    padding:    0,
+    marginTop: 0,
+    width: theme.spacing.unit * 20,
+    padding: 0,
   },
   formControl: {
     margin: theme.spacing.unit * 2,
@@ -162,7 +163,7 @@ const styles =  theme => ({
 })
 
 SignIn.propTypes = {
-  classes:  PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(SignIn)

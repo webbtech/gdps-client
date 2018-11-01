@@ -2,14 +2,14 @@
 
 import moment from 'moment'
 
-export const extractPathParts = (pathname, start=2) => {
+export const extractPathParts = (pathname, start = 2) => {
   const prts = pathname.split('/')
   if (prts.length < start + 1) return null
 
   return prts.slice(start)
 }
 
-export const dateToInt = dateStr => {
+export const dateToInt = (dateStr) => {
   const dte = moment(dateStr)
   if (!dte.isValid()) return null
 
@@ -17,7 +17,7 @@ export const dateToInt = dateStr => {
   return parseInt(date, 10)
 }
 
-export const dateNextDay = dateStr => {
+export const dateNextDay = (dateStr) => {
   const dte = moment(dateStr)
   if (!dte.isValid()) return null
 
@@ -25,7 +25,7 @@ export const dateNextDay = dateStr => {
   return parseInt(nextDay, 10)
 }
 
-export const datePrevDay = dateStr => {
+export const datePrevDay = (dateStr) => {
   const dte = moment(dateStr)
   if (!dte.isValid()) return null
 
@@ -37,7 +37,7 @@ export const datePrevDay = dateStr => {
 export const fmtNumber = (number, decimal = 2, useGrouping = false, currency = false) => {
   if (number === undefined) return null
 
-  let opts = {
+  const opts = {
     useGrouping,
     minimumFractionDigits: decimal,
     maximumFractionDigits: decimal,
@@ -50,10 +50,6 @@ export const fmtNumber = (number, decimal = 2, useGrouping = false, currency = f
   return formatter.format(number)
 }
 
-export const setOrderedFuelTypes = (fuelTypes, fuelTypeList) => {
-  return fuelTypeList.filter(ft => fuelTypes.includes(ft))
-}
+export const setOrderedFuelTypes = (fuelTypes, fuelTypeList) => fuelTypeList.filter(ft => fuelTypes.includes(ft))
 
-export const ucFirst = word => {
-  return word.charAt(0).toUpperCase() + word.slice(1)
-}
+export const ucFirst = word => word.charAt(0).toUpperCase() + word.slice(1)

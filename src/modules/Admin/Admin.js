@@ -20,9 +20,7 @@ import { styles as ms } from '../../styles/main'
 
 
 class Admin extends Component {
-
   render() {
-
     const { classes, match } = this.props
 
     return (
@@ -30,33 +28,34 @@ class Admin extends Component {
         <Header />
         <Paper className={classes.paper}>
           <Typography
-              gutterBottom
-              variant="h5"
-          >Administration</Typography>
+            gutterBottom
+            variant="h5"
+          >Administration
+          </Typography>
           <AdminMenu />
           <Divider /><br />
           <div>
             <Route
-                component={StationTanks}
-                exact
-                path={`${match.url}/station-admin`}
+              component={StationTanks}
+              exact
+              path={`${match.url}/station-admin`}
             />
             <Route
-                component={StationTanks}
-                path={`${match.url}/station-admin/:stationID`}
+              component={StationTanks}
+              path={`${match.url}/station-admin/:stationID`}
             />
             <Route
-                component={TankAdmin}
-                path={`${match.url}/tank-admin`}
+              component={TankAdmin}
+              path={`${match.url}/tank-admin`}
             />
             <Route
-                component={TankForm}
-                exact
-                path={`${match.url}/tank-form`}
+              component={TankForm}
+              exact
+              path={`${match.url}/tank-form`}
             />
             <Route
-                component={TankForm}
-                path={`${match.url}/tank-form/:tankID`}
+              component={TankForm}
+              path={`${match.url}/tank-form/:tankID`}
             />
           </div>
         </Paper>
@@ -66,8 +65,8 @@ class Admin extends Component {
 }
 
 Admin.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  match:    PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 }
 
 export default withStyles(ms)(Admin)

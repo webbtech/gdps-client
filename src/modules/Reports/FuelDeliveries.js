@@ -29,7 +29,6 @@ query FuelDeliveryReport($date: String!, $stationID: String!) {
 `
 
 const Report = ({ classes, data }) => {
-
   if (!data) return null
   if (data && data.loading) {
     return <div className={classes.container}><Loader /></div>
@@ -49,32 +48,33 @@ const Report = ({ classes, data }) => {
     <div className={classes.container}>
       <Paper className={classes.reportContainer}>
         <Typography
-            className={classes.title}
-            gutterBottom
-            variant="h6"
-        >Fuel Deliveries</Typography>
+          className={classes.title}
+          gutterBottom
+          variant="h6"
+        >Fuel Deliveries
+        </Typography>
         <br />
         <ReportHeading
-            classes={classes}
-            data={fts}
+          classes={classes}
+          data={fts}
         />
         <ReportData
-            classes={classes}
-            data={data.fuelDeliveryReport.deliveries}
-            fuelTypes={fts}
+          classes={classes}
+          data={data.fuelDeliveryReport.deliveries}
+          fuelTypes={fts}
         />
         <ReportSummary
-            classes={classes}
-            data={data.fuelDeliveryReport.deliverySummary}
-            fuelTypes={fts}
+          classes={classes}
+          data={data.fuelDeliveryReport.deliverySummary}
+          fuelTypes={fts}
         />
       </Paper>
     </div>
   )
 }
 Report.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.object,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object,
 }
 
 const ReportHeading = ({ classes, data }) => (
@@ -82,30 +82,31 @@ const ReportHeading = ({ classes, data }) => (
     <div className={classes.headerCell}>Day</div>
     {data.map(ft => (
       <div
-          className={classes.headerCellRt}
-          key={ft}
-      >{ft}</div>
+        className={classes.headerCellRt}
+        key={ft}
+      >{ft}
+      </div>
     ))}
   </div>
 )
 ReportHeading.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.array.isRequired,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
 }
 
 const ReportData = ({ classes, data, fuelTypes }) => (
   data.map(d => (
     <div
-        className={classes.reportDataRow}
-        key={d.date}
+      className={classes.reportDataRow}
+      key={d.date}
     >
       <div className={classes.reportDataDateCell}>
         {moment(d.date.toString()).format('MMM D')}
       </div>
       {fuelTypes.map(ft => (
         <div
-            className={classes.reportDataCell}
-            key={ft}
+          className={classes.reportDataCell}
+          key={ft}
         >
           {utils.fmtNumber(d.data[ft], 0, true)}
         </div>
@@ -114,8 +115,8 @@ const ReportData = ({ classes, data, fuelTypes }) => (
   ))
 )
 ReportData.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.array.isRequired,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
 }
 
 const ReportSummary = ({ classes, data, fuelTypes }) => (
@@ -123,8 +124,8 @@ const ReportSummary = ({ classes, data, fuelTypes }) => (
     <div className={classes.reportDataDateCell} />
     {fuelTypes.map(ft => (
       <div
-          className={classes.reportSummaryCell}
-          key={ft}
+        className={classes.reportSummaryCell}
+        key={ft}
       >
         {utils.fmtNumber(data[ft], 0, true)}
       </div>
@@ -132,16 +133,14 @@ const ReportSummary = ({ classes, data, fuelTypes }) => (
   </div>
 )
 ReportSummary.propTypes = {
-  classes:    PropTypes.object.isRequired,
-  data:       PropTypes.object.isRequired,
-  fuelTypes:  PropTypes.array.isRequired,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+  fuelTypes: PropTypes.array.isRequired,
 }
 
 
 class FuelDeliveries extends Component {
-
   render() {
-
     const { classes, data } = this.props
 
     if (data && data.error) {
@@ -152,68 +151,68 @@ class FuelDeliveries extends Component {
       <div className={classes.mainContainer}>
         <ReportSelectors />
         <Report
-            classes={classes}
-            data={data}
+          classes={classes}
+          data={data}
         />
       </div>
     )
   }
 }
 FuelDeliveries.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.object,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object,
   location: PropTypes.object,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   container: {
-    display:        'flex',
-    flexDirection:  'column',
-    fontFamily:     theme.typography.fontFamily,
-    marginTop:      theme.spacing.unit * 3,
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: theme.typography.fontFamily,
+    marginTop: theme.spacing.unit * 3,
   },
   headerRow: {
-    borderBottom:       'solid 1px',
-    borderBottomColor:  theme.palette.grey['300'],
-    color:              theme.palette.grey['700'],
-    display:            'flex',
-    flexDirection:      'row',
-    paddingBottom:      theme.spacing.unit,
-    paddingLeft:        theme.spacing.unit * 2,
-    paddingRight:       theme.spacing.unit * 2,
+    borderBottom: 'solid 1px',
+    borderBottomColor: theme.palette.grey['300'],
+    color: theme.palette.grey['700'],
+    display: 'flex',
+    flexDirection: 'row',
+    paddingBottom: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
   },
   headerCell: {
     width: 80,
   },
   headerCellRt: {
-    textAlign:  'right',
+    textAlign: 'right',
     width: 120,
   },
   mainContainer: {
-    width:  600,
+    width: 600,
     margin: 'auto',
   },
   reportContainer: {
-    flexDirection:  'column',
-    marginBottom:   theme.spacing.unit * 2,
-     paddingBottom: theme.spacing.unit * 2,
-    paddingTop:     theme.spacing.unit * 2,
+    flexDirection: 'column',
+    marginBottom: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+    paddingTop: theme.spacing.unit * 2,
   },
   reportDataRow: {
-    borderBottom:       'solid 1px',
-    borderBottomColor:  theme.palette.grey['300'],
-    display:            'flex',
-    flexDirection:      'row',
-    paddingBottom:      theme.spacing.unit,
-    paddingTop:         theme.spacing.unit,
-    paddingLeft:        theme.spacing.unit * 2,
-    paddingRight:       theme.spacing.unit * 2,
+    borderBottom: 'solid 1px',
+    borderBottomColor: theme.palette.grey['300'],
+    display: 'flex',
+    flexDirection: 'row',
+    paddingBottom: theme.spacing.unit,
+    paddingTop: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
     '&:hover': {
       backgroundColor: theme.palette.grey['100'],
     },
   },
   reportDataCell: {
-    textAlign:  'right',
+    textAlign: 'right',
     width: 120,
   },
   reportDataNeg: {
@@ -223,20 +222,20 @@ const styles =  theme => ({
     width: 80,
   },
   reportSummaryCell: {
-    textAlign:  'right',
+    textAlign: 'right',
     fontWeight: 500,
     width: 120,
   },
   reportSummaryRow: {
-    display:            'flex',
-    flexDirection:      'row',
-    paddingBottom:      theme.spacing.unit,
-    paddingTop:         theme.spacing.unit,
-    paddingLeft:        theme.spacing.unit * 2,
-    paddingRight:       theme.spacing.unit * 2,
+    display: 'flex',
+    flexDirection: 'row',
+    paddingBottom: theme.spacing.unit,
+    paddingTop: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
   },
   title: {
-    paddingLeft:        theme.spacing.unit * 2,
+    paddingLeft: theme.spacing.unit * 2,
   },
 })
 
@@ -247,8 +246,8 @@ export default graphql(FD_REPORT_QUERY, {
     const prts = utils.extractPathParts(props.location.pathname, 3)
     return ({
       variables: {
-        date:       moment(prts[0]).format('YYYY-MM-DD'),
-        stationID:  prts[1],
+        date: moment(prts[0]).format('YYYY-MM-DD'),
+        stationID: prts[1],
       },
     })
   },

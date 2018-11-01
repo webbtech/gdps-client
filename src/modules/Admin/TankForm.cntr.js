@@ -27,7 +27,7 @@ query Tank($id: String!) {
 const FetchTank = graphql(TANK_QUERY, {
   skip: ({ match }) => !match || !match.params.tankID,
   options: ({ match }) => ({
-    variables: {id: match.params.tankID},
+    variables: { id: match.params.tankID },
   }),
 })
 
@@ -53,34 +53,34 @@ mutation UpdateTank($fields: TankInput) {
 // see: https://medium.com/@cyberlight/adapting-and-testing-forms-components-with-query-and-mutation-from-react-apollo-2-1-x-5c3a2971efa
 const UpdateTank = graphql(UPDATE_TANK_MUTATION, {
   props: ({ mutate }) => ({
-    UpdateTank: (fields) => mutate({
-      variables: {fields},
+    UpdateTank: fields => mutate({
+      variables: { fields },
       errorPolicy: 'all',
     }),
   }),
-  options: (props) => ({
+  options: props => ({
     onCompleted: () => {
     // onCompleted: (result, errs) => {
       // console.log('result: ', result)
       props.history.push('/admin/tank-admin')
     },
-    refetchQueries: [{query: TANKLIST_QUERY}],
+    refetchQueries: [{ query: TANKLIST_QUERY }],
   }),
   errorPolicy: 'all',
 })
 
 const CreateTank = graphql(CREATE_TANK_MUTATION, {
   props: ({ mutate }) => ({
-    CreateTank: (fields) => mutate({
-      variables: {fields},
+    CreateTank: fields => mutate({
+      variables: { fields },
     }),
   }),
-  options: (props) => ({
+  options: props => ({
     onCompleted: () => {
     // onCompleted: (result, errs) => {
       props.history.push('/admin/tank-admin')
     },
-    refetchQueries: [{query: TANKLIST_QUERY}],
+    refetchQueries: [{ query: TANKLIST_QUERY }],
   }),
   errorPolicy: 'all',
 })
@@ -104,12 +104,11 @@ const TankFormCntr = withFormik({
     }
   },
   handleSubmit: async (values, { props, setSubmitting, setErrors }) => {
-
     const isUpdate = !!values.id
-    let file, graphqlReturn
+    let file,
+      graphqlReturn
 
     if (isUpdate) {
-
       delete values.__typename
       if (values.levelsFile) {
         file = values.levelsFile
@@ -117,7 +116,7 @@ const TankFormCntr = withFormik({
 
         // Check file type
         if (file.type !== 'text/csv') {
-          setErrors({levelsFile: 'Invalid file type, must be a .csv file'})
+          setErrors({ levelsFile: 'Invalid file type, must be a .csv file' })
           setSubmitting(false)
           return
         }
@@ -126,12 +125,12 @@ const TankFormCntr = withFormik({
       try {
         graphqlReturn = await props.UpdateTank(values)
         if (graphqlReturn && graphqlReturn.errors) {
-          setErrors({graphql: graphqlReturn.errors[0].message})
+          setErrors({ graphql: graphqlReturn.errors[0].message })
           setSubmitting(false)
           return
         }
       } catch (error) {
-        setErrors({graphql: error.message})
+        setErrors({ graphql: error.message })
         setSubmitting(false)
       }
       if (file && graphqlReturn) {
@@ -139,13 +138,11 @@ const TankFormCntr = withFormik({
         const tankID = values.id
         const fileRet = await uploadTankFile(file, `tankFile_${tankID}.csv`)
         if (fileRet.error) {
-          setErrors({graphql: fileRet.error})
+          setErrors({ graphql: fileRet.error })
           setSubmitting(false)
         }
       }
-
     } else { // New tank
-
       if (values.levelsFile) {
         file = values.levelsFile
         delete values.levelsFile
@@ -155,12 +152,12 @@ const TankFormCntr = withFormik({
       try {
         graphqlReturn = await props.CreateTank(values)
         if (graphqlReturn && graphqlReturn.errors) {
-          setErrors({graphql: graphqlReturn.errors[0].message})
+          setErrors({ graphql: graphqlReturn.errors[0].message })
           setSubmitting(false)
           return
         }
       } catch (error) {
-        setErrors({graphql: error.message})
+        setErrors({ graphql: error.message })
         setSubmitting(false)
       }
       if (file && graphqlReturn) {
@@ -168,7 +165,7 @@ const TankFormCntr = withFormik({
         const uploadTankFile = await LoadS3File()
         const fileRet = await uploadTankFile(file, `tankFile_${tankID}.csv`)
         if (fileRet.error) {
-          setErrors({graphql: fileRet.error})
+          setErrors({ graphql: fileRet.error })
           setSubmitting(false)
         }
       }

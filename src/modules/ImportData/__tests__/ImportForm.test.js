@@ -6,21 +6,18 @@ import { shallow } from 'enzyme'
 import ImportForm from '../ImportForm'
 
 describe('ImportForm', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = shallow(
-        <ImportForm {...props} />
-      )
+      mountedC = shallow(<ImportForm {...props} />)
     }
     return mountedC
   }
 
   beforeEach(() => {
     props = {
-      history: {location: {pathname: '/'}},
+      history: { location: { pathname: '/' } },
     }
     mountedC = undefined
   })
@@ -28,5 +25,4 @@ describe('ImportForm', () => {
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

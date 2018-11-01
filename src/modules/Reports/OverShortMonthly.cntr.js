@@ -24,14 +24,12 @@ query DipOSMonthReport($date: String!, $stationID: String!) {
 
 const fetchOSMonthly = graphql(OSM_REPORT_QUERY, {
   skip: ({ match }) => !match || !match.params.date || !match.params.stationID,
-  options: ({ match }) => {
-    return ({
-      variables: {
-        date:       moment(match.params.date).format('YYYY-MM-DD'),
-        stationID:  match.params.stationID,
-      },
-    })
-  },
+  options: ({ match }) => ({
+    variables: {
+      date: moment(match.params.date).format('YYYY-MM-DD'),
+      stationID: match.params.stationID,
+    },
+  }),
 })
 
 function mapDispatchToProps(dispatch) {

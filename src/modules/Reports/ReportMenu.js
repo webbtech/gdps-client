@@ -15,8 +15,10 @@ import MenuList from '@material-ui/core/MenuList'
 import { withStyles } from '@material-ui/core/styles'
 import { styles as ms } from '../../styles/main'
 
-class ReportMenu extends Component {
+const setButtonColor = (pathname, searchPath) => (pathname.indexOf(searchPath) >= 0 ? 'primary' : 'default')
 
+
+class ReportMenu extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -25,10 +27,11 @@ class ReportMenu extends Component {
       openMenu3: false,
       openMenuDwnld: false,
     }
-    this.handleClose  = this.handleClose.bind(this)
+    this.handleClose = this.handleClose.bind(this)
     this.handleToggle = this.handleToggle.bind(this)
-    this.handleLink   = this.handleLink.bind(this)
+    this.handleLink = this.handleLink.bind(this)
   }
+
 
   handleClose() {
     // if (this.target1.contains(event.target) || this.target2.contains(event.target)) {
@@ -51,198 +54,197 @@ class ReportMenu extends Component {
     this.props.history.push(`${match.url}${uri}`)
   }
 
-  setButtonColor(pathname, searchPath) {
-    return (pathname.indexOf(searchPath) >= 0) ? 'primary' : 'default'
-  }
 
   render() {
-
     const { classes } = this.props
-    const { openMenu1, openMenu2, openMenu3, openMenuDwnld } = this.state
+    const {
+      openMenu1, openMenu2, openMenu3, openMenuDwnld,
+    } = this.state
     const { pathname } = this.props.history.location
 
     return (
 
-      <div style={{display: 'inline-flex', flexDirection: 'row'}}>
-      {/* Start Fuel Sales Menu */}
-        <div style={{flex: 'flex-grow'}}>
+      <div style={{ display: 'inline-flex', flexDirection: 'row' }}>
+        {/* Start Fuel Sales Menu */}
+        <div style={{ flex: 'flex-grow' }}>
           <Manager>
             <Reference>
               {() => (
-              <div
-                  ref={node => {
+                <div
+                  ref={(node) => {
                     this.target1 = node
                   }}
-              >
-                <Button
-                    color={this.setButtonColor(pathname, '/fuel-sales')}
-                    onClick={() => this.handleToggle('openMenu1')}
                 >
+                  <Button
+                    color={setButtonColor(pathname, '/fuel-sales')}
+                    onClick={() => this.handleToggle('openMenu1')}
+                  >
                   Fuel Sales
-                </Button>
-              </div>
+                  </Button>
+                </div>
               )}
             </Reference>
             <Popper
-                eventsEnabled={openMenu1}
-                placement="bottom-start"
+              eventsEnabled={openMenu1}
+              placement="bottom-start"
             >
               {() => (
-              <ClickAwayListener onClickAway={this.handleClose}>
-                <Grow
+                <ClickAwayListener onClickAway={this.handleClose}>
+                  <Grow
                     className={classNames({ [classes.popperClose]: !openMenu1 })}
                     id="menu1"
                     in={openMenu1}
                     style={{ transformOrigin: '0 0 0', position: 'absolute', zIndex: 1 }}
-                >
-                  <Paper>
-                    <MenuList role="menu">
-                      <MenuItem onClick={() => this.handleLink('/fuel-sales-detailed')}>Station Details</MenuItem>
-                      <MenuItem onClick={() => this.handleLink('/fuel-sales-list')}>Station List</MenuItem>
-                    </MenuList>
-                  </Paper>
-                </Grow>
-              </ClickAwayListener>
+                  >
+                    <Paper>
+                      <MenuList role="menu">
+                        <MenuItem onClick={() => this.handleLink('/fuel-sales-detailed')}>Station Details</MenuItem>
+                        <MenuItem onClick={() => this.handleLink('/fuel-sales-list')}>Station List</MenuItem>
+                      </MenuList>
+                    </Paper>
+                  </Grow>
+                </ClickAwayListener>
               )}
             </Popper>
           </Manager>
         </div>
-      {/* End Fuel Sales Menu */}
+        {/* End Fuel Sales Menu */}
 
-      {/* Start Fuel Deliveries Button */}
-        <div style={{flex: 'flex-grow'}}>
+        {/* Start Fuel Deliveries Button */}
+        <div style={{ flex: 'flex-grow' }}>
           <Button
-              color={this.setButtonColor(pathname, '/fuel-deliveries')}
-              onClick={() => this.handleLink('/fuel-deliveries')}
+            color={setButtonColor(pathname, '/fuel-deliveries')}
+            onClick={() => this.handleLink('/fuel-deliveries')}
           >
             Fuel Deliveries
           </Button>
         </div>
-      {/* End Fuel Deliveries Button */}
+        {/* End Fuel Deliveries Button */}
 
-      {/* Start Overshort Menu */}
-        <div style={{flex: 'flex-grow'}}>
+        {/* Start Overshort Menu */}
+        <div style={{ flex: 'flex-grow' }}>
           <Manager>
             <Reference>
               {() => (
-              <div ref={node => {this.target2 = node}}>
-              <Button
-                  color={this.setButtonColor(pathname, '/overshort-')}
-                  onClick={() => this.handleToggle('openMenu2')}
-              >
+                <div ref={(node) => { this.target2 = node }}>
+                  <Button
+                    color={setButtonColor(pathname, '/overshort-')}
+                    onClick={() => this.handleToggle('openMenu2')}
+                  >
                 Over-short
-              </Button>
-              </div>
+                  </Button>
+                </div>
               )}
             </Reference>
             <Popper
-                eventsEnabled={openMenu2}
-                placement="bottom"
+              eventsEnabled={openMenu2}
+              placement="bottom"
             >
               {() => (
-              <ClickAwayListener onClickAway={this.handleClose}>
-                <Grow
+                <ClickAwayListener onClickAway={this.handleClose}>
+                  <Grow
                     className={classNames({ [classes.popperClose]: !openMenu2 })}
                     id="menu2"
                     in={openMenu2}
                     style={{ transformOrigin: '0 0 0', position: 'absolute', zIndex: 1 }}
-                >
-                  <Paper>
-                    <MenuList role="menu">
-                      <MenuItem onClick={() => this.handleLink('/overshort-monthly')}>Monthly</MenuItem>
-                      <MenuItem onClick={() => this.handleLink('/overshort-annually')}>Annual</MenuItem>
-                    </MenuList>
-                  </Paper>
-                </Grow>
-              </ClickAwayListener>
+                  >
+                    <Paper>
+                      <MenuList role="menu">
+                        <MenuItem onClick={() => this.handleLink('/overshort-monthly')}>Monthly</MenuItem>
+                        <MenuItem onClick={() => this.handleLink('/overshort-annually')}>Annual</MenuItem>
+                      </MenuList>
+                    </Paper>
+                  </Grow>
+                </ClickAwayListener>
               )}
             </Popper>
           </Manager>
         </div>
-      {/* End Overshort Menu */}
+        {/* End Overshort Menu */}
 
-    {/* Start Propane Sales Menu */}
-        <div style={{flex: 'flex-grow'}}>
+        {/* Start Propane Sales Menu */}
+        <div style={{ flex: 'flex-grow' }}>
           <Manager>
             <Reference>
               {() => (
-              <div ref={node => {this.target3 = node}}>
-                <Button
-                    color={this.setButtonColor(pathname, '/propane-sales-')}
+                <div ref={(node) => { this.target3 = node }}>
+                  <Button
+                    color={setButtonColor(pathname, '/propane-sales-')}
                     onClick={() => this.handleToggle('openMenu3')}
-                >
+                  >
                   Propane Sales
-                </Button>
-              </div>
+                  </Button>
+                </div>
               )}
             </Reference>
             <Popper
-                eventsEnabled={openMenu3}
-                placement="bottom-start"
+              eventsEnabled={openMenu3}
+              placement="bottom-start"
             >
               {() => (
-              <ClickAwayListener onClickAway={this.handleClose}>
-                <Grow
+                <ClickAwayListener onClickAway={this.handleClose}>
+                  <Grow
                     className={classNames({ [classes.popperClose]: !openMenu3 })}
                     id="menu1"
                     in={openMenu3}
                     style={{ transformOrigin: '0 0 0', position: 'absolute', zIndex: 1 }}
-                >
-                  <Paper>
-                    <MenuList role="menu">
-                      <MenuItem onClick={() => this.handleLink('/propane-sales-monthly')}>Monthly</MenuItem>
-                      <MenuItem onClick={() => this.handleLink('/propane-sales-annual')}>Annual</MenuItem>
-                    </MenuList>
-                  </Paper>
-                </Grow>
-              </ClickAwayListener>
+                  >
+                    <Paper>
+                      <MenuList role="menu">
+                        <MenuItem onClick={() => this.handleLink('/propane-sales-monthly')}>Monthly</MenuItem>
+                        <MenuItem onClick={() => this.handleLink('/propane-sales-annual')}>Annual</MenuItem>
+                      </MenuList>
+                    </Paper>
+                  </Grow>
+                </ClickAwayListener>
               )}
             </Popper>
           </Manager>
         </div>
-      {/* End Propane Sales Menu */}
+        {/* End Propane Sales Menu */}
 
-      {/* Start Report Downloads Menu */}
-        <div style={{flex: 'flex-grow'}}>
+        {/* Start Report Downloads Menu */}
+        <div style={{ flex: 'flex-grow' }}>
           <Manager>
             <Reference>
               {() => (
-              <div ref={node => {this.target4 = node}}>
-                <Button
-                    color={this.setButtonColor(pathname, '/report-download-')}
+                <div ref={(node) => { this.target4 = node }}>
+                  <Button
+                    color={setButtonColor(pathname, '/report-download-')}
                     onClick={() => this.handleToggle('openMenuDwnld')}
-                >
+                  >
                   Report Downloads
-                </Button>
-              </div>
+                  </Button>
+                </div>
               )}
             </Reference>
             <Popper
                 // className={classNames({ [classes.popperClose]: !openMenuDwnld })}
-                eventsEnabled={openMenuDwnld}
-                placement="bottom-start"
+              eventsEnabled={openMenuDwnld}
+              placement="bottom-start"
             >
               {() => (
-              <ClickAwayListener onClickAway={this.handleClose}>
-                <Grow
+                <ClickAwayListener onClickAway={this.handleClose}>
+                  <Grow
                     className={classNames({ [classes.popperClose]: !openMenuDwnld })}
                     id="menu1"
                     in={openMenuDwnld}
                     style={{ transformOrigin: '0 0 0', position: 'absolute', zIndex: 1 }}
-                >
-                  <Paper>
-                    <MenuList role="menu">
-                      <MenuItem onClick={() => this.handleLink('/report-download-propane')}>Propane Sales</MenuItem>
-                      <MenuItem onClick={() => this.handleLink('/report-download-station')}>Station Report</MenuItem>
-                    </MenuList>
-                  </Paper>
-                </Grow>
-              </ClickAwayListener>
+                  >
+                    <Paper>
+                      <MenuList role="menu">
+                        <MenuItem onClick={() => this.handleLink('/report-download-station')}>Station Report</MenuItem>
+                        <MenuItem onClick={() => this.handleLink('/report-download-propane')}>Propane Sales</MenuItem>
+                        <MenuItem onClick={() => this.handleLink('/report-download-propane')}>Fuel Sales Summary</MenuItem>
+                      </MenuList>
+                    </Paper>
+                  </Grow>
+                </ClickAwayListener>
               )}
             </Popper>
           </Manager>
         </div>
-      {/* End Report Downloads Menu */}
+        {/* End Report Downloads Menu */}
 
       </div>
     )
@@ -250,9 +252,9 @@ class ReportMenu extends Component {
 }
 
 ReportMenu.propTypes = {
-  classes: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
+  match: PropTypes.instanceOf(Object).isRequired,
 }
 
 export default withRouter(withStyles(ms)(ReportMenu))

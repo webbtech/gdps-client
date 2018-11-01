@@ -6,14 +6,11 @@ import { shallow } from 'enzyme'
 import TankLevelsDialog from '../TankLevelsDialog'
 
 describe('TankLevelsDialog', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = shallow(
-        <TankLevelsDialog {...props} />
-      )
+      mountedC = shallow(<TankLevelsDialog {...props} />)
     }
     return mountedC
   }
@@ -28,5 +25,4 @@ describe('TankLevelsDialog', () => {
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

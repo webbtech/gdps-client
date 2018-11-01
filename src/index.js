@@ -35,8 +35,7 @@ if (module.hot) {
   render = () => {
     try {
       renderApp()
-    }
-    catch(error) {
+    } catch (error) {
       console.error(error) // eslint-disable-line
       // renderError(error)
     }

@@ -30,7 +30,6 @@ mutation FuelSaleDownload($date: String!, $stationID: String!) {
 `
 
 class StationReportDownload extends Component {
-
   constructor(props) {
     super(props)
 
@@ -43,31 +42,30 @@ class StationReportDownload extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange = event => {
-    this.setState(() => ({ [event.target.name]: event.target.value , toasterMsg: ''}))
+  handleChange = (event) => {
+    this.setState(() => ({ [event.target.name]: event.target.value, toasterMsg: '' }))
   }
 
-  handleStationChange = value => {
+  handleStationChange = (value) => {
     this.setState(() => ({ stationID: value, toasterMsg: '' }))
   }
 
   // handleSubmit = async () => {
   handleSubmit = () => {
-
     if (!this.state.stationID) {
-      this.setState(() => ({toasterMsg: 'Missing Station'}))
+      this.setState(() => ({ toasterMsg: 'Missing Station' }))
       return
     }
     const yr = this.state.year.toString()
     const date = `${yr}-${this.state.month}-01`
     const m = moment(date)
     if (!m.isValid()) {
-      this.setState(() => ({toasterMsg: 'Invalid date'}))
+      this.setState(() => ({ toasterMsg: 'Invalid date' }))
       return
     }
     const today = moment().startOf('month')
     if (today.isBefore(date)) {
-      this.setState(() => ({toasterMsg: 'Invalid date. Select an earlier date.'}))
+      this.setState(() => ({ toasterMsg: 'Invalid date. Select an earlier date.' }))
       return
     }
     const { stationID } = this.state
@@ -81,32 +79,32 @@ class StationReportDownload extends Component {
     this.props.mutate({
       variables,
     })
-    .then(({ data }) => {
-      tabOpen.location = data.fuelSaleDownload.reportLink
-    }).catch((error) => {
-      const errMsg = `There was an error sending the query: ${error}`
+      .then(({ data }) => {
+        tabOpen.location = data.fuelSaleDownload.reportLink
+      }).catch((error) => {
+        const errMsg = `There was an error sending the query: ${error}`
       console.error('error: ', errMsg) // eslint-disable-line
       // this.props.actions.errorSend({message: errMsg, type: 'danger'})
-    })
+      })
   }
 
   render() {
-
     const { classes } = this.props
 
     return (
       <div className={classes.container}>
         <Typography
-            gutterBottom
-            variant="h6"
-        >Station Report Download</Typography>
+          gutterBottom
+          variant="h6"
+        >Station Report Download
+        </Typography>
         <div className={classes.selectRow}>
 
           <div className={classes.selectCell}>
             <FormControl className={classes.formControl}>
               <StationSelector
-                  onStationChange={this.handleStationChange}
-                  stationID={this.state.stationID}
+                onStationChange={this.handleStationChange}
+                stationID={this.state.stationID}
               />
             </FormControl>
           </div>
@@ -115,18 +113,19 @@ class StationReportDownload extends Component {
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="year-select">Year</InputLabel>
               <Select
-                  inputProps={{
+                inputProps={{
                     name: 'year',
                     id: 'year-select',
                   }}
-                  onChange={this.handleChange}
-                  value={this.state.year}
+                onChange={this.handleChange}
+                value={this.state.year}
               >
                 {setYears().map(yr => (
                   <MenuItem
-                      key={yr}
-                      value={yr}
-                  >{yr}</MenuItem>
+                    key={yr}
+                    value={yr}
+                  >{yr}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -136,18 +135,19 @@ class StationReportDownload extends Component {
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="month-select">Month</InputLabel>
               <Select
-                  inputProps={{
+                inputProps={{
                     name: 'month',
                     id: 'month-select',
                   }}
-                  onChange={this.handleChange}
-                  value={this.state.month}
+                onChange={this.handleChange}
+                value={this.state.month}
               >
                 {setMonths().map(m => (
                   <MenuItem
-                      key={m.key}
-                      value={m.key}
-                  >{m.label}</MenuItem>
+                    key={m.key}
+                    value={m.key}
+                  >{m.label}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -155,11 +155,11 @@ class StationReportDownload extends Component {
 
           <div className={classes.buttonCell}>
             <Button
-                color="primary"
-                onClick={() => this.handleSubmit()}
-                variant="contained"
+              color="primary"
+              onClick={() => this.handleSubmit()}
+              variant="contained"
             >
-            <Save className={classes.leftIcon} />
+              <Save className={classes.leftIcon} />
             Download Report
             </Button>
           </div>
@@ -181,17 +181,17 @@ class StationReportDownload extends Component {
   }
 }
 StationReportDownload.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  mutate:   PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
+  mutate: PropTypes.func.isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   container: {
-    display:        'flex',
-    flexDirection:  'column',
-    fontFamily:     theme.typography.fontFamily,
-    margin:         'auto',
-    width:          600,
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: theme.typography.fontFamily,
+    margin: 'auto',
+    width: 600,
   },
   leftIcon: {
     marginRight: theme.spacing.unit,
@@ -210,8 +210,8 @@ const styles =  theme => ({
     flexGrow: 1,
   },
   selectRow: {
-    display:        'inline-flex',
-    flexDirection:  'row',
+    display: 'inline-flex',
+    flexDirection: 'row',
   },
 })
 

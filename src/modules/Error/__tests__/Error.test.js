@@ -6,14 +6,11 @@ import { shallow } from 'enzyme'
 import Error from '../Error'
 
 describe('Error', () => {
-
   let mountedC
   let props
   const component = () => {
     if (!mountedC) {
-      mountedC = shallow(
-        <Error {...props} />
-      )
+      mountedC = shallow(<Error {...props} />)
     }
     return mountedC
   }
@@ -29,5 +26,4 @@ describe('Error', () => {
   it('matches snapshot', () => {
     expect(component()).toMatchSnapshot()
   })
-
 })

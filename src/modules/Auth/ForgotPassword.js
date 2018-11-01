@@ -16,25 +16,24 @@ import { withStyles } from '@material-ui/core/styles'
 
 
 class ForgotPassword extends Component {
-
   state = {
-    authData:     '',
-    error:        '',
-    loading:      false,
-    password:     '',
-    showConfirm:  false,
-    snackMsg:     '',
-    snackOpen:    false,
-    token:        '',
-    username:     '',
+    authData: '',
+    error: '',
+    loading: false,
+    password: '',
+    showConfirm: false,
+    snackMsg: '',
+    snackOpen: false,
+    token: '',
+    username: '',
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  handleOpenSnack = msg => {
-    this.setState({ snackOpen: true, snackMsg: msg})
+  handleOpenSnack = (msg) => {
+    this.setState({ snackOpen: true, snackMsg: msg })
   }
 
   handleClose = () => {
@@ -49,7 +48,9 @@ class ForgotPassword extends Component {
       this.setState({ authData: response, loading: false, showConfirm: true })
     } catch (err) {
       console.log(`ForgotPassword::onSubmitForm(): Error ${JSON.stringify(err, null, 2)}`) // eslint-disable-line
-      this.setState({ error: err, loading: false, snackMsg: err.message, snackOpen: true })
+      this.setState({
+        error: err, loading: false, snackMsg: err.message, snackOpen: true,
+      })
     }
   }
 
@@ -63,7 +64,9 @@ class ForgotPassword extends Component {
     } catch (err) {
       const errMsg = err.message || err
       console.log(`ForgotPassword::onConfirmSubmitted(): Error ${JSON.stringify(err, null, 2)}`) // eslint-disable-line
-      this.setState({ error: errMsg, loading: false, snackMsg: errMsg, snackOpen: true })
+      this.setState({
+        error: errMsg, loading: false, snackMsg: errMsg, snackOpen: true,
+      })
     }
   }
 
@@ -75,32 +78,32 @@ class ForgotPassword extends Component {
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="username">Username</InputLabel>
           <Input
-              autoFocus={username === ''}
-              id="username"
-              name="username"
-              onChange={this.handleChange}
+            autoFocus={username === ''}
+            id="username"
+            name="username"
+            onChange={this.handleChange}
               // type="email"
-              value={username}
+            value={username}
           />
         </FormControl>
 
         <Button
-            className={classes.submitButton}
-            color="primary"
-            disabled={loading}
-            onClick={() => this.onSubmitForm()}
-            variant="contained"
+          className={classes.submitButton}
+          color="primary"
+          disabled={loading}
+          onClick={() => this.onSubmitForm()}
+          variant="contained"
         >
           {loading ? ('Stand by...') : ('Send Code')}
         </Button>
 
         <Button
-            className={classes.returnButton}
-            onClick={() => onStateChange('signIn')}
-            size="small"
+          className={classes.returnButton}
+          onClick={() => onStateChange('signIn')}
+          size="small"
         >
           <Typography
-              color="inherit"
+            color="inherit"
           >
             Return to Sign In
           </Typography>
@@ -110,49 +113,47 @@ class ForgotPassword extends Component {
   }
 
   renderConfirmPassword = () => {
-
     const { classes } = this.props
     const { token, loading, password } = this.state
 
     return (
       <div className={classes.formContainer}>
         <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="token">Code</InputLabel>
-            <Input
-                autoFocus
-                id="token"
-                name="token"
-                onChange={this.handleChange}
-                value={token}
-            />
-          </FormControl>
+          <InputLabel htmlFor="token">Code</InputLabel>
+          <Input
+            autoFocus
+            id="token"
+            name="token"
+            onChange={this.handleChange}
+            value={token}
+          />
+        </FormControl>
 
-          <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Input
-                id="password"
-                name="password"
-                onChange={this.handleChange}
-                type="password"
-                value={password}
-            />
-          </FormControl>
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="password">Password</InputLabel>
+          <Input
+            id="password"
+            name="password"
+            onChange={this.handleChange}
+            type="password"
+            value={password}
+          />
+        </FormControl>
 
-          <Button
-              className={classes.submitButton}
-              color="primary"
-              disabled={loading}
-              onClick={() => this.onConfirmSubmitted()}
-              variant="contained"
-          >
-            {loading ? ('Stand by...') : ('Confirm')}
-          </Button>
+        <Button
+          className={classes.submitButton}
+          color="primary"
+          disabled={loading}
+          onClick={() => this.onConfirmSubmitted()}
+          variant="contained"
+        >
+          {loading ? ('Stand by...') : ('Confirm')}
+        </Button>
       </div>
     )
   }
 
   render() {
-
     const { authState, classes } = this.props
     const { showConfirm, snackOpen, snackMsg } = this.state
 
@@ -162,13 +163,13 @@ class ForgotPassword extends Component {
       <div>
         <Paper className={classes.container}>
           <AppBar
-              color="secondary"
-              position="static"
+            color="secondary"
+            position="static"
           >
             <Toolbar>
               <Typography
-                  color="inherit"
-                  variant="h6"
+                color="inherit"
+                variant="h6"
               >
                 Forgot Password
               </Typography>
@@ -177,46 +178,45 @@ class ForgotPassword extends Component {
           {!showConfirm ? (this.renderSendCode()) : (this.renderConfirmPassword())}
         </Paper>
         <Snackbar
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            message={<span id="message-id">{snackMsg}</span>}
-            onClose={this.handleClose}
-            open={snackOpen}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          message={<span id="message-id">{snackMsg}</span>}
+          onClose={this.handleClose}
+          open={snackOpen}
         />
       </div>
     )
-
   }
 }
 
 ForgotPassword.propTypes = {
-  authState:      PropTypes.string,
-  classes:  PropTypes.object.isRequired,
-  onStateChange:  PropTypes.func.isRequired,
+  authState: PropTypes.string,
+  classes: PropTypes.object.isRequired,
+  onStateChange: PropTypes.func.isRequired,
 }
 
 
-const styles =  theme => ({
+const styles = theme => ({
   container: {
-    display:        'flex',
-    flexDirection:  'column',
-    fontFamily:     theme.typography.fontFamily,
-    width:          theme.spacing.unit * 50,
-    margin:         'auto',
-    marginTop:      theme.spacing.unit * 2,
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: theme.typography.fontFamily,
+    width: theme.spacing.unit * 50,
+    margin: 'auto',
+    marginTop: theme.spacing.unit * 2,
   },
   formContainer: {
-    display:        'flex',
-    flexDirection:  'column',
+    display: 'flex',
+    flexDirection: 'column',
   },
   formControl: {
     margin: theme.spacing.unit * 2,
   },
   returnButton: {
-    margin:     theme.spacing.unit,
+    margin: theme.spacing.unit,
     marginLeft: theme.spacing.unit * 2,
-    marginTop:  0,
-    width:      theme.spacing.unit * 20,
-    padding:    0,
+    marginTop: 0,
+    width: theme.spacing.unit * 20,
+    padding: 0,
   },
   submitButton: {
     margin: theme.spacing.unit * 2,

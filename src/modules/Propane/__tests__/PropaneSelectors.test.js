@@ -7,21 +7,18 @@ import { render } from 'enzyme'
 import PropaneSelectors from '../PropaneSelectors'
 
 describe('PropaneSelectors', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = render(
-        <Router><PropaneSelectors {...props} /></Router>
-      )
+      mountedC = render(<Router><PropaneSelectors {...props} /></Router>)
     }
     return mountedC
   }
 
   beforeEach(() => {
     props = {
-      history: {location: {pathname: '/'}},
+      history: { location: { pathname: '/' } },
     }
     mountedC = undefined
   })
@@ -34,5 +31,4 @@ describe('PropaneSelectors', () => {
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

@@ -9,7 +9,7 @@ export function errorSend(error) {
   if (!error.id) {
     error.id = new Date().getTime()
   }
-  return { type: ERROR_SEND, payload: error}
+  return { type: ERROR_SEND, payload: error }
 }
 
 /**

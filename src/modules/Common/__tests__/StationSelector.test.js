@@ -6,14 +6,11 @@ import { shallow } from 'enzyme'
 import StationSelector from '../StationSelector'
 
 describe('StationSelector', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = shallow(
-        <StationSelector {...props} />
-      )
+      mountedC = shallow(<StationSelector {...props} />)
     }
     return mountedC
   }
@@ -26,5 +23,4 @@ describe('StationSelector', () => {
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

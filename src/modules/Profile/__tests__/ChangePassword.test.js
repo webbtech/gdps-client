@@ -6,14 +6,11 @@ import { shallow } from 'enzyme'
 import ChangePassword from '../ChangePassword'
 
 describe('ChangePassword', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = shallow(
-        <ChangePassword {...props} />
-      )
+      mountedC = shallow(<ChangePassword {...props} />)
     }
     return mountedC
   }
@@ -26,5 +23,4 @@ describe('ChangePassword', () => {
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

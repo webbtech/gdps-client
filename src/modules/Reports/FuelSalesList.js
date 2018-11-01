@@ -33,10 +33,8 @@ query FuelSaleListReport($date: String!) {
 `
 
 const Report = ({ classes, data, date }) => {
-
   if (!data) return null
-  if (data && data.loading)
-    return <div className={classes.container}><Loader /></div>
+  if (data && data.loading) { return <div className={classes.container}><Loader /></div> }
 
   if (!data.fuelSaleListReport) {
     return (
@@ -51,105 +49,108 @@ const Report = ({ classes, data, date }) => {
   return (
     <div className={classes.container}>
       <Typography
-          gutterBottom
-          variant="h5"
-      >Fuel Sales Station List</Typography>
+        gutterBottom
+        variant="h5"
+      >Fuel Sales Station List
+      </Typography>
       <Paper className={classes.reportContainer}>
         <Typography
-            className={classes.title}
-            gutterBottom
-            variant="h6"
-        >No-Lead Report</Typography>
+          className={classes.title}
+          gutterBottom
+          variant="h6"
+        >No-Lead Report
+        </Typography>
         <PeriodHdr
-            classes={classes}
-            data={data.fuelSaleListReport.periodHeader}
+          classes={classes}
+          data={data.fuelSaleListReport.periodHeader}
         />
         {sales.map((sale, i) => (
           <SalesRow
-              classes={classes}
-              data={sale}
-              date={date}
-              key={i}
-              type="NL"
+            classes={classes}
+            data={sale}
+            date={date}
+            key={i}
+            type="NL"
           />
         ))}
         <SummaryRow
-            classes={classes}
-            data={data.fuelSaleListReport}
-            type="NL"
+          classes={classes}
+          data={data.fuelSaleListReport}
+          type="NL"
         />
-      <Typography>*NOTE: Values in brackets are fuel price average for period</Typography>
+        <Typography>*NOTE: Values in brackets are fuel price average for period</Typography>
       </Paper>
       <br />
       <Paper className={classes.reportContainer}>
         <Typography
-            className={classes.title}
-            gutterBottom
-            variant="h6"
-        >Diesel Report</Typography>
+          className={classes.title}
+          gutterBottom
+          variant="h6"
+        >Diesel Report
+        </Typography>
         <PeriodHdr
-            classes={classes}
-            data={data.fuelSaleListReport.periodHeader}
+          classes={classes}
+          data={data.fuelSaleListReport.periodHeader}
         />
         {sales.map((sale, i) => (
           <SalesRow
-              classes={classes}
-              data={sale}
-              date={date}
-              key={i}
-              type="DSL"
+            classes={classes}
+            data={sale}
+            date={date}
+            key={i}
+            type="DSL"
           />
         ))}
         <SummaryRow
-            classes={classes}
-            data={data.fuelSaleListReport}
-            type="DSL"
+          classes={classes}
+          data={data.fuelSaleListReport}
+          type="DSL"
         />
       </Paper>
     </div>
   )
 }
 Report.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.object,
-  date:     PropTypes.string,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object,
+  date: PropTypes.string,
 }
 
 const PeriodHdr = ({ classes, data }) => {
-
-  let periods = []
+  const periods = []
   for (const period in data) periods.push(data[period])
 
   return (
     <div className={classes.periodHdrRow}>
       <div
-          className={classes.periodHdrCell}
-          style={{flex: .75}}
+        className={classes.periodHdrCell}
+        style={{ flex: 0.75 }}
       />
       {periods.map((period, i) => (
         <div
-            className={classes.periodHdrCell}
-            key={i}
+          className={classes.periodHdrCell}
+          key={i}
         >
           {moment(period.startDate).format('MM/DD')} - {moment(period.endDate).format('MM/DD')}
         </div>
       ))}
       <div
-          className={classes.dataCell}
-          style={{flex: .75}}
+        className={classes.dataCell}
+        style={{ flex: 0.75 }}
       />
     </div>
   )
 }
 PeriodHdr.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.object,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object,
 }
 
-const SalesRow = ({ classes, data, date, type }) => {
-
+const SalesRow = ({
+  classes, data, date, type,
+}) => {
   // Skip stations that don't have diesel when doing diesel report
-  if (type === 'DSL' &&  data.stationTotal.DSL <= 0) return null
+  if (type === 'DSL' && data.stationTotal.DSL <= 0) return null
   const sales = []
   const link = `/reports/fuel-sales-detailed/${date}/${data.stationID}`
 
@@ -167,32 +168,31 @@ const SalesRow = ({ classes, data, date, type }) => {
       </div>
       {sales.map((sale, i) => (
         <div
-            className={classes.dataCell}
-            key={i}
+          className={classes.dataCell}
+          key={i}
         >
           {utils.fmtNumber(sale.amount, 0, true)}
           {sale.fuelPrice && <span className={classes.fuelPrice}>({utils.fmtNumber(sale.fuelPrice, 1)})</span>}
         </div>
       ))}
       <div
-          className={classes.dataCell}
-          style={{flex: .75}}
+        className={classes.dataCell}
+        style={{ flex: 0.75 }}
       >
-        {utils.fmtNumber(data.stationTotal[type], 0 , true)}
+        {utils.fmtNumber(data.stationTotal[type], 0, true)}
       </div>
     </div>
   )
 }
 SalesRow.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.object,
-  date:     PropTypes.string.isRequired,
-  type:     PropTypes.string.isRequired,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object,
+  date: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 }
 
 const SummaryRow = ({ classes, data, type }) => {
-
-  let sums = []
+  const sums = []
   for (const sum in data.periodTotals) sums.push(data.periodTotals[sum][type])
   const total = data.totalsByFuel[type]
 
@@ -201,15 +201,15 @@ const SummaryRow = ({ classes, data, type }) => {
       <div className={classes.dataCellStation} />
       {sums.map((sum, i) => (
         <div
-            className={classes.dataTotalCell}
-            key={i}
+          className={classes.dataTotalCell}
+          key={i}
         >
           {utils.fmtNumber(sum, 0, true)}
         </div>
       ))}
       <div
-          className={classes.dataTotalCell}
-          style={{flex: .75}}
+        className={classes.dataTotalCell}
+        style={{ flex: 0.75 }}
       >
         {utils.fmtNumber(total, 0, true)}
       </div>
@@ -217,15 +217,13 @@ const SummaryRow = ({ classes, data, type }) => {
   )
 }
 SummaryRow.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.object,
-  type:     PropTypes.string.isRequired,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object,
+  type: PropTypes.string.isRequired,
 }
 
 class FuelSalesList extends Component {
-
   render() {
-
     let dte
     const { classes, data } = this.props
     const prts = utils.extractPathParts(this.props.location.pathname, 3)
@@ -237,12 +235,12 @@ class FuelSalesList extends Component {
     return (
       <div className={classes.mainContainer}>
         <ReportSelectors
-            hideStation
+          hideStation
         />
         <Report
-            classes={classes}
-            data={data}
-            date={dte}
+          classes={classes}
+          data={data}
+          date={dte}
         />
       </div>
     )
@@ -250,89 +248,89 @@ class FuelSalesList extends Component {
 }
 
 FuelSalesList.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.object,
-  history:  PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object,
+  history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
-  match:    PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   container: {
-    display:        'flex',
-    flexDirection:  'column',
-    fontFamily:     theme.typography.fontFamily,
-    marginTop:      theme.spacing.unit * 3,
-    width:          theme.spacing.unit * 55,
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: theme.typography.fontFamily,
+    marginTop: theme.spacing.unit * 3,
+    width: theme.spacing.unit * 55,
   },
   mainContainer: {
-    width:  900,
+    width: 900,
     margin: 'auto',
   },
   dataRow: {
-    borderBottom:       'solid 1px',
-    borderBottomColor:  theme.palette.grey['300'],
-    display:            'flex',
-    flexDirection:      'row',
-    paddingBottom:      theme.spacing.unit,
-    paddingTop:         theme.spacing.unit,
-    paddingLeft:        theme.spacing.unit * 2,
-    paddingRight:       theme.spacing.unit * 2,
+    borderBottom: 'solid 1px',
+    borderBottomColor: theme.palette.grey['300'],
+    display: 'flex',
+    flexDirection: 'row',
+    paddingBottom: theme.spacing.unit,
+    paddingTop: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
     '&:hover': {
       backgroundColor: theme.palette.grey['100'],
     },
   },
   dataSummaryRow: {
-    display:            'flex',
-    flexDirection:      'row',
-    paddingBottom:      theme.spacing.unit,
-    paddingTop:         theme.spacing.unit,
-    paddingLeft:        theme.spacing.unit * 2,
-    paddingRight:       theme.spacing.unit * 2,
+    display: 'flex',
+    flexDirection: 'row',
+    paddingBottom: theme.spacing.unit,
+    paddingTop: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
   },
   dataCell: {
-    flex:       1,
-    textAlign:  'right',
+    flex: 1,
+    textAlign: 'right',
   },
   dataTotalCell: {
-    flex:       1,
+    flex: 1,
     fontWeight: 550,
-    textAlign:  'right',
+    textAlign: 'right',
   },
   dataCellStation: {
-    flex:     .75,
+    flex: 0.75,
   },
   fuelPrice: {
-    fontSize:     14,
-    paddingLeft:  theme.spacing.unit,
+    fontSize: 14,
+    paddingLeft: theme.spacing.unit,
   },
   periodHdrRow: {
-    borderBottom:       'solid 1px',
-    borderBottomColor:  theme.palette.grey['300'],
-    color:              theme.palette.grey['700'],
-    display:            'flex',
-    flexDirection:      'row',
-    fontWeight:         400,
-    paddingBottom:      theme.spacing.unit,
-    paddingTop:         theme.spacing.unit,
-    paddingLeft:        theme.spacing.unit * 2,
-    paddingRight:       theme.spacing.unit * 2,
+    borderBottom: 'solid 1px',
+    borderBottomColor: theme.palette.grey['300'],
+    color: theme.palette.grey['700'],
+    display: 'flex',
+    flexDirection: 'row',
+    fontWeight: 400,
+    paddingBottom: theme.spacing.unit,
+    paddingTop: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
   },
   periodHdrCell: {
-    flex:         1,
-    textAlign:    'right',
+    flex: 1,
+    textAlign: 'right',
     paddingRight: theme.spacing.unit,
   },
   reportContainer: {
-    display:        'flex',
-    flexDirection:  'column',
-    marginBottom:   theme.spacing.unit * 2,
-    paddingBottom:  theme.spacing.unit * 2,
-    paddingTop:     theme.spacing.unit * 2,
-    width:          900,
+    display: 'flex',
+    flexDirection: 'column',
+    marginBottom: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+    paddingTop: theme.spacing.unit * 2,
+    width: 900,
   },
   title: {
-    paddingLeft:        theme.spacing.unit * 2,
+    paddingLeft: theme.spacing.unit * 2,
   },
 })
 

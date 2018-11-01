@@ -6,14 +6,11 @@ import OverShortAnnually from '../OverShortAnnually'
 import { shallow } from 'enzyme'
 
 describe('OverShortAnnually', () => {
-
   let mountedC
   let props
   const testC = () => {
     if (!mountedC) {
-      mountedC = shallow(
-        <OverShortAnnually {...props} />
-      )
+      mountedC = shallow(<OverShortAnnually {...props} />)
     }
     return mountedC
   }
@@ -21,7 +18,7 @@ describe('OverShortAnnually', () => {
   beforeEach(() => {
     props = {
       history: {},
-      location: {pathname: '/'},
+      location: { pathname: '/' },
       match: {},
     }
     mountedC = undefined
@@ -30,5 +27,4 @@ describe('OverShortAnnually', () => {
   it('matches snapshot', () => {
     expect(testC()).toMatchSnapshot()
   })
-
 })

@@ -6,14 +6,11 @@ import { shallow } from 'enzyme'
 import AdminMenu from '../AdminMenu'
 
 describe('AdminMenu', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = shallow(
-        <AdminMenu {...props} />
-      )
+      mountedC = shallow(<AdminMenu {...props} />)
     }
     return mountedC
   }
@@ -26,5 +23,4 @@ describe('AdminMenu', () => {
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

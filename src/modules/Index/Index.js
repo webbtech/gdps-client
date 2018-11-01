@@ -52,7 +52,6 @@ const Reports = Loadable({
 Sentry.init({ dsn: SENTRY_DSN })
 
 class Index extends Component {
-
   constructor(props) {
     super(props)
     this.state = {
@@ -62,8 +61,8 @@ class Index extends Component {
 
   componentDidCatch(error, errorInfo) {
     this.setState({ error })
-    Sentry.configureScope(scope => {
-      Object.keys(errorInfo).forEach(key => {
+    Sentry.configureScope((scope) => {
+      Object.keys(errorInfo).forEach((key) => {
         scope.setExtra(key, errorInfo[key])
       })
     })
@@ -71,7 +70,6 @@ class Index extends Component {
   }
 
   render() {
-
     if (this.props.authState !== 'signedIn') return null
 
     if (this.state.error) {
@@ -85,66 +83,65 @@ class Index extends Component {
             <Errors />
             <Switch>
               <Route
-                  component={Dashboard}
-                  exact
-                  path="/"
+                component={Dashboard}
+                exact
+                path="/"
               />
               <Route
-                  component={Dips}
-                  exact
-                  path="/dips"
+                component={Dips}
+                exact
+                path="/dips"
               />
               <Route
-                  component={Dips}
-                  path="/dips/:date/:stationID"
+                component={Dips}
+                path="/dips/:date/:stationID"
               />
               <Route
-                  component={Reports}
-                  path="/reports"
+                component={Reports}
+                path="/reports"
               />
               <Route
-                  component={Propane}
-                  exact
-                  path="/propane"
+                component={Propane}
+                exact
+                path="/propane"
               />
               <Route
-                  component={Propane}
-                  path="/propane/:date"
+                component={Propane}
+                path="/propane/:date"
               />
               <Route
-                  component={ImportData}
-                  path="/import-data"
+                component={ImportData}
+                path="/import-data"
               />
               <Route
-                  component={Admin}
-                  path="/admin"
+                component={Admin}
+                path="/admin"
               />
               <Route
-                  component={Profile}
-                  path="/profile"
+                component={Profile}
+                path="/profile"
               />
               <Route
-                  component={ChangePassword}
-                  path="/change-password"
+                component={ChangePassword}
+                path="/change-password"
               />
               <Route
-                  component={Download}
-                  path="/download"
+                component={Download}
+                path="/download"
               />
             </Switch>
           </div>
         </ConnectedRouter>
-        </ApolloProvider>
+      </ApolloProvider>
     )
   }
 }
 
 Index.propTypes = {
-  authState:  PropTypes.string,
+  authState: PropTypes.string,
 }
 
 class AppWithAuth extends Component { // eslint-disable-line react/no-multi-comp
-
   state = {
     user: '',
   }
@@ -163,24 +160,24 @@ class AppWithAuth extends Component { // eslint-disable-line react/no-multi-comp
   handleAuthStateChange(state) { // eslint-disable-line
     // console.log('state in handleAuthStateChange: ', state) // eslint-disable-line
     // if (state === 'signedIn') {
-        // Do something when the user has signed-in
+    // Do something when the user has signed-in
     // }
   }
 
-  render(){
+  render() {
     // console.log('user in render: ', this.state)
 
     return (
       <div>
         <Authenticator
-            hideDefault
-            onStateChange={this.handleAuthStateChange}
+          hideDefault
+          onStateChange={this.handleAuthStateChange}
         >
           <Index />
-          <SignIn/>
-          <ConfirmSignIn/>
-          <ForgotPassword/>
-          <RequireNewPassword/>
+          <SignIn />
+          <ConfirmSignIn />
+          <ForgotPassword />
+          <RequireNewPassword />
         </Authenticator>
       </div>
     )

@@ -8,30 +8,30 @@ import { withStyles } from '@material-ui/core/styles'
 import grey from '@material-ui/core/colors/grey'
 
 
-const Alert = ({ children, classes, type }) => {
+const Alert = ({ children, classes, type }) =>
   // console.log('children: ', children)
-  return(
+  (
     <div className={classNames(classes.base, classes[type])}>{children}</div>
   )
-}
+
 
 Alert.propTypes = {
   children: PropTypes.string.isRequired,
-  classes:  PropTypes.object.isRequired,
-  type:     PropTypes.string.isRequired,
+  classes: PropTypes.object.isRequired,
+  type: PropTypes.string.isRequired,
 }
 
 const styles = theme => ({
   base: {
     // borderRadius:     4,
-    margin:           theme.spacing.unit,
-    padding:          theme.spacing.unit * 1.2,
-    paddingLeft:      theme.spacing.unit * 1.5,
-    paddingRight:     theme.spacing.unit * 1.5,
-    color:            grey[800],
+    margin: theme.spacing.unit,
+    padding: theme.spacing.unit * 1.2,
+    paddingLeft: theme.spacing.unit * 1.5,
+    paddingRight: theme.spacing.unit * 1.5,
+    color: grey[800],
   },
   danger: {
-    backgroundColor:  'rgba(242, 69, 61, 0.3)',
+    backgroundColor: 'rgba(242, 69, 61, 0.3)',
   },
   success: {
     backgroundColor: 'rgba(80, 174, 84, 0.3)',

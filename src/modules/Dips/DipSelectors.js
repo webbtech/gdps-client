@@ -18,7 +18,6 @@ import StationSelector from '../Common/StationSelector'
 import { STD_DATE_FORMAT as dateFormat } from '../../config/constants'
 
 class DipSelectors extends Component {
-
   constructor(props) {
     super(props)
     this.handleStationChange = this.handleStationChange.bind(this)
@@ -35,9 +34,9 @@ class DipSelectors extends Component {
     const { date, stationID } = params
     const setDate = moment(date)
     const newDte = {
-      year:   setDate.format('YYYY'),
-      month:  setDate.subtract(1, 'months').format('MM'),
-      date:   setDate.format('DD'),
+      year: setDate.format('YYYY'),
+      month: setDate.subtract(1, 'months').format('MM'),
+      date: setDate.format('DD'),
     }
     if (date) {
       this.setState({ selectedDate: this.state.selectedDate.set(newDte) }, this.setNextDisabled)
@@ -48,16 +47,16 @@ class DipSelectors extends Component {
   }
 
   // This could get more involved if state isn't set in time: https://stackoverflow.com/questions/37401635/react-js-wait-for-setstate-to-finish-before-triggering-a-function
-  handleStationChange = value => {
+  handleStationChange = (value) => {
     this.setState({ stationID: value }, this.handleGetDip)
   }
 
-  handleDateChange = date => {
+  handleDateChange = (date) => {
     this.setState({ selectedDate: date }, this.handleGetDip)
   }
 
-  handleNextPrevDate = val => {
-    let dte = this.state.selectedDate
+  handleNextPrevDate = (val) => {
+    const dte = this.state.selectedDate
     if (val === 'p') {
       dte.subtract(1, 'days')
     } else if (val === 'n') {
@@ -82,11 +81,10 @@ class DipSelectors extends Component {
   setNextDisabled = () => {
     const { selectedDate } = this.state
     const today = moment().format(dateFormat)
-    this.setState({ nextDisabled: !selectedDate.isBefore(today)})
+    this.setState({ nextDisabled: !selectedDate.isBefore(today) })
   }
 
   render() {
-
     const { classes } = this.props
     const { nextDisabled, selectedDate, stationID } = this.state
 
@@ -97,8 +95,8 @@ class DipSelectors extends Component {
           <div className={classes.cell}>
             <FormControl className={classes.formControl}>
               <StationSelector
-                  onStationChange={this.handleStationChange}
-                  stationID={stationID}
+                onStationChange={this.handleStationChange}
+                stationID={stationID}
               />
             </FormControl>
           </div>
@@ -107,12 +105,12 @@ class DipSelectors extends Component {
             <FormControl className={classes.formControl}>
               <MuiPickersUtilsProvider utils={MomentUtils}>
                 <DatePicker
-                    autoOk
-                    disableFuture
-                    format="MMM D, YYYY"
-                    label="Date"
-                    onChange={this.handleDateChange}
-                    value={selectedDate}
+                  autoOk
+                  disableFuture
+                  format="MMM D, YYYY"
+                  label="Date"
+                  onChange={this.handleDateChange}
+                  value={selectedDate}
                 />
               </MuiPickersUtilsProvider>
             </FormControl>
@@ -120,19 +118,19 @@ class DipSelectors extends Component {
 
           <div className={classes.cell}>
             <Button
-                className={classes.navButton}
-                color="secondary"
-                onClick={() => this.handleNextPrevDate('p')}
-                variant="fab"
+              className={classes.navButton}
+              color="secondary"
+              onClick={() => this.handleNextPrevDate('p')}
+              variant="fab"
             >
               <ArrowBack />
             </Button>
             <Button
-                className={classes.navButton}
-                color="secondary"
-                disabled={nextDisabled}
-                onClick={() => this.handleNextPrevDate('n')}
-                variant="fab"
+              className={classes.navButton}
+              color="secondary"
+              disabled={nextDisabled}
+              onClick={() => this.handleNextPrevDate('n')}
+              variant="fab"
             >
               <ArrowForward />
             </Button>
@@ -145,35 +143,35 @@ class DipSelectors extends Component {
 }
 
 DipSelectors.propTypes = {
-  actions:  PropTypes.object.isRequired,
-  classes:  PropTypes.object.isRequired,
-  history:  PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
-  match:    PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   cell: {
-    flex:       'flex-grow',
-    alignSelf:  'flex-end',
+    flex: 'flex-grow',
+    alignSelf: 'flex-end',
   },
   container: {
     marginBottom: theme.spacing.unit,
   },
   formControl: {
-    margin:   theme.spacing.unit,
+    margin: theme.spacing.unit,
     minWidth: 120,
   },
   navButton: {
-    margin:       theme.spacing.unit,
-    height:       theme.spacing.unit * 4.5,
-    width:        theme.spacing.unit * 4.5,
-    marginRight:  0,
+    margin: theme.spacing.unit,
+    height: theme.spacing.unit * 4.5,
+    width: theme.spacing.unit * 4.5,
+    marginRight: 0,
   },
   selectRow: {
-    display:        'inline-flex',
-    flexDirection:  'row',
-    marginBottom:   theme.spacing.unit,
+    display: 'inline-flex',
+    flexDirection: 'row',
+    marginBottom: theme.spacing.unit,
   },
 })
 

@@ -7,21 +7,18 @@ import { render } from 'enzyme'
 import ReportMenu from '../ReportMenu'
 
 describe('ReportMenu', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = render(
-        <Router><ReportMenu {...props} /></Router>
-      )
+      mountedC = render(<Router><ReportMenu {...props} /></Router>)
     }
     return mountedC
   }
 
   beforeEach(() => {
     props = {
-      history: {location: {pathname: '/'}},
+      history: { location: { pathname: '/' } },
       match: {},
     }
     mountedC = undefined
@@ -35,11 +32,9 @@ describe('ReportMenu', () => {
   it('renders correct number of buttons', () => {
     const buttons = reportC().find('button')
     expect(buttons).toHaveLength(5)
-
   })
 
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

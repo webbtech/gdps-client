@@ -60,7 +60,7 @@ const defaultOptions = {
 }
 
 const cache = new InMemoryCache({
-  dataIdFromObject: object => {
+  dataIdFromObject: (object) => {
     // if (object.__typename === 'FuelSaleDetailedReport') {
     //   console.log('object: ', object)
     // }

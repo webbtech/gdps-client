@@ -6,14 +6,11 @@ import { shallow } from 'enzyme'
 import DipForm from '../DipForm.cntr'
 
 describe('DipForm', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = shallow(
-        <DipForm {...props} />
-      )
+      mountedC = shallow(<DipForm {...props} />)
     }
     return mountedC
   }
@@ -30,5 +27,4 @@ describe('DipForm', () => {
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

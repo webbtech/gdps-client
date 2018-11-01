@@ -24,67 +24,66 @@ import { styles as ms } from '../../styles/main'
 
 
 class Reports extends Component {
-
   render() {
-
     const { classes, match } = this.props
 
     return (
-      <div style={{display: 'flex', flexDirection: 'column'}}>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
         <Header />
         <Paper className={classes.paper}>
           <Typography
-              gutterBottom
-              variant="h5"
-          >Reports</Typography>
+            gutterBottom
+            variant="h5"
+          >Reports
+          </Typography>
           <ReportMenu />
           <Divider /><br />
           <div>
             <Route
-                component={FuelSalesDetailed}
-                path={`${match.url}/fuel-sales-detailed`}
+              component={FuelSalesDetailed}
+              path={`${match.url}/fuel-sales-detailed`}
             />
             <Route
-                component={FuelSalesList}
-                path={`${match.url}/fuel-sales-list`}
+              component={FuelSalesList}
+              path={`${match.url}/fuel-sales-list`}
             />
             <Route
-                component={OverShortMonthly}
-                exact
-                path={`${match.url}/overshort-monthly`}
+              component={OverShortMonthly}
+              exact
+              path={`${match.url}/overshort-monthly`}
             />
             <Route
-                component={OverShortMonthly}
-                path={`${match.url}/overshort-monthly/:date/:stationID`}
+              component={OverShortMonthly}
+              path={`${match.url}/overshort-monthly/:date/:stationID`}
             />
             <Route
-                component={OverShortAnnually}
-                exact
-                path={`${match.url}/overshort-annually`}
+              component={OverShortAnnually}
+              exact
+              path={`${match.url}/overshort-annually`}
             />
             <Route
-                component={OverShortAnnually}
-                path={`${match.url}/overshort-annually/:year/:stationID`}
+              component={OverShortAnnually}
+              path={`${match.url}/overshort-annually/:year/:stationID`}
             />
             <Route
-                component={FuelDeliveries}
-                path={`${match.url}/fuel-deliveries`}
+              component={FuelDeliveries}
+              path={`${match.url}/fuel-deliveries`}
             />
             <Route
-                component={PropaneSalesAnnual}
-                path={`${match.url}/propane-sales-annual`}
+              component={PropaneSalesAnnual}
+              path={`${match.url}/propane-sales-annual`}
             />
             <Route
-                component={PropaneSalesMonthly}
-                path={`${match.url}/propane-sales-monthly`}
+              component={PropaneSalesMonthly}
+              path={`${match.url}/propane-sales-monthly`}
             />
             <Route
-                component={StationReportDownload}
-                path={`${match.url}/report-download-station`}
+              component={StationReportDownload}
+              path={`${match.url}/report-download-station`}
             />
             <Route
-                component={PropaneReportDownload}
-                path={`${match.url}/report-download-propane`}
+              component={PropaneReportDownload}
+              path={`${match.url}/report-download-propane`}
             />
           </div>
         </Paper>

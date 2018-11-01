@@ -7,7 +7,6 @@ import Snackbar from '@material-ui/core/Snackbar'
 import { withStyles } from '@material-ui/core/styles'
 
 class Toaster extends Component {
-
   state = {
     duration: 3000,
     open: false,
@@ -16,7 +15,7 @@ class Toaster extends Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     if (prevState.open === false && this.props.message) {
-      this.setState({message: this.props.message, open: true})
+      this.setState({ message: this.props.message, open: true })
     }
   }
 
@@ -32,47 +31,46 @@ class Toaster extends Component {
   }
 
   render() {
-
     const { classes, message } = this.props
     const duration = this.props.duration || this.state.duration
 
     return (
       <Snackbar
-          ContentProps={{
+        ContentProps={{
             'aria-describedby': 'message-id',
           }}
-          action={[
-            <IconButton
-                aria-label="Close"
-                className={classes.close}
-                color="inherit"
-                key="close"
-                onClick={this.handleClose}
-            >
-              <CloseIcon />
-            </IconButton>,
+        action={[
+          <IconButton
+            aria-label="Close"
+            className={classes.close}
+            color="inherit"
+            key="close"
+            onClick={this.handleClose}
+          >
+            <CloseIcon />
+          </IconButton>,
           ]}
-          anchorOrigin={{
+        anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'left',
           }}
-          autoHideDuration={duration}
-          message={<span id="message-id">{message}</span>}
-          onClose={this.handleClose}
-          open={this.state.open}
+        autoHideDuration={duration}
+        message={<span id="message-id">{message}</span>}
+        onClose={this.handleClose}
+        open={this.state.open}
       />
     )
   }
 }
 Toaster.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  duration:  PropTypes.number,
-  message:  PropTypes.string,
+  classes: PropTypes.object.isRequired,
+  duration: PropTypes.number,
+  message: PropTypes.string,
 }
 
 const styles = theme => ({
   close: {
-    width:  theme.spacing.unit * 4,
+    width: theme.spacing.unit * 4,
     height: theme.spacing.unit * 4,
   },
 })

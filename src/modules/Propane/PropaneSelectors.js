@@ -19,7 +19,6 @@ import DatePicker from 'material-ui-pickers/DatePicker'
 import { STD_DATE_FORMAT as dateFormat } from '../../config/constants'
 
 class PropaneSelectors extends Component {
-
   state = {
     nextDisabled: true,
     selectedDate: moment(),
@@ -37,19 +36,19 @@ class PropaneSelectors extends Component {
     // this.setState({ selectedDate: date }, this.handleGetEntry)
     this.setState({ selectedDate: moment(date) }, this.setNextDisabled)
 
-    /*const { history, match } = this.props
+    /* const { history, match } = this.props
     const { selectedDate } = this.state
     const dte = selectedDate.format(dateFormat)
     const uri = `${match.url}/${dte}`
-    history.push(uri)*/
+    history.push(uri) */
   }
 
-  handleDateChange = date => {
+  handleDateChange = (date) => {
     this.setState({ selectedDate: date }, this.handleGetEntry)
   }
 
-  handleNextPrevDate = val => {
-    let dte = this.state.selectedDate
+  handleNextPrevDate = (val) => {
+    const dte = this.state.selectedDate
     if (val === 'p') {
       dte.subtract(1, 'days')
     } else if (val === 'n') {
@@ -72,11 +71,10 @@ class PropaneSelectors extends Component {
   setNextDisabled = () => {
     const { selectedDate } = this.state
     const today = moment().format(dateFormat)
-    this.setState({ nextDisabled: !selectedDate.isBefore(today)})
+    this.setState({ nextDisabled: !selectedDate.isBefore(today) })
   }
 
   render() {
-
     const { classes } = this.props
     const { nextDisabled, selectedDate } = this.state
 
@@ -88,12 +86,12 @@ class PropaneSelectors extends Component {
             <FormControl className={classes.formControl}>
               <MuiPickersUtilsProvider utils={MomentUtils}>
                 <DatePicker
-                    autoOk
-                    disableFuture
-                    format="MMM D, YYYY"
-                    label="Date"
-                    onChange={this.handleDateChange}
-                    value={selectedDate}
+                  autoOk
+                  disableFuture
+                  format="MMM D, YYYY"
+                  label="Date"
+                  onChange={this.handleDateChange}
+                  value={selectedDate}
                 />
               </MuiPickersUtilsProvider>
             </FormControl>
@@ -101,19 +99,19 @@ class PropaneSelectors extends Component {
 
           <div className={classes.cell}>
             <Button
-                className={classes.navButton}
-                color="secondary"
-                onClick={() => this.handleNextPrevDate('p')}
-                variant="fab"
+              className={classes.navButton}
+              color="secondary"
+              onClick={() => this.handleNextPrevDate('p')}
+              variant="fab"
             >
               <ArrowBack />
             </Button>
             <Button
-                className={classes.navButton}
-                color="secondary"
-                disabled={nextDisabled}
-                onClick={() => this.handleNextPrevDate('n')}
-                variant="fab"
+              className={classes.navButton}
+              color="secondary"
+              disabled={nextDisabled}
+              onClick={() => this.handleNextPrevDate('n')}
+              variant="fab"
             >
               <ArrowForward />
             </Button>
@@ -126,13 +124,13 @@ class PropaneSelectors extends Component {
 }
 
 PropaneSelectors.propTypes = {
-  classes:      PropTypes.object.isRequired,
-  history:      PropTypes.object.isRequired,
-  location:     PropTypes.object.isRequired,
-  match:        PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   cell: {
     flex: 'flex-grow',
     alignSelf: 'flex-end',
@@ -141,7 +139,7 @@ const styles =  theme => ({
     marginBottom: theme.spacing.unit,
   },
   formControl: {
-    margin:   theme.spacing.unit,
+    margin: theme.spacing.unit,
     minWidth: 160,
   },
   navButton: {
@@ -151,9 +149,9 @@ const styles =  theme => ({
     marginRight: 0,
   },
   selectRow: {
-    display:        'inline-flex',
-    flexDirection:  'row',
-    marginBottom:   theme.spacing.unit,
+    display: 'inline-flex',
+    flexDirection: 'row',
+    marginBottom: theme.spacing.unit,
   },
 })
 

@@ -12,9 +12,7 @@ import { styles as ms } from '../../styles/main'
 import PropaneForm from './PropaneForm.cont'
 
 class Propane extends Component {
-
   render() {
-
     const { classes, history } = this.props
 
     return (
@@ -22,9 +20,10 @@ class Propane extends Component {
         <Header history={history} />
         <Paper className={classes.paper}>
           <Typography
-              gutterBottom
-              variant="h5"
-          >Propane Entries</Typography>
+            gutterBottom
+            variant="h5"
+          >Propane Entries
+          </Typography>
           <Divider /><br />
           <PropaneForm />
         </Paper>
@@ -34,9 +33,9 @@ class Propane extends Component {
 }
 
 Propane.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  history:  PropTypes.object.isRequired,
-  match:    PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 }
 
 export default withStyles(ms)(Propane)

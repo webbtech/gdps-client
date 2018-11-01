@@ -16,13 +16,12 @@ import TableRow from '@material-ui/core/TableRow'
 import { fmtNumber } from '../../utils/utils'
 
 class TankLevelsDialog extends Component {
-
   state = {
     open: false,
   }
 
   handleClickOpen = () => {
-    this.setState({open: true})
+    this.setState({ open: true })
   }
 
   handleClose = () => {
@@ -30,7 +29,6 @@ class TankLevelsDialog extends Component {
   }
 
   render() {
-
     const { classes, tank } = this.props
 
     const levels = []
@@ -44,52 +42,53 @@ class TankLevelsDialog extends Component {
     return (
       <div>
         <Button
-            className={classes.openButton}
-            color="secondary"
-            onClick={this.handleClickOpen}
-            variant="outlined"
-        >Levels</Button>
+          className={classes.openButton}
+          color="secondary"
+          onClick={this.handleClickOpen}
+          variant="outlined"
+        >Levels
+        </Button>
         <Dialog
-            aria-labelledby="scroll-dialog-title"
-            onClose={this.handleClose}
-            open={this.state.open}
-            scroll={this.state.scroll}
+          aria-labelledby="scroll-dialog-title"
+          onClose={this.handleClose}
+          open={this.state.open}
+          scroll={this.state.scroll}
         >
-        <DialogTitle id="scroll-dialog-title">Tank Levels for tank id: {tank.id}</DialogTitle>
-        <DialogContent>
-          <Table className={classes.table}>
-            <TableHead>
-              <TableRow>
-                <TableCell numeric>Level (cm)</TableCell>
-                <TableCell numeric>Litres</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-            {levels.map(l => (
-              <TableRow key={l.level}>
-                <TableCell numeric>{l.level}</TableCell>
-                <TableCell numeric>{fmtNumber(l.litres, 0, true)}</TableCell>
-              </TableRow>
+          <DialogTitle id="scroll-dialog-title">Tank Levels for tank id: {tank.id}</DialogTitle>
+          <DialogContent>
+            <Table className={classes.table}>
+              <TableHead>
+                <TableRow>
+                  <TableCell numeric>Level (cm)</TableCell>
+                  <TableCell numeric>Litres</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {levels.map(l => (
+                  <TableRow key={l.level}>
+                    <TableCell numeric>{l.level}</TableCell>
+                    <TableCell numeric>{fmtNumber(l.litres, 0, true)}</TableCell>
+                  </TableRow>
             ))}
-            </TableBody>
-          </Table>
-        </DialogContent>
-        <DialogActions>
-          <Button
+              </TableBody>
+            </Table>
+          </DialogContent>
+          <DialogActions>
+            <Button
               color="primary"
               onClick={this.handleClose}
-          >
+            >
             Close
-          </Button>
-        </DialogActions>
-      </Dialog>
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     )
   }
 }
 TankLevelsDialog.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  tank:     PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  tank: PropTypes.object.isRequired,
 }
 
 const styles = () => ({

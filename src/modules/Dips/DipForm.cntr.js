@@ -22,33 +22,30 @@ mutation CreateDips($fields: [DipInput]) {
 
 const PersistDip = graphql(CREATE_DIPS, {
   props: ({ mutate }) => ({
-    PersistDip: (fields) => mutate({
-      variables: {fields},
+    PersistDip: fields => mutate({
+      variables: { fields },
       errorPolicy: 'all',
     }),
   }),
-  options: ({ match: { params }}) => {
-    return ({
-      refetchQueries: [
-        {
-          query: DIP_QUERY,
-          variables: {
-            date:       dateToInt(params.date),
-            dateFrom:   datePrevDay(params.date),
-            dateTo:     dateToInt(params.date),
-            stationID: params.stationID,
-          },
+  options: ({ match: { params } }) => ({
+    refetchQueries: [
+      {
+        query: DIP_QUERY,
+        variables: {
+          date: dateToInt(params.date),
+          dateFrom: datePrevDay(params.date),
+          dateTo: dateToInt(params.date),
+          stationID: params.stationID,
         },
-      ],
-    })
-  },
+      },
+    ],
+  }),
   errorPolicy: 'all',
 })
 
-const validateInput = fields => {
-
-  let errors = []
-  let deliveries = {}
+const validateInput = (fields) => {
+  const errors = []
+  const deliveries = {}
   for (const id in fields) {
     const f = fields[id]
     if (!deliveries[f.tank.fuelType]) {
@@ -79,17 +76,17 @@ const validateInput = fields => {
 }
 
 const extractInput = (date, stationID, fields) => {
-  let ret = []
+  const ret = []
   for (const id in fields) {
     const f = fields[id]
     ret.push({
       date,
-      delivery:       f.delivery ? Number(f.delivery) : null,
-      fuelType:       f.tank.fuelType,
-      level:          f.level || 0,
-      litres:         f.litres || 0,
+      delivery: f.delivery ? Number(f.delivery) : null,
+      fuelType: f.tank.fuelType,
+      level: f.level || 0,
+      litres: f.litres || 0,
       stationID,
-      stationTankID:  id,
+      stationTankID: id,
     })
   }
   return ret
@@ -100,18 +97,15 @@ const extractInput = (date, stationID, fields) => {
 const DipFormCntr = withFormik({
 
   enableReinitialize: true,
-  mapPropsToValues: ({ tankDips }) => {
-    return {tanks: tankDips}
-  },
+  mapPropsToValues: ({ tankDips }) => ({ tanks: tankDips }),
   handleSubmit: async (values, { props, setSubmitting, setErrors }) => {
-
     props.actions.errorClear()
 
-    let validateErrors = validateInput(values.tanks)
+    const validateErrors = validateInput(values.tanks)
     if (validateErrors.length) {
-      let errs = {}
-      validateErrors.forEach(e => {
-        props.actions.errorSend({message: e.message, type: 'danger'})
+      const errs = {}
+      validateErrors.forEach((e) => {
+        props.actions.errorSend({ message: e.message, type: 'danger' })
         errs[e.tankID] = e.message
         setErrors(errs)
       })
@@ -119,18 +113,18 @@ const DipFormCntr = withFormik({
       return
     }
 
-    const { actions, match: { params }} = props
+    const { actions, match: { params } } = props
     let graphqlReturn
-    let submitVals = extractInput(dateToInt(params.date), params.stationID, values.tanks)
+    const submitVals = extractInput(dateToInt(params.date), params.stationID, values.tanks)
     try {
       graphqlReturn = await props.PersistDip(submitVals)
       if (graphqlReturn && graphqlReturn.errors) {
         setSubmitting(false)
-        actions.errorSend({message: graphqlReturn.errors[0].message, type: 'danger'})
+        actions.errorSend({ message: graphqlReturn.errors[0].message, type: 'danger' })
       }
     } catch (error) {
       setSubmitting(false)
-       actions.errorSend({message: error.message, type: 'danger'})
+      actions.errorSend({ message: error.message, type: 'danger' })
     }
   },
   displayName: 'DipForm',

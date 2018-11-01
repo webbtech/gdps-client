@@ -6,14 +6,11 @@ import { shallow } from 'enzyme'
 import StationTanks from '../StationTanks.cntr'
 
 describe('StationTanks', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = shallow(
-        <StationTanks {...props} />
-      )
+      mountedC = shallow(<StationTanks {...props} />)
     }
     return mountedC
   }
@@ -28,5 +25,4 @@ describe('StationTanks', () => {
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

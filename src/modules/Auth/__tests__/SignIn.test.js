@@ -7,14 +7,11 @@ import { render } from 'enzyme'
 import SignIn from '../SignIn'
 
 describe('SignIn', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = render(
-        <Router><SignIn {...props} /></Router>
-      )
+      mountedC = render(<Router><SignIn {...props} /></Router>)
     }
     return mountedC
   }
@@ -35,5 +32,4 @@ describe('SignIn', () => {
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

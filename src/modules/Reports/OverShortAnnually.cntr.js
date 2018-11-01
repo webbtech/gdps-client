@@ -20,14 +20,12 @@ query DipOSAnnualReport($date: String!, $stationID: String!) {
 
 const fetchOSAnnual = graphql(OSA_REPORT_QUERY, {
   skip: ({ match }) => !match || !match.params.year || !match.params.stationID,
-  options: ({ match }) => {
-    return ({
-      variables: {
-        date:       moment().year(match.params.year).format('YYYY-MM-DD'),
-        stationID:  match.params.stationID,
-      },
-    })
-  },
+  options: ({ match }) => ({
+    variables: {
+      date: moment().year(match.params.year).format('YYYY-MM-DD'),
+      stationID: match.params.stationID,
+    },
+  }),
 })
 
 function mapDispatchToProps(dispatch) {

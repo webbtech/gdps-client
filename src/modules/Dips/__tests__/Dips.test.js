@@ -6,14 +6,11 @@ import { shallow } from 'enzyme'
 import Dips from '../Dips.cntr'
 
 describe('Dips', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = shallow(
-        <Dips {...props} />
-      )
+      mountedC = shallow(<Dips {...props} />)
     }
     return mountedC
   }
@@ -21,7 +18,7 @@ describe('Dips', () => {
   beforeEach(() => {
     props = {
       history: {},
-      location: {pathname: '/'},
+      location: { pathname: '/' },
       match: {
         params: {
           date: '',
@@ -34,5 +31,4 @@ describe('Dips', () => {
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

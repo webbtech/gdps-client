@@ -47,7 +47,6 @@ mutation CreateStationTank($fields: StationTankInput) {
 `
 
 class TankDialog extends Component {
-
   state = {
     fuelType: '',
     open: false,
@@ -56,15 +55,15 @@ class TankDialog extends Component {
   }
 
   handleClickOpen = () => {
-    this.setState({open: true})
+    this.setState({ open: true })
   }
 
   handleOpenConfirm = () => {
-    this.setState({openConfirm: true})
+    this.setState({ openConfirm: true })
   }
 
   handleOkConfirm = () => {
-    this.setState({openConfirm: false, fuelType: ''})
+    this.setState({ openConfirm: false, fuelType: '' })
   }
 
   handleClose = () => {
@@ -83,33 +82,31 @@ class TankDialog extends Component {
     this.setState({ fuelType: value })
   }
 
-  setCreateFields = () => {
-    return {
-      fields: {
-        fuelType:   this.state.fuelType,
-        stationID:  this.props.stationID,
-        tankID:     this.state.selectedTank,
-      },
-    }
-  }
+  setCreateFields = () => ({
+    fields: {
+      fuelType: this.state.fuelType,
+      stationID: this.props.stationID,
+      tankID: this.state.selectedTank,
+    },
+  })
 
   render() {
-
     const { classes, stationID } = this.props
 
     return (
       <div>
         <Button
-            color="secondary"
-            disabled={!stationID}
-            onClick={this.handleClickOpen}
-            variant="outlined"
-        >Add Tank</Button>
+          color="secondary"
+          disabled={!stationID}
+          onClick={this.handleClickOpen}
+          variant="outlined"
+        >Add Tank
+        </Button>
         <Dialog
-            aria-labelledby="scroll-dialog-title"
-            onClose={this.handleClose}
-            open={this.state.open}
-            scroll={this.state.scroll}
+          aria-labelledby="scroll-dialog-title"
+          onClose={this.handleClose}
+          open={this.state.open}
+          scroll={this.state.scroll}
         >
           <DialogTitle id="scroll-dialog-title">Select New Tank</DialogTitle>
           <Query query={TANKLIST_QUERY}>
@@ -130,17 +127,16 @@ class TankDialog extends Component {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                    {tanks.map(t => (
-                      <TableRow
+                      {tanks.map(t => (
+                        <TableRow
                           hover
                           key={t.id}
                           onClick={e => this.handleSelectTank(e, t.id)}
-                          // role="checkbox"
-                      >
-                        <TableCell>{t.id}</TableCell>
-                        <TableCell numeric>{fmtNumber(t.size, 0, true)}</TableCell>
-                        <TableCell>{t.model}</TableCell>
-                      </TableRow>
+                        >
+                          <TableCell>{t.id}</TableCell>
+                          <TableCell numeric>{fmtNumber(t.size, 0, true)}</TableCell>
+                          <TableCell>{t.model}</TableCell>
+                        </TableRow>
                     ))}
                     </TableBody>
                   </Table>
@@ -151,8 +147,8 @@ class TankDialog extends Component {
 
           <DialogActions>
             <Button
-                color="primary"
-                onClick={this.handleClose}
+              color="primary"
+              onClick={this.handleClose}
             >
               Close
             </Button>
@@ -160,54 +156,54 @@ class TankDialog extends Component {
         </Dialog>
 
         <Dialog
-            aria-describedby="alert-dialog-description"
-            aria-labelledby="alert-dialog-title"
-            onClose={this.handleCloseConfirm}
-            open={this.state.openConfirm}
+          aria-describedby="alert-dialog-description"
+          aria-labelledby="alert-dialog-title"
+          onClose={this.handleCloseConfirm}
+          open={this.state.openConfirm}
         >
           <DialogTitle id="alert-dialog-title">Select Fuel Type and Confirm</DialogTitle>
           <DialogContent>
             <div className={classes.msg}>NOTE: This action cannot be reversed.<br />Please ensure all details are accurate.</div>
             <RadioGroup
-                aria-label="Ringtone"
-                name="ringtone"
-                onChange={this.handleSelectFuelType}
-                ref={ref => {
+              aria-label="Ringtone"
+              name="ringtone"
+              onChange={this.handleSelectFuelType}
+              ref={(ref) => {
                   this.radioGroupRef = ref
                 }}
-                value={this.state.fuelType}
+              value={this.state.fuelType}
             >
               {fuelTypes.map(option => (
                 <FormControlLabel
-                    control={<Radio />}
-                    key={option}
-                    label={option}
-                    value={option}
+                  control={<Radio />}
+                  key={option}
+                  label={option}
+                  value={option}
                 />
               ))}
             </RadioGroup>
           </DialogContent>
           <DialogActions>
-            
+
             <Mutation
-                mutation={CREATE_TANK_MUTATION}
-                onCompleted={this.handleOkConfirm}
-                refetchQueries={[{query: TANK_QUERY, variables: {stationID}}]}
-                variables={this.setCreateFields()}
+              mutation={CREATE_TANK_MUTATION}
+              onCompleted={this.handleOkConfirm}
+              refetchQueries={[{ query: TANK_QUERY, variables: { stationID } }]}
+              variables={this.setCreateFields()}
             >
               {(toggleActive, { loading, error }) => (
                 <div>
                   <Button
-                      color="primary"
-                      onClick={this.handleCloseConfirm}
+                    color="primary"
+                    onClick={this.handleCloseConfirm}
                   >
                     Cancel
                   </Button>
                   <Button
-                      color="primary"
-                      disabled={!this.state.fuelType}
+                    color="primary"
+                    disabled={!this.state.fuelType}
                       // onClick={this.handleOkConfirm}
-                      onClick={toggleActive}
+                    onClick={toggleActive}
                   >
                     Confirm Add Tank
                   </Button>
@@ -225,25 +221,25 @@ class TankDialog extends Component {
   }
 }
 TankDialog.propTypes = {
-  classes:    PropTypes.object.isRequired,
-  stationID:  PropTypes.string.isRequired,
+  classes: PropTypes.object.isRequired,
+  stationID: PropTypes.string.isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   container: {
-    display:        'flex',
-    flexDirection:  'column',
-    fontFamily:     theme.typography.fontFamily,
-    margin:         'auto',
-    width:          700,
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: theme.typography.fontFamily,
+    margin: 'auto',
+    width: 700,
   },
   errorMsg: {
-    fontFamily:     theme.typography.fontFamily,
-    fontWeight:     500,
-    height:         40,
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: 500,
+    height: 40,
   },
   msg: {
-    fontFamily:     theme.typography.fontFamily,
+    fontFamily: theme.typography.fontFamily,
   },
 })
 
