@@ -235,7 +235,7 @@ class ReportMenu extends Component {
                       <MenuList role="menu">
                         <MenuItem onClick={() => this.handleLink('/report-download-station')}>Station Report</MenuItem>
                         <MenuItem onClick={() => this.handleLink('/report-download-propane')}>Propane Sales</MenuItem>
-                        <MenuItem onClick={() => this.handleLink('/report-download-propane')}>Fuel Sales Summary</MenuItem>
+                        <MenuItem onClick={() => this.handleLink('/report-download-fuelsalesum')}>Fuel Sales Summary</MenuItem>
                       </MenuList>
                     </Paper>
                   </Grow>

@@ -19,6 +19,7 @@ import PropaneSalesAnnual from './PropaneSalesAnnual'
 import ReportMenu from './ReportMenu'
 import StationReportDownload from './StationReportDownload'
 import PropaneReportDownload from './PropaneReportDownload'
+import FuelSalesSummaryDownload from './FuelSalesSummaryDownload'
 
 import { styles as ms } from '../../styles/main'
 
@@ -84,6 +85,10 @@ class Reports extends Component {
             <Route
               component={PropaneReportDownload}
               path={`${match.url}/report-download-propane`}
+            />
+            <Route
+              component={FuelSalesSummaryDownload}
+              path={`${match.url}/report-download-fuelsalesum`}
             />
           </div>
         </Paper>

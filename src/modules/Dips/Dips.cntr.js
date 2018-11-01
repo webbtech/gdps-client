@@ -8,35 +8,35 @@ import * as errorActions from '../Error/errorActions'
 import { datePrevDay, dateToInt } from '../../utils/utils'
 
 export const DIP_QUERY = gql`
-  query Dips($date: Int!, $dateFrom: Int!, $dateTo: Int!, $stationID: String!) {
-    curDips: dips(date: $date, stationID: $stationID) {
-      date
-      fuelType
-      level
+query Dips($date: Int!, $dateFrom: Int!, $dateTo: Int!, $stationID: String!) {
+  curDips: dips(date: $date, stationID: $stationID) {
+    date
+    fuelType
+    level
+    litres
+    stationTankID
+    fuelDelivery {
       litres
-      stationTankID
-      fuelDelivery {
-        litres
-      }
-    }
-    prevDips: dips(date: $dateFrom, stationID: $stationID) {
-      date
-      fuelType
-      level
-      litres
-      stationTankID
-    }
-    fuelPrice(date: $date, stationID: $stationID) {
-      date
-      price
-      stationID
-    }
-    dipOverShortRange(dateFrom: $dateFrom, dateTo: $dateTo, stationID: $stationID) {
-      date
-      overShort
-      stationID
     }
   }
+  prevDips: dips(date: $dateFrom, stationID: $stationID) {
+    date
+    fuelType
+    level
+    litres
+    stationTankID
+  }
+  fuelPrice(date: $date, stationID: $stationID) {
+    date
+    price
+    stationID
+  }
+  dipOverShortRange(dateFrom: $dateFrom, dateTo: $dateTo, stationID: $stationID) {
+    date
+    overShort
+    stationID
+  }
+}
 `
 
 const STATION_TANK_QUERY = gql`
@@ -105,9 +105,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default compose(
-  FetchDips,
+  // FetchDips,
   FetchTanks,
-  FetchFuelSale,
+  // FetchFuelSale,
   connect(
     null,
     mapDispatchToProps
