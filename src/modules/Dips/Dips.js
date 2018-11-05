@@ -85,7 +85,6 @@ class Dips extends Component {
     let fsDate = ''
     if (fuelSaleLatest && fuelSaleLatest.fuelSaleLatest) {
       fsDate = moment(fuelSaleLatest.fuelSaleLatest.date.toString())
-      // lastFSDate = fsDate.format('MMM DD, YYYY')
     }
 
     if (dips && dips.error) {
@@ -104,7 +103,11 @@ class Dips extends Component {
       waitComponent = <Loader />
     }
 
-    if (dips && dips.loading === false && dips.dipOverShortRange && !dips.error) {
+    if (dips && dips.loading === true) {
+      return <Loader />
+    }
+
+    if (dips && dips.loading === false && dips.dipOverShortRange) {
       haveCurDips = true
       const curDay = dateToInt(requestDate)
       const prevDay = datePrevDay(requestDate)
@@ -148,7 +151,11 @@ class Dips extends Component {
             {haveCurDips && haveFSImport &&
               <div style={{ display: 'flex', flexDirection: 'row', marginTop: 20 }}>
                 <div style={{ flex: 1 }}>
-                  {tanks && tanks.stationTanks && tanks.loading === false && dips && dips.loading === false ? (
+                  {tanks &&
+                    tanks.stationTanks &&
+                    tanks.loading === false &&
+                    dips && dips.loading === false
+                  ? (
                     <DipForm
                       editMode={editMode}
                       havePrevDayDips={havePrevDayDips}
@@ -174,17 +181,19 @@ class Dips extends Component {
     )
   }
 }
-
 Dips.propTypes = {
-  actions: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object,
-  dips: PropTypes.object,
-  fuelSaleLatest: PropTypes.object,
-  history: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
-  tanks: PropTypes.object,
+  actions: PropTypes.instanceOf(Object).isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  dips: PropTypes.instanceOf(Object),
+  fuelSaleLatest: PropTypes.instanceOf(Object),
+  history: PropTypes.instanceOf(Object).isRequired,
+  match: PropTypes.instanceOf(Object).isRequired,
+  tanks: PropTypes.instanceOf(Object),
+}
+Dips.defaultProps = {
+  dips: null,
+  fuelSaleLatest: null,
+  tanks: null,
 }
 
 const styles = theme => ({

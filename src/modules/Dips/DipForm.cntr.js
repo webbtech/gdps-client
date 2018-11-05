@@ -46,7 +46,9 @@ const PersistDip = graphql(CREATE_DIPS, {
 const validateInput = (fields) => {
   const errors = []
   const deliveries = {}
-  for (const id in fields) {
+  const fieldIDs = Object.keys(fields)
+
+  fieldIDs.forEach((id) => {
     const f = fields[id]
     if (!deliveries[f.tank.fuelType]) {
       deliveries[f.tank.fuelType] = 0
@@ -54,9 +56,9 @@ const validateInput = (fields) => {
     if (f.delivery) {
       deliveries[f.tank.fuelType] += f.delivery
     }
-  }
+  })
 
-  for (const id in fields) {
+  fieldIDs.forEach((id) => {
     const f = fields[id]
     if (f.level > f.prevLevel && !deliveries[f.tank.fuelType]) {
       errors.push({
@@ -70,14 +72,16 @@ const validateInput = (fields) => {
         message: 'Invalid litres value.',
       })
     }
-  }
+  })
 
   return errors
 }
 
 const extractInput = (date, stationID, fields) => {
   const ret = []
-  for (const id in fields) {
+  const fieldIDs = Object.keys(fields)
+
+  fieldIDs.forEach((id) => {
     const f = fields[id]
     ret.push({
       date,
@@ -88,7 +92,7 @@ const extractInput = (date, stationID, fields) => {
       stationID,
       stationTankID: id,
     })
-  }
+  })
   return ret
 }
 
