@@ -10,8 +10,6 @@ import Button from '@material-ui/core/Button'
 import FormControl from '@material-ui/core/FormControl'
 import { withStyles } from '@material-ui/core/styles'
 
-import MomentUtils from 'material-ui-pickers/utils/moment-utils'
-import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider'
 import DatePicker from 'material-ui-pickers/DatePicker'
 
 import StationSelector from '../Common/StationSelector'
@@ -46,6 +44,12 @@ class DipSelectors extends Component {
     }
   }
 
+  setNextDisabled = () => {
+    const { selectedDate } = this.state
+    const today = moment().format(dateFormat)
+    this.setState({ nextDisabled: !selectedDate.isBefore(today) })
+  }
+
   // This could get more involved if state isn't set in time: https://stackoverflow.com/questions/37401635/react-js-wait-for-setstate-to-finish-before-triggering-a-function
   handleStationChange = (value) => {
     this.setState({ stationID: value }, this.handleGetDip)
@@ -78,12 +82,6 @@ class DipSelectors extends Component {
     }
   }
 
-  setNextDisabled = () => {
-    const { selectedDate } = this.state
-    const today = moment().format(dateFormat)
-    this.setState({ nextDisabled: !selectedDate.isBefore(today) })
-  }
-
   render() {
     const { classes } = this.props
     const { nextDisabled, selectedDate, stationID } = this.state
@@ -103,16 +101,14 @@ class DipSelectors extends Component {
 
           <div className={classNames([classes.cell], [classes.calendar])}>
             <FormControl className={classes.formControl}>
-              <MuiPickersUtilsProvider utils={MomentUtils}>
-                <DatePicker
-                  autoOk
-                  disableFuture
-                  format="MMM D, YYYY"
-                  label="Date"
-                  onChange={this.handleDateChange}
-                  value={selectedDate}
-                />
-              </MuiPickersUtilsProvider>
+              <DatePicker
+                autoOk
+                disableFuture
+                format="MMM D, YYYY"
+                label="Date"
+                onChange={this.handleDateChange}
+                value={selectedDate}
+              />
             </FormControl>
           </div>
 
@@ -143,11 +139,10 @@ class DipSelectors extends Component {
 }
 
 DipSelectors.propTypes = {
-  actions: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
+  actions: PropTypes.instanceOf(Object).isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
+  match: PropTypes.instanceOf(Object).isRequired,
 }
 
 const styles = theme => ({

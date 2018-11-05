@@ -22,7 +22,7 @@ class DipForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      haveErrors: false,
+      // haveErrors: false,
       toasterMsg: '',
     }
     this.handleCalculateLitres = debounce(this.handleCalculateLitres, 250)
@@ -68,9 +68,9 @@ class DipForm extends Component {
     let inputLevel = parseInt(val, 10)
     const origLevel = clone(inputLevel)
     if (inputLevel <= 1) return
-    const levels = tanks[tankID].tank.tank.levels
+    const { levels } = tanks[tankID].tank.tank
     if (inputLevel > 9 && !levels[inputLevel]) {
-      inputLevel--
+      inputLevel-- // eslint-disable-line
     }
 
     tanks[tankID].level = inputLevel
@@ -106,14 +106,16 @@ class DipForm extends Component {
     const submitLabel = editMode ? 'Edit Dips' : 'Save Dips'
 
     const rows = []
-    for (const t in tankDips) {
+    const tdIDs = Object.keys(tankDips)
+
+    tdIDs.forEach((id) => {
       rows.push({
-        id: t,
-        fuelType: tankDips[t].tank.fuelType,
-        tankID: tankDips[t].tank.tankID,
-        size: tankDips[t].tank.tank.size,
+        id,
+        fuelType: tankDips[id].tank.fuelType,
+        tankID: tankDips[id].tank.tankID,
+        size: tankDips[id].tank.tank.size,
       })
-    }
+    })
 
     return (
       <div className={classes.container}>
@@ -166,7 +168,9 @@ class DipForm extends Component {
                   <FormHelperText id="level-text">{errors[`${t.id}_level`]}</FormHelperText>
                 </FormControl>
               </div>
-              <div className={classNames(classes.dataCell, classes.dataAlignRight, classes.botSpacerField)}>
+              <div className={
+                classNames(classes.dataCell, classes.dataAlignRight, classes.botSpacerField)}
+              >
                 {values.tanks[t.id] && fmtNumber(values.tanks[t.id].litres, 0, true)}
               </div>
               <div className={classes.dataCell}>
@@ -213,19 +217,18 @@ class DipForm extends Component {
 }
 
 DipForm.propTypes = {
-  actions: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired,
+  actions: PropTypes.instanceOf(Object).isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
   dirty: PropTypes.bool.isRequired,
   editMode: PropTypes.bool.isRequired,
-  errors: PropTypes.object.isRequired,
+  errors: PropTypes.instanceOf(Object).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   havePrevDayDips: PropTypes.bool.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
-  match: PropTypes.object.isRequired,
   setFieldError: PropTypes.func.isRequired,
   setFieldValue: PropTypes.func.isRequired,
-  tankDips: PropTypes.object.isRequired,
-  values: PropTypes.object.isRequired,
+  tankDips: PropTypes.instanceOf(Object).isRequired,
+  values: PropTypes.instanceOf(Object).isRequired,
 }
 
 const styles = theme => ({

@@ -22,7 +22,6 @@ const errorLink = onError(({ networkError, graphQLErrors }) => {
     Sentry.captureException(networkError)
   }
 })
-
 const httpLink = new HttpLink({ uri: config.BASE_URL })
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
@@ -44,13 +43,17 @@ const link = ApolloLink.from([
 
 const defaultOptions = {
   watchQuery: {
-    fetchPolicy: 'cache-first',
+    // fetchPolicy: 'cache-first',
     // fetchPolicy: 'cache-and-network',
+    // fetchPolicy: 'network-only',
+    fetchPolicy: 'no-cache',
     errorPolicy: 'all',
   },
   query: {
     fetchPolicy: 'cache-first',
     // fetchPolicy: 'cache-and-network',
+    // fetchPolicy: 'network-only',
+    // fetchPolicy: 'no-cache',
     errorPolicy: 'all',
   },
   mutate: {

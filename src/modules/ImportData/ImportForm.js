@@ -10,21 +10,17 @@ import Create from '@material-ui/icons/Create'
 import Divider from '@material-ui/core/Divider'
 import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-// import FormLabel from '@material-ui/core/FormLabel'
 import Paper from '@material-ui/core/Paper'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
-import MomentUtils from 'material-ui-pickers/utils/moment-utils'
-import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider'
 import DatePicker from 'material-ui-pickers/DatePicker'
 
 import Toaster from '../Common/Toaster'
 import ImportLog from './ImportLog'
-import { STD_DATE_FORMAT as dateFormat } from '../../config/constants'
-import { MAX_IMPORT_DAYS as maxImportDays } from '../../config/constants'
+import { STD_DATE_FORMAT as dateFormat, MAX_IMPORT_DAYS as maxImportDays } from '../../config/constants'
 
 
 const IMPORT_FUELSALES = gql`
@@ -67,7 +63,9 @@ class ImportForm extends Component {
   }
 
   handleStartDateChange = (date) => {
-    this.setState({ selectedStartDate: date, startDate: date.format(dateFormat) }, this.validateDates)
+    this.setState({
+      selectedStartDate: date, startDate: date.format(dateFormat),
+    }, this.validateDates)
   }
 
   handleEndDateChange = (date) => {
@@ -108,31 +106,27 @@ class ImportForm extends Component {
           <div className={classes.formRow}>
             <div className={classes.formCell}>
               <FormControl className={classes.formControl}>
-                <MuiPickersUtilsProvider utils={MomentUtils}>
-                  <DatePicker
-                    autoOk
-                    disableFuture
-                    format="MMM D, YYYY"
-                    label="Start Date"
-                    onChange={this.handleStartDateChange}
-                    value={selectedStartDate}
-                  />
-                </MuiPickersUtilsProvider>
+                <DatePicker
+                  autoOk
+                  disableFuture
+                  format="MMM D, YYYY"
+                  label="Start Date"
+                  onChange={this.handleStartDateChange}
+                  value={selectedStartDate}
+                />
               </FormControl>
             </div>
 
             <div className={classes.formCell}>
               <FormControl className={classes.formControl}>
-                <MuiPickersUtilsProvider utils={MomentUtils}>
-                  <DatePicker
-                    autoOk
-                    disableFuture
-                    format="MMM D, YYYY"
-                    label="End Date"
-                    onChange={this.handleEndDateChange}
-                    value={selectedEndDate}
-                  />
-                </MuiPickersUtilsProvider>
+                <DatePicker
+                  autoOk
+                  disableFuture
+                  format="MMM D, YYYY"
+                  label="End Date"
+                  onChange={this.handleEndDateChange}
+                  value={selectedEndDate}
+                />
               </FormControl>
             </div>
 
@@ -141,7 +135,6 @@ class ImportForm extends Component {
                 className={classes.formControl}
                 component="fieldset"
               >
-                {/* <FormLabel component="legend">Import Type</FormLabel> */}
                 <RadioGroup
                   aria-label="ImportType"
                   className={classes.radioGroup}
@@ -217,7 +210,7 @@ class ImportForm extends Component {
   }
 }
 ImportForm.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
 }
 
 const styles = theme => ({
