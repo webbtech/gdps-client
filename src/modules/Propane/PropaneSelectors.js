@@ -11,11 +11,8 @@ import Button from '@material-ui/core/Button'
 import FormControl from '@material-ui/core/FormControl'
 import { withStyles } from '@material-ui/core/styles'
 
-import MomentUtils from 'material-ui-pickers/utils/moment-utils'
-import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider'
 import DatePicker from 'material-ui-pickers/DatePicker'
 
-// import { extractPathParts } from '../../utils/utils'
 import { STD_DATE_FORMAT as dateFormat } from '../../config/constants'
 
 class PropaneSelectors extends Component {
@@ -30,7 +27,7 @@ class PropaneSelectors extends Component {
 
     const { match: { params } } = this.props
     if (!params.date) return
-    const date = params.date
+    const { date } = params
     // console.log('match: ', this.props.match.params)
     // console.log('date: ', date)
     // this.setState({ selectedDate: date }, this.handleGetEntry)
@@ -41,6 +38,12 @@ class PropaneSelectors extends Component {
     const dte = selectedDate.format(dateFormat)
     const uri = `${match.url}/${dte}`
     history.push(uri) */
+  }
+
+  setNextDisabled = () => {
+    const { selectedDate } = this.state
+    const today = moment().format(dateFormat)
+    this.setState({ nextDisabled: !selectedDate.isBefore(today) })
   }
 
   handleDateChange = (date) => {
@@ -68,12 +71,6 @@ class PropaneSelectors extends Component {
     history.push(uri)
   }
 
-  setNextDisabled = () => {
-    const { selectedDate } = this.state
-    const today = moment().format(dateFormat)
-    this.setState({ nextDisabled: !selectedDate.isBefore(today) })
-  }
-
   render() {
     const { classes } = this.props
     const { nextDisabled, selectedDate } = this.state
@@ -84,16 +81,14 @@ class PropaneSelectors extends Component {
 
           <div className={classNames([classes.cell], [classes.calendar])}>
             <FormControl className={classes.formControl}>
-              <MuiPickersUtilsProvider utils={MomentUtils}>
-                <DatePicker
-                  autoOk
-                  disableFuture
-                  format="MMM D, YYYY"
-                  label="Date"
-                  onChange={this.handleDateChange}
-                  value={selectedDate}
-                />
-              </MuiPickersUtilsProvider>
+              <DatePicker
+                autoOk
+                disableFuture
+                format="MMM D, YYYY"
+                label="Date"
+                onChange={this.handleDateChange}
+                value={selectedDate}
+              />
             </FormControl>
           </div>
 
@@ -124,10 +119,9 @@ class PropaneSelectors extends Component {
 }
 
 PropaneSelectors.propTypes = {
-  classes: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
+  match: PropTypes.instanceOf(Object).isRequired,
 }
 
 const styles = theme => ({

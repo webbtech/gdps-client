@@ -213,7 +213,7 @@ class ReportMenu extends Component {
                     color={setButtonColor(pathname, '/report-download-')}
                     onClick={() => this.handleToggle('openMenuDwnld')}
                   >
-                  Report Downloads
+                  Downloads
                   </Button>
                 </div>
               )}

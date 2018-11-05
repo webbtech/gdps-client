@@ -19,7 +19,7 @@ import PropaneSalesAnnual from './PropaneSalesAnnual'
 import ReportMenu from './ReportMenu'
 import StationReportDownload from './StationReportDownload'
 import PropaneReportDownload from './PropaneReportDownload'
-import FuelSalesSummaryDownload from './FuelSalesSummaryDownload'
+import FuelSalesSummaryDownload from './FuelSalesSummaryDownload.cntr'
 
 import { styles as ms } from '../../styles/main'
 

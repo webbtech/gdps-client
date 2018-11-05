@@ -36,7 +36,9 @@ class Download extends Component {
             variant="h6"
           >File Download
           </Typography>
-          <div className={classes.message}>Stand by your file is being prepared and will download shortly.</div>
+          <div className={classes.message}>
+            Stand by your file is being prepared and will download shortly.
+          </div>
           <Button
             className={classes.button}
             color="secondary"
@@ -51,7 +53,7 @@ class Download extends Component {
   }
 }
 Download.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
 }
 
 const styles = theme => ({

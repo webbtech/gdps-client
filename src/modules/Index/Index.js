@@ -1,19 +1,23 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import Amplify from 'aws-amplify'
+import Amplify, { Auth } from 'aws-amplify'
 import createHistory from 'history/createBrowserHistory'
 import Loadable from 'react-loadable'
 import { ApolloProvider } from 'react-apollo'
-import { Auth } from 'aws-amplify'
+// import { Auth } from 'aws-amplify'
 import { Authenticator } from 'aws-amplify-react'
 import { ConnectedRouter } from 'react-router-redux'
 import { Switch, Route } from 'react-router'
 
+import MomentUtils from 'material-ui-pickers/utils/moment-utils'
+import MuiPickersUtilsProvider from 'material-ui-pickers/MuiPickersUtilsProvider'
+import * as Sentry from '@sentry/browser'
+
 import Alert from '../Common/Alert'
-import aws_exports from '../Auth/aws-exports'
+import awsExports from '../Auth/aws-exports'
 import ChangePassword from '../Profile/ChangePassword'
-import client from '../../apollo.js'
+import client from '../../apollo'
 import Dashboard from './Dashboard'
 import Dips from '../Dips/Dips.cntr'
 import Download from '../Common/Download'
@@ -30,11 +34,10 @@ import ForgotPassword from '../Auth/ForgotPassword'
 import RequireNewPassword from '../Auth/RequireNewPassword'
 
 // Sentry
-import * as Sentry from '@sentry/browser'
 import { SENTRY_DSN } from '../../config/constants'
 
 
-Amplify.configure(aws_exports)
+Amplify.configure(awsExports)
 const history = createHistory()
 
 const Loading = () => <div>Loading...</div>
@@ -79,58 +82,60 @@ class Index extends Component {
     return (
       <ApolloProvider client={client}>
         <ConnectedRouter history={history}>
-          <div>
-            <Errors />
-            <Switch>
-              <Route
-                component={Dashboard}
-                exact
-                path="/"
-              />
-              <Route
-                component={Dips}
-                exact
-                path="/dips"
-              />
-              <Route
-                component={Dips}
-                path="/dips/:date/:stationID"
-              />
-              <Route
-                component={Reports}
-                path="/reports"
-              />
-              <Route
-                component={Propane}
-                exact
-                path="/propane"
-              />
-              <Route
-                component={Propane}
-                path="/propane/:date"
-              />
-              <Route
-                component={ImportData}
-                path="/import-data"
-              />
-              <Route
-                component={Admin}
-                path="/admin"
-              />
-              <Route
-                component={Profile}
-                path="/profile"
-              />
-              <Route
-                component={ChangePassword}
-                path="/change-password"
-              />
-              <Route
-                component={Download}
-                path="/download"
-              />
-            </Switch>
-          </div>
+          <MuiPickersUtilsProvider utils={MomentUtils}>
+            <div>
+              <Errors />
+              <Switch>
+                <Route
+                  component={Dashboard}
+                  exact
+                  path="/"
+                />
+                <Route
+                  component={Dips}
+                  exact
+                  path="/dips"
+                />
+                <Route
+                  component={Dips}
+                  path="/dips/:date/:stationID"
+                />
+                <Route
+                  component={Reports}
+                  path="/reports"
+                />
+                <Route
+                  component={Propane}
+                  exact
+                  path="/propane"
+                />
+                <Route
+                  component={Propane}
+                  path="/propane/:date"
+                />
+                <Route
+                  component={ImportData}
+                  path="/import-data"
+                />
+                <Route
+                  component={Admin}
+                  path="/admin"
+                />
+                <Route
+                  component={Profile}
+                  path="/profile"
+                />
+                <Route
+                  component={ChangePassword}
+                  path="/change-password"
+                />
+                <Route
+                  component={Download}
+                  path="/download"
+                />
+              </Switch>
+            </div>
+          </MuiPickersUtilsProvider>
         </ConnectedRouter>
       </ApolloProvider>
     )
@@ -140,10 +145,13 @@ class Index extends Component {
 Index.propTypes = {
   authState: PropTypes.string,
 }
+Index.defaultProps = {
+  authState: '',
+}
 
 class AppWithAuth extends Component { // eslint-disable-line react/no-multi-comp
   state = {
-    user: '',
+    user: '', // eslint-disable-line
   }
 
   async componentWillMount() {
