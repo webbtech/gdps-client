@@ -6,14 +6,11 @@ import { shallow } from 'enzyme'
 import TankForm from '../TankForm.cntr'
 
 describe('TankForm', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = shallow(
-        <TankForm {...props} />
-      )
+      mountedC = shallow(<TankForm {...props} />)
     }
     return mountedC
   }
@@ -28,5 +25,4 @@ describe('TankForm', () => {
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

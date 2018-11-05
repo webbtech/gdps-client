@@ -3,36 +3,35 @@
 import React from 'react'
 import { MemoryRouter as Router } from 'react-router-dom'
 import { render } from 'enzyme'
+import MomentUtils from 'material-ui-pickers/utils/moment-utils'
+import MuiPickersUtilsProvider from 'material-ui-pickers/MuiPickersUtilsProvider'
 
 import PropaneSelectors from '../PropaneSelectors'
 
 describe('PropaneSelectors', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = render(
-        <Router><PropaneSelectors {...props} /></Router>
-      )
+      mountedC = render( // eslint-disable-line
+        <Router>
+          <MuiPickersUtilsProvider utils={MomentUtils}>
+            <PropaneSelectors {...props} />
+          </MuiPickersUtilsProvider>
+        </Router>
+      ) // eslint-disable-line
     }
     return mountedC
   }
 
   beforeEach(() => {
     props = {
-      history: {location: {pathname: '/'}},
+      history: { location: { pathname: '/' } },
     }
     mountedC = undefined
-  })
-
-  it('always renders a div', () => {
-    const divs = reportC().find('div')
-    expect(divs.length).toBeGreaterThan(0)
   })
 
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

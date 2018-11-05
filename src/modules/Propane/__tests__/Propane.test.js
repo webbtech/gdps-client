@@ -6,14 +6,11 @@ import { shallow } from 'enzyme'
 import Propane from '../Propane'
 
 describe('Propane', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = shallow(
-        <Propane {...props} />
-      )
+      mountedC = shallow(<Propane {...props} />)
     }
     return mountedC
   }
@@ -30,5 +27,4 @@ describe('Propane', () => {
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

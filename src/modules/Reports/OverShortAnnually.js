@@ -15,10 +15,8 @@ import { FUEL_TYPE_LIST } from '../../config/constants'
 
 
 const Report = ({ classes, data }) => {
-
   if (!data) return null
-  if (data && data.loading)
-    return <div className={classes.container}><Loader /></div>
+  if (data && data.loading) { return <div className={classes.container}><Loader /></div> }
 
   if (!data.dipOSAnnualReport) {
     return (
@@ -34,32 +32,33 @@ const Report = ({ classes, data }) => {
     <div className={classes.container}>
       <Paper className={classes.reportContainer}>
         <Typography
-            className={classes.title}
-            gutterBottom
-            variant="h6"
-        >OverShort Annual</Typography>
+          className={classes.title}
+          gutterBottom
+          variant="h6"
+        >OverShort Annual
+        </Typography>
         <br />
         <ReportHeading
-            classes={classes}
-            data={fts}
+          classes={classes}
+          data={fts}
         />
         <ReportData
-            classes={classes}
-            data={data.dipOSAnnualReport.months}
-            fuelTypes={fts}
+          classes={classes}
+          data={data.dipOSAnnualReport.months}
+          fuelTypes={fts}
         />
         <ReportSummary
-            classes={classes}
-            data={data.dipOSAnnualReport.summary}
-            fuelTypes={fts}
+          classes={classes}
+          data={data.dipOSAnnualReport.summary}
+          fuelTypes={fts}
         />
       </Paper>
     </div>
   )
 }
 Report.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.object,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object,
 }
 
 const ReportHeading = ({ classes, data }) => (
@@ -67,46 +66,44 @@ const ReportHeading = ({ classes, data }) => (
     <div className={classes.headerCell}>Month</div>
     {data.map(ft => (
       <div
-          className={classes.headerCellRt}
-          key={ft}
-      >{ft}</div>
+        className={classes.headerCellRt}
+        key={ft}
+      >{ft}
+      </div>
     ))}
   </div>
 )
 ReportHeading.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.array.isRequired,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
 }
 
 const ReportData = ({ classes, data, fuelTypes }) => {
-
-  let rows = []
+  const rows = []
   for (const d in data) {
-    rows.push(
-      <div
-          className={classes.reportDataRow}
-          key={d}
-      >
-        <div className={classes.reportDataDateCell}>
-          {moment(`${d.toString()}01`).format('MMM')}
-        </div>
-        {fuelTypes.map(ft => (
-          <div
-              className={classNames(classes.reportDataCell, {[classes.reportDataNeg]: data[d][ft] < 0})}
-              key={ft}
-          >
-            {utils.fmtNumber(data[d][ft], 2, true)}
-          </div>
-        ))}
+    rows.push(<div
+      className={classes.reportDataRow}
+      key={d}
+    >
+      <div className={classes.reportDataDateCell}>
+        {moment(`${d.toString()}01`).format('MMM')}
       </div>
-    )
+      {fuelTypes.map(ft => (
+        <div
+          className={classNames(classes.reportDataCell, { [classes.reportDataNeg]: data[d][ft] < 0 })}
+          key={ft}
+        >
+          {utils.fmtNumber(data[d][ft], 2, true)}
+        </div>
+        ))}
+    </div>)
   }
 
   return rows
 }
 ReportData.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
 }
 
 const ReportSummary = ({ classes, data, fuelTypes }) => (
@@ -114,8 +111,8 @@ const ReportSummary = ({ classes, data, fuelTypes }) => (
     <div className={classes.reportDataDateCell} />
     {fuelTypes.map(ft => (
       <div
-          className={classNames(classes.reportSummaryCell, {[classes.reportDataNeg]: data[ft] < 0})}
-          key={ft}
+        className={classNames(classes.reportSummaryCell, { [classes.reportDataNeg]: data[ft] < 0 })}
+        key={ft}
       >
         {utils.fmtNumber(data[ft], 2, true)}
       </div>
@@ -123,26 +120,24 @@ const ReportSummary = ({ classes, data, fuelTypes }) => (
   </div>
 )
 ReportSummary.propTypes = {
-  classes:    PropTypes.object.isRequired,
-  data:       PropTypes.object.isRequired,
-  fuelTypes:  PropTypes.array.isRequired,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+  fuelTypes: PropTypes.array.isRequired,
 }
 
 
 class OverShortAnnually extends Component {
-
-  componentDidUpdate = prevProps => {
+  componentDidUpdate = (prevProps) => {
     if (!prevProps.data) return
     if (!prevProps.data.error && this.props.data.error) {
       const errMsg = this.props.data.error.message
       const ts = moment.utc().format()
       const msg = `${errMsg} -- ${ts}`
-      this.props.actions.errorSend({message: msg, type: 'danger'})
+      this.props.actions.errorSend({ message: msg, type: 'danger' })
     }
   }
 
   render() {
-
     const { classes, data } = this.props
 
     if (data && data.error) {
@@ -152,72 +147,72 @@ class OverShortAnnually extends Component {
     return (
       <div className={classes.mainContainer}>
         <ReportSelectors
-            hideMonth
+          hideMonth
         />
         <Report
-            classes={classes}
-            data={data}
+          classes={classes}
+          data={data}
         />
       </div>
     )
   }
 }
 OverShortAnnually.propTypes = {
-  actions:  PropTypes.object.isRequired,
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.object,
+  actions: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object,
   location: PropTypes.object.isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   container: {
-    display:        'flex',
-    flexDirection:  'column',
-    fontFamily:     theme.typography.fontFamily,
-    marginTop:      theme.spacing.unit * 3,
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: theme.typography.fontFamily,
+    marginTop: theme.spacing.unit * 3,
   },
   headerRow: {
-    borderBottom:       'solid 1px',
-    borderBottomColor:  theme.palette.grey['300'],
-    color:              theme.palette.grey['700'],
-    display:            'flex',
-    flexDirection:      'row',
-    paddingBottom:      theme.spacing.unit,
-    paddingLeft:        theme.spacing.unit * 2,
-    paddingRight:       theme.spacing.unit * 2,
+    borderBottom: 'solid 1px',
+    borderBottomColor: theme.palette.grey['300'],
+    color: theme.palette.grey['700'],
+    display: 'flex',
+    flexDirection: 'row',
+    paddingBottom: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
   },
   headerCell: {
     width: 80,
   },
   headerCellRt: {
-    textAlign:  'right',
+    textAlign: 'right',
     width: 120,
   },
   mainContainer: {
-    width:  600,
+    width: 600,
     margin: 'auto',
   },
   reportContainer: {
-    flexDirection:  'column',
-    marginBottom:   theme.spacing.unit * 2,
-    paddingBottom:  theme.spacing.unit * 2,
-    paddingTop:     theme.spacing.unit * 2,
+    flexDirection: 'column',
+    marginBottom: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+    paddingTop: theme.spacing.unit * 2,
   },
   reportDataRow: {
-    borderBottom:       'solid 1px',
-    borderBottomColor:  theme.palette.grey['300'],
-    display:            'flex',
-    flexDirection:      'row',
-    paddingBottom:      theme.spacing.unit,
-    paddingTop:         theme.spacing.unit,
-    paddingLeft:        theme.spacing.unit * 2,
-    paddingRight:       theme.spacing.unit * 2,
+    borderBottom: 'solid 1px',
+    borderBottomColor: theme.palette.grey['300'],
+    display: 'flex',
+    flexDirection: 'row',
+    paddingBottom: theme.spacing.unit,
+    paddingTop: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
     '&:hover': {
       backgroundColor: theme.palette.grey['100'],
     },
   },
   reportDataCell: {
-    textAlign:  'right',
+    textAlign: 'right',
     width: 120,
   },
   reportDataNeg: {
@@ -227,20 +222,20 @@ const styles =  theme => ({
     width: 80,
   },
   reportSummaryCell: {
-    textAlign:  'right',
+    textAlign: 'right',
     fontWeight: 500,
     width: 120,
   },
   reportSummaryRow: {
-    display:            'flex',
-    flexDirection:      'row',
-    paddingBottom:      theme.spacing.unit,
-    paddingTop:         theme.spacing.unit,
-    paddingLeft:        theme.spacing.unit * 2,
-    paddingRight:       theme.spacing.unit * 2,
+    display: 'flex',
+    flexDirection: 'row',
+    paddingBottom: theme.spacing.unit,
+    paddingTop: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
   },
   title: {
-    paddingLeft:        theme.spacing.unit * 2,
+    paddingLeft: theme.spacing.unit * 2,
   },
 })
 

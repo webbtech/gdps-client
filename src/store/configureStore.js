@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === 'production') {
   // if (env === 'development') {
   module.exports = require('./configureStore.dev')
   // } else if (env === 'stage') {
-    // module.exports = require('./configureStore.stg')
+  // module.exports = require('./configureStore.stg')
   // }
 }
 

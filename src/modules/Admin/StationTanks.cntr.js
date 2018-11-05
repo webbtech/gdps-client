@@ -33,7 +33,7 @@ mutation ToggleActive($fields: StationTankActiveInput) {
 const FetchTanks = graphql(TANK_QUERY, {
   skip: ({ match }) => !match || !match.params.stationID,
   options: ({ match }) => ({
-    variables: {stationID: match.params.stationID},
+    variables: { stationID: match.params.stationID },
   }),
 })
 

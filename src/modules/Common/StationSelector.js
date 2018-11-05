@@ -19,7 +19,6 @@ const QUERY = gql`
 `
 
 class StationSelector extends React.Component {
-
   constructor(props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)
@@ -30,7 +29,6 @@ class StationSelector extends React.Component {
   }
 
   render() {
-
     const { data, stationID } = this.props
 
     if (data.loading) return <p>Loading...</p>
@@ -42,19 +40,20 @@ class StationSelector extends React.Component {
       <div>
         <InputLabel htmlFor="station-select">Station</InputLabel>
         <Select
-            inputProps={{
+          inputProps={{
               name: 'stationID',
               id: 'station-select',
             }}
-            onChange={this.handleChange}
-            style={{minWidth: 110}}
-            value={stationID}
+          onChange={this.handleChange}
+          style={{ minWidth: 110 }}
+          value={stationID}
         >
           {data.stations && data.stations.map(({ id, name }) => (
             <MenuItem
-                key={id}
-                value={id}
-            >{name}</MenuItem>
+              key={id}
+              value={id}
+            >{name}
+            </MenuItem>
           ))}
         </Select>
       </div>
@@ -63,9 +62,9 @@ class StationSelector extends React.Component {
 }
 
 StationSelector.propTypes = {
-  data:             PropTypes.object.isRequired,
-  onStationChange:  PropTypes.func.isRequired,
-  stationID:        PropTypes.string,
+  data: PropTypes.object.isRequired,
+  onStationChange: PropTypes.func.isRequired,
+  stationID: PropTypes.string,
 }
 
 export default graphql(QUERY)(StationSelector)

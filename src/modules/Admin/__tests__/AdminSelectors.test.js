@@ -7,14 +7,11 @@ import { render } from 'enzyme'
 import AdminSelectors from '../AdminSelectors'
 
 describe('AdminSelectors', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = render(
-        <Router><AdminSelectors {...props} /></Router>
-      )
+      mountedC = render(<Router><AdminSelectors {...props} /></Router>)
     }
     return mountedC
   }
@@ -34,5 +31,4 @@ describe('AdminSelectors', () => {
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

@@ -7,14 +7,11 @@ import { render } from 'enzyme'
 import Admin from '../Admin'
 
 describe('Admin', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = render(
-        <Router><Admin {...props} /></Router>
-      )
+      mountedC = render(<Router><Admin {...props} /></Router>)
     }
     return mountedC
   }
@@ -34,5 +31,4 @@ describe('Admin', () => {
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

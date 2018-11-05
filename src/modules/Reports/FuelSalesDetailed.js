@@ -33,17 +33,16 @@ query FuelSaleDetailedReport($date: String!, $stationID: String!) {
 `
 
 const Report = ({ data, classes }) => {
-
   if (!data) return null
-  if (data && data.loading)
-    return <div className={classes.container}><Loader /></div>
+  if (data && data.loading) { return <div className={classes.container}><Loader /></div> }
 
   if (!data.fuelSaleDetailedReport) {
     return (
       <div className={classes.container}>
         <Typography
-            variant="body2"
-        >There is no data available for the specified date.</Typography>
+          variant="body2"
+        >There is no data available for the specified date.
+        </Typography>
       </div>
     )
   }
@@ -52,23 +51,24 @@ const Report = ({ data, classes }) => {
   return (
     <div className={classes.container}>
       <Typography
-          gutterBottom
-          variant="h5"
-      >Fuel Sales Station Detail</Typography>
+        gutterBottom
+        variant="h5"
+      >Fuel Sales Station Detail
+      </Typography>
       {data.fuelSaleDetailedReport.weekSales.map((sale, i) => (
         <Week
-            classes={classes}
-            data={sale}
-            fuelTypes={fts}
-            key={i}
+          classes={classes}
+          data={sale}
+          fuelTypes={fts}
+          key={i}
         />
       ))}
     </div>
   )
 }
 Report.propTypes = {
-  classes:    PropTypes.object.isRequired,
-  data:       PropTypes.object,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object,
 }
 
 const WeekHeader = ({ wkNo, fuelTypes, classes }) => (
@@ -76,16 +76,17 @@ const WeekHeader = ({ wkNo, fuelTypes, classes }) => (
     <div className={classes.weekHdrCell}>Week {wkNo}</div>
     {fuelTypes.map(ft => (
       <div
-          className={classes.weekDataRt}
-          key={ft}
-      >{ft}</div>
+        className={classes.weekDataRt}
+        key={ft}
+      >{ft}
+      </div>
     ))}
   </div>
 )
 WeekHeader.propTypes = {
-  classes:    PropTypes.object.isRequired,
-  fuelTypes:  PropTypes.array.isRequired,
-  wkNo:       PropTypes.string.isRequired,
+  classes: PropTypes.object.isRequired,
+  fuelTypes: PropTypes.array.isRequired,
+  wkNo: PropTypes.string.isRequired,
 }
 
 const Week = ({ data, fuelTypes, classes }) => {
@@ -93,60 +94,60 @@ const Week = ({ data, fuelTypes, classes }) => {
   return (
     <Paper className={classes.weekContainer}>
       <WeekHeader
-          classes={classes}
-          fuelTypes={fuelTypes}
-          wkNo={wkNo}
+        classes={classes}
+        fuelTypes={fuelTypes}
+        wkNo={wkNo}
       />
       {data.sales.map(sale => (
         <div
-            className={classes.weekDataRow}
-            key={sale.date}
+          className={classes.weekDataRow}
+          key={sale.date}
         >
           <div className={classes.weekDataCell}>{moment(sale.date.toString()).format('MMM DD')}</div>
           {fuelTypes.map(ft => (
             <div
-                className={classes.weekDataRt}
-                key={ft}
-            >{utils.fmtNumber(sale.sales[ft], 0, true)}</div>
+              className={classes.weekDataRt}
+              key={ft}
+            >{utils.fmtNumber(sale.sales[ft], 0, true)}
+            </div>
           ))}
         </div>
       ))}
       <WeekSummary
-          classes={classes}
-          data={data.totals}
-          fuelTypes={fuelTypes}
+        classes={classes}
+        data={data.totals}
+        fuelTypes={fuelTypes}
       />
     </Paper>
   )
 }
 Week.propTypes = {
-  classes:    PropTypes.object.isRequired,
-  data:       PropTypes.object.isRequired,
-  fuelTypes:  PropTypes.array.isRequired,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+  fuelTypes: PropTypes.array.isRequired,
 }
 
-const WeekSummary = ({ data, fuelTypes, classes }) =>  (
+const WeekSummary = ({ data, fuelTypes, classes }) => (
   <div className={classes.weekSummary}>
     <div className={classes.weekDataCell} >{'  '}</div>
     {fuelTypes.map(ft => (
       <div
-          className={classes.weekDataRt}
-          key={ft}
-      >{utils.fmtNumber(data[ft], 0, true)}</div>
+        className={classes.weekDataRt}
+        key={ft}
+      >{utils.fmtNumber(data[ft], 0, true)}
+      </div>
     ))}
   </div>
 )
 WeekSummary.propTypes = {
-  classes:    PropTypes.object.isRequired,
-  data:       PropTypes.object.isRequired,
-  fuelTypes:  PropTypes.array.isRequired,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+  fuelTypes: PropTypes.array.isRequired,
 }
 
 
 class FuelSalesDetailed extends Component {
-
   render() {
-
     const { classes, data } = this.props
 
     if (data && data.error) {
@@ -157,8 +158,8 @@ class FuelSalesDetailed extends Component {
       <div className={classes.mainContainer}>
         <ReportSelectors />
         <Report
-            classes={classes}
-            data={data}
+          classes={classes}
+          data={data}
         />
       </div>
     )
@@ -166,74 +167,74 @@ class FuelSalesDetailed extends Component {
 }
 
 FuelSalesDetailed.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.object,
-  history:  PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object,
+  history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
-  match:    PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   container: {
-    display:        'flex',
-    flexDirection:  'column',
-    fontFamily:     theme.typography.fontFamily,
-    marginTop:      theme.spacing.unit * 5,
-    width:          theme.spacing.unit * 55,
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: theme.typography.fontFamily,
+    marginTop: theme.spacing.unit * 5,
+    width: theme.spacing.unit * 55,
   },
   mainContainer: {
-    width:  600,
+    width: 600,
     margin: 'auto',
   },
   weekContainer: {
-    display:        'flex-inline',
-    marginBottom:   theme.spacing.unit * 5,
-    paddingBottom:   theme.spacing.unit * 2,
-    paddingTop:      theme.spacing.unit * 2,
+    display: 'flex-inline',
+    marginBottom: theme.spacing.unit * 5,
+    paddingBottom: theme.spacing.unit * 2,
+    paddingTop: theme.spacing.unit * 2,
   },
   weekHdrRow: {
-    borderBottom:       'solid 1px',
-    borderBottomColor:  theme.palette.grey['300'],
-    color:              theme.palette.grey['700'],
-    display:            'flex',
-    flexDirection:      'row',
-    fontWeight:         400,
-    paddingBottom:      theme.spacing.unit,
-    paddingLeft:        theme.spacing.unit * 2,
-    paddingRight:       theme.spacing.unit * 2,
+    borderBottom: 'solid 1px',
+    borderBottomColor: theme.palette.grey['300'],
+    color: theme.palette.grey['700'],
+    display: 'flex',
+    flexDirection: 'row',
+    fontWeight: 400,
+    paddingBottom: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
   },
   weekHdrCell: {
-    display:    'flex',
-    flex:       1,
-    textAlign:  'right',
+    display: 'flex',
+    flex: 1,
+    textAlign: 'right',
   },
   weekDataRow: {
-    borderBottom:       'solid 1px',
-    borderBottomColor:  theme.palette.grey['300'],
-    display:            'flex',
-    flexDirection:      'row',
-    paddingBottom:      theme.spacing.unit,
-    paddingTop:         theme.spacing.unit,
-    paddingLeft:        theme.spacing.unit * 2,
-    paddingRight:       theme.spacing.unit * 2,
+    borderBottom: 'solid 1px',
+    borderBottomColor: theme.palette.grey['300'],
+    display: 'flex',
+    flexDirection: 'row',
+    paddingBottom: theme.spacing.unit,
+    paddingTop: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
     '&:hover': {
       backgroundColor: theme.palette.grey['100'],
     },
   },
   weekDataCell: {
-    flex:     1,
+    flex: 1,
   },
   weekDataRt: {
-    flex:       1,
-    textAlign:  'right',
+    flex: 1,
+    textAlign: 'right',
   },
   weekSummary: {
-    display:        'flex',
-    flexDirection:  'row',
-    fontWeight:     500,
-    paddingTop:     theme.spacing.unit,
-    paddingLeft:        theme.spacing.unit * 2,
-    paddingRight:       theme.spacing.unit * 2,
+    display: 'flex',
+    flexDirection: 'row',
+    fontWeight: 500,
+    paddingTop: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
   },
 })
 
@@ -243,8 +244,8 @@ export default graphql(FSD_REPORT_QUERY, {
     const prts = utils.extractPathParts(props.location.pathname, 3)
     return ({
       variables: {
-        date:       moment(prts[0]).format('YYYY-MM-DD'),
-        stationID:  prts[1],
+        date: moment(prts[0]).format('YYYY-MM-DD'),
+        stationID: prts[1],
       },
     })
   },

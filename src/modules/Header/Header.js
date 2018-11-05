@@ -21,7 +21,6 @@ import { LOGROCKET_ID } from '../../config/constants'
 
 // function Header(props) {
 class Header extends React.Component {
-
   constructor(props) {
     super(props)
     this.handleCloseMainMenu = this.handleCloseMainMenu.bind(this)
@@ -30,31 +29,31 @@ class Header extends React.Component {
     this.handleMainMenu = this.handleMainMenu.bind(this)
 
     this.state = {
-      auth:           true,
-      anchorEl:       null,
-      menuEl:         null,
-      selectedIndex:  this.props.history.location.pathname,
-      user:           '',
+      auth: true,
+      anchorEl: null,
+      menuEl: null,
+      selectedIndex: this.props.history.location.pathname,
+      user: '',
     }
   }
 
   componentDidMount = () => {
     Auth.currentUserInfo()
     // Auth.currentAuthenticatedUser()
-    .then(user => {
+      .then((user) => {
       // console.log('user in componentDidMount: ', user.attributes)
-      this.setState({user: user.attributes})
-      if (user) {
-        LogRocket.init(LOGROCKET_ID)
-        const id = user.username
+        this.setState({ user: user.attributes })
+        if (user) {
+          LogRocket.init(LOGROCKET_ID)
+          const id = user.username
 
-        LogRocket.identify(id, {
-          name: user.attributes.name,
-          email: user.attributes.email,
-          environment: 'prod',
-        })
-      }
-    })
+          LogRocket.identify(id, {
+            name: user.attributes.name,
+            email: user.attributes.email,
+            environment: 'prod',
+          })
+        }
+      })
     .catch(err => console.log(err)) // eslint-disable-line
   }
 
@@ -70,7 +69,7 @@ class Header extends React.Component {
     this.setState({ anchorEl: null })
   }
 
-  handleMainMenu = event => {
+  handleMainMenu = (event) => {
     this.setState({ menuEl: event.currentTarget })
   }
 
@@ -78,93 +77,96 @@ class Header extends React.Component {
     this.setState({ menuEl: null })
   }
 
-  handleNavigate = url => {
-     this.props.history.push(url)
-     this.setState(() => ({selectedIndex: url, menuEl: null}))
+  handleNavigate = (url) => {
+    this.props.history.push(url)
+    this.setState(() => ({ selectedIndex: url, menuEl: null }))
   }
 
   handleLogout = () => {
     Auth.signOut()
-    .then(() => {
+      .then(() => {
       // this.props.history.push('/')
       // window.open('/')
-      window.location.replace ('/')
-    })
+        window.location.replace('/')
+      })
     .catch(err => console.error(err)) // eslint-disable-line
   }
 
   render() {
-
     const { classes } = this.props
-    const { auth, anchorEl, menuEl, selectedIndex, user } = this.state
+    const {
+      auth, anchorEl, menuEl, selectedIndex, user,
+    } = this.state
     const open = Boolean(anchorEl)
     const openMenu = Boolean(menuEl)
 
     return (
       <div className={classes.root}>
         <AppBar
-            color="secondary"
-            position="static"
+          color="secondary"
+          position="static"
         >
           <Toolbar>
             <IconButton
-                aria-label="Menu"
-                className={classes.menuButton}
-                color="inherit"
-                onClick={e => this.handleMainMenu(e)}
+              aria-label="Menu"
+              className={classes.menuButton}
+              color="inherit"
+              onClick={e => this.handleMainMenu(e)}
             >
               <MenuIcon />
             </IconButton>
             <Menu
-                anchorEl={menuEl}
-                id="main-menu"
-                onClose={this.handleCloseMainMenu}
-                open={openMenu}
-                transformOrigin={{
+              anchorEl={menuEl}
+              id="main-menu"
+              onClose={this.handleCloseMainMenu}
+              open={openMenu}
+              transformOrigin={{
                   vertical: 'top',
                   horizontal: 'left',
                 }}
             >
-              {menuItems.map((m) => (
+              {menuItems.map(m => (
                 <MenuItem
-                    disabled={m.uri === selectedIndex}
-                    key={m.uri}
-                    onClick={() => this.handleNavigate(m.uri)}
-                    selected={m.uri === selectedIndex}
-                >{m.label}</MenuItem>
+                  disabled={m.uri === selectedIndex}
+                  key={m.uri}
+                  onClick={() => this.handleNavigate(m.uri)}
+                  selected={m.uri === selectedIndex}
+                >{m.label}
+                </MenuItem>
               ))}
             </Menu>
             <Typography
-                className={classes.flex}
-                color="inherit"
-                variant="h6"
+              className={classes.flex}
+              color="inherit"
+              variant="h6"
             >
               <Link
-                  className={classes.titleLink}
-                  to="/"
-              >Gales Dips</Link>
+                className={classes.titleLink}
+                to="/"
+              >Gales Dips
+              </Link>
             </Typography>
             {auth && (
               <div>
                 {user.name}
                 <IconButton
-                    aria-haspopup="true"
-                    aria-owns={open ? 'menu-appbar' : null}
-                    color="inherit"
-                    onClick={e => this.handleProfileMenu(e)}
+                  aria-haspopup="true"
+                  aria-owns={open ? 'menu-appbar' : null}
+                  color="inherit"
+                  onClick={e => this.handleProfileMenu(e)}
                 >
                   <AccountCircle />
                 </IconButton>
                 <Menu
-                    anchorEl={anchorEl}
-                    anchorOrigin={{
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
                       vertical: 'top',
                       horizontal: 'right',
                     }}
-                    id="menu-appbar"
-                    onClose={() => this.handleCloseProfileMenu()}
-                    open={open}
-                    transformOrigin={{
+                  id="menu-appbar"
+                  onClose={() => this.handleCloseProfileMenu()}
+                  open={open}
+                  transformOrigin={{
                       vertical: 'top',
                       horizontal: 'right',
                     }}
@@ -186,31 +188,31 @@ Header.propTypes = {
   history: PropTypes.object.isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   root: {
-    flexGrow:   1,
+    flexGrow: 1,
     fontFamily: theme.typography.fontFamily,
   },
   flex: {
     flex: 1,
   },
   menuButton: {
-    marginLeft:   -12,
-    marginRight:  20,
+    marginLeft: -12,
+    marginRight: 20,
   },
   titleLink: {
     textDecoration: 'none',
-    color:          '#fff',
+    color: '#fff',
   },
 })
 
 const menuItems = [
-  {uri: '/', label: 'Dashboard'},
-  {uri: '/dips', label: 'Dip Entries'},
-  {uri: '/reports', label: 'Reports'},
-  {uri: '/propane', label: 'Propane Entries'},
-  {uri: '/import-data', label: 'Import Sales Data'},
-  {uri: '/admin', label: 'Administration'},
+  { uri: '/', label: 'Dashboard' },
+  { uri: '/dips', label: 'Dip Entries' },
+  { uri: '/reports', label: 'Reports' },
+  { uri: '/propane', label: 'Propane Entries' },
+  { uri: '/import-data', label: 'Import Sales Data' },
+  { uri: '/admin', label: 'Administration' },
 ]
 
 export default withRouter(withStyles(styles)(Header))

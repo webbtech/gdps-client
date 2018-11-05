@@ -15,7 +15,7 @@ const rootEl = document.getElementById('root')
 // for explanation on below
 let render = () => {
   // Dynamically import our main App component, and render it
-  const Index = require('./modules/Index/Index').default
+  const Index = require('./modules/Index/Index').default // eslint-disable-line
 
   ReactDOM.render(
     <Provider store={store}>
@@ -35,8 +35,7 @@ if (module.hot) {
   render = () => {
     try {
       renderApp()
-    }
-    catch(error) {
+    } catch (error) {
       console.error(error) // eslint-disable-line
       // renderError(error)
     }

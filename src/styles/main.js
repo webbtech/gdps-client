@@ -1,10 +1,10 @@
-export const styles =  theme => ({
-  /*dashBut: {
+export const styles = theme => ({
+  /* dashBut: {
     margin: 2,
-  },*/
-  /*root: {
+  }, */
+  /* root: {
     flexGrow: 1,
-  },*/
+  }, */
   root: {
     display: 'flex',
   },
@@ -28,7 +28,7 @@ export const styles =  theme => ({
     padding: theme.spacing.unit * 2,
   },
   popperClose: {
-    pointerEvents:  'none',
+    pointerEvents: 'none',
     zIndex: -1,
   },
 })

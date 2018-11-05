@@ -12,7 +12,6 @@ import { withStyles } from '@material-ui/core/styles'
 
 
 class AdminSelectors extends Component {
-
   state = {
     stationID: '',
   }
@@ -26,7 +25,7 @@ class AdminSelectors extends Component {
     }
   }
 
-  handleStationChange = event => {
+  handleStationChange = (event) => {
     this.setState({ [event.target.name]: event.target.value }, this.handleSetStation)
   }
 
@@ -41,7 +40,6 @@ class AdminSelectors extends Component {
   }
 
   render() {
-
     const { classes } = this.props
 
     return (
@@ -49,17 +47,17 @@ class AdminSelectors extends Component {
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="station-select">Station</InputLabel>
           <Select
-              inputProps={{
+            inputProps={{
                 name: 'stationID',
                 id: 'station-select',
               }}
-              onChange={this.handleStationChange}
-              value={this.state.stationID}
+            onChange={this.handleStationChange}
+            value={this.state.stationID}
           >
             {mockStations.map(s => (
               <MenuItem
-                  key={s.id}
-                  value={s.id}
+                key={s.id}
+                value={s.id}
               >
                 {s.name}
               </MenuItem>
@@ -72,24 +70,24 @@ class AdminSelectors extends Component {
 }
 
 AdminSelectors.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  history:  PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
-  match:    PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   formControl: {
-    margin:   theme.spacing.unit,
+    margin: theme.spacing.unit,
     minWidth: 120,
   },
 })
 
 const mockStations = [
-  {id: 'b-10', name: 'Bridge'},
-  {id: 'ch-20', name: 'Chippawa'},
-  {id: 'co-30', name: 'Collier'},
-  {id: 'd-40', name: 'Drummond'},
+  { id: 'b-10', name: 'Bridge' },
+  { id: 'ch-20', name: 'Chippawa' },
+  { id: 'co-30', name: 'Collier' },
+  { id: 'd-40', name: 'Drummond' },
 ]
 
 export default withRouter(withStyles(styles)(AdminSelectors))

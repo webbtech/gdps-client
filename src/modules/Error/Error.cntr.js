@@ -10,33 +10,29 @@ import { withStyles } from '@material-ui/core/styles'
 import Error from './Error'
 
 class ErrorContainer extends Component {
-
   render() {
-
     const { classes, errors } = this.props
 
-    const items = errors.map(err => {
-      return (
-        <CSSTransition
-            classNames={{
-              appear:       classes.appear,
+    const items = errors.map(err => (
+      <CSSTransition
+        classNames={{
+              appear: classes.appear,
               appearActive: classes.appearActive,
-              enter:        classes.enter,
-              enterActive:  classes.enterActive,
-              exit:         classes.exit,
-              exitActive:   classes.exitActive,
+              enter: classes.enter,
+              enterActive: classes.enterActive,
+              exit: classes.exit,
+              exitActive: classes.exitActive,
             }}
-            key={err.id}
-            timeout={{ enter: 500, exit: 300 }}
-        >
+        key={err.id}
+        timeout={{ enter: 500, exit: 300 }}
+      >
         <Error
-            message={err.message}
-            onClick={() => this.props.dismissError(err.id)}
-            type={err.type}
+          message={err.message}
+          onClick={() => this.props.dismissError(err.id)}
+          type={err.type}
         />
-        </CSSTransition>
-      )
-    })
+      </CSSTransition>
+    ))
 
     return (
       <div className={classes.errContainer}>
@@ -49,13 +45,13 @@ class ErrorContainer extends Component {
 }
 
 ErrorContainer.propTypes = {
-  classes:      PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
   dismissError: PropTypes.func.isRequired,
-  errors:       PropTypes.array,
+  errors: PropTypes.array,
 }
 
 const mapStateToProps = state => ({
-  errors:   state.errors,
+  errors: state.errors,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -65,27 +61,27 @@ const mapDispatchToProps = dispatch => ({
 const styles = theme => ({
   errContainer: {
     backgroundColor: '#fff',
-    fontFamily:       theme.typography.fontFamily,
-    left:             0,
-    minWidth:         500,
+    fontFamily: theme.typography.fontFamily,
+    left: 0,
+    minWidth: 500,
     // paddingBottom:    theme.spacing.unit,
-    position:         'fixed',
-    top:              0,
-    width:            '100%',
-    zIndex:           100,
+    position: 'fixed',
+    top: 0,
+    width: '100%',
+    zIndex: 100,
   },
   enter: {
     opacity: 0.01,
   },
   enterActive: {
-    opacity:    1,
+    opacity: 1,
     transition: 'opacity 500ms ease-in',
   },
   exit: {
     opacity: 1,
   },
   exitActive: {
-    opacity:    0.01,
+    opacity: 0.01,
     transition: 'opacity 300ms ease-in',
   },
   appear: {

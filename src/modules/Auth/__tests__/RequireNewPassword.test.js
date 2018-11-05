@@ -7,14 +7,11 @@ import { render } from 'enzyme'
 import RequireNewPassword from '../RequireNewPassword'
 
 describe('RequireNewPassword', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = render(
-        <Router><RequireNewPassword {...props} /></Router>
-      )
+      mountedC = render(<Router><RequireNewPassword {...props} /></Router>)
     }
     return mountedC
   }
@@ -35,5 +32,4 @@ describe('RequireNewPassword', () => {
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

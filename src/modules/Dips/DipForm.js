@@ -19,11 +19,10 @@ import { fmtNumber } from '../../utils/utils'
 
 
 class DipForm extends Component {
-
   constructor(props) {
     super(props)
     this.state = {
-      haveErrors: false,
+      // haveErrors: false,
       toasterMsg: '',
     }
     this.handleCalculateLitres = debounce(this.handleCalculateLitres, 250)
@@ -33,10 +32,10 @@ class DipForm extends Component {
   handleChange = (e) => {
     e.persist()
     const inputId = e.target.id
-    const val     = e.target.value
-    const pcs     = inputId.split('_')
-    const tankID  = pcs[0]
-    const field   = pcs[1]
+    const val = e.target.value
+    const pcs = inputId.split('_')
+    const tankID = pcs[0]
+    const field = pcs[1]
 
     // Clear any previous tank errors
     delete this.props.errors[tankID]
@@ -54,9 +53,8 @@ class DipForm extends Component {
   }
 
   handleCalculateLitres = (tankID, val) => {
-
-    let { errors } = this.props
-    let { tanks } = this.props.values
+    const { errors } = this.props
+    const { tanks } = this.props.values
 
     // Clear any old errors related this this tank
     delete errors[`${tankID}_level`]
@@ -70,9 +68,9 @@ class DipForm extends Component {
     let inputLevel = parseInt(val, 10)
     const origLevel = clone(inputLevel)
     if (inputLevel <= 1) return
-    const levels = tanks[tankID].tank.tank.levels
+    const { levels } = tanks[tankID].tank.tank
     if (inputLevel > 9 && !levels[inputLevel]) {
-      inputLevel--
+      inputLevel-- // eslint-disable-line
     }
 
     tanks[tankID].level = inputLevel
@@ -85,16 +83,15 @@ class DipForm extends Component {
   }
 
   handleDipComplete = () => {
-    this.setState({toasterMsg: 'Dip entry successfully persisted'})
+    this.setState({ toasterMsg: 'Dip entry successfully persisted' })
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault()
     this.props.handleSubmit(e)
   }
 
   render() {
-
     const {
       classes,
       dirty,
@@ -106,30 +103,33 @@ class DipForm extends Component {
       values,
     } = this.props
     const errorKeys = Object.keys(errors).length
-    let submitLabel = editMode ? 'Edit Dips' : 'Save Dips'
+    const submitLabel = editMode ? 'Edit Dips' : 'Save Dips'
 
-    let rows = []
-    for (const t in tankDips) {
+    const rows = []
+    const tdIDs = Object.keys(tankDips)
+
+    tdIDs.forEach((id) => {
       rows.push({
-        id:       t,
-        fuelType: tankDips[t].tank.fuelType,
-        tankID:   tankDips[t].tank.tankID,
-        size:     tankDips[t].tank.tank.size,
+        id,
+        fuelType: tankDips[id].tank.fuelType,
+        tankID: tankDips[id].tank.tankID,
+        size: tankDips[id].tank.tank.size,
       })
-    }
+    })
 
     return (
       <div className={classes.container}>
         <Typography
-            gutterBottom
-            variant="h6"
-        >Dips</Typography>
+          gutterBottom
+          variant="h6"
+        >Dips
+        </Typography>
 
         <form
-            autoComplete="off"
-            className={classes.form}
-            noValidate
-            onSubmit={this.handleSubmit}
+          autoComplete="off"
+          className={classes.form}
+          noValidate
+          onSubmit={this.handleSubmit}
         >
           <div className={classes.headerRow}>
             <div className={classes.headerCell}>Tank</div>
@@ -141,49 +141,51 @@ class DipForm extends Component {
 
           {rows.map((t, i) => (
             <div
-                className={classNames(
+              className={classNames(
                   classes.dataRow,
-                  {[classes.errorDanger]: errors[t.id]}
+                  { [classes.errorDanger]: errors[t.id] }
                 )}
-                key={t.id}
+              key={t.id}
             >
               <div className={classNames(classes.dataCell, classes.botSpacerField)}>
                 {t.size} ({t.tankID})
-                <span style={{display: 'inline', marginLeft: 15}}>{t.fuelType}</span>
+                <span style={{ display: 'inline', marginLeft: 15 }}>{t.fuelType}</span>
               </div>
               <div className={classes.dataCell}>
                 <FormControl
-                    aria-describedby="size-helper-text"
-                    className={classes.formControl}
-                    error={!!errors[`${t.id}_level`]}
+                  aria-describedby="size-helper-text"
+                  className={classes.formControl}
+                  error={!!errors[`${t.id}_level`]}
                 >
                   <Input
-                      autoFocus={i === 0}
-                      className={classes.input}
-                      id={`${t.id}_level`}
-                      onChange={this.handleChange}
-                      type="number"
-                      value={values.tanks[t.id] ? values.tanks[t.id].level : ''}
+                    autoFocus={i === 0}
+                    className={classes.input}
+                    id={`${t.id}_level`}
+                    onChange={this.handleChange}
+                    type="number"
+                    value={values.tanks[t.id] ? values.tanks[t.id].level : ''}
                   />
                   <FormHelperText id="level-text">{errors[`${t.id}_level`]}</FormHelperText>
                 </FormControl>
               </div>
-              <div className={classNames(classes.dataCell, classes.dataAlignRight, classes.botSpacerField)}>
+              <div className={
+                classNames(classes.dataCell, classes.dataAlignRight, classes.botSpacerField)}
+              >
                 {values.tanks[t.id] && fmtNumber(values.tanks[t.id].litres, 0, true)}
               </div>
-              <div  className={classes.dataCell}>
+              <div className={classes.dataCell}>
                 <FormControl
-                    aria-describedby="size-helper-text"
-                    className={classes.formControl}
-                    error={!!errors[`${t.id}_delivery`]}
+                  aria-describedby="size-helper-text"
+                  className={classes.formControl}
+                  error={!!errors[`${t.id}_delivery`]}
                 >
                   <Input
-                      className={classes.input}
-                      id={`${t.id}_delivery`}
-                      name="delivery"
-                      onChange={this.handleChange}
-                      type="number"
-                      value={values.tanks[t.id].delivery}
+                    className={classes.input}
+                    id={`${t.id}_delivery`}
+                    name="delivery"
+                    onChange={this.handleChange}
+                    type="number"
+                    value={values.tanks[t.id].delivery}
                   />
                   <FormHelperText id="delivery-text">{errors[`${t.id}_delivery`]}</FormHelperText>
                 </FormControl>
@@ -193,11 +195,11 @@ class DipForm extends Component {
           <div>
             <div className={classes.buttonContainer}>
               <Button
-                  className={classes.submitButton}
-                  color="primary"
-                  disabled={!dirty || isSubmitting || !!errorKeys}
-                  type="submit"
-                  variant="contained"
+                className={classes.submitButton}
+                color="primary"
+                disabled={!dirty || isSubmitting || !!errorKeys}
+                type="submit"
+                variant="contained"
               >
                 <Save className={classNames(classes.leftIcon, classes.iconSmall)} />
                 {submitLabel}
@@ -215,22 +217,21 @@ class DipForm extends Component {
 }
 
 DipForm.propTypes = {
-  actions:          PropTypes.object.isRequired,
-  classes:          PropTypes.object.isRequired,
-  dirty:            PropTypes.bool.isRequired,
-  editMode:         PropTypes.bool.isRequired,
-  errors:           PropTypes.object.isRequired,
-  handleSubmit:     PropTypes.func.isRequired,
-  havePrevDayDips:  PropTypes.bool.isRequired,
-  isSubmitting:     PropTypes.bool.isRequired,
-  match:            PropTypes.object.isRequired,
-  setFieldError:    PropTypes.func.isRequired,
-  setFieldValue:    PropTypes.func.isRequired,
-  tankDips:         PropTypes.object.isRequired,
-  values:           PropTypes.object.isRequired,
+  actions: PropTypes.instanceOf(Object).isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  dirty: PropTypes.bool.isRequired,
+  editMode: PropTypes.bool.isRequired,
+  errors: PropTypes.instanceOf(Object).isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  havePrevDayDips: PropTypes.bool.isRequired,
+  isSubmitting: PropTypes.bool.isRequired,
+  setFieldError: PropTypes.func.isRequired,
+  setFieldValue: PropTypes.func.isRequired,
+  tankDips: PropTypes.instanceOf(Object).isRequired,
+  values: PropTypes.instanceOf(Object).isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   alignRight: {
     textAlign: 'right',
   },
@@ -238,34 +239,34 @@ const styles =  theme => ({
     textAlign: 'center',
   },
   buttonContainer: {
-    display:        'flex',
-    flexDirection:  'column',
+    display: 'flex',
+    flexDirection: 'column',
   },
   container: {
-    display:        'flex',
-    flexDirection:  'column',
-    fontFamily:     theme.typography.fontFamily,
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: theme.typography.fontFamily,
   },
   dataAlignRight: {
-    textAlign:    'right',
-    marginRight:  theme.spacing.unit * 7,
-    marginLeft:   -(theme.spacing.unit * 7),
+    textAlign: 'right',
+    marginRight: theme.spacing.unit * 7,
+    marginLeft: -(theme.spacing.unit * 7),
   },
   dataCell: {
-    alignSelf:      'flex-end',
-    flex:           1,
-    padding:        theme.spacing.unit,
-    paddingBottom:  theme.spacing.unit * 2,
+    alignSelf: 'flex-end',
+    flex: 1,
+    padding: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit * 2,
   },
   dataRowError: {
     backgroundColor: '#FAC7C6',
   },
   dataRow: {
-    borderBottomColor:  '#efefef',
-    borderBottomStyle:  'solid',
-    borderBottomWidth:  1,
-    display:            'inline-flex',
-    flexDirection:      'row',
+    borderBottomColor: '#efefef',
+    borderBottomStyle: 'solid',
+    borderBottomWidth: 1,
+    display: 'inline-flex',
+    flexDirection: 'row',
   },
   delButton: {
     minWidth: 0,
@@ -274,26 +275,26 @@ const styles =  theme => ({
     backgroundColor: red[100],
   },
   form: {
-    display:        'flex',
-    flexDirection:  'column',
+    display: 'flex',
+    flexDirection: 'column',
   },
   input: {
-    paddingLeft:  10,
-    width:        theme.spacing.unit * 15,
+    paddingLeft: 10,
+    width: theme.spacing.unit * 15,
   },
   headerRow: {
-    borderBottomColor:  '#efefef',
-    borderBottomStyle:  'solid',
-    borderBottomWidth:  1,
-    display:            'inline-flex',
-    flexDirection:      'row',
-    paddingBottom:      4,
+    borderBottomColor: '#efefef',
+    borderBottomStyle: 'solid',
+    borderBottomWidth: 1,
+    display: 'inline-flex',
+    flexDirection: 'row',
+    paddingBottom: 4,
   },
   headerCell: {
-    color:      theme.palette.secondary.main,
-    flex:       1,
+    color: theme.palette.secondary.main,
+    flex: 1,
     fontWeight: '500',
-    padding:    theme.spacing.unit,
+    padding: theme.spacing.unit,
   },
   leftIcon: {
     marginRight: theme.spacing.unit,
@@ -305,13 +306,13 @@ const styles =  theme => ({
     fontSize: 20,
   },
   narrowCell: {
-    flex:           .5,
-    padding:        0,
-    paddingBottom:  theme.spacing.unit,
+    flex: 0.5,
+    padding: 0,
+    paddingBottom: theme.spacing.unit,
   },
   submitButton: {
-    margin:     theme.spacing.unit,
-    marginTop:  theme.spacing.unit * 3,
+    margin: theme.spacing.unit,
+    marginTop: theme.spacing.unit * 3,
   },
   submitMsg: {
     margin: 'auto',

@@ -16,21 +16,20 @@ import { withStyles } from '@material-ui/core/styles'
 
 
 class ConfirmSignIn extends Component {
-
   state = {
-    error:      '',
-    loading:    false,
-    snackMsg:   '',
-    snackOpen:  false,
+    error: '',
+    loading: false,
+    snackMsg: '',
+    snackOpen: false,
     code: '',
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  handleOpenSnack = msg => {
-    this.setState({ snackOpen: true, snackMsg: msg})
+  handleOpenSnack = (msg) => {
+    this.setState({ snackOpen: true, snackMsg: msg })
   }
 
   handleClose = () => {
@@ -41,21 +40,23 @@ class ConfirmSignIn extends Component {
     const { authData } = this.props
     try {
       this.setState({ loading: true })
-      let mfaType = 'SMS_MFA'
+      const mfaType = 'SMS_MFA'
       await Auth.confirmSignIn(authData, this.state.code, mfaType)
       this.setState({ loading: false, code: '' })
-
     } catch (err) {
       const errMsg = err.message || err
       console.log(`RequireNewPassword::onSubmit(): Error ${JSON.stringify(err, null, 2)}`) // eslint-disable-line
-      this.setState({ error: errMsg, loading: false, snackMsg: errMsg, snackOpen: true })
+      this.setState({
+        error: errMsg, loading: false, snackMsg: errMsg, snackOpen: true,
+      })
     }
   }
 
   render() {
-
     const { authState, classes } = this.props
-    const { loading, snackOpen, snackMsg, code } = this.state
+    const {
+      loading, snackOpen, snackMsg, code,
+    } = this.state
 
     if (authState !== 'confirmSignIn') return null
 
@@ -63,13 +64,13 @@ class ConfirmSignIn extends Component {
       <div>
         <Paper className={classes.container}>
           <AppBar
-              color="secondary"
-              position="static"
+            color="secondary"
+            position="static"
           >
             <Toolbar>
               <Typography
-                  color="inherit"
-                  variant="h6"
+                color="inherit"
+                variant="h6"
               >
                 Confirm Code
               </Typography>
@@ -79,30 +80,30 @@ class ConfirmSignIn extends Component {
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="code">Code</InputLabel>
             <Input
-                autoFocus
-                id="code"
-                name="code"
-                onChange={this.handleChange}
-                value={code}
+              autoFocus
+              id="code"
+              name="code"
+              onChange={this.handleChange}
+              value={code}
             />
           </FormControl>
 
           <Button
-              className={classes.submitButton}
-              color="primary"
-              disabled={loading}
-              onClick={() => this.onSubmit()}
-              variant="contained"
+            className={classes.submitButton}
+            color="primary"
+            disabled={loading}
+            onClick={() => this.onSubmit()}
+            variant="contained"
           >
             {loading ? 'Stand by...' : 'Confirm'}
           </Button>
         </Paper>
 
         <Snackbar
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            message={<span id="message-id">{snackMsg}</span>}
-            onClose={this.handleClose}
-            open={snackOpen}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          message={<span id="message-id">{snackMsg}</span>}
+          onClose={this.handleClose}
+          open={snackOpen}
         />
       </div>
     )
@@ -110,19 +111,19 @@ class ConfirmSignIn extends Component {
 }
 
 ConfirmSignIn.propTypes = {
-  authState:      PropTypes.string,
-  onSignIn:       PropTypes.func.isRequired,
-  onStateChange:  PropTypes.func.isRequired,
+  authState: PropTypes.string,
+  onSignIn: PropTypes.func.isRequired,
+  onStateChange: PropTypes.func.isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   container: {
-    display:        'flex',
-    flexDirection:  'column',
-    fontFamily:     theme.typography.fontFamily,
-    width:          theme.spacing.unit * 50,
-    margin:         'auto',
-    marginTop:      theme.spacing.unit * 2,
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: theme.typography.fontFamily,
+    width: theme.spacing.unit * 50,
+    margin: 'auto',
+    marginTop: theme.spacing.unit * 2,
   },
   formControl: {
     margin: theme.spacing.unit * 2,
@@ -133,7 +134,7 @@ const styles =  theme => ({
 })
 
 ConfirmSignIn.propTypes = {
-  classes:  PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(ConfirmSignIn)

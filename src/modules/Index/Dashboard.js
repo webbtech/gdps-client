@@ -14,41 +14,39 @@ import { styles as ms } from '../../styles/main'
 
 
 class Dashboard extends Component {
-
   render() {
-
     const { classes } = this.props
     return (
       <div>
         <Header />
         <Paper className={classes.paper}>
           <Typography
-              gutterBottom
-              variant="h5"
+            gutterBottom
+            variant="h5"
           >
             Select Activity
           </Typography>
           <Button
-              component={Link}
-              to="/dips"
+            component={Link}
+            to="/dips"
           >
             Dip Entries
           </Button>
           <Button
-              component={Link}
-              to="/propane"
+            component={Link}
+            to="/propane"
           >
             Propane Entries
           </Button>
           <Button
-              component={Link}
-              to="/reports"
+            component={Link}
+            to="/reports"
           >
             Reports
           </Button>
           <Button
-              component={Link}
-              to="/import-data"
+            component={Link}
+            to="/import-data"
           >
             Import Sales Data
           </Button>

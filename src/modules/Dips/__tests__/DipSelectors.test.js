@@ -6,14 +6,11 @@ import { shallow } from 'enzyme'
 import DipSelectors from '../DipSelectors'
 
 describe('DipSelectors', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = shallow(
-        <DipSelectors {...props} />
-      )
+      mountedC = shallow(<DipSelectors {...props} />)
     }
     return mountedC
   }
@@ -31,5 +28,4 @@ describe('DipSelectors', () => {
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

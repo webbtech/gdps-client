@@ -40,47 +40,43 @@ const FetchDelivery = graphql(DELIVERY_QUERY, {
   name: 'propane',
   skip: ({ match }) => !match || !match.params.date,
   options: ({ match }) => ({
-    variables: {date: dateToInt(match.params.date)},
+    variables: { date: dateToInt(match.params.date) },
   }),
 })
 
 const PersistDelivery = graphql(CREATE_DELIVERY, {
   props: ({ mutate }) => ({
     PersistDelivery: fields => mutate({
-      variables: {fields},
+      variables: { fields },
       errorPolicy: 'all',
     }),
   }),
-  options: ({ match: { params }}) => {
-    return ({
-      refetchQueries: [{
-        query: DELIVERY_QUERY,
-        variables: {
-          date: params.date ? dateToInt(params.date) : '',
-        },
-      }],
-    })
-  },
+  options: ({ match: { params } }) => ({
+    refetchQueries: [{
+      query: DELIVERY_QUERY,
+      variables: {
+        date: params.date ? dateToInt(params.date) : '',
+      },
+    }],
+  }),
   skip: ({ match }) => !match || !match.params.date,
 })
 
 const RemoveDelivery = graphql(REMOVE_DELIVERY, {
   props: ({ mutate }) => ({
     RemoveDelivery: fields => mutate({
-      variables: {fields},
+      variables: { fields },
       errorPolicy: 'all',
     }),
   }),
-  options: ({ match: { params }}) => {
-    return ({
-      refetchQueries: [{
-        query: DELIVERY_QUERY,
-        variables: {
-          date: params.date ? dateToInt(params.date) : '',
-        },
-      }],
-    })
-  },
+  options: ({ match: { params } }) => ({
+    refetchQueries: [{
+      query: DELIVERY_QUERY,
+      variables: {
+        date: params.date ? dateToInt(params.date) : '',
+      },
+    }],
+  }),
 })
 
 const PropaneFormCntr = withFormik({
@@ -91,24 +87,23 @@ const PropaneFormCntr = withFormik({
     return { litres }
   },
   handleSubmit: async (values, { props, setSubmitting }) => {
-
     props.actions.errorClear()
 
     let graphqlReturn
-    const { actions, match: { params }} = props
+    const { actions, match: { params } } = props
     const submitVals = {
-      date:   dateToInt(params.date),
+      date: dateToInt(params.date),
       litres: Number(values.litres),
     }
     try {
       graphqlReturn = await props.PersistDelivery(submitVals)
       if (graphqlReturn && graphqlReturn.errors) {
         setSubmitting(false)
-        actions.errorSend({message: graphqlReturn.errors[0].message, type: 'danger'})
+        actions.errorSend({ message: graphqlReturn.errors[0].message, type: 'danger' })
       }
     } catch (error) {
       setSubmitting(false)
-       actions.errorSend({message: error.message, type: 'danger'})
+      actions.errorSend({ message: error.message, type: 'danger' })
     }
   },
   displayName: 'PropaneForm',

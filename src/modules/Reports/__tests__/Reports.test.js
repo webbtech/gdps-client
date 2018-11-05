@@ -11,9 +11,7 @@ describe('Reports', () => {
   let props
   const reportsC = () => {
     if (!mountedC) {
-      mountedC = shallow(
-        <Reports {...props} />
-      )
+      mountedC = shallow(<Reports {...props} />)
     }
     return mountedC
   }
@@ -29,5 +27,4 @@ describe('Reports', () => {
   it('matches snapshot', () => {
     expect(reportsC()).toMatchSnapshot()
   })
-
 })

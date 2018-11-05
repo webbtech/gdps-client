@@ -27,29 +27,27 @@ mutation PropaneSignedURL($date: String!) {
 `
 
 class PropaneReportDownload extends Component {
-
   state = {
     month: moment(new Date()).subtract(1, 'months').format('MM'),
     toasterMsg: '',
     year: (new Date()).getFullYear(),
   }
 
-  handleChange = event => {
-    this.setState(() => ({ [event.target.name]: event.target.value , toasterMsg: ''}))
+  handleChange = (event) => {
+    this.setState(() => ({ [event.target.name]: event.target.value, toasterMsg: '' }))
   }
 
   handleSubmit = () => {
-
     const yr = this.state.year.toString()
     const date = `${yr}-${this.state.month}-01`
     const m = moment(date)
     if (!m.isValid()) {
-      this.setState(() => ({toasterMsg: 'Invalid date'}))
+      this.setState(() => ({ toasterMsg: 'Invalid date' }))
       return
     }
     const today = moment().startOf('month')
     if (today.isBefore(date)) {
-      this.setState(() => ({toasterMsg: 'Invalid date. Select an earlier date.'}))
+      this.setState(() => ({ toasterMsg: 'Invalid date. Select an earlier date.' }))
       return
     }
     const variables = {
@@ -60,43 +58,44 @@ class PropaneReportDownload extends Component {
     this.props.mutate({
       variables,
     })
-    .then(({ data }) => {
-      tabOpen.location = data.propaneSignedURL.reportLink
-    }).catch((error) => {
-      const errMsg = `There was an error sending the query: ${error}`
+      .then(({ data }) => {
+        tabOpen.location = data.propaneSignedURL.reportLink
+      }).catch((error) => {
+        const errMsg = `There was an error sending the query: ${error}`
       console.error('error: ', errMsg) // eslint-disable-line
       // this.props.actions.errorSend({message: errMsg, type: 'danger'})
-    })
+      })
   }
 
   render() {
-
     const { classes } = this.props
 
     return (
       <div className={classes.container}>
         <Typography
-            gutterBottom
-            variant="h6"
-        >Propane Report Download</Typography>
+          gutterBottom
+          variant="h6"
+        >Propane Report Download
+        </Typography>
         <div className={classes.selectRow}>
 
           <div className={classes.selectCell}>
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="year-select">Year</InputLabel>
               <Select
-                  inputProps={{
+                inputProps={{
                     name: 'year',
                     id: 'year-select',
                   }}
-                  onChange={this.handleChange}
-                  value={this.state.year}
+                onChange={this.handleChange}
+                value={this.state.year}
               >
                 {setYears().map(yr => (
                   <MenuItem
-                      key={yr}
-                      value={yr}
-                  >{yr}</MenuItem>
+                    key={yr}
+                    value={yr}
+                  >{yr}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -106,18 +105,19 @@ class PropaneReportDownload extends Component {
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="month-select">Month</InputLabel>
               <Select
-                  inputProps={{
+                inputProps={{
                     name: 'month',
                     id: 'month-select',
                   }}
-                  onChange={this.handleChange}
-                  value={this.state.month}
+                onChange={this.handleChange}
+                value={this.state.month}
               >
                 {setMonths().map(m => (
                   <MenuItem
-                      key={m.key}
-                      value={m.key}
-                  >{m.label}</MenuItem>
+                    key={m.key}
+                    value={m.key}
+                  >{m.label}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -125,11 +125,11 @@ class PropaneReportDownload extends Component {
 
           <div className={classes.buttonCell}>
             <Button
-                color="primary"
-                onClick={() => this.handleSubmit()}
-                variant="contained"
+              color="primary"
+              onClick={() => this.handleSubmit()}
+              variant="contained"
             >
-            <Save className={classes.leftIcon} />
+              <Save className={classes.leftIcon} />
             Download Report
             </Button>
           </div>
@@ -144,27 +144,27 @@ class PropaneReportDownload extends Component {
   }
 }
 PropaneReportDownload.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  mutate:   PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
+  mutate: PropTypes.func.isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   container: {
-    display:        'flex',
-    flexDirection:  'column',
-    fontFamily:     theme.typography.fontFamily,
-    margin:         'auto',
-    width:          450,
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: theme.typography.fontFamily,
+    margin: 'auto',
+    width: 450,
   },
   leftIcon: {
     marginRight: theme.spacing.unit,
   },
   reportDetails: {
-    color:      theme.palette.grey['700'],
-    fontSize:   15,
-    fontStyle:  'italic',
-    marginTop:  theme.spacing.unit * 4,
-    width:      400,
+    color: theme.palette.grey['700'],
+    fontSize: 15,
+    fontStyle: 'italic',
+    marginTop: theme.spacing.unit * 4,
+    width: 400,
     '& li': {
       marginBottom: 6,
     },
@@ -173,8 +173,8 @@ const styles =  theme => ({
     flexGrow: 1,
   },
   selectRow: {
-    display:        'inline-flex',
-    flexDirection:  'row',
+    display: 'inline-flex',
+    flexDirection: 'row',
   },
 })
 

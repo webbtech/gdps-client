@@ -8,18 +8,15 @@ import { routerMiddleware } from 'react-router-redux'
 const history = createHistory()
 const middleware = routerMiddleware(history)
 
-export default function configureStore(preloadedState={}) {
+export default function configureStore(preloadedState = {}) {
   const store = createStore(
     rootReducer,
     preloadedState,
-    composeWithDevTools(
-      applyMiddleware(middleware, logger)
-    )
+    composeWithDevTools(applyMiddleware(middleware, logger))
   )
   if (module.hot) {
     module.hot.accept('../reducers', () =>
-      store.replaceReducer(rootReducer)
-    )
+      store.replaceReducer(rootReducer))
   }
 
   return store

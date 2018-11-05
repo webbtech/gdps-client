@@ -15,9 +15,8 @@ import { dateToInt } from '../../utils/utils'
 
 
 class PropaneForm extends Component {
-
   removeDelivery = async () => {
-    const { actions, RemoveDelivery, match: { params }} = this.props
+    const { actions, RemoveDelivery, match: { params } } = this.props
     const input = {
       date: dateToInt(params.date),
     }
@@ -25,20 +24,19 @@ class PropaneForm extends Component {
     try {
       graphqlReturn = await RemoveDelivery(input)
       if (graphqlReturn && graphqlReturn.errors) {
-        actions.errorSend({message: graphqlReturn.errors[0].message, type: 'danger'})
+        actions.errorSend({ message: graphqlReturn.errors[0].message, type: 'danger' })
       }
     } catch (error) {
-       actions.errorSend({message: error.message, type: 'danger'})
+      actions.errorSend({ message: error.message, type: 'danger' })
     }
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault()
     this.props.handleSubmit(e)
   }
 
   render() {
-
     const {
       classes,
       dirty,
@@ -50,52 +48,53 @@ class PropaneForm extends Component {
     return (
       <div className={classes.container}>
         <Typography
-            gutterBottom
-            variant="h6"
-        >Propane Delivery</Typography>
+          gutterBottom
+          variant="h6"
+        >Propane Delivery
+        </Typography>
         <PropaneSelectors />
 
         <form
-            autoComplete="off"
-            className={classes.form}
-            noValidate
-            onSubmit={this.handleSubmit}
+          autoComplete="off"
+          className={classes.form}
+          noValidate
+          onSubmit={this.handleSubmit}
         >
           <div className={classes.dataRow}>
             <div className={classes.dataCell}>
               <Input
-                  autoFocus
-                  name="litres"
-                  onChange={handleChange}
-                  placeholder="Litres"
-                  type="number"
-                  value={values.litres}
+                autoFocus
+                name="litres"
+                onChange={handleChange}
+                placeholder="Litres"
+                type="number"
+                value={values.litres}
               />
             </div>
             <div className={classNames([classes.dataCell], [classes.narrowCell])}>
               <Button
-                  className={classes.delButton}
-                  color="secondary"
-                  disabled={!values.litres}
-                  onClick={this.removeDelivery}
+                className={classes.delButton}
+                color="secondary"
+                disabled={!values.litres}
+                onClick={this.removeDelivery}
               >
-                <Delete style={{padding: 0}} />
+                <Delete style={{ padding: 0 }} />
               </Button>
             </div>
           </div>
 
-            <div>
-              <Button
-                  className={classes.submitButton}
-                  color="primary"
-                  disabled={!dirty || isSubmitting}
-                  type="submit"
-                  variant="contained"
-              >
-                <Save className={classNames(classes.leftIcon, classes.iconSmall)} />
+          <div>
+            <Button
+              className={classes.submitButton}
+              color="primary"
+              disabled={!dirty || isSubmitting}
+              type="submit"
+              variant="contained"
+            >
+              <Save className={classNames(classes.leftIcon, classes.iconSmall)} />
                 Save Propane Delivery
-              </Button>
-            </div>
+            </Button>
+          </div>
         </form>
       </div>
     )
@@ -103,15 +102,15 @@ class PropaneForm extends Component {
 }
 
 PropaneForm.propTypes = {
-  classes:      PropTypes.object.isRequired,
-  dirty:        PropTypes.bool.isRequired,
+  classes: PropTypes.object.isRequired,
+  dirty: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
-  values:       PropTypes.object.isRequired,
+  values: PropTypes.object.isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   alignRight: {
     textAlign: 'right',
   },
@@ -119,21 +118,21 @@ const styles =  theme => ({
     textAlign: 'center',
   },
   container: {
-    display:        'flex',
-    flexDirection:  'column',
-    fontFamily:     theme.typography.fontFamily,
-    width:          theme.spacing.unit * 40,
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: theme.typography.fontFamily,
+    width: theme.spacing.unit * 40,
     margin: 'auto',
   },
   dataCell: {
-    alignSelf:      'flex-end',
-    flex:           1,
-    padding:        theme.spacing.unit,
-    paddingBottom:  theme.spacing.unit * 2,
+    alignSelf: 'flex-end',
+    flex: 1,
+    padding: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit * 2,
   },
   dataRow: {
-    display:        'inline-flex',
-    flexDirection:  'row',
+    display: 'inline-flex',
+    flexDirection: 'row',
   },
   delButton: {
     minWidth: 0,

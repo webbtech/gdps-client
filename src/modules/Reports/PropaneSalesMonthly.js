@@ -25,7 +25,6 @@ query PropaneSaleMonthReport($date: String!) {
 `
 
 const Report = ({ classes, data }) => {
-
   if (!data) return null
   if (data && data.loading) {
     return <div className={classes.container}><Loader /></div>
@@ -35,13 +34,14 @@ const Report = ({ classes, data }) => {
     return (
       <div className={classes.container}>
         <Typography
-            variant="body2"
-        >There is no data available for the specified date.</Typography>
+          variant="body2"
+        >There is no data available for the specified date.
+        </Typography>
       </div>
     )
   }
 
-  let wks = []
+  const wks = []
   const sales = data.propaneSaleMonthReport.sales
   const summary = data.propaneSaleMonthReport.salesSummary
   const deliveries = data.propaneSaleMonthReport.deliveries
@@ -59,17 +59,18 @@ const Report = ({ classes, data }) => {
       <Paper className={classes.reportContainer}>
         <div className={classes.reportTitleContainer}>
           <Typography
-              gutterBottom
-              variant="h6"
-          >Propane Monthly Sales Detail</Typography>
+            gutterBottom
+            variant="h6"
+          >Propane Monthly Sales Detail
+          </Typography>
           <br />
           <ReportHeading classes={classes} />
         </div>
         {wks.map(wk => (
           <ReportWeek
-              classes={classes}
-              data={wk}
-              key={wk.week}
+            classes={classes}
+            data={wk}
+            key={wk.week}
           />
         ))}
       </Paper>
@@ -78,27 +79,26 @@ const Report = ({ classes, data }) => {
       <Paper className={classes.reportContainer}>
         <div className={classes.reportTitleContainer}>
           <Typography
-              gutterBottom
-              variant="h6"
-          >Propane Deliveries</Typography>
+            gutterBottom
+            variant="h6"
+          >Propane Deliveries
+          </Typography>
         </div>
         <ReportDeliveries
-            classes={classes}
-            data={deliveries}
+          classes={classes}
+          data={deliveries}
         />
       </Paper>
     </div>
   )
-
 }
 Report.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.object,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object,
 }
 
 const ReportWeek = ({ classes, data }) => {
-
-  let rows = []
+  const rows = []
   for (const s in data.sales) {
     rows.push({
       date: s,
@@ -113,8 +113,8 @@ const ReportWeek = ({ classes, data }) => {
       </div>
       {rows.map(sale => (
         <div
-            className={classes.reportDataRow}
-            key={sale.date}
+          className={classes.reportDataRow}
+          key={sale.date}
         >
           <div className={classes.reportDateCell}>{moment(sale.date).format('MMM D')}</div>
           <div className={classes.reportDataCell}>{utils.fmtNumber(sale.sales['475'], 0, true)}</div>
@@ -130,8 +130,8 @@ const ReportWeek = ({ classes, data }) => {
   )
 }
 ReportWeek.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
 }
 
 const ReportHeading = ({ classes }) => (
@@ -142,7 +142,7 @@ const ReportHeading = ({ classes }) => (
   </div>
 )
 ReportHeading.propTypes = {
-  classes:  PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
 }
 
 const ReportDeliveries = ({ classes, data }) => (
@@ -156,8 +156,8 @@ const ReportDeliveries = ({ classes, data }) => (
     </div>
     {data.map(del => (
       <div
-          className={classes.reportDataRow}
-          key={del.date}
+        className={classes.reportDataRow}
+        key={del.date}
       >
         <div className={classes.reportDateCell}>{moment(del.date.toString()).format('MMM D')}</div>
         <div className={classes.reportDataCell}>{utils.fmtNumber(del.litres, 0, true)}</div>
@@ -166,15 +166,13 @@ const ReportDeliveries = ({ classes, data }) => (
   </div>
 )
 ReportDeliveries.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.array.isRequired,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
 }
 
 
 class PropaneSalesMonthly extends Component {
-
   render() {
-
     const { classes, data } = this.props
 
     if (data && data.error) {
@@ -184,11 +182,11 @@ class PropaneSalesMonthly extends Component {
     return (
       <div className={classes.mainContainer}>
         <ReportSelectors
-            hideStation
+          hideStation
         />
         <Report
-            classes={classes}
-            data={data}
+          classes={classes}
+          data={data}
         />
       </div>
     )
@@ -196,55 +194,55 @@ class PropaneSalesMonthly extends Component {
 }
 
 PropaneSalesMonthly.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.object,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object,
   location: PropTypes.object.isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   container: {
-    display:        'flex',
-    flexDirection:  'row',
-    fontFamily:     theme.typography.fontFamily,
-    marginTop:      theme.spacing.unit * 3,
+    display: 'flex',
+    flexDirection: 'row',
+    fontFamily: theme.typography.fontFamily,
+    marginTop: theme.spacing.unit * 3,
   },
   headerRow: {
-    color:          theme.palette.grey['700'],
-    display:        'flex',
-    flexDirection:  'row',
+    color: theme.palette.grey['700'],
+    display: 'flex',
+    flexDirection: 'row',
   },
   headerCell: {
     flex: 1,
   },
   headerCellRt: {
-    flex:       1,
-    textAlign:  'right',
+    flex: 1,
+    textAlign: 'right',
   },
   mainContainer: {
-    width:  600,
+    width: 600,
     margin: 'auto',
   },
   reportContainer: {
-    display:        'inline-flex',
-    flexDirection:  'column',
-    marginBottom:   theme.spacing.unit * 2,
+    display: 'inline-flex',
+    flexDirection: 'column',
+    marginBottom: theme.spacing.unit * 2,
   },
   reportDataRow: {
-    borderBottom:       'solid 1px',
-    borderBottomColor:  theme.palette.grey['300'],
-    display:            'flex',
-    flexDirection:      'row',
-    paddingBottom:      theme.spacing.unit,
-    paddingTop:         theme.spacing.unit,
-    paddingLeft:        theme.spacing.unit * 2,
-    paddingRight:       theme.spacing.unit * 2,
+    borderBottom: 'solid 1px',
+    borderBottomColor: theme.palette.grey['300'],
+    display: 'flex',
+    flexDirection: 'row',
+    paddingBottom: theme.spacing.unit,
+    paddingTop: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
     '&:hover': {
       backgroundColor: theme.palette.grey['100'],
     },
   },
   reportDataCell: {
     flex: 1,
-    textAlign:  'right',
+    textAlign: 'right',
   },
   reportDateCell: {
     flex: 1,
@@ -253,31 +251,31 @@ const styles =  theme => ({
     width: theme.spacing.unit * 10,
   },
   reportSummaryCell: {
-    flex:       1,
+    flex: 1,
     fontWeight: 500,
-    textAlign:  'right',
+    textAlign: 'right',
   },
   reportSummaryRow: {
-    display:        'flex',
-    flexDirection:  'row',
-    paddingBottom:  theme.spacing.unit,
-    paddingTop:     theme.spacing.unit,
-    paddingRight:   theme.spacing.unit * 2,
+    display: 'flex',
+    flexDirection: 'row',
+    paddingBottom: theme.spacing.unit,
+    paddingTop: theme.spacing.unit,
+    paddingRight: theme.spacing.unit * 2,
   },
   reportTitleContainer: {
-    padding:        theme.spacing.unit * 2,
-    paddingBottom:  0,
+    padding: theme.spacing.unit * 2,
+    paddingBottom: 0,
   },
   weekContainer: {
-    flexDirection:  'column',
-    marginTop:      theme.spacing.unit * 2,
+    flexDirection: 'column',
+    marginTop: theme.spacing.unit * 2,
   },
   weekHeadingRow: {
-    backgroundColor:  theme.palette.grey['100'],
-    display:          'flex',
-    flexDirection:    'row',
-    padding:          theme.spacing.unit,
-    paddingLeft:      theme.spacing.unit * 2,
+    backgroundColor: theme.palette.grey['100'],
+    display: 'flex',
+    flexDirection: 'row',
+    padding: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
   },
 })
 
@@ -288,7 +286,7 @@ export default graphql(PSM_REPORT_QUERY, {
     const prts = utils.extractPathParts(props.location.pathname, 3)
     return ({
       variables: {
-        date:       prts[0],
+        date: prts[0],
       },
     })
   },

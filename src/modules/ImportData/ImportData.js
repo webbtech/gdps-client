@@ -12,9 +12,7 @@ import { styles as ms } from '../../styles/main'
 
 
 class ImportData extends Component {
-
   render() {
-
     const { classes } = this.props
 
     return (
@@ -22,8 +20,8 @@ class ImportData extends Component {
         <Header />
         <Paper className={classes.paper}>
           <Typography
-              gutterBottom
-              variant="h5"
+            gutterBottom
+            variant="h5"
           >
             Import Sales Data
           </Typography>

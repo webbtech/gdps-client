@@ -26,7 +26,6 @@ query PropaneSaleAnnualReport($date: String!) {
 `
 
 const Report = ({ classes, data }) => {
-
   if (!data) return null
   if (data && data.loading) {
     return <div className={classes.container}><Loader /></div>
@@ -36,8 +35,9 @@ const Report = ({ classes, data }) => {
     return (
       <div className={classes.container}>
         <Typography
-            variant="body2"
-        >There is no data available for the specified date.</Typography>
+          variant="body2"
+        >There is no data available for the specified date.
+        </Typography>
       </div>
     )
   }
@@ -50,24 +50,24 @@ const Report = ({ classes, data }) => {
       <Paper className={classes.reportContainer}>
         <div className={classes.reportTitleContainer}>
           <Typography
-              gutterBottom
-              variant="h6"
-          >Propane Annual Sales</Typography>
+            gutterBottom
+            variant="h6"
+          >Propane Annual Sales
+          </Typography>
           <br />
         </div>
         <ReportHeading classes={classes} />
         <ReportData
-            classes={classes}
-            data={reportData}
+          classes={classes}
+          data={reportData}
         />
       </Paper>
     </div>
   )
-
 }
 Report.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.object,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object,
 }
 
 const ReportHeading = ({ classes }) => (
@@ -79,28 +79,25 @@ const ReportHeading = ({ classes }) => (
   </div>
 )
 ReportHeading.propTypes = {
-  classes:  PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
 }
 
 const ReportData = ({ classes, data }) => {
-
   // console.log('data in ReportData: ', data)
-  let rows = []
+  const rows = []
 
   for (const dte in data.sales) {
-    rows.push(
-      <div
-          className={classes.reportDataRow}
-          key={dte}
-      >
-        <div className={classes.reportDateCell}>
-          {moment(`${dte.toString()}01`).format('MMM')}
-        </div>
-        <div className={classes.reportDataCell}>{utils.fmtNumber(data.sales[dte]['475'], 0, true)}</div>
-        <div className={classes.reportDataCell}>{utils.fmtNumber(data.sales[dte]['476'], 0, true)}</div>
-        <div className={classes.reportDataCell}>{utils.fmtNumber(data.deliveries[dte], 0, true)}</div>
+    rows.push(<div
+      className={classes.reportDataRow}
+      key={dte}
+    >
+      <div className={classes.reportDateCell}>
+        {moment(`${dte.toString()}01`).format('MMM')}
       </div>
-    )
+      <div className={classes.reportDataCell}>{utils.fmtNumber(data.sales[dte]['475'], 0, true)}</div>
+      <div className={classes.reportDataCell}>{utils.fmtNumber(data.sales[dte]['476'], 0, true)}</div>
+      <div className={classes.reportDataCell}>{utils.fmtNumber(data.deliveries[dte], 0, true)}</div>
+    </div>)
   }
 
   return (
@@ -116,15 +113,13 @@ const ReportData = ({ classes, data }) => {
   )
 }
 ReportData.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
 }
 
 
 class PropaneSalesAnnual extends Component {
-
   render() {
-
     const { classes, data } = this.props
     // console.log('data: ', data)
 
@@ -135,96 +130,96 @@ class PropaneSalesAnnual extends Component {
     return (
       <div className={classes.mainContainer}>
         <ReportSelectors
-            hideMonth
-            hideStation
+          hideMonth
+          hideStation
         />
         <Report
-            classes={classes}
-            data={data}
+          classes={classes}
+          data={data}
         />
       </div>
     )
   }
 }
 PropaneSalesAnnual.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  data:     PropTypes.object,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object,
   location: PropTypes.object.isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   container: {
-    display:        'flex',
-    flexDirection:  'row',
-    fontFamily:     theme.typography.fontFamily,
-    marginTop:      theme.spacing.unit * 3,
+    display: 'flex',
+    flexDirection: 'row',
+    fontFamily: theme.typography.fontFamily,
+    marginTop: theme.spacing.unit * 3,
   },
   headerRow: {
-    borderBottom:       'solid 1px',
-    borderBottomColor:  theme.palette.grey['300'],
-    color:              theme.palette.grey['700'],
-    display:            'flex',
-    flexDirection:      'row',
-    paddingBottom:      theme.spacing.unit,
-    paddingLeft:        theme.spacing.unit * 2,
-    paddingRight:       theme.spacing.unit * 2,
+    borderBottom: 'solid 1px',
+    borderBottomColor: theme.palette.grey['300'],
+    color: theme.palette.grey['700'],
+    display: 'flex',
+    flexDirection: 'row',
+    paddingBottom: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
   },
   headerCell: {
-    flex: .25,
+    flex: 0.25,
   },
   headerCellRt: {
-    flex:       1,
-    textAlign:  'right',
+    flex: 1,
+    textAlign: 'right',
   },
   mainContainer: {
-    width:  450,
+    width: 450,
     margin: 'auto',
   },
   reportContainer: {
-    display:        'flex',
-    flex:           1,
-    flexDirection:  'column',
-    marginBottom:   theme.spacing.unit * 2,
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
+    marginBottom: theme.spacing.unit * 2,
   },
   reportDataRow: {
-    borderBottom:       'solid 1px',
-    borderBottomColor:  theme.palette.grey['300'],
-    display:            'flex',
-    flexDirection:      'row',
-    paddingBottom:      theme.spacing.unit,
-    paddingTop:         theme.spacing.unit,
-    paddingLeft:        theme.spacing.unit * 2,
-    paddingRight:       theme.spacing.unit * 2,
+    borderBottom: 'solid 1px',
+    borderBottomColor: theme.palette.grey['300'],
+    display: 'flex',
+    flexDirection: 'row',
+    paddingBottom: theme.spacing.unit,
+    paddingTop: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
     '&:hover': {
       backgroundColor: theme.palette.grey['100'],
     },
   },
   reportDataCell: {
     flex: 1,
-    textAlign:  'right',
+    textAlign: 'right',
   },
   reportDateCell: {
-    flex: .25,
+    flex: 0.25,
   },
   reportMargin: {
     width: theme.spacing.unit * 10,
   },
   reportSummaryCell: {
-    flex:       1,
+    flex: 1,
     fontWeight: 500,
-    textAlign:  'right',
+    textAlign: 'right',
   },
   reportSummaryRow: {
-    display:        'flex',
-    flexDirection:  'row',
-    paddingBottom:  theme.spacing.unit,
-    paddingTop:     theme.spacing.unit,
-    paddingLeft:    theme.spacing.unit * 2,
-    paddingRight:   theme.spacing.unit * 2,
+    display: 'flex',
+    flexDirection: 'row',
+    paddingBottom: theme.spacing.unit,
+    paddingTop: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
   },
   reportTitleContainer: {
-    padding:        theme.spacing.unit * 2,
-    paddingBottom:  0,
+    padding: theme.spacing.unit * 2,
+    paddingBottom: 0,
   },
 })
 
@@ -235,7 +230,7 @@ export default graphql(PSA_REPORT_QUERY, {
     const prts = utils.extractPathParts(props.location.pathname, 3)
     return ({
       variables: {
-        date:       moment(`${prts[0]}-01-01`),
+        date: moment(`${prts[0]}-01-01`),
       },
     })
   },

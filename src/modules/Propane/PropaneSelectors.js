@@ -11,15 +11,11 @@ import Button from '@material-ui/core/Button'
 import FormControl from '@material-ui/core/FormControl'
 import { withStyles } from '@material-ui/core/styles'
 
-import MomentUtils from 'material-ui-pickers/utils/moment-utils'
-import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider'
 import DatePicker from 'material-ui-pickers/DatePicker'
 
-// import { extractPathParts } from '../../utils/utils'
 import { STD_DATE_FORMAT as dateFormat } from '../../config/constants'
 
 class PropaneSelectors extends Component {
-
   state = {
     nextDisabled: true,
     selectedDate: moment(),
@@ -31,25 +27,31 @@ class PropaneSelectors extends Component {
 
     const { match: { params } } = this.props
     if (!params.date) return
-    const date = params.date
+    const { date } = params
     // console.log('match: ', this.props.match.params)
     // console.log('date: ', date)
     // this.setState({ selectedDate: date }, this.handleGetEntry)
     this.setState({ selectedDate: moment(date) }, this.setNextDisabled)
 
-    /*const { history, match } = this.props
+    /* const { history, match } = this.props
     const { selectedDate } = this.state
     const dte = selectedDate.format(dateFormat)
     const uri = `${match.url}/${dte}`
-    history.push(uri)*/
+    history.push(uri) */
   }
 
-  handleDateChange = date => {
+  setNextDisabled = () => {
+    const { selectedDate } = this.state
+    const today = moment().format(dateFormat)
+    this.setState({ nextDisabled: !selectedDate.isBefore(today) })
+  }
+
+  handleDateChange = (date) => {
     this.setState({ selectedDate: date }, this.handleGetEntry)
   }
 
-  handleNextPrevDate = val => {
-    let dte = this.state.selectedDate
+  handleNextPrevDate = (val) => {
+    const dte = this.state.selectedDate
     if (val === 'p') {
       dte.subtract(1, 'days')
     } else if (val === 'n') {
@@ -69,14 +71,7 @@ class PropaneSelectors extends Component {
     history.push(uri)
   }
 
-  setNextDisabled = () => {
-    const { selectedDate } = this.state
-    const today = moment().format(dateFormat)
-    this.setState({ nextDisabled: !selectedDate.isBefore(today)})
-  }
-
   render() {
-
     const { classes } = this.props
     const { nextDisabled, selectedDate } = this.state
 
@@ -86,34 +81,32 @@ class PropaneSelectors extends Component {
 
           <div className={classNames([classes.cell], [classes.calendar])}>
             <FormControl className={classes.formControl}>
-              <MuiPickersUtilsProvider utils={MomentUtils}>
-                <DatePicker
-                    autoOk
-                    disableFuture
-                    format="MMM D, YYYY"
-                    label="Date"
-                    onChange={this.handleDateChange}
-                    value={selectedDate}
-                />
-              </MuiPickersUtilsProvider>
+              <DatePicker
+                autoOk
+                disableFuture
+                format="MMM D, YYYY"
+                label="Date"
+                onChange={this.handleDateChange}
+                value={selectedDate}
+              />
             </FormControl>
           </div>
 
           <div className={classes.cell}>
             <Button
-                className={classes.navButton}
-                color="secondary"
-                onClick={() => this.handleNextPrevDate('p')}
-                variant="fab"
+              className={classes.navButton}
+              color="secondary"
+              onClick={() => this.handleNextPrevDate('p')}
+              variant="fab"
             >
               <ArrowBack />
             </Button>
             <Button
-                className={classes.navButton}
-                color="secondary"
-                disabled={nextDisabled}
-                onClick={() => this.handleNextPrevDate('n')}
-                variant="fab"
+              className={classes.navButton}
+              color="secondary"
+              disabled={nextDisabled}
+              onClick={() => this.handleNextPrevDate('n')}
+              variant="fab"
             >
               <ArrowForward />
             </Button>
@@ -126,13 +119,12 @@ class PropaneSelectors extends Component {
 }
 
 PropaneSelectors.propTypes = {
-  classes:      PropTypes.object.isRequired,
-  history:      PropTypes.object.isRequired,
-  location:     PropTypes.object.isRequired,
-  match:        PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
+  match: PropTypes.instanceOf(Object).isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   cell: {
     flex: 'flex-grow',
     alignSelf: 'flex-end',
@@ -141,7 +133,7 @@ const styles =  theme => ({
     marginBottom: theme.spacing.unit,
   },
   formControl: {
-    margin:   theme.spacing.unit,
+    margin: theme.spacing.unit,
     minWidth: 160,
   },
   navButton: {
@@ -151,9 +143,9 @@ const styles =  theme => ({
     marginRight: 0,
   },
   selectRow: {
-    display:        'inline-flex',
-    flexDirection:  'row',
-    marginBottom:   theme.spacing.unit,
+    display: 'inline-flex',
+    flexDirection: 'row',
+    marginBottom: theme.spacing.unit,
   },
 })
 

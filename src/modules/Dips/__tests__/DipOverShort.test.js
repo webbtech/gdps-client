@@ -7,14 +7,11 @@ import { render } from 'enzyme'
 import DipOverShort from '../DipOverShort'
 
 describe('DipOverShort', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = render(
-        <Router><DipOverShort {...props} /></Router>
-      )
+      mountedC = render(<Router><DipOverShort {...props} /></Router>)
     }
     return mountedC
   }
@@ -31,5 +28,4 @@ describe('DipOverShort', () => {
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

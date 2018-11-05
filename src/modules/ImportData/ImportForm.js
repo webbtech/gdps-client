@@ -10,21 +10,17 @@ import Create from '@material-ui/icons/Create'
 import Divider from '@material-ui/core/Divider'
 import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-// import FormLabel from '@material-ui/core/FormLabel'
 import Paper from '@material-ui/core/Paper'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
-import MomentUtils from 'material-ui-pickers/utils/moment-utils'
-import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider'
 import DatePicker from 'material-ui-pickers/DatePicker'
 
 import Toaster from '../Common/Toaster'
 import ImportLog from './ImportLog'
-import { STD_DATE_FORMAT as dateFormat } from '../../config/constants'
-import { MAX_IMPORT_DAYS as maxImportDays } from '../../config/constants'
+import { STD_DATE_FORMAT as dateFormat, MAX_IMPORT_DAYS as maxImportDays } from '../../config/constants'
 
 
 const IMPORT_FUELSALES = gql`
@@ -52,7 +48,6 @@ query ImportLog($importType: String!) {
 `
 
 class ImportForm extends Component {
-
   constructor(props) {
     super(props)
 
@@ -67,20 +62,22 @@ class ImportForm extends Component {
     }
   }
 
-  handleStartDateChange = date => {
-    this.setState({ selectedStartDate: date, startDate: date.format(dateFormat) }, this.validateDates)
+  handleStartDateChange = (date) => {
+    this.setState({
+      selectedStartDate: date, startDate: date.format(dateFormat),
+    }, this.validateDates)
   }
 
-  handleEndDateChange = date => {
+  handleEndDateChange = (date) => {
     this.setState({ selectedEndDate: date, endDate: date.format(dateFormat) }, this.validateDates)
   }
 
-  handleImportTypeChange = event => {
+  handleImportTypeChange = (event) => {
     this.setState({ importType: event.target.value })
   }
 
   handleImportComplete = () => {
-    this.setState({toasterMsg: 'Data import successfully completed'})
+    this.setState({ toasterMsg: 'Data import successfully completed' })
   }
 
   validateDates = () => {
@@ -94,13 +91,12 @@ class ImportForm extends Component {
           toasterMsg: `Maximum number of days between dates: (${maxImportDays}) exceeded`,
         })
       } else {
-        this.setState({skipQuery: false})
+        this.setState({ skipQuery: false })
       }
     }
   }
 
   render() {
-
     const { importType, selectedStartDate, selectedEndDate } = this.state
     const { classes } = this.props
 
@@ -110,72 +106,67 @@ class ImportForm extends Component {
           <div className={classes.formRow}>
             <div className={classes.formCell}>
               <FormControl className={classes.formControl}>
-                <MuiPickersUtilsProvider utils={MomentUtils}>
-                  <DatePicker
-                      autoOk
-                      disableFuture
-                      format="MMM D, YYYY"
-                      label="Start Date"
-                      onChange={this.handleStartDateChange}
-                      value={selectedStartDate}
-                  />
-                </MuiPickersUtilsProvider>
+                <DatePicker
+                  autoOk
+                  disableFuture
+                  format="MMM D, YYYY"
+                  label="Start Date"
+                  onChange={this.handleStartDateChange}
+                  value={selectedStartDate}
+                />
               </FormControl>
             </div>
 
             <div className={classes.formCell}>
               <FormControl className={classes.formControl}>
-                <MuiPickersUtilsProvider utils={MomentUtils}>
-                  <DatePicker
-                      autoOk
-                      disableFuture
-                      format="MMM D, YYYY"
-                      label="End Date"
-                      onChange={this.handleEndDateChange}
-                      value={selectedEndDate}
-                  />
-                </MuiPickersUtilsProvider>
+                <DatePicker
+                  autoOk
+                  disableFuture
+                  format="MMM D, YYYY"
+                  label="End Date"
+                  onChange={this.handleEndDateChange}
+                  value={selectedEndDate}
+                />
               </FormControl>
             </div>
 
             <div className={classes.formCell}>
               <FormControl
-                  className={classes.formControl}
-                  component="fieldset"
+                className={classes.formControl}
+                component="fieldset"
               >
-                {/*<FormLabel component="legend">Import Type</FormLabel>*/}
                 <RadioGroup
-                    aria-label="ImportType"
-                    className={classes.radioGroup}
-                    name="importType"
-                    onChange={this.handleImportTypeChange}
-                    value={importType}
+                  aria-label="ImportType"
+                  className={classes.radioGroup}
+                  name="importType"
+                  onChange={this.handleImportTypeChange}
+                  value={importType}
                 >
                   <FormControlLabel
-                      control={<Radio />}
-                      label="Fuel"
-                      value="fuel"
+                    control={<Radio />}
+                    label="Fuel"
+                    value="fuel"
                   />
                   <FormControlLabel
-                      control={<Radio />}
+                    control={<Radio />}
                       // disabled
-                      label="Propane"
-                      value="propane"
+                    label="Propane"
+                    value="propane"
                   />
                 </RadioGroup>
               </FormControl>
             </div>
 
             <div
-                className={classes.formCell}
-                style={{margin: 'auto'}}
+              className={classes.formCell}
+              style={{ margin: 'auto' }}
             >
               <Mutation
-                  mutation={IMPORT_FUELSALES}
-                  onCompleted={this.handleImportComplete}
-                  refetchQueries={[{query: IMPORT_LOG, variables: {importType}}]}
-                  skip={this.state.skipQuery}
-                  variables={{
+                mutation={IMPORT_FUELSALES}
+                onCompleted={this.handleImportComplete}
+                refetchQueries={[{ query: IMPORT_LOG, variables: { importType } }]}
+                skip={this.state.skipQuery}
+                variables={{
                     dateStart: this.state.startDate,
                     dateEnd: this.state.endDate,
                     importType: this.state.importType,
@@ -185,11 +176,11 @@ class ImportForm extends Component {
                   <div>
                     <div className={classes.processMsg} />
                     <Button
-                        className={classes.submitButton}
-                        color="primary"
-                        disabled={this.state.skipQuery}
-                        onClick={importData}
-                        variant="contained"
+                      className={classes.submitButton}
+                      color="primary"
+                      disabled={this.state.skipQuery}
+                      onClick={importData}
+                      variant="contained"
                     >Import Data
                       <Create className={classes.rightIcon} />
                     </Button>
@@ -205,8 +196,8 @@ class ImportForm extends Component {
           <Divider /><br />
           <div className={classes.formRow}>
             <Typography
-                gutterBottom
-                variant="caption"
+              gutterBottom
+              variant="caption"
             >
               {`NOTE: Ensure dates exist in current Sales data, and do not exceed ${maxImportDays} days in duration.`}
             </Typography>
@@ -219,31 +210,31 @@ class ImportForm extends Component {
   }
 }
 ImportForm.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   container: {
-    display:        'flex',
-    flexDirection:  'column',
-    fontFamily:     theme.typography.fontFamily,
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: theme.typography.fontFamily,
     width: 750,
     margin: 'auto',
   },
   formContainer: {
-    display:        'flex',
-    flexDirection:  'column',
+    display: 'flex',
+    flexDirection: 'column',
     padding: theme.spacing.unit,
   },
   formRow: {
-    display:        'flex',
+    display: 'flex',
     flexDirection: 'row',
   },
   formCell: {
     flexGrow: 1,
   },
   formControl: {
-    margin:   theme.spacing.unit,
+    margin: theme.spacing.unit,
     minWidth: 120,
   },
   radioGroup: {

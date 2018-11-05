@@ -34,14 +34,14 @@ query TankList {
 
 const TankList = ({ classes, formFunc }) => (
   <Query
-      fetchPolicy="cache-and-network"
-      pollInterval={5000}
-      query={TANKLIST_QUERY}
+    fetchPolicy="cache-and-network"
+    pollInterval={5000}
+    query={TANKLIST_QUERY}
   >
 
     {({ loading, error, data }) => {
       if (error) return `Error!: ${error}`
-      /*if (loading) return <div className={classes.container}><Loader /></div>*/
+      /* if (loading) return <div className={classes.container}><Loader /></div> */
 
       const tanks = sortBy(data.tankList, [t => t.id])
       return (
@@ -49,16 +49,16 @@ const TankList = ({ classes, formFunc }) => (
           <TankListHeading classes={classes} />
           {tanks.map(t => (
             <div
-                className={
+              className={
                   classNames(
                     classes.listRow,
-                    {[classes.statusOK]: t.status === 'OK'},
-                    {[classes.statusPending]: t.status === 'PENDING'},
-                    {[classes.statusProcessing]: t.status === 'PROCESSING'}
+                    { [classes.statusOK]: t.status === 'OK' },
+                    { [classes.statusPending]: t.status === 'PENDING' },
+                    { [classes.statusProcessing]: t.status === 'PROCESSING' }
                   )
                 }
-                key={t.id}
-                onClick={() => formFunc(t.id)}
+              key={t.id}
+              onClick={() => formFunc(t.id)}
             >
               <div className={classes.listCellSmall}>{t.id}</div>
               <div className={classes.listCellSmall}>{fmtNumber(t.size, 0, true)}</div>
@@ -73,8 +73,8 @@ const TankList = ({ classes, formFunc }) => (
   </Query>
 )
 TankList.propTypes = {
-  classes:    PropTypes.object.isRequired,
-  formFunc:   PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
+  formFunc: PropTypes.func.isRequired,
 }
 
 const TankListHeading = ({ classes }) => (
@@ -87,51 +87,51 @@ const TankListHeading = ({ classes }) => (
   </div>
 )
 TankListHeading.propTypes = {
-  classes:    PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
 }
 
 class TankAdmin extends Component {
-
-  handleGoToForm = tankID => {
+  handleGoToForm = (tankID) => {
     const { history } = this.props
     const uri = `/admin/tank-form/${tankID}`
     history.push(uri)
   }
 
   render() {
-
     const { classes } = this.props
 
     return (
       <div className={classes.container}>
         <Typography
-            gutterBottom
-            variant="h5"
-        >Tank Administration</Typography>
+          gutterBottom
+          variant="h5"
+        >Tank Administration
+        </Typography>
         <Paper className={classes.listContainer}>
           <AppBar
-              color="default"
-              position="static"
+            color="default"
+            position="static"
           >
             <Toolbar>
               <Typography
-                  className={classes.title}
-                  gutterBottom
-                  variant="h6"
+                className={classes.title}
+                gutterBottom
+                variant="h6"
               >
               Tank Listing
               </Typography>
               <Button
-                  color="secondary"
-                  component={Link}
-                  to="/admin/tank-form"
-                  variant="outlined"
-              >Create Tank</Button>
+                color="secondary"
+                component={Link}
+                to="/admin/tank-form"
+                variant="outlined"
+              >Create Tank
+              </Button>
             </Toolbar>
           </AppBar>
           <TankList
-              classes={classes}
-              formFunc={this.handleGoToForm}
+            classes={classes}
+            formFunc={this.handleGoToForm}
           />
         </Paper>
       </div>
@@ -139,47 +139,47 @@ class TankAdmin extends Component {
   }
 }
 TankAdmin.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  history:  PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   container: {
-    display:        'flex',
-    flexDirection:  'column',
-    fontFamily:     theme.typography.fontFamily,
-    margin:         'auto',
-    width:          700,
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: theme.typography.fontFamily,
+    margin: 'auto',
+    width: 700,
   },
   headerRow: {
-    borderBottom:       'solid 1px',
-    borderBottomColor:  theme.palette.grey['300'],
-    color:              theme.palette.grey['700'],
-    display:            'flex',
-    flexDirection:      'row',
-    paddingBottom:      theme.spacing.unit,
-    paddingLeft:        theme.spacing.unit * 2,
-    paddingRight:       theme.spacing.unit * 2,
+    borderBottom: 'solid 1px',
+    borderBottomColor: theme.palette.grey['300'],
+    color: theme.palette.grey['700'],
+    display: 'flex',
+    flexDirection: 'row',
+    paddingBottom: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
   },
   headerCell: {
     flex: 1,
   },
-  listBox:{
+  listBox: {
     marginTop: theme.spacing.unit * 2,
   },
   listContainer: {
-    display:        'flex',
-    flexDirection:  'column',
+    display: 'flex',
+    flexDirection: 'column',
   },
   listRow: {
-    borderBottom:       'solid 1px',
-    borderBottomColor:  theme.palette.grey['300'],
-    cursor:             'pointer',
-    display:            'flex',
-    flexDirection:      'row',
-    padding:            theme.spacing.unit,
-    paddingLeft:        theme.spacing.unit * 2,
-    paddingRight:       theme.spacing.unit * 2,
+    borderBottom: 'solid 1px',
+    borderBottomColor: theme.palette.grey['300'],
+    cursor: 'pointer',
+    display: 'flex',
+    flexDirection: 'row',
+    padding: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
     '&:hover': {
       backgroundColor: theme.palette.grey['100'],
     },
@@ -188,7 +188,7 @@ const styles =  theme => ({
     flex: 1,
   },
   listCellSmall: {
-    flex: .5,
+    flex: 0.5,
   },
   statusOK: {
     backgroundColor: green[50],

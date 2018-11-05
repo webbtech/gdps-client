@@ -21,11 +21,10 @@ import { extractPathParts } from '../../utils/utils'
 import { RECORDS_START_YEAR as startYear } from '../../config/constants'
 
 // note: This might need to go into an init file
-Array.range = (start, end) => Array.from({length: (end + 1 - start)}, (v, k) => k + start)
+Array.range = (start, end) => Array.from({ length: (end + 1 - start) }, (v, k) => k + start)
 
 
 class Reports extends Component {
-
   state = {
     month: moment(new Date()).format('MM'),
     openSnackbar: false,
@@ -49,9 +48,9 @@ class Reports extends Component {
         setDate = moment(date)
       }
       const newDte = {
-        year:   setDate.format('YYYY'),
-        month:  setDate.subtract(1, 'months').format('MM'),
-        date:   setDate.format('DD'),
+        year: setDate.format('YYYY'),
+        month: setDate.subtract(1, 'months').format('MM'),
+        date: setDate.format('DD'),
       }
       this.setState({ selectedDate: this.state.selectedDate.set(newDte) })
       this.setState({ month: this.state.selectedDate.format('MM') })
@@ -62,7 +61,7 @@ class Reports extends Component {
     }
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState(() => ({ [event.target.name]: event.target.value }))
   }
 
@@ -77,47 +76,46 @@ class Reports extends Component {
     this.setState({ openSnackbar: true, snackbarMessage: message })
   }
 
-  handleStationChange = value => {
+  handleStationChange = (value) => {
     this.setState({ stationID: value })
   }
 
   // todo: replace this with the Common/Toaster component
   renderSnackBar = () => {
-
     const { classes } = this.props
     return (
       <Snackbar
-          ContentProps={{
+        ContentProps={{
             'aria-describedby': 'message-id',
           }}
-          action={[
-            <IconButton
-                aria-label="Close"
-                className={classes.close}
-                color="inherit"
-                key="close"
-                onClick={this.handleClose}
-            >
-              <CloseIcon />
-            </IconButton>,
+        action={[
+          <IconButton
+            aria-label="Close"
+            className={classes.close}
+            color="inherit"
+            key="close"
+            onClick={this.handleClose}
+          >
+            <CloseIcon />
+          </IconButton>,
           ]}
-          anchorOrigin={{
+        anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'left',
           }}
-          autoHideDuration={6000}
-          message={<span id="message-id">{this.state.snackbarMessage}</span>}
-          onClose={this.handleClose}
-          open={this.state.openSnackbar}
+        autoHideDuration={6000}
+        message={<span id="message-id">{this.state.snackbarMessage}</span>}
+        onClose={this.handleClose}
+        open={this.state.openSnackbar}
       />
     )
   }
 
   setMonths = () => {
-    let months = []
-    for (let i=0; i < 12; i++) {
+    const months = []
+    for (let i = 0; i < 12; i++) {
       const dte = moment(new Date(0, i))
-      months.push({key: dte.format('MM'), label: dte.format('MMMM')})
+      months.push({ key: dte.format('MM'), label: dte.format('MMMM') })
     }
     return months
   }
@@ -143,7 +141,6 @@ class Reports extends Component {
   }
 
   render() {
-
     const { classes, hideMonth, hideStation } = this.props
     this.setYears()
 
@@ -154,8 +151,8 @@ class Reports extends Component {
           <div className={classes.cell}>
             <FormControl className={classes.formControl}>
               <StationSelector
-                  onStationChange={this.handleStationChange}
-                  stationID={this.state.stationID}
+                onStationChange={this.handleStationChange}
+                stationID={this.state.stationID}
               />
             </FormControl>
           </div>
@@ -165,18 +162,19 @@ class Reports extends Component {
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="year-select">Year</InputLabel>
               <Select
-                  inputProps={{
+                inputProps={{
                     name: 'year',
                     id: 'year-select',
                   }}
-                  onChange={this.handleChange}
-                  value={this.state.year}
+                onChange={this.handleChange}
+                value={this.state.year}
               >
                 {this.setYears().map(yr => (
                   <MenuItem
-                      key={yr}
-                      value={yr}
-                  >{yr}</MenuItem>
+                    key={yr}
+                    value={yr}
+                  >{yr}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -187,18 +185,19 @@ class Reports extends Component {
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="month-select">Month</InputLabel>
               <Select
-                  inputProps={{
+                inputProps={{
                     name: 'month',
                     id: 'month-select',
                   }}
-                  onChange={this.handleChange}
-                  value={this.state.month}
+                onChange={this.handleChange}
+                value={this.state.month}
               >
                 {this.setMonths().map(m => (
                   <MenuItem
-                      key={m.key}
-                      value={m.key}
-                  >{m.label}</MenuItem>
+                    key={m.key}
+                    value={m.key}
+                  >{m.label}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -207,11 +206,11 @@ class Reports extends Component {
 
           <div className={classes.buttonCell}>
             <Button
-                color="primary"
-                onClick={this.submitReport}
-                variant="contained"
+              color="primary"
+              onClick={this.submitReport}
+              variant="contained"
             >Create Report
-            <Create className={classes.rightIcon} />
+              <Create className={classes.rightIcon} />
             </Button>
           </div>
 
@@ -224,40 +223,40 @@ class Reports extends Component {
 }
 
 Reports.propTypes = {
-  classes:      PropTypes.object.isRequired,
-  hideMonth:    PropTypes.bool,
-  hideStation:  PropTypes.bool,
-  history:      PropTypes.object.isRequired,
-  location:     PropTypes.object.isRequired,
-  match:        PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  hideMonth: PropTypes.bool,
+  hideStation: PropTypes.bool,
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   buttonCell: {
-    flex:       1,
-    marginTop:  theme.spacing.unit * 2,
+    flex: 1,
+    marginTop: theme.spacing.unit * 2,
     marginLeft: theme.spacing.unit * 2,
   },
   cell: {
     flex: 'flex-grow',
   },
   close: {
-    width:  theme.spacing.unit * 4,
+    width: theme.spacing.unit * 4,
     height: theme.spacing.unit * 4,
   },
   container: {
     marginBottom: theme.spacing.unit,
   },
   formControl: {
-    margin:   theme.spacing.unit,
+    margin: theme.spacing.unit,
     minWidth: 120,
   },
   rightIcon: {
     marginLeft: theme.spacing.unit,
   },
   selectRow: {
-    display:        'inline-flex',
-    flexDirection:  'row',
+    display: 'inline-flex',
+    flexDirection: 'row',
     marginBottom: theme.spacing.unit,
   },
 })

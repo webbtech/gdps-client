@@ -19,19 +19,17 @@ import TankLevelsDialog from './TankLevelsDialog'
 
 
 class TankForm extends Component {
-
   state = {
     editMode: false,
     tankID: '',
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault()
     this.props.handleSubmit(e)
   }
 
   render() {
-
     const {
       classes,
       data,
@@ -51,18 +49,19 @@ class TankForm extends Component {
     return (
       <Paper className={classes.container}>
         <AppBar
-            color="default"
-            position="static"
+          color="default"
+          position="static"
         >
           <Toolbar>
             <Typography
-                className={classes.title}
-                gutterBottom
-                variant="h6"
-            >{formTitle}</Typography>
+              className={classes.title}
+              gutterBottom
+              variant="h6"
+            >{formTitle}
+            </Typography>
             {isEditMode &&
               <TankLevelsDialog
-                  tank={data.tank}
+                tank={data.tank}
               />
             }
           </Toolbar>
@@ -71,87 +70,87 @@ class TankForm extends Component {
         {data && data.loading && <div className={classes.dataMsg}>Loading...</div>}
         {errors && errors.graphql && <div className={classNames(classes.dataMsg, classes.errMsg)}>Received data error: {errors.graphql}</div>}
         <form
-            autoComplete="off"
-            className={classes.form}
-            noValidate
-            onSubmit={this.handleSubmit}
+          autoComplete="off"
+          className={classes.form}
+          noValidate
+          onSubmit={this.handleSubmit}
         >
           <input
-              id="tankID"
-              type="hidden"
-              value={values.id || ''}
+            id="tankID"
+            type="hidden"
+            value={values.id || ''}
           />
 
           <FormControl
-              aria-describedby="size-helper-text"
-              className={classes.formControl}
-              error={!!errors.size}
+            aria-describedby="size-helper-text"
+            className={classes.formControl}
+            error={!!errors.size}
           >
             <InputLabel htmlFor="size">Capacity</InputLabel>
             <Input
-                autoFocus={!isEditMode}
-                id="size"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                type="number"
-                value={values.size || ''}
+              autoFocus={!isEditMode}
+              id="size"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              type="number"
+              value={values.size || ''}
             />
             <FormHelperText id="size-text">{errors.size}</FormHelperText>
           </FormControl>
 
           <FormControl
-              aria-describedby="model-helper-text"
-              className={classes.formControl}
-              error={!!errors.model}
+            aria-describedby="model-helper-text"
+            className={classes.formControl}
+            error={!!errors.model}
           >
             <InputLabel htmlFor="model">Model</InputLabel>
             <Input
-                id="model"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.model || ''}
+              id="model"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.model || ''}
             />
             <FormHelperText id="model-text">{errors.model}</FormHelperText>
           </FormControl>
 
           <FormControl
-              aria-describedby="description-helper-text"
-              className={classes.formControl}
-              error={!!errors.description}
+            aria-describedby="description-helper-text"
+            className={classes.formControl}
+            error={!!errors.description}
           >
             <InputLabel htmlFor="description">Description</InputLabel>
             <Input
-                id="description"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.description || ''}
+              id="description"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.description || ''}
             />
             <FormHelperText id="description-text">{errors.description}</FormHelperText>
           </FormControl>
 
           <FormControl
-              aria-describedby="description-helper-text"
-              className={classes.formControl}
-              error={!!errors.levelsFile}
+            aria-describedby="description-helper-text"
+            className={classes.formControl}
+            error={!!errors.levelsFile}
           >
             <InputLabel htmlFor="levelsFile">Levels File</InputLabel>
             <Input
-                id="levelsFile"
-                name="levelsFile"
-                onBlur={handleBlur}
-                onChange={(event) => {
+              id="levelsFile"
+              name="levelsFile"
+              onBlur={handleBlur}
+              onChange={(event) => {
                   setFieldValue('levelsFile', event.currentTarget.files[0])
                 }}
-                type="file"
+              type="file"
             />
             <FormHelperText id="levelsFile-text">{errors.levelsFile}</FormHelperText>
           </FormControl>
           <Button
-              className={classes.submitButton}
-              color="primary"
-              disabled={!dirty || isSubmitting}
-              type="submit"
-              variant="contained"
+            className={classes.submitButton}
+            color="primary"
+            disabled={!dirty || isSubmitting}
+            type="submit"
+            variant="contained"
           >
           Submit
           </Button>
@@ -161,26 +160,26 @@ class TankForm extends Component {
   }
 }
 TankForm.propTypes = {
-  classes:        PropTypes.object.isRequired,
-  data:           PropTypes.object,
-  dirty:          PropTypes.bool.isRequired,
-  errors:         PropTypes.object,
-  handleBlur:     PropTypes.func.isRequired,
-  handleChange:   PropTypes.func.isRequired,
-  handleSubmit:   PropTypes.func.isRequired,
-  isSubmitting:   PropTypes.bool.isRequired,
-  setFieldValue:  PropTypes.func.isRequired,
-  setValues:      PropTypes.func.isRequired,
-  values:         PropTypes.object,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object,
+  dirty: PropTypes.bool.isRequired,
+  errors: PropTypes.object,
+  handleBlur: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  isSubmitting: PropTypes.bool.isRequired,
+  setFieldValue: PropTypes.func.isRequired,
+  setValues: PropTypes.func.isRequired,
+  values: PropTypes.object,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   container: {
-    display:        'flex',
-    flexDirection:  'column',
-    fontFamily:     theme.typography.fontFamily,
-    margin:         'auto',
-    width:          400,
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: theme.typography.fontFamily,
+    margin: 'auto',
+    width: 400,
   },
   dataMsg: {
     marginBottom: theme.spacing.unit,
@@ -200,7 +199,7 @@ const styles =  theme => ({
   form: {
     dispay: 'flex',
     flexDirection: 'column',
-    padding:        theme.spacing.unit * 2,
+    padding: theme.spacing.unit * 2,
   },
   submitButton: {
     flex: 1,

@@ -6,14 +6,11 @@ import { shallow } from 'enzyme'
 import Alert from '../Alert'
 
 describe('Alert', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = shallow(
-        <Alert {...props} />
-      )
+      mountedC = shallow(<Alert {...props} />)
     }
     return mountedC
   }
@@ -31,5 +28,4 @@ describe('Alert', () => {
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

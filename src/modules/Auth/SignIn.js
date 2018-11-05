@@ -33,7 +33,6 @@ import { withStyles } from '@material-ui/core/styles'
 const logger = new Logger('SignIn')
 
 class SignIn extends AuthPiece {
-
   constructor(props) {
     super(props)
     this.checkContact = this.checkContact.bind(this)
@@ -57,7 +56,7 @@ class SignIn extends AuthPiece {
     window.removeEventListener('keydown', this.onKeyDown)
   }
 
-  onKeyDown = e => {
+  onKeyDown = (e) => {
     if (this.props.authState === 'signIn') {
       if (e.keyCode === 13) { // when press enter
         this.signIn()
@@ -65,20 +64,20 @@ class SignIn extends AuthPiece {
     }
   }
 
-  handleOpen = msg => {
-    this.setState({ snackOpen: true, snackMsg: msg})
+  handleOpen = (msg) => {
+    this.setState({ snackOpen: true, snackMsg: msg })
   }
 
   handleClose = () => {
     this.setState({ snackOpen: false })
   }
 
-  checkContact = user => {
+  checkContact = (user) => {
     if (!Auth || typeof Auth.verifiedContact !== 'function') {
       throw new Error('No Auth module found, please ensure @aws-amplify/auth is imported')
     }
     Auth.verifiedContact(user)
-      .then(data => {
+      .then((data) => {
         if (!JS.isEmpty(data.verified)) {
           this.changeState('signedIn', user)
         } else {
@@ -96,7 +95,7 @@ class SignIn extends AuthPiece {
       throw new Error('No Auth module found, please ensure @aws-amplify/auth is imported')
     }
     Auth.signIn(username, password)
-      .then(user => {
+      .then((user) => {
         this.setState({ loading: false })
         logger.debug(user)
         if (user.challengeName === 'SMS_MFA' || user.challengeName === 'SOFTWARE_TOKEN_MFA') {
@@ -108,18 +107,16 @@ class SignIn extends AuthPiece {
         } else if (user.challengeName === 'MFA_SETUP') {
           logger.debug('TOTP setup', user.challengeParam)
           this.changeState('TOTPSetup', user)
-        }
-        else {
+        } else {
           this.checkContact(user)
         }
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ loading: false })
         if (err.code === 'UserNotConfirmedException') {
           logger.debug('the user is not confirmed')
           this.changeState('confirmSignUp')
-        }
-        else if (err.code === 'PasswordResetRequiredException') {
+        } else if (err.code === 'PasswordResetRequiredException') {
           logger.debug('the user requires a new password')
           this.changeState('requireNewPassword')
         } else {
@@ -137,13 +134,13 @@ class SignIn extends AuthPiece {
       <div>
         <Paper className={classes.container}>
           <AppBar
-              color="secondary"
-              position="static"
+            color="secondary"
+            position="static"
           >
             <Toolbar>
               <Typography
-                  color="inherit"
-                  variant="h6"
+                color="inherit"
+                variant="h6"
               >
                 Sign In To Your Account
               </Typography>
@@ -152,38 +149,38 @@ class SignIn extends AuthPiece {
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="username">Username</InputLabel>
             <Input
-                autoFocus
-                id="username"
-                key="username"
-                name="username"
-                onChange={this.handleInputChange}
+              autoFocus
+              id="username"
+              key="username"
+              name="username"
+              onChange={this.handleInputChange}
             />
           </FormControl>
 
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="password">Password</InputLabel>
             <Input
-                id="password"
-                key="password"
-                name="password"
-                onChange={this.handleInputChange}
-                type="password"
+              id="password"
+              key="password"
+              name="password"
+              onChange={this.handleInputChange}
+              type="password"
             />
           </FormControl>
 
           <Button
-              className={classes.submitButton}
-              color="primary"
-              onClick={this.signIn}
-              variant="contained"
+            className={classes.submitButton}
+            color="primary"
+            onClick={this.signIn}
+            variant="contained"
           >
             {loading ? ('Stand by...') : ('Sign In')}
           </Button>
 
           <Button
-              className={classes.forgotButton}
-              onClick={() => onStateChange('forgotPassword')}
-              size="small"
+            className={classes.forgotButton}
+            onClick={() => onStateChange('forgotPassword')}
+            size="small"
           >
               Forgot Password
           </Button>
@@ -191,25 +188,25 @@ class SignIn extends AuthPiece {
         </Paper>
 
         <Snackbar
-            ContentProps={{
+          ContentProps={{
               'aria-describedby': 'message-id',
             }}
-            action={[
-              <IconButton
-                  aria-label="Close"
-                  className={classes.close}
-                  color="inherit"
-                  key="close"
-                  onClick={this.handleClose}
-              >
-                <CloseIcon />
-              </IconButton>,
+          action={[
+            <IconButton
+              aria-label="Close"
+              className={classes.close}
+              color="inherit"
+              key="close"
+              onClick={this.handleClose}
+            >
+              <CloseIcon />
+            </IconButton>,
             ]}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            autoHideDuration={6000}
-            message={<span id="message-id">{snackMsg}</span>}
-            onClose={this.handleClose}
-            open={snackOpen}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          autoHideDuration={6000}
+          message={<span id="message-id">{snackMsg}</span>}
+          onClose={this.handleClose}
+          open={snackOpen}
         />
       </div>
     )
@@ -218,23 +215,23 @@ class SignIn extends AuthPiece {
 
 const styles = theme => ({
   container: {
-    display:        'flex',
-    flexDirection:  'column',
-    fontFamily:     theme.typography.fontFamily,
-    width:          theme.spacing.unit * 50,
-    margin:         'auto',
-    marginTop:      theme.spacing.unit * 2,
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: theme.typography.fontFamily,
+    width: theme.spacing.unit * 50,
+    margin: 'auto',
+    marginTop: theme.spacing.unit * 2,
   },
   forgotButton: {
-    margin:       'auto',
+    margin: 'auto',
     marginBottom: theme.spacing.unit,
-    width:        theme.spacing.unit * 20,
-    padding:      0,
-    color:        theme.palette.secondary.main,
+    width: theme.spacing.unit * 20,
+    padding: 0,
+    color: theme.palette.secondary.main,
   },
   formContainer: {
-    display:        'flex',
-    flexDirection:  'column',
+    display: 'flex',
+    flexDirection: 'column',
   },
   formControl: {
     margin: theme.spacing.unit * 2,

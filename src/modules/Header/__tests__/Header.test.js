@@ -7,21 +7,18 @@ import { render } from 'enzyme'
 import Header from '../Header'
 
 describe('Header', () => {
-
   let mountedC
   let props
   const reportC = () => {
     if (!mountedC) {
-      mountedC = render(
-        <Router><Header {...props} /></Router>
-      )
+      mountedC = render(<Router><Header {...props} /></Router>)
     }
     return mountedC
   }
 
   beforeEach(() => {
     props = {
-      history: {location: {pathname: '/'}},
+      history: { location: { pathname: '/' } },
     }
     mountedC = undefined
   })
@@ -34,5 +31,4 @@ describe('Header', () => {
   it('matches snapshot', () => {
     expect(reportC()).toMatchSnapshot()
   })
-
 })

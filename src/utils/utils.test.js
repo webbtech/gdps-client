@@ -5,47 +5,43 @@
 import { dateNextDay, datePrevDay, dateToInt, extractPathParts, fmtNumber, setOrderedFuelTypes } from './utils'
 
 describe('dateToInt', () => {
-
   it('return an integer date', () => {
-    let intDte = dateToInt('2018-03-04')
+    const intDte = dateToInt('2018-03-04')
     expect(intDte).toEqual(20180304)
   })
 
   it('returns a null date', () => {
-    let intDte = dateToInt('2018-03-34')
+    const intDte = dateToInt('2018-03-34')
     expect(intDte).toBeNull()
   })
 })
 
 describe('datePrevDay', () => {
-
   it('returns previous day integer', () => {
-    let prevDay = datePrevDay('2018-05-29')
+    const prevDay = datePrevDay('2018-05-29')
     expect(prevDay).toEqual(20180528)
   })
 
   it('returns null', () => {
-    let prevDay = datePrevDay('2018-05-34')
+    const prevDay = datePrevDay('2018-05-34')
     expect(prevDay).toBeNull()
   })
 })
 
 describe('dateNextDay', () => {
-
   it('returns next day integer', () => {
-    let nextDay = dateNextDay('2018-05-29')
+    const nextDay = dateNextDay('2018-05-29')
     expect(nextDay).toEqual(20180530)
   })
 
   it('returns null', () => {
-    let nextDay = dateNextDay('2018-05-34')
+    const nextDay = dateNextDay('2018-05-34')
     expect(nextDay).toBeNull()
   })
 })
 
 
 describe('extractPathParts', () => {
-
   const path = '/dips/2018-05-30/c9d27fe9-9b0e-450c-9f2e-149a55d0a881'
 
   it('returns 2 parts', () => {
@@ -70,7 +66,6 @@ describe('extractPathParts', () => {
 })
 
 describe('fmtNumber', () => {
-
   const number = 12345.06789
 
   it('returns formatted number with 2 decimal places', () => {

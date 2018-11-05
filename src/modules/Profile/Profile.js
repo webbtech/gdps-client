@@ -17,17 +17,16 @@ import Header from '../Header/Header'
 
 
 class Profile extends Component {
-
   state = {
-    email:      '',
-    error:      '',
-    loading:    false,
-    name:       '',
-    password:   '',
-    phone:      '',
-    snackMsg:   '',
-    snackOpen:  false,
-    user:       {},
+    email: '',
+    error: '',
+    loading: false,
+    name: '',
+    password: '',
+    phone: '',
+    snackMsg: '',
+    snackOpen: false,
+    user: {},
     username: '',
   }
 
@@ -37,10 +36,10 @@ class Profile extends Component {
         (result) => {
           const user = result.attributes
           this.setState({
-            loading:  false,
-            email:    user.email,
-            name:     user.name,
-            user:     result,
+            loading: false,
+            email: user.email,
+            name: user.name,
+            user: result,
           })
         },
         // Note: it's important to handle errors here
@@ -55,12 +54,12 @@ class Profile extends Component {
       )
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  handleOpenSnack = msg => {
-    this.setState({ snackOpen: true, snackMsg: msg})
+  handleOpenSnack = (msg) => {
+    this.setState({ snackOpen: true, snackMsg: msg })
   }
 
   handleClose = () => {
@@ -68,8 +67,7 @@ class Profile extends Component {
   }
 
   async onSubmitForm() {
-
-    let attributes = {
+    const attributes = {
       email: this.state.email,
       name: this.state.name,
       // username: this.state.username,
@@ -82,27 +80,30 @@ class Profile extends Component {
     } catch (err) {
       const errMsg = err.message || err
       console.log(`ForgotPassword::onConfirmSubmitted(): Error ${JSON.stringify(err, null, 2)}`) // eslint-disable-line
-      this.setState({ error: errMsg, loading: false, snackMsg: errMsg, snackOpen: true })
+      this.setState({
+        error: errMsg, loading: false, snackMsg: errMsg, snackOpen: true,
+      })
     }
   }
 
   render() {
-
     const { classes } = this.props
-    const { loading, snackMsg, snackOpen, user } = this.state
+    const {
+      loading, snackMsg, snackOpen, user,
+    } = this.state
 
     return (
       <div className={classes.container}>
         <Header />
         <Paper className={classes.paper}>
           <AppBar
-              className={classes.appBar}
-              color="secondary"
-              position="static"
+            className={classes.appBar}
+            color="secondary"
+            position="static"
           >
             <Typography
-                color="inherit"
-                variant="h6"
+              color="inherit"
+              variant="h6"
             >
               {user.name} Profile
             </Typography>
@@ -113,41 +114,41 @@ class Profile extends Component {
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="name">Name</InputLabel>
               <Input
-                  id="name"
-                  name="name"
-                  onChange={this.handleChange}
-                  value={this.state.name}
+                id="name"
+                name="name"
+                onChange={this.handleChange}
+                value={this.state.name}
               />
             </FormControl>
 
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="email">Email</InputLabel>
               <Input
-                  id="email"
-                  name="email"
-                  onChange={this.handleChange}
-                  type="email"
-                  value={this.state.email}
+                id="email"
+                name="email"
+                onChange={this.handleChange}
+                type="email"
+                value={this.state.email}
               />
             </FormControl>
 
             <Button
-                className={classes.submitButton}
-                color="primary"
-                disabled={loading}
-                onClick={() => this.onSubmitForm()}
-                variant="contained"
+              className={classes.submitButton}
+              color="primary"
+              disabled={loading}
+              onClick={() => this.onSubmitForm()}
+              variant="contained"
             >
               {loading ? 'Stand by...' : 'Update Profile'}
             </Button>
 
             <Button
-                className={classes.additionalButton}
-                onClick={() => this.props.history.push('/change-password')}
-                size="small"
+              className={classes.additionalButton}
+              onClick={() => this.props.history.push('/change-password')}
+              size="small"
             >
               <Typography
-                  color="inherit"
+                color="inherit"
               >
                 Change Password
               </Typography>
@@ -156,10 +157,10 @@ class Profile extends Component {
           </div>
         </Paper>
         <Snackbar
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            message={<span id="message-id">{snackMsg}</span>}
-            onClose={this.handleClose}
-            open={snackOpen}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          message={<span id="message-id">{snackMsg}</span>}
+          onClose={this.handleClose}
+          open={snackOpen}
         />
       </div>
     )
@@ -167,28 +168,28 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
-  classes:  PropTypes.object.isRequired,
-  history:  PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   appBar: {
     padding: theme.spacing.unit * 1.5,
     paddingLeft: theme.spacing.unit * 3,
   },
   container: {
-    display:        'flex',
-    flexDirection:  'column',
-    fontFamily:     theme.typography.fontFamily,
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: theme.typography.fontFamily,
   },
   paper: {
-    margin:     'auto',
-    marginTop:  theme.spacing.unit * 3,
-    minWidth:   500,
+    margin: 'auto',
+    marginTop: theme.spacing.unit * 3,
+    minWidth: 500,
   },
   formContainer: {
-    display:        'flex',
-    flexDirection:  'column',
+    display: 'flex',
+    flexDirection: 'column',
   },
   formControl: {
     margin: theme.spacing.unit * 2,
@@ -197,11 +198,11 @@ const styles =  theme => ({
     margin: theme.spacing.unit * 2,
   },
   additionalButton: {
-    margin:     theme.spacing.unit,
+    margin: theme.spacing.unit,
     marginLeft: theme.spacing.unit * 2,
-    marginTop:  0,
-    width:      theme.spacing.unit * 20,
-    padding:    0,
+    marginTop: 0,
+    width: theme.spacing.unit * 20,
+    padding: 0,
   },
 })
 

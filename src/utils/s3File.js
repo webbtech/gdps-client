@@ -16,12 +16,11 @@ AWS.config.update({
 
 const s3 = new AWS.S3({
   apiVersion: '2006-03-01',
-  params: {Bucket: bucketName},
+  params: { Bucket: bucketName },
 })
 
 export async function uploadTankFile(file, fileName) {
-
-  let retMsg = {
+  const retMsg = {
     error: '',
     success: '',
     fileData: {},
@@ -42,13 +41,13 @@ export async function uploadTankFile(file, fileName) {
     Body: file,
   }
   await s3.upload(params).promise()
-  .then(data => {
-    retMsg.success = 'File sucessfully updloaded'
-    retMsg.fileData = data
-  })
-  .catch(err => {
-    retMsg.error = `An error occured uploading file: ${err.message}`
-  })
+    .then((data) => {
+      retMsg.success = 'File sucessfully updloaded'
+      retMsg.fileData = data
+    })
+    .catch((err) => {
+      retMsg.error = `An error occured uploading file: ${err.message}`
+    })
 
   return retMsg
 }

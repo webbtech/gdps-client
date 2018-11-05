@@ -21,9 +21,9 @@ import { FUEL_TYPE_LIST as fuelTypeList } from '../../config/constants'
 import { TANK_QUERY, TOGGLE_ACTIVE_MUTATION } from './StationTanks.cntr'
 
 const sortTanks = (fuelTypes, tanks) => {
-  let ret = []
-  fuelTypes.forEach(ft => {
-    tanks.forEach(tank => {
+  const ret = []
+  fuelTypes.forEach((ft) => {
+    tanks.forEach((tank) => {
       if (tank.fuelType === ft) {
         ret.push(tank)
       }
@@ -33,7 +33,6 @@ const sortTanks = (fuelTypes, tanks) => {
 }
 
 class StationTanks extends Component {
-
   state = {
     stationID: '',
     toasterMsg: '',
@@ -48,7 +47,7 @@ class StationTanks extends Component {
     }
   }
 
-  handleStationChange = value => {
+  handleStationChange = (value) => {
     this.setState({ stationID: value }, this.handlePushURI)
   }
 
@@ -61,29 +60,26 @@ class StationTanks extends Component {
   }
   // see: https://gist.github.com/bvaughn/982ab689a41097237f6e9860db7ca8d6
   // for example on loading external data
-  /*static getDerivedStateFromProps = (props) => {
+  /* static getDerivedStateFromProps = (props) => {
     const stationID = props.location.pathname.split('/')[2]
     if (stationID) {
       return { stationID }
     }
     return null
-  }*/
+  } */
 
-  setToggleVars = tank => {
-    return {
-      fields: {
-        id: tank.id,
-        active: !tank.active,
-      },
-    }
-  }
+  setToggleVars = tank => ({
+    fields: {
+      id: tank.id,
+      active: !tank.active,
+    },
+  })
 
   handleUpdateComplete = () => {
-    this.setState({toasterMsg: 'Tank active status updated'})
+    this.setState({ toasterMsg: 'Tank active status updated' })
   }
 
   render() {
-
     const { classes, data } = this.props
     const { stationID } = this.state
 
@@ -99,19 +95,20 @@ class StationTanks extends Component {
     return (
       <div className={classes.container}>
         <Typography
-            gutterBottom
-            variant="h5"
-        >Station Tank Administration</Typography>
+          gutterBottom
+          variant="h5"
+        >Station Tank Administration
+        </Typography>
         <Paper className={classes.dataContainer}>
           <AppBar
-              color="default"
-              position="static"
+            color="default"
+            position="static"
           >
             <Toolbar>
               <FormControl className={classes.stationSelector}>
                 <StationSelector
-                    onStationChange={this.handleStationChange}
-                    stationID={stationID}
+                  onStationChange={this.handleStationChange}
+                  stationID={stationID}
                 />
               </FormControl>
               <AddTankDialog stationID={this.state.stationID} />
@@ -130,19 +127,19 @@ class StationTanks extends Component {
                 </div>
 
                 <Mutation
-                    mutation={TOGGLE_ACTIVE_MUTATION}
-                    onCompleted={this.handleUpdateComplete}
+                  mutation={TOGGLE_ACTIVE_MUTATION}
+                  onCompleted={this.handleUpdateComplete}
                 >
                   {(toggleActive, { loading, error }) => (
                     <div>
                       {tanks.map(t => (
                         <div
-                            className={classNames(classes.dataRow, {[classes.rowInactive]: !t.active})}
-                            key={t.id}
-                            onClick={() => {
+                          className={classNames(classes.dataRow, { [classes.rowInactive]: !t.active })}
+                          key={t.id}
+                          onClick={() => {
                               toggleActive({
                                 variables: this.setToggleVars(t),
-                                refetchQueries: [{query: TANK_QUERY, variables: {stationID}}],
+                                refetchQueries: [{ query: TANK_QUERY, variables: { stationID } }],
                               })
                             }}
                         >
@@ -151,8 +148,8 @@ class StationTanks extends Component {
                           <div className={classes.dataCell}>{t.tank.size}</div>
                           <div className={classes.dataCell}>
                             <Checkbox
-                                checked={t.active}
-                                classes={{root: classes.checkboxRoot}}
+                              checked={t.active}
+                              classes={{ root: classes.checkboxRoot }}
                             />
                           </div>
                         </div>
@@ -169,8 +166,8 @@ class StationTanks extends Component {
           }
         </Paper>
         <Toaster
-            duration={1000}
-            message={this.state.toasterMsg}
+          duration={1000}
+          message={this.state.toasterMsg}
         />
       </div>
     )
@@ -178,84 +175,84 @@ class StationTanks extends Component {
 }
 
 StationTanks.propTypes = {
-  classes:    PropTypes.object.isRequired,
-  data:       PropTypes.object,
-  history:    PropTypes.object.isRequired,
-  location:   PropTypes.object.isRequired,
-  match:      PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object,
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
   // stationID:  PropTypes.string.isRequired,
 }
 
-const styles =  theme => ({
+const styles = theme => ({
   checkboxRoot: {
     padding: 0,
     height: 10,
   },
   container: {
-    display:        'flex',
-    flexDirection:  'column',
-    fontFamily:     theme.typography.fontFamily,
-    margin:         'auto',
-    width:          400,
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: theme.typography.fontFamily,
+    margin: 'auto',
+    width: 400,
   },
   dataCell: {
     flex: 1,
   },
   dataCellSm: {
-    flex: .5,
+    flex: 0.5,
   },
   dataContainer: {
-    display:        'flex',
-    flexDirection:  'column',
+    display: 'flex',
+    flexDirection: 'column',
   },
   dataRow: {
-    borderBottom:       'solid 1px',
-    borderBottomColor:  theme.palette.grey['300'],
-    display:            'flex',
-    flexDirection:      'row',
-    padding:            theme.spacing.unit * 2,
+    borderBottom: 'solid 1px',
+    borderBottomColor: theme.palette.grey['300'],
+    display: 'flex',
+    flexDirection: 'row',
+    padding: theme.spacing.unit * 2,
     '&:hover': {
-      backgroundColor:  theme.palette.grey['100'],
-      cursor:           'pointer',
+      backgroundColor: theme.palette.grey['100'],
+      cursor: 'pointer',
     },
   },
   errorMsg: {
     borderBottom: 'none',
-    paddingLeft:  theme.spacing.unit,
-    height:       40,
+    paddingLeft: theme.spacing.unit,
+    height: 40,
   },
   headerRow: {
-    borderBottomColor:  '#efefef',
-    borderBottomStyle:  'solid',
-    borderBottomWidth:  1,
-    color:              theme.palette.grey['700'],
-    display:            'inline-flex',
-    flexDirection:      'row',
-    padding:            theme.spacing.unit,
+    borderBottomColor: '#efefef',
+    borderBottomStyle: 'solid',
+    borderBottomWidth: 1,
+    color: theme.palette.grey['700'],
+    display: 'inline-flex',
+    flexDirection: 'row',
+    padding: theme.spacing.unit,
   },
   headerCell: {
-    flex:       1,
+    flex: 1,
     fontWeight: '500',
-    padding:    theme.spacing.unit,
+    padding: theme.spacing.unit,
   },
   headerCellSm: {
-    flex:       .5,
+    flex: 0.5,
     fontWeight: '500',
-    padding:    theme.spacing.unit,
+    padding: theme.spacing.unit,
   },
   instructMsg: {
     padding: theme.spacing.unit * 2,
   },
   rowInactive: {
-    opacity: .5,
+    opacity: 0.5,
   },
   submitButton: {
-    margin:     theme.spacing.unit * 2,
+    margin: theme.spacing.unit * 2,
     marginLeft: 0,
   },
   table: {
     minWidth: 400,
-    width:    500,
+    width: 500,
   },
   stationSelector: {
     flexGrow: 1,

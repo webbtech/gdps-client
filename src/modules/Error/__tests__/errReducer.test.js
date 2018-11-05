@@ -4,10 +4,9 @@ import * as actions from '../errorActions'
 import reducer from '../errorReducer'
 
 describe('todos reducer', () => {
-
   const time = new Date().getTime()
   const time2 = time + 1
-  let state = [
+  const state = [
     {
       message: 'First message',
       id: time,
@@ -23,39 +22,34 @@ describe('todos reducer', () => {
   })
 
   it('should handle ERROR_SEND', () => {
-
-    expect(
-      reducer([], {
-        type: actions.ERROR_SEND,
-        payload: {
-          message: 'Run the tests',
-          id: time,
-        },
-      })
-    ).toEqual([
+    expect(reducer([], {
+      type: actions.ERROR_SEND,
+      payload: {
+        message: 'Run the tests',
+        id: time,
+      },
+    })).toEqual([
       {
         message: 'Run the tests',
         id: time,
       },
     ])
 
-    expect(
-      reducer(
-        [
-          {
-            message: 'Existing message',
-            id: time,
-          },
-        ],
+    expect(reducer(
+      [
         {
-          type: actions.ERROR_SEND,
-          payload: {
-            message: 'Run the tests',
-            id: time2,
-          },
-        }
-      )
-    ).toEqual([
+          message: 'Existing message',
+          id: time,
+        },
+      ],
+      {
+        type: actions.ERROR_SEND,
+        payload: {
+          message: 'Run the tests',
+          id: time2,
+        },
+      }
+    )).toEqual([
       {
         message: 'Run the tests',
         id: time2,
@@ -65,28 +59,22 @@ describe('todos reducer', () => {
         id: time,
       },
     ])
-
   })
 
   it('should dismiss error', () => {
-    expect(
-      reducer(
-        state,
-        {
-          type: actions.ERROR_DISMISS,
-          payload: time,
-        }
-      )
-    ).toEqual(state.slice(1))
+    expect(reducer(
+      state,
+      {
+        type: actions.ERROR_DISMISS,
+        payload: time,
+      }
+    )).toEqual(state.slice(1))
   })
 
   it('should clear all errors', () => {
-    expect(
-      reducer(
-        state,
-        { type: actions.ERROR_CLEAR }
-      )
-    ).toEqual([])
+    expect(reducer(
+      state,
+      { type: actions.ERROR_CLEAR }
+    )).toEqual([])
   })
-
 })

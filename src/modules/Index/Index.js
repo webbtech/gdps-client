@@ -1,19 +1,23 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import Amplify from 'aws-amplify'
+import Amplify, { Auth } from 'aws-amplify'
 import createHistory from 'history/createBrowserHistory'
 import Loadable from 'react-loadable'
 import { ApolloProvider } from 'react-apollo'
-import { Auth } from 'aws-amplify'
+// import { Auth } from 'aws-amplify'
 import { Authenticator } from 'aws-amplify-react'
 import { ConnectedRouter } from 'react-router-redux'
 import { Switch, Route } from 'react-router'
 
+import MomentUtils from 'material-ui-pickers/utils/moment-utils'
+import MuiPickersUtilsProvider from 'material-ui-pickers/MuiPickersUtilsProvider'
+import * as Sentry from '@sentry/browser'
+
 import Alert from '../Common/Alert'
-import aws_exports from '../Auth/aws-exports'
+import awsExports from '../Auth/aws-exports'
 import ChangePassword from '../Profile/ChangePassword'
-import client from '../../apollo.js'
+import client from '../../apollo'
 import Dashboard from './Dashboard'
 import Dips from '../Dips/Dips.cntr'
 import Download from '../Common/Download'
@@ -30,11 +34,10 @@ import ForgotPassword from '../Auth/ForgotPassword'
 import RequireNewPassword from '../Auth/RequireNewPassword'
 
 // Sentry
-import * as Sentry from '@sentry/browser'
 import { SENTRY_DSN } from '../../config/constants'
 
 
-Amplify.configure(aws_exports)
+Amplify.configure(awsExports)
 const history = createHistory()
 
 const Loading = () => <div>Loading...</div>
@@ -52,7 +55,6 @@ const Reports = Loadable({
 Sentry.init({ dsn: SENTRY_DSN })
 
 class Index extends Component {
-
   constructor(props) {
     super(props)
     this.state = {
@@ -62,8 +64,8 @@ class Index extends Component {
 
   componentDidCatch(error, errorInfo) {
     this.setState({ error })
-    Sentry.configureScope(scope => {
-      Object.keys(errorInfo).forEach(key => {
+    Sentry.configureScope((scope) => {
+      Object.keys(errorInfo).forEach((key) => {
         scope.setExtra(key, errorInfo[key])
       })
     })
@@ -71,7 +73,6 @@ class Index extends Component {
   }
 
   render() {
-
     if (this.props.authState !== 'signedIn') return null
 
     if (this.state.error) {
@@ -81,72 +82,76 @@ class Index extends Component {
     return (
       <ApolloProvider client={client}>
         <ConnectedRouter history={history}>
-          <div>
-            <Errors />
-            <Switch>
-              <Route
+          <MuiPickersUtilsProvider utils={MomentUtils}>
+            <div>
+              <Errors />
+              <Switch>
+                <Route
                   component={Dashboard}
                   exact
                   path="/"
-              />
-              <Route
+                />
+                <Route
                   component={Dips}
                   exact
                   path="/dips"
-              />
-              <Route
+                />
+                <Route
                   component={Dips}
                   path="/dips/:date/:stationID"
-              />
-              <Route
+                />
+                <Route
                   component={Reports}
                   path="/reports"
-              />
-              <Route
+                />
+                <Route
                   component={Propane}
                   exact
                   path="/propane"
-              />
-              <Route
+                />
+                <Route
                   component={Propane}
                   path="/propane/:date"
-              />
-              <Route
+                />
+                <Route
                   component={ImportData}
                   path="/import-data"
-              />
-              <Route
+                />
+                <Route
                   component={Admin}
                   path="/admin"
-              />
-              <Route
+                />
+                <Route
                   component={Profile}
                   path="/profile"
-              />
-              <Route
+                />
+                <Route
                   component={ChangePassword}
                   path="/change-password"
-              />
-              <Route
+                />
+                <Route
                   component={Download}
                   path="/download"
-              />
-            </Switch>
-          </div>
+                />
+              </Switch>
+            </div>
+          </MuiPickersUtilsProvider>
         </ConnectedRouter>
-        </ApolloProvider>
+      </ApolloProvider>
     )
   }
 }
 
 Index.propTypes = {
-  authState:  PropTypes.string,
+  authState: PropTypes.string,
+}
+Index.defaultProps = {
+  authState: '',
 }
 
 class AppWithAuth extends Component { // eslint-disable-line react/no-multi-comp
-
   state = {
-    user: '',
+    user: '', // eslint-disable-line
   }
 
   async componentWillMount() {
@@ -163,24 +168,24 @@ class AppWithAuth extends Component { // eslint-disable-line react/no-multi-comp
   handleAuthStateChange(state) { // eslint-disable-line
     // console.log('state in handleAuthStateChange: ', state) // eslint-disable-line
     // if (state === 'signedIn') {
-        // Do something when the user has signed-in
+    // Do something when the user has signed-in
     // }
   }
 
-  render(){
+  render() {
     // console.log('user in render: ', this.state)
 
     return (
       <div>
         <Authenticator
-            hideDefault
-            onStateChange={this.handleAuthStateChange}
+          hideDefault
+          onStateChange={this.handleAuthStateChange}
         >
           <Index />
-          <SignIn/>
-          <ConfirmSignIn/>
-          <ForgotPassword/>
-          <RequireNewPassword/>
+          <SignIn />
+          <ConfirmSignIn />
+          <ForgotPassword />
+          <RequireNewPassword />
         </Authenticator>
       </div>
     )
