@@ -30,17 +30,11 @@ class DipSelectors extends Component {
   componentDidMount = () => {
     const { params } = this.props.match
     const { date, stationID } = params
-    const setDate = moment(date)
-    const newDte = {
-      year: setDate.format('YYYY'),
-      month: setDate.subtract(1, 'months').format('MM'),
-      date: setDate.format('DD'),
-    }
     if (date) {
-      this.setState({ selectedDate: this.state.selectedDate.set(newDte) }, this.setNextDisabled)
+      this.setState(() => ({ selectedDate: moment(date) }), this.setNextDisabled)
     }
     if (stationID) {
-      this.setState({ stationID }, this.handleGetDip)
+      this.setState(() => ({ stationID }), this.handleGetDip)
     }
   }
 
@@ -60,13 +54,13 @@ class DipSelectors extends Component {
   }
 
   handleNextPrevDate = (val) => {
-    const dte = this.state.selectedDate
+    const newDte = moment(this.state.selectedDate)
     if (val === 'p') {
-      dte.subtract(1, 'days')
+      newDte.subtract(1, 'd')
     } else if (val === 'n') {
-      dte.add(1, 'days')
+      newDte.add(1, 'd')
     }
-    this.setState({ selectedDate: dte }, this.handleGetDip)
+    this.setState(() => ({ selectedDate: newDte }), this.handleGetDip)
   }
 
   handleGetDip = () => {
@@ -74,7 +68,6 @@ class DipSelectors extends Component {
     this.setNextDisabled()
     const { history } = this.props
     const { selectedDate, stationID } = this.state
-
     if (stationID) {
       const dte = selectedDate.format(dateFormat)
       const uri = `/dips/${dte}/${stationID}`
