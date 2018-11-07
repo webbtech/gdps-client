@@ -55,6 +55,15 @@ const populateTanks = (dips, tanks) => {
 }
 
 class Dips extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      submitting: false,
+    }
+    this.handleSubmitNotify = this.handleSubmitNotify.bind(this)
+  }
+
   componentDidUpdate = (prevProps) => {
     if (!prevProps.dips) return
     if (!prevProps.dips.error && this.props.dips.error) {
@@ -63,6 +72,10 @@ class Dips extends Component {
       const msg = `${errMsg} -- ${ts}`
       this.props.actions.errorSend({ message: msg, type: 'danger' })
     }
+  }
+
+  handleSubmitNotify = (isSubmit) => {
+    this.setState(() => ({ submitting: isSubmit }))
   }
 
   render() {
@@ -79,17 +92,20 @@ class Dips extends Component {
     const dateObj = moment(requestDate)
     let havePrevDayDips = false
     let editMode = false
-    let haveCurDips = false
+    // let haveCurDips = false
     let haveFSImport = true
+    let loading = true
 
     let fsDate = ''
     if (fuelSaleLatest && fuelSaleLatest.fuelSaleLatest) {
       fsDate = moment(fuelSaleLatest.fuelSaleLatest.date.toString())
     }
 
+    /*
     if (dips && dips.error) {
       haveCurDips = false
     }
+    */
 
     // Compare last imported with current date
     if (dateObj.isAfter(fsDate)) {
@@ -103,12 +119,13 @@ class Dips extends Component {
       waitComponent = <Loader />
     }
 
-    if (dips && dips.loading === true) {
-      return <Loader />
+    if (dips && dips.networkStatus === 7
+      && tanks && tanks.networkStatus === 7) {
+      loading = false
     }
 
-    if (dips && dips.loading === false && dips.dipOverShortRange) {
-      haveCurDips = true
+    if (dips && dips.dipOverShortRange) {
+      // haveCurDips = true
       const curDay = dateToInt(requestDate)
       const prevDay = datePrevDay(requestDate)
       if (dips.dipOverShortRange[0].date === prevDay) {
@@ -132,6 +149,8 @@ class Dips extends Component {
           <div className={classes.secondaryContainer}>
             <DipSelectors />
 
+            {haveFSImport && loading && waitComponent}
+
             {!haveFSImport &&
               <div className={classes.lastFS}>
                 <Button
@@ -148,33 +167,26 @@ class Dips extends Component {
               </div>
             }
 
-            {haveCurDips && haveFSImport &&
+            {haveFSImport && !loading &&
               <div style={{ display: 'flex', flexDirection: 'row', marginTop: 20 }}>
                 <div style={{ flex: 1 }}>
-                  {tanks &&
-                    tanks.stationTanks &&
-                    tanks.loading === false &&
-                    dips && dips.loading === false
-                  ? (
-                    <DipForm
-                      editMode={editMode}
-                      havePrevDayDips={havePrevDayDips}
-                      tankDips={populateTanks(dips, tanks.stationTanks)}
-                    />
-                ) : (
-                  waitComponent
-                )}
+                  <DipForm
+                    editMode={editMode}
+                    havePrevDayDips={havePrevDayDips}
+                    tankDips={populateTanks(dips, tanks.stationTanks)}
+                    submitFunc={this.handleSubmitNotify}
+                  />
                 </div>
                 <div style={{ flex: 0.7 }}>
-                  {dips &&
                   <DipOverShort
                     dateObj={dateObj}
                     dips={dips}
+                    isSubmit={this.state.submitting}
                   />
-                }
                 </div>
               </div>
             }
+
           </div>
         </Paper>
       </div>

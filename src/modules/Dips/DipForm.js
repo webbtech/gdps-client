@@ -22,10 +22,15 @@ class DipForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      // haveErrors: false,
       toasterMsg: '',
     }
     this.handleCalculateLitres = debounce(this.handleCalculateLitres, 250)
+  }
+
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.isSubmitting !== this.props.isSubmitting) {
+      this.props.submitFunc(this.props.isSubmitting)
+    }
   }
 
   // see: https://stackoverflow.com/questions/23123138/perform-debounce-in-react-js for explanation on debounce
@@ -227,6 +232,7 @@ DipForm.propTypes = {
   isSubmitting: PropTypes.bool.isRequired,
   setFieldError: PropTypes.func.isRequired,
   setFieldValue: PropTypes.func.isRequired,
+  submitFunc: PropTypes.func.isRequired,
   tankDips: PropTypes.instanceOf(Object).isRequired,
   values: PropTypes.instanceOf(Object).isRequired,
 }
