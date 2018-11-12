@@ -11,6 +11,7 @@ module.exports = {
     semi: ["error", "never"],
     "comma-dangle": ["warn", "always-multiline"],
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
     // "no-underscore-dangle": [2, { "allowAfterThis": true }]
     // "no-underscore-dangle": [0]
   }

@@ -92,7 +92,6 @@ class Dips extends Component {
     const dateObj = moment(requestDate)
     let havePrevDayDips = false
     let editMode = false
-    // let haveCurDips = false
     let haveFSImport = true
     let loading = true
 
@@ -100,12 +99,6 @@ class Dips extends Component {
     if (fuelSaleLatest && fuelSaleLatest.fuelSaleLatest) {
       fsDate = moment(fuelSaleLatest.fuelSaleLatest.date.toString())
     }
-
-    /*
-    if (dips && dips.error) {
-      haveCurDips = false
-    }
-    */
 
     // Compare last imported with current date
     if (dateObj.isAfter(fsDate)) {
@@ -125,7 +118,6 @@ class Dips extends Component {
     }
 
     if (dips && dips.dipOverShortRange) {
-      // haveCurDips = true
       const curDay = dateToInt(requestDate)
       const prevDay = datePrevDay(requestDate)
       if (dips.dipOverShortRange[0].date === prevDay) {
@@ -173,6 +165,7 @@ class Dips extends Component {
                   <DipForm
                     editMode={editMode}
                     havePrevDayDips={havePrevDayDips}
+                    isSubmit={this.state.submitting}
                     tankDips={populateTanks(dips, tanks.stationTanks)}
                     submitFunc={this.handleSubmitNotify}
                   />

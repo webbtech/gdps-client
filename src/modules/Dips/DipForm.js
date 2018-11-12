@@ -104,12 +104,12 @@ class DipForm extends Component {
       errors,
       havePrevDayDips,
       isSubmitting,
+      isSubmit,
       tankDips,
       values,
     } = this.props
     const errorKeys = Object.keys(errors).length
     const submitLabel = editMode ? 'Edit Dips' : 'Save Dips'
-
     const rows = []
     const tdIDs = Object.keys(tankDips)
 
@@ -210,7 +210,7 @@ class DipForm extends Component {
                 {submitLabel}
               </Button>
             </div>
-            {!havePrevDayDips &&
+            {!havePrevDayDips && !isSubmit &&
               <Alert type="info">Previous day dips missing. Ensure dips are entered consecutively.</Alert>
             }
           </div>
@@ -229,6 +229,7 @@ DipForm.propTypes = {
   errors: PropTypes.instanceOf(Object).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   havePrevDayDips: PropTypes.bool.isRequired,
+  isSubmit: PropTypes.bool.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   setFieldError: PropTypes.func.isRequired,
   setFieldValue: PropTypes.func.isRequired,
