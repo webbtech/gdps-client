@@ -19,7 +19,7 @@ const s3 = new AWS.S3({
   params: { Bucket: bucketName },
 })
 
-export async function uploadTankFile(file, fileName) {
+export default async function uploadTankFile(file, fileName) {
   const retMsg = {
     error: '',
     success: '',

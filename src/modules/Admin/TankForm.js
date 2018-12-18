@@ -197,7 +197,7 @@ const styles = theme => ({
     width: '100%',
   },
   form: {
-    dispay: 'flex',
+    display: 'flex',
     flexDirection: 'column',
     padding: theme.spacing.unit * 2,
   },

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import gql from 'graphql-tag'
@@ -25,8 +25,8 @@ query FuelSaleDetailedReport($date: String!, $stationID: String!) {
         date
         sales
       }
+      range
       totals
-      yearWeek
     }
   }
 }
@@ -55,20 +55,23 @@ const Report = ({ data, classes }) => {
         variant="h5"
       >Fuel Sales Station Detail
       </Typography>
-      {data.fuelSaleDetailedReport.weekSales.map((sale, i) => (
+      {data.fuelSaleDetailedReport.weekSales.map(sale => (
         <Week
           classes={classes}
           data={sale}
           fuelTypes={fts}
-          key={i}
+          key={sale.range.yearWeek}
         />
       ))}
     </div>
   )
 }
 Report.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object),
+}
+Report.defaultProps = {
+  data: null,
 }
 
 const WeekHeader = ({ wkNo, fuelTypes, classes }) => (
@@ -84,13 +87,13 @@ const WeekHeader = ({ wkNo, fuelTypes, classes }) => (
   </div>
 )
 WeekHeader.propTypes = {
-  classes: PropTypes.object.isRequired,
-  fuelTypes: PropTypes.array.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  fuelTypes: PropTypes.instanceOf(Object).isRequired,
   wkNo: PropTypes.string.isRequired,
 }
 
 const Week = ({ data, fuelTypes, classes }) => {
-  const wkNo = data.yearWeek.toString().substring(4)
+  const wkNo = data.range.yearWeek.toString().substring(4)
   return (
     <Paper className={classes.weekContainer}>
       <WeekHeader
@@ -122,9 +125,9 @@ const Week = ({ data, fuelTypes, classes }) => {
   )
 }
 Week.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired,
-  fuelTypes: PropTypes.array.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object).isRequired,
+  fuelTypes: PropTypes.instanceOf(Object).isRequired,
 }
 
 const WeekSummary = ({ data, fuelTypes, classes }) => (
@@ -140,38 +143,33 @@ const WeekSummary = ({ data, fuelTypes, classes }) => (
   </div>
 )
 WeekSummary.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired,
-  fuelTypes: PropTypes.array.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object).isRequired,
+  fuelTypes: PropTypes.instanceOf(Object).isRequired,
 }
 
 
-class FuelSalesDetailed extends Component {
-  render() {
-    const { classes, data } = this.props
-
-    if (data && data.error) {
-      return <p>Data Error :(</p>
-    }
-
-    return (
-      <div className={classes.mainContainer}>
-        <ReportSelectors />
-        <Report
-          classes={classes}
-          data={data}
-        />
-      </div>
-    )
+const FuelSalesDetailed = ({ classes, data }) => {
+  if (data && data.error) {
+    return <p>Data Error :(</p>
   }
+  return (
+    <div className={classes.mainContainer}>
+      <ReportSelectors />
+      <Report
+        classes={classes}
+        data={data}
+      />
+    </div>
+  )
 }
 
 FuelSalesDetailed.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object,
-  history: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object),
+}
+FuelSalesDetailed.defaultProps = {
+  data: null,
 }
 
 const styles = theme => ({
@@ -239,14 +237,11 @@ const styles = theme => ({
 })
 
 export default graphql(FSD_REPORT_QUERY, {
-  skip: props => props.location.pathname.split('/').length < 5,
-  options: (props) => {
-    const prts = utils.extractPathParts(props.location.pathname, 3)
-    return ({
-      variables: {
-        date: moment(prts[0]).format('YYYY-MM-DD'),
-        stationID: prts[1],
-      },
-    })
-  },
+  skip: ({ match }) => !match || !match.params.date,
+  options: ({ match }) => ({
+    variables: {
+      date: moment(match.params.date).format('YYYY-MM-DD'),
+      stationID: match.params.stationID,
+    },
+  }),
 })(withStyles(styles)(FuelSalesDetailed))

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import gql from 'graphql-tag'
@@ -17,9 +17,20 @@ import ReportSelectors from './ReportSelectors'
 const PSM_REPORT_QUERY = gql`
 query PropaneSaleMonthReport($date: String!) {
   propaneSaleMonthReport(date: $date) {
-    sales
-    salesSummary
-    deliveries
+    periodSales {
+      dates {
+        dateStart
+        dateEnd
+        dayRange
+        yearWeek
+      }
+      sales
+      summary
+    }
+    deliveries {
+      date
+      litres
+    }
   }
 }
 `
@@ -41,18 +52,19 @@ const Report = ({ classes, data }) => {
     )
   }
 
-  const wks = []
-  const sales = data.propaneSaleMonthReport.sales
-  const summary = data.propaneSaleMonthReport.salesSummary
-  const deliveries = data.propaneSaleMonthReport.deliveries
+  // const wks = []
+  const {
+    deliveries,
+    periodSales,
+  } = data.propaneSaleMonthReport
 
-  for (const wk in sales) {
+  /*periodOrder.forEach((po) => {
     wks.push({
-      week: wk,
-      sales: sales[wk],
-      summary: summary[wk],
+      week: po,
+      sales: sales[po],
+      summary: salesSummary[po],
     })
-  }
+  })*/
 
   return (
     <div className={classes.container}>
@@ -66,11 +78,11 @@ const Report = ({ classes, data }) => {
           <br />
           <ReportHeading classes={classes} />
         </div>
-        {wks.map(wk => (
+        {periodSales.map(sale => (
           <ReportWeek
             classes={classes}
-            data={wk}
-            key={wk.week}
+            data={sale}
+            // key={wk.week}
           />
         ))}
       </Paper>
@@ -93,45 +105,42 @@ const Report = ({ classes, data }) => {
   )
 }
 Report.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object),
+}
+Report.defaultProps = {
+  data: null,
 }
 
 const ReportWeek = ({ classes, data }) => {
-  const rows = []
-  for (const s in data.sales) {
-    rows.push({
-      date: s,
-      sales: data.sales[s],
-    })
-  }
+  const { dates, sales, summary } = data
 
   return (
     <div className={classes.weekContainer}>
       <div className={classes.weekHeadingRow}>
-        <div className={classes.reportDateCell}>Week {data.week.substring(4)}</div>
+        <div className={classes.reportDateCell}>Week {dates.yearWeek.toString().substring(4)}</div>
       </div>
-      {rows.map(sale => (
+      {sales.map(sale => (
         <div
           className={classes.reportDataRow}
           key={sale.date}
         >
-          <div className={classes.reportDateCell}>{moment(sale.date).format('MMM D')}</div>
-          <div className={classes.reportDataCell}>{utils.fmtNumber(sale.sales['475'], 0, true)}</div>
-          <div className={classes.reportDataCell}>{utils.fmtNumber(sale.sales['476'], 0, true)}</div>
+          <div className={classes.reportDateCell}>{utils.numberToMoment(sale.date).format('MMM D')}</div>
+          <div className={classes.reportDataCell}>{utils.fmtNumber(sale['475'], 0, true)}</div>
+          <div className={classes.reportDataCell}>{utils.fmtNumber(sale['476'], 0, true)}</div>
         </div>
       ))}
       <div className={classes.reportSummaryRow}>
         <div className={classes.reportDateCell} />
-        <div className={classes.reportSummaryCell}>{utils.fmtNumber(data.summary['475'], 0, true)}</div>
-        <div className={classes.reportSummaryCell}>{utils.fmtNumber(data.summary['476'], 0, true)}</div>
+        <div className={classes.reportSummaryCell}>{utils.fmtNumber(summary['475'], 0, true)}</div>
+        <div className={classes.reportSummaryCell}>{utils.fmtNumber(summary['476'], 0, true)}</div>
       </div>
     </div>
   )
 }
 ReportWeek.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object).isRequired,
 }
 
 const ReportHeading = ({ classes }) => (
@@ -142,7 +151,7 @@ const ReportHeading = ({ classes }) => (
   </div>
 )
 ReportHeading.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
 }
 
 const ReportDeliveries = ({ classes, data }) => (
@@ -166,37 +175,35 @@ const ReportDeliveries = ({ classes, data }) => (
   </div>
 )
 ReportDeliveries.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.array.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object).isRequired,
 }
 
 
-class PropaneSalesMonthly extends Component {
-  render() {
-    const { classes, data } = this.props
-
-    if (data && data.error) {
-      return <p>Data Error :(</p>
-    }
-
-    return (
-      <div className={classes.mainContainer}>
-        <ReportSelectors
-          hideStation
-        />
-        <Report
-          classes={classes}
-          data={data}
-        />
-      </div>
-    )
+const PropaneSalesMonthly = ({ classes, data }) => {
+  if (data && data.error) {
+    return <p>Data Error :(</p>
   }
-}
 
+  return (
+    <div className={classes.mainContainer}>
+      <ReportSelectors
+        hideStation
+      />
+      <Report
+        classes={classes}
+        data={data}
+      />
+    </div>
+  )
+}
 PropaneSalesMonthly.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object,
-  location: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object),
+  // location: PropTypes.instanceOf(Object).isRequired,
+}
+PropaneSalesMonthly.defaultProps = {
+  data: null,
 }
 
 const styles = theme => ({

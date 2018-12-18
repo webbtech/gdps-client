@@ -1,5 +1,4 @@
-// import logger from 'redux-logger'
-// import { composeWithDevTools } from 'redux-devtools-extension'
+import LogRocket from 'logrocket'
 
 import { createStore, applyMiddleware } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
@@ -13,7 +12,7 @@ export default function configureStore(preloadedState = {}) {
   const store = createStore(
     rootReducer,
     preloadedState,
-    applyMiddleware(middleware)
+    applyMiddleware(LogRocket.reduxMiddleware(), middleware)
   )
   return store
 }

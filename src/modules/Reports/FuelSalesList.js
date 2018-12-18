@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import gql from 'graphql-tag'
@@ -18,16 +18,37 @@ import * as utils from '../../utils/utils'
 const FSL_REPORT_QUERY = gql`
 query FuelSaleListReport($date: String!) {
   fuelSaleListReport(date: $date) {
-    periodHeader
-    sales {
+    periodHeader {
+      yearWeek
+      startDate
+      endDate
+      week
+    }
+    periodSales {
       fuelPrices
-      periods
+      periods {
+        dates
+        fuelSales {
+          NL
+          DSL
+        }
+      }
       stationID
       stationName
-      stationTotal
+      stationTotal {
+        NL
+        DSL
+      }
     }
-    periodTotals
-    totalsByFuel
+    periodTotals {
+      period
+      NL
+      DSL
+    }
+    totalsByFuel {
+      NL
+      DSL
+    }
   }
 }
 `
@@ -44,7 +65,7 @@ const Report = ({ classes, data, date }) => {
     )
   }
 
-  const sales = data.fuelSaleListReport.sales
+  const { periodSales } = data.fuelSaleListReport
 
   return (
     <div className={classes.container}>
@@ -62,14 +83,14 @@ const Report = ({ classes, data, date }) => {
         </Typography>
         <PeriodHdr
           classes={classes}
-          data={data.fuelSaleListReport.periodHeader}
+          data={data.fuelSaleListReport}
         />
-        {sales.map((sale, i) => (
+        {periodSales.map(sale => (
           <SalesRow
             classes={classes}
             data={sale}
             date={date}
-            key={i}
+            key={sale.stationID}
             type="NL"
           />
         ))}
@@ -78,7 +99,7 @@ const Report = ({ classes, data, date }) => {
           data={data.fuelSaleListReport}
           type="NL"
         />
-        <Typography>*NOTE: Values in brackets are fuel price average for period</Typography>
+        <Typography>&nbsp; *NOTE: Values in brackets are fuel price average for period</Typography>
       </Paper>
       <br />
       <Paper className={classes.reportContainer}>
@@ -90,14 +111,14 @@ const Report = ({ classes, data, date }) => {
         </Typography>
         <PeriodHdr
           classes={classes}
-          data={data.fuelSaleListReport.periodHeader}
+          data={data.fuelSaleListReport}
         />
-        {sales.map((sale, i) => (
+        {periodSales.map(sale => (
           <SalesRow
             classes={classes}
             data={sale}
             date={date}
-            key={i}
+            key={sale.stationID}
             type="DSL"
           />
         ))}
@@ -111,39 +132,39 @@ const Report = ({ classes, data, date }) => {
   )
 }
 Report.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object),
   date: PropTypes.string,
 }
+Report.defaultProps = {
+  data: null,
+  date: '',
+}
 
-const PeriodHdr = ({ classes, data }) => {
-  const periods = []
-  for (const period in data) periods.push(data[period])
 
-  return (
-    <div className={classes.periodHdrRow}>
+const PeriodHdr = ({ classes, data }) => (
+  <div className={classes.periodHdrRow}>
+    <div
+      className={classes.periodHdrCell}
+      style={{ flex: 0.75 }}
+    />
+    {data.periodHeader.map(period => (
       <div
         className={classes.periodHdrCell}
-        style={{ flex: 0.75 }}
-      />
-      {periods.map((period, i) => (
-        <div
-          className={classes.periodHdrCell}
-          key={i}
-        >
-          {moment(period.startDate).format('MM/DD')} - {moment(period.endDate).format('MM/DD')}
-        </div>
-      ))}
-      <div
-        className={classes.dataCell}
-        style={{ flex: 0.75 }}
-      />
-    </div>
-  )
-}
+        key={period.week}
+      >
+        {moment(period.startDate).format('MM/DD')} - {moment(period.endDate).format('MM/DD')}
+      </div>
+    ))}
+    <div
+      className={classes.dataCell}
+      style={{ flex: 0.75 }}
+    />
+  </div>
+)
 PeriodHdr.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object).isRequired,
 }
 
 const SalesRow = ({
@@ -151,28 +172,24 @@ const SalesRow = ({
 }) => {
   // Skip stations that don't have diesel when doing diesel report
   if (type === 'DSL' && data.stationTotal.DSL <= 0) return null
-  const sales = []
   const link = `/reports/fuel-sales-detailed/${date}/${data.stationID}`
-
-  for (const period in data.periods) {
-    sales.push({
-      amount: data.periods[period].sales[type],
-      fuelPrice: type === 'NL' ? data.fuelPrices.prices[period] : null,
-    })
-  }
 
   return (
     <div className={classes.dataRow}>
       <div className={classes.dataCellStation}>
         <Link to={link}>{data.stationName}</Link>
       </div>
-      {sales.map((sale, i) => (
+      {data.periods.map(sale => (
         <div
           className={classes.dataCell}
-          key={i}
+          key={sale.dates.yearWeek}
         >
-          {utils.fmtNumber(sale.amount, 0, true)}
-          {sale.fuelPrice && <span className={classes.fuelPrice}>({utils.fmtNumber(sale.fuelPrice, 1)})</span>}
+          {utils.fmtNumber(sale.fuelSales[type], 0, true)}
+          {data.fuelPrices.prices[sale.dates.yearWeek] && type === 'NL' &&
+            <span className={classes.fuelPrice}>
+              ({utils.fmtNumber(data.fuelPrices.prices[sale.dates.yearWeek], 1)})
+            </span>
+          }
         </div>
       ))}
       <div
@@ -185,74 +202,64 @@ const SalesRow = ({
   )
 }
 SalesRow.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object).isRequired,
   date: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
 }
 
-const SummaryRow = ({ classes, data, type }) => {
-  const sums = []
-  for (const sum in data.periodTotals) sums.push(data.periodTotals[sum][type])
-  const total = data.totalsByFuel[type]
-
-  return (
-    <div className={classes.dataSummaryRow}>
-      <div className={classes.dataCellStation} />
-      {sums.map((sum, i) => (
-        <div
-          className={classes.dataTotalCell}
-          key={i}
-        >
-          {utils.fmtNumber(sum, 0, true)}
-        </div>
-      ))}
+const SummaryRow = ({
+  classes,
+  data,
+  type,
+}) => (
+  <div className={classes.dataSummaryRow}>
+    <div className={classes.dataCellStation} />
+    {data.periodTotals.map(period => (
       <div
         className={classes.dataTotalCell}
-        style={{ flex: 0.75 }}
+        key={period.period}
       >
-        {utils.fmtNumber(total, 0, true)}
+        {utils.fmtNumber(period[type], 0, true)}
       </div>
+    ))}
+    <div
+      className={classes.dataTotalCell}
+      style={{ flex: 0.75 }}
+    >
+      {utils.fmtNumber(data.totalsByFuel[type], 0, true)}
     </div>
-  )
-}
+  </div>
+)
 SummaryRow.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object).isRequired,
   type: PropTypes.string.isRequired,
 }
 
-class FuelSalesList extends Component {
-  render() {
-    let dte
-    const { classes, data } = this.props
-    const prts = utils.extractPathParts(this.props.location.pathname, 3)
 
-    if (prts) {
-      dte = prts[0]
-    }
+const FuelSalesList = ({ classes, data, match }) => {
+  const date = match.params.date // eslint-disable-line
 
-    return (
-      <div className={classes.mainContainer}>
-        <ReportSelectors
-          hideStation
-        />
-        <Report
-          classes={classes}
-          data={data}
-          date={dte}
-        />
-      </div>
-    )
-  }
+  return (
+    <div className={classes.mainContainer}>
+      <ReportSelectors hideStation />
+      <Report
+        classes={classes}
+        data={data}
+        date={date}
+      />
+    </div>
+  )
 }
-
 FuelSalesList.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object,
-  history: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object),
+  match: PropTypes.instanceOf(Object).isRequired,
+}
+FuelSalesList.defaultProps = {
+  data: null,
+  date: null,
 }
 
 const styles = theme => ({
@@ -335,13 +342,10 @@ const styles = theme => ({
 })
 
 export default graphql(FSL_REPORT_QUERY, {
-  skip: props => props.location.pathname.split('/').length < 4,
-  options: (props) => {
-    const prts = utils.extractPathParts(props.location.pathname, 3)
-    return ({
-      variables: {
-        date: prts[0],
-      },
-    })
-  },
+  skip: ({ match }) => !match || !match.params.date,
+  options: ({ match }) => ({
+    variables: {
+      date: match.params.date,
+    },
+  }),
 })(withStyles(styles)(FuelSalesList))

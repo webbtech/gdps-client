@@ -21,7 +21,7 @@ import { extractPathParts } from '../../utils/utils'
 import { RECORDS_START_YEAR as startYear } from '../../config/constants'
 
 // note: This might need to go into an init file
-Array.range = (start, end) => Array.from({ length: (end + 1 - start) }, (v, k) => k + start)
+Array.range = (start, end) => Array.from({ length: ((end + 1) - start) }, (v, k) => k + start)
 
 
 class Reports extends Component {
@@ -35,11 +35,10 @@ class Reports extends Component {
   }
 
   componentDidMount = () => {
-    const pathPrts = extractPathParts(this.props.location.pathname, 3)
-    if (!pathPrts) return
+    const { params } = this.props.match
+    if (!Object.keys(params).length) return
 
-    const date = pathPrts[0]
-    const stationID = pathPrts[1]
+    const { date, stationID } = params
     if (date) {
       let setDate
       if (date.length === 4) {
@@ -47,18 +46,30 @@ class Reports extends Component {
       } else {
         setDate = moment(date)
       }
-      const newDte = {
-        year: setDate.format('YYYY'),
-        month: setDate.subtract(1, 'months').format('MM'),
-        date: setDate.format('DD'),
-      }
-      this.setState({ selectedDate: this.state.selectedDate.set(newDte) })
-      this.setState({ month: this.state.selectedDate.format('MM') })
-      this.setState({ year: parseInt(this.state.selectedDate.format('YYYY'), 10) })
+      this.setState(() => ({
+        selectedDate: setDate,
+        month: setDate.format('MM'),
+        year: Number(setDate.format('YYYY')),
+      }))
     }
     if (stationID) {
-      this.setState({ stationID })
+      this.setState(() => ({ stationID }))
     }
+  }
+
+  setMonths = () => {
+    const months = []
+    for (let i = 0; i < 12; i += 1) {
+      const dte = moment(new Date(0, i))
+      months.push({ key: dte.format('MM'), label: dte.format('MMMM') })
+    }
+    return months
+  }
+
+  setYears = () => {
+    const curYear = (new Date()).getFullYear()
+    const years = Array.range(startYear, curYear)
+    return years.reverse()
   }
 
   handleChange = (event) => {
@@ -78,6 +89,20 @@ class Reports extends Component {
 
   handleStationChange = (value) => {
     this.setState({ stationID: value })
+  }
+
+  submitReport = () => {
+    const { hideMonth, hideStation, history } = this.props
+    const { month, stationID, year } = this.state
+    const validProps = hideStation ? month && year : month && stationID && year
+    if (validProps) {
+      const dte = hideMonth ? String(year) : `${year}-${month}-01`
+      const reportPath = `/reports/${extractPathParts(this.props.location.pathname)[0]}`
+      const uri = hideStation ? `${reportPath}/${dte}` : `${reportPath}/${dte}/${stationID}`
+      history.push(uri)
+    } else {
+      this.handleOpenSnackbar('Missing Station. Please enter a station.')
+    }
   }
 
   // todo: replace this with the Common/Toaster component
@@ -109,35 +134,6 @@ class Reports extends Component {
         open={this.state.openSnackbar}
       />
     )
-  }
-
-  setMonths = () => {
-    const months = []
-    for (let i = 0; i < 12; i++) {
-      const dte = moment(new Date(0, i))
-      months.push({ key: dte.format('MM'), label: dte.format('MMMM') })
-    }
-    return months
-  }
-
-  setYears = () => {
-    const curYear = (new Date()).getFullYear()
-    const years = Array.range(startYear, curYear)
-    return years.reverse()
-  }
-
-  submitReport = () => {
-    const { hideMonth, hideStation, history } = this.props
-    const { month, stationID, year } = this.state
-    const validProps = hideStation ? month && year : month && stationID && year
-    if (validProps) {
-      const dte = hideMonth ? String(year) : `${year}-${month}-01`
-      const reportPath = `/reports/${extractPathParts(this.props.location.pathname)[0]}`
-      const uri = hideStation ? `${reportPath}/${dte}` : `${reportPath}/${dte}/${stationID}`
-      history.push(uri)
-    } else {
-      this.handleOpenSnackbar('Missing Station. Please enter a station.')
-    }
   }
 
   render() {
@@ -221,14 +217,17 @@ class Reports extends Component {
     )
   }
 }
-
 Reports.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
   hideMonth: PropTypes.bool,
   hideStation: PropTypes.bool,
-  history: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
+  location: PropTypes.instanceOf(Object).isRequired,
+  match: PropTypes.instanceOf(Object).isRequired,
+}
+Reports.defaultProps = {
+  hideMonth: false,
+  hideStation: false,
 }
 
 const styles = theme => ({

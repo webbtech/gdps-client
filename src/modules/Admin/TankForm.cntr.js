@@ -105,8 +105,8 @@ const TankFormCntr = withFormik({
   },
   handleSubmit: async (values, { props, setSubmitting, setErrors }) => {
     const isUpdate = !!values.id
-    let file,
-      graphqlReturn
+    let file
+    let graphqlReturn
 
     if (isUpdate) {
       delete values.__typename

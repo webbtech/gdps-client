@@ -12,7 +12,9 @@ module.exports = {
     "comma-dangle": ["warn", "always-multiline"],
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
     "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
-    // "no-underscore-dangle": [2, { "allowAfterThis": true }]
-    // "no-underscore-dangle": [0]
+    "jsx-a11y/anchor-is-valid": [ "error", {
+      "components": [ "Link" ],
+      "specialLink": [ "to" ]
+    }]
   }
 };
