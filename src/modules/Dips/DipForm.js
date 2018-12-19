@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import classNames from 'classnames'
-import { clone, debounce } from 'lodash'
+import { clone } from 'lodash'
 
 import Button from '@material-ui/core/Button'
 import FormControl from '@material-ui/core/FormControl'
@@ -24,7 +24,7 @@ class DipForm extends Component {
     this.state = {
       toasterMsg: '',
     }
-    this.handleCalculateLitres = debounce(this.handleCalculateLitres, 250)
+    this.handleBlur = this.handleBlur.bind(this)
   }
 
   componentDidUpdate = (prevProps) => {
@@ -51,6 +51,12 @@ class DipForm extends Component {
     } else {
       this.props.setFieldValue(`tanks.${tankID}.${field}`, '', false)
     }
+  }
+
+  handleBlur = (e) => {
+    e.persist()
+    const [tankID, field] = e.target.id.split('_')
+    const val = e.target.value
 
     if (field === 'level') {
       this.handleCalculateLitres(tankID, val)
@@ -166,6 +172,7 @@ class DipForm extends Component {
                     autoFocus={i === 0}
                     className={classes.input}
                     id={`${t.id}_level`}
+                    onBlur={this.handleBlur}
                     onChange={this.handleChange}
                     type="number"
                     value={values.tanks[t.id] ? values.tanks[t.id].level : ''}
@@ -188,6 +195,7 @@ class DipForm extends Component {
                     className={classes.input}
                     id={`${t.id}_delivery`}
                     name="delivery"
+                    onBlur={this.handleBlur}
                     onChange={this.handleChange}
                     type="number"
                     value={values.tanks[t.id].delivery}
