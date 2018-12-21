@@ -218,9 +218,9 @@ class DipForm extends Component {
                 {submitLabel}
               </Button>
             </div>
-            {!havePrevDayDips && !isSubmit &&
+            {/*!havePrevDayDips && !isSubmit &&
               <Alert type="info">Previous day dips missing. Ensure dips are entered consecutively.</Alert>
-            }
+            */}
           </div>
         </form>
         <Toaster message={this.state.toasterMsg} />
