@@ -42,11 +42,11 @@ export default async function uploadTankFile(file, fileName) {
   }
   await s3.upload(params).promise()
     .then((data) => {
-      retMsg.success = 'File sucessfully updloaded'
+      retMsg.success = 'File successfully uploaded'
       retMsg.fileData = data
     })
     .catch((err) => {
-      retMsg.error = `An error occured uploading file: ${err.message}`
+      retMsg.error = `An error occurred uploading file: ${err.message}`
     })
 
   return retMsg
