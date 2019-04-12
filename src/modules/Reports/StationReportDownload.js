@@ -33,12 +33,15 @@ class StationReportDownload extends Component {
   constructor(props) {
     super(props)
 
+    const dte = moment().subtract(1, 'months')
+
     this.state = {
-      month: moment(new Date()).subtract(1, 'months').format('MM'),
+      month: dte.format('MM'),
       stationID: '',
       toasterMsg: '',
-      year: (new Date()).getFullYear(),
+      year: Number(dte.format('YYYY')),
     }
+
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -50,7 +53,6 @@ class StationReportDownload extends Component {
     this.setState(() => ({ stationID: value, toasterMsg: '' }))
   }
 
-  // handleSubmit = async () => {
   handleSubmit = () => {
     if (!this.state.stationID) {
       this.setState(() => ({ toasterMsg: 'Missing Station' }))
@@ -167,7 +169,7 @@ class StationReportDownload extends Component {
         </div>
 
         <div className={classes.reportDetails}>
-          This report file download is a "xlsx" spreadsheet file and consists of the following station details:
+          {'This report file download is a "xlsx" spreadsheet file and consists of the following station details:'}
           <ul>
             <li>Fuel Sales</li>
             <li>Fuel Deliveries</li>
@@ -181,7 +183,7 @@ class StationReportDownload extends Component {
   }
 }
 StationReportDownload.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
   mutate: PropTypes.func.isRequired,
 }
 
