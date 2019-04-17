@@ -36,15 +36,17 @@ const populateTanks = (dips, tanks) => {
         }
         if (curDips) {
           tmp.dips = R.find(R.propEq('stationTankID', t.id))(curDips)
-          tmp.level = tmp.dips.level
-          tmp.litres = tmp.dips.litres
-          if (tmp.dips.fuelDelivery) {
-            tmp.delivery = tmp.dips.fuelDelivery.litres
+          if (tmp.dips) {
+            tmp.level = tmp.dips.level
+            tmp.litres = tmp.dips.litres
+            if (tmp.dips.fuelDelivery) {
+              tmp.delivery = tmp.dips.fuelDelivery.litres
+            }
           }
         }
         if (prevDips) {
           tmp.prevDips = R.find(R.propEq('stationTankID', t.id))(prevDips)
-          tmp.prevLevel = tmp.prevDips.level
+          tmp.prevLevel = tmp.prevDips && tmp.prevDips.level
         }
         tanksObj[t.id] = tmp
       }
