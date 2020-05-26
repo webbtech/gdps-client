@@ -7,7 +7,7 @@ import { withRouter } from 'react-router'
 
 import DipForm from './DipForm'
 import * as errorActions from '../Error/errorActions'
-import { datePrevDay, dateToInt } from '../../utils/utils'
+import { datePrevDay, dateToInt } from '../../utils/date'
 import { DIP_QUERY } from './Dips.cntr'
 
 

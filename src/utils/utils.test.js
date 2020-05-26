@@ -1,45 +1,14 @@
 /* eslint no-undef: "off" */
 
-// To test this file, use: npm test -- utils-test
+// To test file: yarn test src/utils/utils.test.js
 
-import { dateNextDay, datePrevDay, dateToInt, extractPathParts, fmtNumber, setOrderedFuelTypes } from './utils'
-
-describe('dateToInt', () => {
-  it('return an integer date', () => {
-    const intDte = dateToInt('2018-03-04')
-    expect(intDte).toEqual(20180304)
-  })
-
-  it('returns a null date', () => {
-    const intDte = dateToInt('2018-03-34')
-    expect(intDte).toBeNull()
-  })
-})
-
-describe('datePrevDay', () => {
-  it('returns previous day integer', () => {
-    const prevDay = datePrevDay('2018-05-29')
-    expect(prevDay).toEqual(20180528)
-  })
-
-  it('returns null', () => {
-    const prevDay = datePrevDay('2018-05-34')
-    expect(prevDay).toBeNull()
-  })
-})
-
-describe('dateNextDay', () => {
-  it('returns next day integer', () => {
-    const nextDay = dateNextDay('2018-05-29')
-    expect(nextDay).toEqual(20180530)
-  })
-
-  it('returns null', () => {
-    const nextDay = dateNextDay('2018-05-34')
-    expect(nextDay).toBeNull()
-  })
-})
-
+import {
+  extractPathParts,
+  fmtNumber,
+  getEnv,
+  getTitle,
+  setOrderedFuelTypes,
+} from './utils'
 
 describe('extractPathParts', () => {
   const path = '/dips/2018-05-30/c9d27fe9-9b0e-450c-9f2e-149a55d0a881'
@@ -105,7 +74,7 @@ describe('fmtNumber', () => {
 })
 
 describe('setOrderedFuelTypes', () => {
-  const { FUEL_TYPE_LIST } = require('../config/constants')
+  const { FUEL_TYPE_LIST } = require('../config/constants') // eslint-disable-line global-require
   const fuelTypes = ['DSL', 'NL', 'SNL', 'CDSL']
   const fuelTypes2 = ['DSL', 'NL', 'SNL']
 
@@ -117,5 +86,45 @@ describe('setOrderedFuelTypes', () => {
   it('return 3 ordered fuel types', () => {
     const fts = setOrderedFuelTypes(fuelTypes2, FUEL_TYPE_LIST)
     expect(fts).toEqual(['NL', 'SNL', 'DSL'])
+  })
+})
+
+describe('setEnv', () => {
+  it('return development environment', () => {
+    process.env.NODE_ENV = 'development'
+    const env = getEnv()
+    expect(env).toEqual('development')
+  })
+
+  it('return stage environment', () => {
+    process.env.NODE_ENV = 'stage'
+    const env = getEnv()
+    expect(env).toEqual('stage')
+  })
+
+  it('return test environment', () => {
+    process.env.NODE_ENV = 'production'
+    const env = getEnv()
+    expect(env).toEqual('production')
+  })
+})
+
+describe('setTitle', () => {
+  it('return development title', () => {
+    process.env.NODE_ENV = 'development'
+    const title = getTitle()
+    expect(title).toEqual('Gales Dips · Dev')
+  })
+
+  it('return staging title', () => {
+    process.env.NODE_ENV = 'stage'
+    const title = getTitle()
+    expect(title).toEqual('Gales Dips · Staging')
+  })
+
+  it('return production title', () => {
+    process.env.NODE_ENV = 'production'
+    const title = getTitle()
+    expect(title).toEqual('Gales Dips · Live')
   })
 })

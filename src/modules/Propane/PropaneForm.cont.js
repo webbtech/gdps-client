@@ -6,7 +6,7 @@ import { withFormik } from 'formik'
 import { withRouter } from 'react-router'
 
 import PropaneForm from './PropaneForm'
-import { dateToInt } from '../../utils/utils'
+import { dateToInt } from '../../utils/date'
 import * as errorActions from '../Error/errorActions'
 
 const DELIVERY_QUERY = gql`

@@ -1,19 +1,21 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+// import { Auth } from 'aws-amplify'
+import { ApolloProvider } from 'react-apollo'
+import { Authenticator } from 'aws-amplify-react'
+import { ConnectedRouter } from 'react-router-redux'
+import { Helmet } from 'react-helmet'
+import { Switch, Route } from 'react-router'
 import Amplify, { Auth } from 'aws-amplify'
 import createHistory from 'history/createBrowserHistory'
 import Loadable from 'react-loadable'
-import { ApolloProvider } from 'react-apollo'
-// import { Auth } from 'aws-amplify'
-import { Authenticator } from 'aws-amplify-react'
-import { ConnectedRouter } from 'react-router-redux'
-import { Switch, Route } from 'react-router'
 
 import MomentUtils from 'material-ui-pickers/utils/moment-utils'
 import MuiPickersUtilsProvider from 'material-ui-pickers/MuiPickersUtilsProvider'
 import * as Sentry from '@sentry/browser'
 
+import { getTitle } from '../../utils/utils'
 import Alert from '../Common/Alert'
 import awsExports from '../Auth/aws-exports'
 import ChangePassword from '../Profile/ChangePassword'
@@ -81,6 +83,9 @@ class Index extends Component {
 
     return (
       <ApolloProvider client={client}>
+        <Helmet>
+          <title>{getTitle()}</title>
+        </Helmet>
         <ConnectedRouter history={history}>
           <MuiPickersUtilsProvider utils={MomentUtils}>
             <div>

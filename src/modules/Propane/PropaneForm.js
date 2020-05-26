@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
 import PropaneSelectors from './PropaneSelectors'
-import { dateToInt } from '../../utils/utils'
+import { dateToInt } from '../../utils/date'
 
 
 class PropaneForm extends Component {

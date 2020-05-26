@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
 import * as utils from '../../utils/utils'
+import { numberToMoment } from '../../utils/date'
 import Loader from '../Common/Loader'
 import ReportSelectors from './ReportSelectors'
 
@@ -125,7 +126,7 @@ const ReportWeek = ({ classes, data }) => {
           className={classes.reportDataRow}
           key={sale.date}
         >
-          <div className={classes.reportDateCell}>{utils.numberToMoment(sale.date).format('MMM D')}</div>
+          <div className={classes.reportDateCell}>{numberToMoment(sale.date).format('MMM D')}</div>
           <div className={classes.reportDataCell}>{utils.fmtNumber(sale['475'], 0, true)}</div>
           <div className={classes.reportDataCell}>{utils.fmtNumber(sale['476'], 0, true)}</div>
         </div>

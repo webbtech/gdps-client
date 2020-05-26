@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 
 import Dips from './Dips'
 import * as errorActions from '../Error/errorActions'
-import { datePrevDay, dateToInt } from '../../utils/utils'
+import { datePrevDay, dateToInt } from '../../utils/date'
 
 export const DIP_QUERY = gql`
   query Dips($date: Int!, $dateFrom: Int!, $dateTo: Int!, $stationID: String!) {

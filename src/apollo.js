@@ -6,7 +6,7 @@ import { onError } from 'apollo-link-error'
 import { setContext } from 'apollo-link-context'
 import * as Sentry from '@sentry/browser'
 
-import { config } from './config/config'
+import config from './config/config'
 
 const errorLink = onError(({ networkError, graphQLErrors }) => {
   if (graphQLErrors) {

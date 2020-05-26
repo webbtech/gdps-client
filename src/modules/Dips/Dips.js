@@ -15,7 +15,7 @@ import DipOverShort from './DipOverShort'
 import DipSelectors from './DipSelectors.cntr'
 import Header from '../Header/Header'
 import Loader from '../Common/Loader'
-import { datePrevDay, dateToInt } from '../../utils/utils'
+import { datePrevDay, dateToInt } from '../../utils/date'
 import { FUEL_TYPE_LIST as fuelTypeList } from '../../config/constants'
 
 const R = require('ramda')
