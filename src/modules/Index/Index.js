@@ -10,12 +10,14 @@ import { Switch, Route } from 'react-router'
 import Amplify, { Auth } from 'aws-amplify'
 import createHistory from 'history/createBrowserHistory'
 import Loadable from 'react-loadable'
+import LogRocket from 'logrocket'
 
 import MomentUtils from 'material-ui-pickers/utils/moment-utils'
 import MuiPickersUtilsProvider from 'material-ui-pickers/MuiPickersUtilsProvider'
 import * as Sentry from '@sentry/browser'
 
 import { getTitle } from '../../utils/utils'
+import { LOCAL_TOKEN_KEY } from '../../config/constants'
 import Alert from '../Common/Alert'
 import awsExports from '../Auth/aws-exports'
 import ChangePassword from '../Profile/ChangePassword'
@@ -36,7 +38,7 @@ import ForgotPassword from '../Auth/ForgotPassword'
 import RequireNewPassword from '../Auth/RequireNewPassword'
 
 // Sentry
-import { SENTRY_DSN } from '../../config/constants'
+// import { SENTRY_DSN } from '../../config/constants'
 
 
 Amplify.configure(awsExports)
@@ -54,7 +56,7 @@ const Reports = Loadable({
   loading: Loading,
 })
 
-Sentry.init({ dsn: SENTRY_DSN })
+// Sentry.init({ dsn: SENTRY_DSN })
 
 class Index extends Component {
   constructor(props) {
@@ -162,11 +164,18 @@ class AppWithAuth extends Component { // eslint-disable-line react/no-multi-comp
   async componentWillMount() {
     const user = await Auth.currentAuthenticatedUser()
     if (user) {
-      // this.setState({user})
       // console.log('fetching user from Auth', user) // eslint-disable-line
       const storage = window.localStorage
-      // console.log('user in componentDidMount: ', user.signInUserSession.accessToken.jwtToken)
-      storage.setItem('userToken', user.signInUserSession.accessToken.jwtToken)
+      storage.setItem(LOCAL_TOKEN_KEY, user.signInUserSession.accessToken.jwtToken)
+
+      const username = user.signInUserSession.idToken.payload['cognito:username']
+      const { name } = user.signInUserSession.idToken.payload
+      const userId = user.username
+      storage.setItem(LOCAL_TOKEN_KEY, user.signInUserSession.accessToken.jwtToken)
+      LogRocket.identify(userId, {
+        name,
+        username,
+      })
     }
   }
 
