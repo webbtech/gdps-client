@@ -1,11 +1,23 @@
 {
   "name": "dips",
-  "version": "0.1.0",
+  "version": "1.0.1",
+  "description": "Gales Dips application front end",
+  "author": "Ron Dyck <rond@webbtech.net>",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "lint": "eslint './src/**/*.js'",
+    "lint:fix": "eslint './src/**/*.js' --fix",
+    "localserve": "serve -s build",
+    "analyze": "source-map-explorer build/static/js/main.*"
+  },
   "dependencies": {
     "@material-ui/core": "3.2.0",
     "@material-ui/icons": "3.0.1",
-    "@sentry/browser": "4.1.0",
+    "@sentry/react": "^5.20.1",
     "apollo-cache-inmemory": "1.3.9",
     "apollo-client": "2.4.5",
     "apollo-link-context": "1.0.9",
@@ -18,7 +30,7 @@
     "formik": "1.2.0",
     "graphql": "14.0.2",
     "graphql-tag": "2.9.2",
-    "history": "4.7.2",
+    "history": "^5.0.0",
     "jss": "9.8.1",
     "lodash": "4.17.11",
     "logrocket": "1.0.8",
@@ -40,16 +52,6 @@
     "react-transition-group": "2.4.0",
     "redux": "4.0.0",
     "yup": "0.26.5"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "lint": "eslint './src/**/*.js'",
-    "lint:fix": "eslint './src/**/*.js' --fix",
-    "localserve": "serve -s build",
-    "analyze": "source-map-explorer build/static/js/main.*"
   },
   "devDependencies": {
     "babel-eslint": "8.2.3",

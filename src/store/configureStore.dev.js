@@ -1,4 +1,4 @@
-import createHistory from 'history/createBrowserHistory'
+import { createBrowserHistory } from 'history'
 import logger from 'redux-logger'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { createStore, applyMiddleware } from 'redux'
@@ -7,7 +7,7 @@ import LogRocket from 'logrocket'
 
 import rootReducer from '../reducers'
 
-const history = createHistory()
+const history = createBrowserHistory()
 const middleware = routerMiddleware(history)
 
 export default function configureStore(preloadedState = {}) {
