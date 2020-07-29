@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import { Auth } from 'aws-amplify'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
-import LogRocket from 'logrocket'
 
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import AppBar from '@material-ui/core/AppBar'
@@ -16,10 +15,6 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
-import { LOGROCKET_ID } from '../../config/constants'
-
-
-// function Header(props) {
 class Header extends React.Component {
   constructor(props) {
     super(props)
@@ -39,20 +34,8 @@ class Header extends React.Component {
 
   componentDidMount = () => {
     Auth.currentUserInfo()
-    // Auth.currentAuthenticatedUser()
       .then((user) => {
-      // console.log('user in componentDidMount: ', user.attributes)
         this.setState({ user: user.attributes })
-        if (user) {
-          LogRocket.init(LOGROCKET_ID)
-          const id = user.username
-
-          LogRocket.identify(id, {
-            name: user.attributes.name,
-            email: user.attributes.email,
-            environment: 'prod',
-          })
-        }
       })
     .catch(err => console.log(err)) // eslint-disable-line
   }

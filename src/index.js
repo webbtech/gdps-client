@@ -2,14 +2,21 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import { Provider } from 'react-redux'
+import LogRocket from 'logrocket'
+import * as Sentry from '@sentry/browser'
 
 import registerServiceWorker from './registerServiceWorker'
 import configureStore from './store/configureStore'
 
-
+const LogRocketID = process.env.REACT_APP_LOGROCKET_ID
+const SentryURL = process.env.REACT_APP_SENTRY_URL
 const store = configureStore()
 const rootEl = document.getElementById('root')
 
+if (process.env.NODE_ENV === 'production') {
+  LogRocket.init(LogRocketID)
+  Sentry.init({ dsn: SentryURL })
+}
 
 // see: https://blog.isquaredsoftware.com/2016/11/practical-redux-part-3-project-planning-and-setup/
 // for explanation on below
