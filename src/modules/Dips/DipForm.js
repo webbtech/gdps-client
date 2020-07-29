@@ -13,7 +13,6 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import red from '@material-ui/core/colors/red'
 
-import Alert from '../Common/Alert'
 import Toaster from '../Common/Toaster'
 import { fmtNumber } from '../../utils/utils'
 
@@ -108,9 +107,7 @@ class DipForm extends Component {
       dirty,
       editMode,
       errors,
-      havePrevDayDips,
       isSubmitting,
-      isSubmit,
       tankDips,
       values,
     } = this.props
