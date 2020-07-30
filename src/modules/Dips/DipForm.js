@@ -215,9 +215,6 @@ class DipForm extends Component {
                 {submitLabel}
               </Button>
             </div>
-            {/*!havePrevDayDips && !isSubmit &&
-              <Alert type="info">Previous day dips missing. Ensure dips are entered consecutively.</Alert>
-            */}
           </div>
         </form>
         <Toaster message={this.state.toasterMsg} />
@@ -233,8 +230,6 @@ DipForm.propTypes = {
   editMode: PropTypes.bool.isRequired,
   errors: PropTypes.instanceOf(Object).isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  havePrevDayDips: PropTypes.bool.isRequired,
-  isSubmit: PropTypes.bool.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   setFieldError: PropTypes.func.isRequired,
   setFieldValue: PropTypes.func.isRequired,

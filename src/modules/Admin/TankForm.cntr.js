@@ -1,7 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 import * as Yup from 'yup'
 import gql from 'graphql-tag'
-import { compose, graphql } from 'react-apollo'
+import { graphql } from '@apollo/react-hoc'
+import { clone, flowRight as compose } from 'lodash'
 import { withFormik } from 'formik'
 
 import TankForm from './TankForm'
@@ -106,17 +107,20 @@ const TankFormCntr = withFormik({
     if (data && data.tank) {
       return data.tank
     }
+    return false
   },
   handleSubmit: async (values, { props, setSubmitting, setErrors }) => {
     const isUpdate = !!values.id
     let file
     let graphqlReturn
 
+    const origValues = clone(values)
+
     if (isUpdate) {
-      delete values.__typename
-      if (values.levelsFile) {
-        file = values.levelsFile
-        delete values.levelsFile
+      delete origValues.__typename
+      if (origValues.levelsFile) {
+        file = origValues.levelsFile
+        delete origValues.levelsFile
 
         // Check file type
         if (file.type !== 'text/csv') {
@@ -127,7 +131,7 @@ const TankFormCntr = withFormik({
       }
 
       try {
-        graphqlReturn = await props.UpdateTank(values)
+        graphqlReturn = await props.UpdateTank(origValues)
         if (graphqlReturn && graphqlReturn.errors) {
           setErrors({ graphql: graphqlReturn.errors[0].message })
           setSubmitting(false)
@@ -139,7 +143,7 @@ const TankFormCntr = withFormik({
       }
       if (file && graphqlReturn) {
         // const uploadTankFile = await LoadS3File()
-        const tankID = values.id
+        const tankID = origValues.id
         const fileRet = await uploadTankFile(file, `tankFile_${tankID}.csv`)
         if (fileRet.error) {
           setErrors({ graphql: fileRet.error })
@@ -147,14 +151,14 @@ const TankFormCntr = withFormik({
         }
       }
     } else { // New tank
-      if (values.levelsFile) {
-        file = values.levelsFile
-        delete values.levelsFile
-        values.status = 'PENDING'
+      if (origValues.levelsFile) {
+        file = origValues.levelsFile
+        delete origValues.levelsFile
+        origValues.status = 'PENDING'
       }
 
       try {
-        graphqlReturn = await props.CreateTank(values)
+        graphqlReturn = await props.CreateTank(origValues)
         if (graphqlReturn && graphqlReturn.errors) {
           setErrors({ graphql: graphqlReturn.errors[0].message })
           setSubmitting(false)

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/react-components'
 
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'

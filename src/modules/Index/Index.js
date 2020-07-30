@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-import { ApolloProvider } from 'react-apollo'
+import { ApolloProvider } from '@apollo/client'
 import { Authenticator } from 'aws-amplify-react'
 import { ConnectedRouter } from 'react-router-redux'
 import { Helmet } from 'react-helmet'
@@ -49,6 +49,7 @@ const Reports = Loadable({
   loader: () => import('../Reports/Reports'),
   loading: Loading,
 })
+
 
 function Index({ authState }) {
   if (authState !== 'signedIn') return null

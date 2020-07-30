@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import gql from 'graphql-tag'
 import moment from 'moment'
-import { graphql } from 'react-apollo'
+import { graphql } from '@apollo/react-hoc'
 
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'

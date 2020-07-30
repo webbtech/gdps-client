@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/react-components'
 import { sortBy } from 'lodash'
 
 import AppBar from '@material-ui/core/AppBar'
@@ -17,7 +17,7 @@ import red from '@material-ui/core/colors/red'
 import green from '@material-ui/core/colors/lightGreen'
 import yellow from '@material-ui/core/colors/yellow'
 
-// import Loader from '../Common/Loader'
+import Loader from '../Common/Loader'
 import { fmtNumber } from '../../utils/utils'
 
 export const TANKLIST_QUERY = gql`
@@ -41,7 +41,7 @@ const TankList = ({ classes, formFunc }) => (
 
     {({ loading, error, data }) => {
       if (error) return `Error!: ${error}`
-      /* if (loading) return <div className={classes.container}><Loader /></div> */
+      if (loading) return <div className={classes.container}><Loader /></div>
 
       const tanks = sortBy(data.tankList, [t => t.id])
       return (
@@ -59,6 +59,9 @@ const TankList = ({ classes, formFunc }) => (
                 }
               key={t.id}
               onClick={() => formFunc(t.id)}
+              onKeyDown={() => formFunc(t.id)}
+              role="button"
+              tabIndex="0"
             >
               <div className={classes.listCellSmall}>{t.id}</div>
               <div className={classes.listCellSmall}>{fmtNumber(t.size, 0, true)}</div>
@@ -73,7 +76,7 @@ const TankList = ({ classes, formFunc }) => (
   </Query>
 )
 TankList.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
   formFunc: PropTypes.func.isRequired,
 }
 
@@ -87,7 +90,7 @@ const TankListHeading = ({ classes }) => (
   </div>
 )
 TankListHeading.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
 }
 
 class TankAdmin extends Component {
@@ -139,8 +142,8 @@ class TankAdmin extends Component {
   }
 }
 TankAdmin.propTypes = {
-  classes: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 }
 
 const styles = theme => ({
