@@ -66,8 +66,8 @@ const Report = ({ classes, data }) => {
   )
 }
 Report.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object),
 }
 
 const ReportHeading = ({ classes }) => (
@@ -79,7 +79,7 @@ const ReportHeading = ({ classes }) => (
   </div>
 )
 ReportHeading.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
 }
 
 const ReportData = ({ classes, data }) => {
@@ -113,8 +113,8 @@ const ReportData = ({ classes, data }) => {
   )
 }
 ReportData.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object).isRequired,
 }
 
 
@@ -142,9 +142,9 @@ class PropaneSalesAnnual extends Component {
   }
 }
 PropaneSalesAnnual.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object,
-  location: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object),
+  location: PropTypes.instanceOf(Object).isRequired,
 }
 
 const styles = theme => ({

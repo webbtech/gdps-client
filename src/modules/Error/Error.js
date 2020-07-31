@@ -12,11 +12,14 @@ import { withStyles } from '@material-ui/core/styles'
 const Error = ({
   message, classes, type, onClick,
 }) => {
-  type = type || 'warning'
+  const thisType = type || 'warning'
   return (
     <div
-      className={classNames(classes.base, classes[type])}
+      className={classNames(classes.base, classes[thisType])}
       onClick={onClick}
+      onKeyDown={onClick}
+      role="button"
+      tabIndex="0"
     >
       {message}
       <Icon
@@ -29,10 +32,13 @@ const Error = ({
 }
 
 Error.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
   message: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   type: PropTypes.string,
+}
+Error.defaultProps = {
+  type: null,
 }
 
 const styles = theme => ({

@@ -17,7 +17,7 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "function",
     "props": Object {
       "children": [Function],
       "ignoreResults": true,
@@ -113,6 +113,7 @@ ShallowWrapper {
             "variableDefinitions": Array [
               Object {
                 "defaultValue": undefined,
+                "directives": Array [],
                 "kind": "VariableDefinition",
                 "type": Object {
                   "kind": "NamedType",
@@ -238,7 +239,7 @@ ShallowWrapper {
         },
       ],
       "variables": Object {
-        "fields": null,
+        "fields": undefined,
       },
     },
     "ref": null,
@@ -249,7 +250,7 @@ ShallowWrapper {
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {
         "children": [Function],
         "ignoreResults": true,
@@ -345,6 +346,7 @@ ShallowWrapper {
               "variableDefinitions": Array [
                 Object {
                   "defaultValue": undefined,
+                  "directives": Array [],
                   "kind": "VariableDefinition",
                   "type": Object {
                     "kind": "NamedType",
@@ -470,7 +472,7 @@ ShallowWrapper {
           },
         ],
         "variables": Object {
-          "fields": null,
+          "fields": undefined,
         },
       },
       "ref": null,

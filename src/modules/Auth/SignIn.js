@@ -1,21 +1,22 @@
+/* eslint-disable no-underscore-dangle */
 /*
  * Copyright 2017-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
- * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with
  * the License. A copy of the License is located at
  *
  *     http://aws.amazon.com/apache2.0/
  *
- * or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
- * and limitations under the License.
+ * or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and limitations
+ * under the License.
  */
 
 import React from 'react'
 import { JS, ConsoleLogger as Logger } from '@aws-amplify/core'
 import Auth from '@aws-amplify/auth'
-
-import AuthPiece from './AuthPiece'
 
 import AppBar from '@material-ui/core/AppBar'
 import Button from '@material-ui/core/Button'
@@ -29,6 +30,8 @@ import Snackbar from '@material-ui/core/Snackbar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
+
+import AuthPiece from './AuthPiece'
 
 const logger = new Logger('SignIn')
 
@@ -81,8 +84,8 @@ class SignIn extends AuthPiece {
         if (!JS.isEmpty(data.verified)) {
           this.changeState('signedIn', user)
         } else {
-          user = Object.assign(user, data)
-          this.changeState('verifyContact', user)
+          const newUser = Object.assign(user, data)
+          this.changeState('verifyContact', newUser)
         }
       })
   }

@@ -15,6 +15,15 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
+const menuItems = [
+  { uri: '/', label: 'Dashboard' },
+  { uri: '/dips', label: 'Dip Entries' },
+  { uri: '/reports', label: 'Reports' },
+  { uri: '/propane', label: 'Propane Entries' },
+  { uri: '/import-data', label: 'Import Sales Data' },
+  { uri: '/admin', label: 'Administration' },
+]
+
 class Header extends React.Component {
   constructor(props) {
     super(props)
@@ -167,8 +176,8 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  classes: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 }
 
 const styles = theme => ({
@@ -188,14 +197,5 @@ const styles = theme => ({
     color: '#fff',
   },
 })
-
-const menuItems = [
-  { uri: '/', label: 'Dashboard' },
-  { uri: '/dips', label: 'Dip Entries' },
-  { uri: '/reports', label: 'Reports' },
-  { uri: '/propane', label: 'Propane Entries' },
-  { uri: '/import-data', label: 'Import Sales Data' },
-  { uri: '/admin', label: 'Administration' },
-]
 
 export default withRouter(withStyles(styles)(Header))

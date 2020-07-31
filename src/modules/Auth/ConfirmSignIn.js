@@ -17,23 +17,11 @@ import { withStyles } from '@material-ui/core/styles'
 
 class ConfirmSignIn extends Component {
   state = {
-    error: '',
+    // error: '',
     loading: false,
     snackMsg: '',
     snackOpen: false,
     code: '',
-  }
-
-  handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
-
-  handleOpenSnack = (msg) => {
-    this.setState({ snackOpen: true, snackMsg: msg })
-  }
-
-  handleClose = () => {
-    this.setState({ snackOpen: false })
   }
 
   async onSubmit() {
@@ -47,9 +35,22 @@ class ConfirmSignIn extends Component {
       const errMsg = err.message || err
       console.log(`RequireNewPassword::onSubmit(): Error ${JSON.stringify(err, null, 2)}`) // eslint-disable-line
       this.setState({
-        error: errMsg, loading: false, snackMsg: errMsg, snackOpen: true,
+        // error: errMsg, loading: false, snackMsg: errMsg, snackOpen: true,
+        loading: false, snackMsg: errMsg, snackOpen: true,
       })
     }
+  }
+
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value })
+  }
+
+  handleOpenSnack = (msg) => {
+    this.setState({ snackOpen: true, snackMsg: msg })
+  }
+
+  handleClose = () => {
+    this.setState({ snackOpen: false })
   }
 
   render() {
@@ -111,9 +112,13 @@ class ConfirmSignIn extends Component {
 }
 
 ConfirmSignIn.propTypes = {
+  classes: PropTypes.instanceOf(Object).isRequired,
   authState: PropTypes.string,
-  onSignIn: PropTypes.func.isRequired,
-  onStateChange: PropTypes.func.isRequired,
+  // onSignIn: PropTypes.func.isRequired,
+  // onStateChange: PropTypes.func.isRequired,
+}
+ConfirmSignIn.defaultProps = {
+  authState: null,
 }
 
 const styles = theme => ({
@@ -132,9 +137,5 @@ const styles = theme => ({
     margin: theme.spacing.unit * 2,
   },
 })
-
-ConfirmSignIn.propTypes = {
-  classes: PropTypes.object.isRequired,
-}
 
 export default withStyles(styles)(ConfirmSignIn)

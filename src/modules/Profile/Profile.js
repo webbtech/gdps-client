@@ -168,8 +168,8 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
-  classes: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 }
 
 const styles = theme => ({

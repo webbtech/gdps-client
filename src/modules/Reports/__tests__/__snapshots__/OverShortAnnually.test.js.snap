@@ -4,7 +4,7 @@ exports[`OverShortAnnually matches snapshot 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Apollo(WithStyles(OverShortAnnually))
+  Symbol(enzyme.__unrendered__): <WithStyles(OverShortAnnually)
     history={Object {}}
     location={
         Object {
@@ -25,168 +25,29 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "class",
     "props": Object {
-      "children": [Function],
-      "displayName": "Apollo(WithStyles(OverShortAnnually))",
-      "query": Object {
-        "definitions": Array [
-          Object {
-            "directives": Array [],
-            "kind": "OperationDefinition",
-            "name": Object {
-              "kind": "Name",
-              "value": "DipOSAnnualReport",
-            },
-            "operation": "query",
-            "selectionSet": Object {
-              "kind": "SelectionSet",
-              "selections": Array [
-                Object {
-                  "alias": undefined,
-                  "arguments": Array [
-                    Object {
-                      "kind": "Argument",
-                      "name": Object {
-                        "kind": "Name",
-                        "value": "date",
-                      },
-                      "value": Object {
-                        "kind": "Variable",
-                        "name": Object {
-                          "kind": "Name",
-                          "value": "date",
-                        },
-                      },
-                    },
-                    Object {
-                      "kind": "Argument",
-                      "name": Object {
-                        "kind": "Name",
-                        "value": "stationID",
-                      },
-                      "value": Object {
-                        "kind": "Variable",
-                        "name": Object {
-                          "kind": "Name",
-                          "value": "stationID",
-                        },
-                      },
-                    },
-                  ],
-                  "directives": Array [],
-                  "kind": "Field",
-                  "name": Object {
-                    "kind": "Name",
-                    "value": "dipOSAnnualReport",
-                  },
-                  "selectionSet": Object {
-                    "kind": "SelectionSet",
-                    "selections": Array [
-                      Object {
-                        "alias": undefined,
-                        "arguments": Array [],
-                        "directives": Array [],
-                        "kind": "Field",
-                        "name": Object {
-                          "kind": "Name",
-                          "value": "fuelTypes",
-                        },
-                        "selectionSet": undefined,
-                      },
-                      Object {
-                        "alias": undefined,
-                        "arguments": Array [],
-                        "directives": Array [],
-                        "kind": "Field",
-                        "name": Object {
-                          "kind": "Name",
-                          "value": "months",
-                        },
-                        "selectionSet": undefined,
-                      },
-                      Object {
-                        "alias": undefined,
-                        "arguments": Array [],
-                        "directives": Array [],
-                        "kind": "Field",
-                        "name": Object {
-                          "kind": "Name",
-                          "value": "summary",
-                        },
-                        "selectionSet": undefined,
-                      },
-                      Object {
-                        "alias": undefined,
-                        "arguments": Array [],
-                        "directives": Array [],
-                        "kind": "Field",
-                        "name": Object {
-                          "kind": "Name",
-                          "value": "year",
-                        },
-                        "selectionSet": undefined,
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-            "variableDefinitions": Array [
-              Object {
-                "defaultValue": undefined,
-                "kind": "VariableDefinition",
-                "type": Object {
-                  "kind": "NonNullType",
-                  "type": Object {
-                    "kind": "NamedType",
-                    "name": Object {
-                      "kind": "Name",
-                      "value": "String",
-                    },
-                  },
-                },
-                "variable": Object {
-                  "kind": "Variable",
-                  "name": Object {
-                    "kind": "Name",
-                    "value": "date",
-                  },
-                },
-              },
-              Object {
-                "defaultValue": undefined,
-                "kind": "VariableDefinition",
-                "type": Object {
-                  "kind": "NonNullType",
-                  "type": Object {
-                    "kind": "NamedType",
-                    "name": Object {
-                      "kind": "Name",
-                      "value": "String",
-                    },
-                  },
-                },
-                "variable": Object {
-                  "kind": "Variable",
-                  "name": Object {
-                    "kind": "Name",
-                    "value": "stationID",
-                  },
-                },
-              },
-            ],
-          },
-        ],
-        "kind": "Document",
-        "loc": Object {
-          "end": 174,
-          "start": 0,
-        },
+      "classes": Object {
+        "container": "OverShortAnnually-container-1",
+        "headerCell": "OverShortAnnually-headerCell-3",
+        "headerCellRt": "OverShortAnnually-headerCellRt-4",
+        "headerRow": "OverShortAnnually-headerRow-2",
+        "mainContainer": "OverShortAnnually-mainContainer-5",
+        "reportContainer": "OverShortAnnually-reportContainer-6",
+        "reportDataCell": "OverShortAnnually-reportDataCell-8",
+        "reportDataDateCell": "OverShortAnnually-reportDataDateCell-10",
+        "reportDataNeg": "OverShortAnnually-reportDataNeg-9",
+        "reportDataRow": "OverShortAnnually-reportDataRow-7",
+        "reportSummaryCell": "OverShortAnnually-reportSummaryCell-11",
+        "reportSummaryRow": "OverShortAnnually-reportSummaryRow-12",
+        "title": "OverShortAnnually-title-13",
       },
-      "skip": true,
-      "warnUnhandledError": true,
+      "history": Object {},
+      "location": Object {
+        "pathname": "/",
+      },
+      "match": Object {},
     },
     "ref": null,
-    "rendered": [Function],
+    "rendered": null,
     "type": [Function],
   },
   Symbol(enzyme.__nodes__): Array [
@@ -195,168 +56,29 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
-        "children": [Function],
-        "displayName": "Apollo(WithStyles(OverShortAnnually))",
-        "query": Object {
-          "definitions": Array [
-            Object {
-              "directives": Array [],
-              "kind": "OperationDefinition",
-              "name": Object {
-                "kind": "Name",
-                "value": "DipOSAnnualReport",
-              },
-              "operation": "query",
-              "selectionSet": Object {
-                "kind": "SelectionSet",
-                "selections": Array [
-                  Object {
-                    "alias": undefined,
-                    "arguments": Array [
-                      Object {
-                        "kind": "Argument",
-                        "name": Object {
-                          "kind": "Name",
-                          "value": "date",
-                        },
-                        "value": Object {
-                          "kind": "Variable",
-                          "name": Object {
-                            "kind": "Name",
-                            "value": "date",
-                          },
-                        },
-                      },
-                      Object {
-                        "kind": "Argument",
-                        "name": Object {
-                          "kind": "Name",
-                          "value": "stationID",
-                        },
-                        "value": Object {
-                          "kind": "Variable",
-                          "name": Object {
-                            "kind": "Name",
-                            "value": "stationID",
-                          },
-                        },
-                      },
-                    ],
-                    "directives": Array [],
-                    "kind": "Field",
-                    "name": Object {
-                      "kind": "Name",
-                      "value": "dipOSAnnualReport",
-                    },
-                    "selectionSet": Object {
-                      "kind": "SelectionSet",
-                      "selections": Array [
-                        Object {
-                          "alias": undefined,
-                          "arguments": Array [],
-                          "directives": Array [],
-                          "kind": "Field",
-                          "name": Object {
-                            "kind": "Name",
-                            "value": "fuelTypes",
-                          },
-                          "selectionSet": undefined,
-                        },
-                        Object {
-                          "alias": undefined,
-                          "arguments": Array [],
-                          "directives": Array [],
-                          "kind": "Field",
-                          "name": Object {
-                            "kind": "Name",
-                            "value": "months",
-                          },
-                          "selectionSet": undefined,
-                        },
-                        Object {
-                          "alias": undefined,
-                          "arguments": Array [],
-                          "directives": Array [],
-                          "kind": "Field",
-                          "name": Object {
-                            "kind": "Name",
-                            "value": "summary",
-                          },
-                          "selectionSet": undefined,
-                        },
-                        Object {
-                          "alias": undefined,
-                          "arguments": Array [],
-                          "directives": Array [],
-                          "kind": "Field",
-                          "name": Object {
-                            "kind": "Name",
-                            "value": "year",
-                          },
-                          "selectionSet": undefined,
-                        },
-                      ],
-                    },
-                  },
-                ],
-              },
-              "variableDefinitions": Array [
-                Object {
-                  "defaultValue": undefined,
-                  "kind": "VariableDefinition",
-                  "type": Object {
-                    "kind": "NonNullType",
-                    "type": Object {
-                      "kind": "NamedType",
-                      "name": Object {
-                        "kind": "Name",
-                        "value": "String",
-                      },
-                    },
-                  },
-                  "variable": Object {
-                    "kind": "Variable",
-                    "name": Object {
-                      "kind": "Name",
-                      "value": "date",
-                    },
-                  },
-                },
-                Object {
-                  "defaultValue": undefined,
-                  "kind": "VariableDefinition",
-                  "type": Object {
-                    "kind": "NonNullType",
-                    "type": Object {
-                      "kind": "NamedType",
-                      "name": Object {
-                        "kind": "Name",
-                        "value": "String",
-                      },
-                    },
-                  },
-                  "variable": Object {
-                    "kind": "Variable",
-                    "name": Object {
-                      "kind": "Name",
-                      "value": "stationID",
-                    },
-                  },
-                },
-              ],
-            },
-          ],
-          "kind": "Document",
-          "loc": Object {
-            "end": 174,
-            "start": 0,
-          },
+        "classes": Object {
+          "container": "OverShortAnnually-container-1",
+          "headerCell": "OverShortAnnually-headerCell-3",
+          "headerCellRt": "OverShortAnnually-headerCellRt-4",
+          "headerRow": "OverShortAnnually-headerRow-2",
+          "mainContainer": "OverShortAnnually-mainContainer-5",
+          "reportContainer": "OverShortAnnually-reportContainer-6",
+          "reportDataCell": "OverShortAnnually-reportDataCell-8",
+          "reportDataDateCell": "OverShortAnnually-reportDataDateCell-10",
+          "reportDataNeg": "OverShortAnnually-reportDataNeg-9",
+          "reportDataRow": "OverShortAnnually-reportDataRow-7",
+          "reportSummaryCell": "OverShortAnnually-reportSummaryCell-11",
+          "reportSummaryRow": "OverShortAnnually-reportSummaryRow-12",
+          "title": "OverShortAnnually-title-13",
         },
-        "skip": true,
-        "warnUnhandledError": true,
+        "history": Object {},
+        "location": Object {
+          "pathname": "/",
+        },
+        "match": Object {},
       },
       "ref": null,
-      "rendered": [Function],
+      "rendered": null,
       "type": [Function],
     },
   ],

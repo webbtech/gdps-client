@@ -102,12 +102,12 @@ class PropaneForm extends Component {
 }
 
 PropaneForm.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
   dirty: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
-  values: PropTypes.object.isRequired,
+  values: PropTypes.instanceOf(Object).isRequired,
 }
 
 const styles = theme => ({

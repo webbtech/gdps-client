@@ -144,7 +144,7 @@ class PropaneReportDownload extends Component {
   }
 }
 PropaneReportDownload.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
   mutate: PropTypes.func.isRequired,
 }
 

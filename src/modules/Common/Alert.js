@@ -17,7 +17,7 @@ const Alert = ({ children, classes, type }) =>
 
 Alert.propTypes = {
   children: PropTypes.string.isRequired,
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
   type: PropTypes.string.isRequired,
 }
 

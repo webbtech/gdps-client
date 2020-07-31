@@ -20,6 +20,8 @@ ShallowWrapper {
       "classes": Object {
         "close": "Toaster-close-1",
       },
+      "duration": 0,
+      "message": "",
     },
     "ref": null,
     "rendered": null,
@@ -34,6 +36,8 @@ ShallowWrapper {
         "classes": Object {
           "close": "Toaster-close-1",
         },
+        "duration": 0,
+        "message": "",
       },
       "ref": null,
       "rendered": null,
