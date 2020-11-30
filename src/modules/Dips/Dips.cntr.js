@@ -1,6 +1,8 @@
 import gql from 'graphql-tag'
-import { compose, graphql } from 'react-apollo'
+import { graphql } from '@apollo/react-hoc'
+import { flowRight as compose } from 'lodash'
 import { connect } from 'react-redux'
+
 import { bindActionCreators } from 'redux'
 
 import Dips from './Dips'
@@ -68,9 +70,9 @@ const FetchDips = graphql(DIP_QUERY, {
     const { date, stationID } = match.params
     return ({
       variables: {
-        date:       dateToInt(date),
-        dateFrom:   datePrevDay(date),
-        dateTo:     dateToInt(date),
+        date: dateToInt(date),
+        dateFrom: datePrevDay(date),
+        dateTo: dateToInt(date),
         stationID,
       },
     })
@@ -81,7 +83,7 @@ const FetchTanks = graphql(STATION_TANK_QUERY, {
   name: 'tanks',
   skip: ({ match }) => !match || !match.params.stationID,
   options: ({ match }) => ({
-    variables: {stationID: match.params.stationID},
+    variables: { stationID: match.params.stationID },
   }),
 })
 
@@ -89,13 +91,13 @@ const FetchFuelSale = graphql(FUEL_SALE_LATEST, {
   name: 'fuelSaleLatest',
   skip: ({ match }) => !match || !match.params.stationID,
   options: ({ match }) => ({
-    variables: {stationID: match.params.stationID},
+    variables: { stationID: match.params.stationID },
   }),
 })
 
-/*const mapDispatchToProps = dispatch => ({
+/* const mapDispatchToProps = dispatch => ({
   sendError: obj => dispatch(errorSend(obj)),
-})*/
+}) */
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({

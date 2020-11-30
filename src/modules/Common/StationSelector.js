@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { graphql } from 'react-apollo'
+import { graphql } from '@apollo/react-hoc'
 import gql from 'graphql-tag'
 
 import InputLabel from '@material-ui/core/InputLabel'
@@ -62,9 +62,12 @@ class StationSelector extends React.Component {
 }
 
 StationSelector.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.instanceOf(Object).isRequired,
   onStationChange: PropTypes.func.isRequired,
   stationID: PropTypes.string,
+}
+StationSelector.defaultProps = {
+  stationID: null,
 }
 
 export default graphql(QUERY)(StationSelector)

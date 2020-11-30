@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import gql from 'graphql-tag'
-import { Mutation } from 'react-apollo'
+import { Mutation } from '@apollo/react-components'
 import moment from 'moment'
+
 
 import Button from '@material-ui/core/Button'
 import Create from '@material-ui/icons/Create'

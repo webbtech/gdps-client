@@ -6,10 +6,11 @@ export const ERROR_CLEAR = 'ERROR_CLEAR'
  * Publish an error alert,
  */
 export function errorSend(error) {
+  const thisError = { ...error }
   if (!error.id) {
-    error.id = new Date().getTime()
+    thisError.id = new Date().getTime()
   }
-  return { type: ERROR_SEND, payload: error }
+  return { type: ERROR_SEND, payload: thisError }
 }
 
 /**

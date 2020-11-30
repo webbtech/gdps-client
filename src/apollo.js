@@ -1,10 +1,13 @@
-import ApolloClient from 'apollo-client'
-import { ApolloLink } from 'apollo-link'
-import { defaultDataIdFromObject, InMemoryCache } from 'apollo-cache-inmemory'
-import { HttpLink } from 'apollo-link-http'
-import { onError } from 'apollo-link-error'
-import { setContext } from 'apollo-link-context'
-import * as Sentry from '@sentry/browser'
+import {
+  ApolloClient,
+  HttpLink,
+  InMemoryCache,
+  defaultDataIdFromObject,
+  from,
+} from '@apollo/client'
+import { onError } from '@apollo/client/link/error'
+import { setContext } from '@apollo/client/link/context'
+import * as Sentry from '@sentry/react'
 
 import config from './config/config'
 
@@ -35,7 +38,7 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
-const link = ApolloLink.from([
+const link = from([
   authLink,
   errorLink,
   httpLink,
@@ -67,7 +70,7 @@ const cache = new InMemoryCache({
     // if (object.__typename === 'FuelSaleDetailedReport') {
     //   console.log('object: ', object)
     // }
-    switch (object.__typename) {
+    switch (object.__typename) { // eslint-disable-line
       case 'DipOverShort': return `${object.date}${object.stationID}`
       case 'Dip': return `${object.date}${object.stationTankID}`
       case 'FuelPrice': return `${object.date}${object.stationID}`

@@ -11,7 +11,7 @@ const Loader = ({ classes }) => (
 )
 
 Loader.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
 }
 
 const styles = theme => ({

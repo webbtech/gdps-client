@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Mutation } from 'react-apollo'
+import { Mutation } from '@apollo/react-components'
 import classNames from 'classnames'
 
 import AppBar from '@material-ui/core/AppBar'
@@ -47,6 +47,13 @@ class StationTanks extends Component {
     }
   }
 
+  setToggleVars = tank => ({
+    fields: {
+      id: tank.id,
+      active: !tank.active,
+    },
+  })
+
   handleStationChange = (value) => {
     this.setState({ stationID: value }, this.handlePushURI)
   }
@@ -67,13 +74,6 @@ class StationTanks extends Component {
     }
     return null
   } */
-
-  setToggleVars = tank => ({
-    fields: {
-      id: tank.id,
-      active: !tank.active,
-    },
-  })
 
   handleUpdateComplete = () => {
     this.setState({ toasterMsg: 'Tank active status updated' })
@@ -134,7 +134,9 @@ class StationTanks extends Component {
                     <div>
                       {tanks.map(t => (
                         <div
-                          className={classNames(classes.dataRow, { [classes.rowInactive]: !t.active })}
+                          className={
+                            classNames(classes.dataRow, { [classes.rowInactive]: !t.active })
+                          }
                           key={t.id}
                           onClick={() => {
                               toggleActive({
@@ -142,6 +144,14 @@ class StationTanks extends Component {
                                 refetchQueries: [{ query: TANK_QUERY, variables: { stationID } }],
                               })
                             }}
+                          onKeyDown={() => {
+                            toggleActive({
+                              variables: this.setToggleVars(t),
+                              refetchQueries: [{ query: TANK_QUERY, variables: { stationID } }],
+                            })
+                          }}
+                          role="button"
+                          tabIndex="0"
                         >
                           <div className={classes.dataCellSm}>{t.tankID}</div>
                           <div className={classes.dataCell}>{t.fuelType}</div>
@@ -175,12 +185,13 @@ class StationTanks extends Component {
 }
 
 StationTanks.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object,
-  history: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
-  // stationID:  PropTypes.string.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object),
+  history: PropTypes.instanceOf(Object).isRequired,
+  location: PropTypes.instanceOf(Object).isRequired,
+}
+StationTanks.defaultProps = {
+  data: {},
 }
 
 const styles = theme => ({

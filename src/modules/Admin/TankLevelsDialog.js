@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
-import DialogTitle from '@material-ui/core/DialogTitle'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
-import { withStyles } from '@material-ui/core/styles'
+import DialogTitle from '@material-ui/core/DialogTitle'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
@@ -32,12 +32,12 @@ class TankLevelsDialog extends Component {
     const { classes, tank } = this.props
 
     const levels = []
-    for (const l in tank.levels) {
+    Object.values(tank.levels).forEach((val) => {
       levels.push({
-        level: tank.levels[l].level,
-        litres: tank.levels[l].litres,
+        level: val.level,
+        litres: val.litres,
       })
-    }
+    })
 
     return (
       <div>
@@ -48,6 +48,7 @@ class TankLevelsDialog extends Component {
           variant="outlined"
         >Levels
         </Button>
+
         <Dialog
           aria-labelledby="scroll-dialog-title"
           onClose={this.handleClose}
@@ -87,8 +88,8 @@ class TankLevelsDialog extends Component {
   }
 }
 TankLevelsDialog.propTypes = {
-  classes: PropTypes.object.isRequired,
-  tank: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  tank: PropTypes.instanceOf(Object).isRequired,
 }
 
 const styles = () => ({

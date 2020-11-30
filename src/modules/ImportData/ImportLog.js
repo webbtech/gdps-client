@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/react-components'
 
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
@@ -31,8 +31,8 @@ const Report = ({ classes, importType }) => (
     variables={{ importType }}
   >
     {({
- loading, error, data, refetch,
-}) => {
+      loading, error, data,
+    }) => {
       // console.log('importType: ', importType)
       if (error) return `Error!: ${error}`
       if (loading) { return <div className={classes.container}><Loader /></div> }
@@ -46,7 +46,7 @@ const Report = ({ classes, importType }) => (
           {data.importLog.map((d, i) => (
             <div
               className={classes.reportDataRow}
-              key={i}
+              key={i} // eslint-disable-line react/no-array-index-key
             >
               <div className={classes.reportDataCell}>{d.importDate}</div>
               <div className={classes.reportDataCell}>{d.dateStart} ... {d.dateEnd}</div>
@@ -59,7 +59,8 @@ const Report = ({ classes, importType }) => (
   </Query>
 )
 Report.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  importType: PropTypes.string.isRequired,
 }
 
 const ReportHeading = ({ classes }) => (
@@ -78,34 +79,29 @@ const ReportHeading = ({ classes }) => (
   </div>
 )
 ReportHeading.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
 }
 
 
-class ImportLog extends Component {
-  render() {
-    const { classes, importType } = this.props
-    // console.log('importType: ', importType)
-
-    return (
-      <Paper className={classes.container}>
-        <Typography
-          className={classes.title}
-          gutterBottom
-          variant="h6"
-        >
-          Import Log ({ucFirst(importType)})
-        </Typography>
-        <Report
-          classes={classes}
-          importType={importType}
-        />
-      </Paper>
-    )
-  }
+function ImportLog({ classes, importType }) {
+  return (
+    <Paper className={classes.container}>
+      <Typography
+        className={classes.title}
+        gutterBottom
+        variant="h6"
+      >
+        Import Log ({ucFirst(importType)})
+      </Typography>
+      <Report
+        classes={classes}
+        importType={importType}
+      />
+    </Paper>
+  )
 }
 ImportLog.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
   importType: PropTypes.string.isRequired,
 }
 

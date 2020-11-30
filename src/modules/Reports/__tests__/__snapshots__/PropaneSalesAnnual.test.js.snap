@@ -23,7 +23,7 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "function",
     "props": Object {
       "children": [Function],
       "displayName": "Apollo(WithStyles(PropaneSalesAnnual))",
@@ -119,6 +119,7 @@ ShallowWrapper {
             "variableDefinitions": Array [
               Object {
                 "defaultValue": undefined,
+                "directives": Array [],
                 "kind": "VariableDefinition",
                 "type": Object {
                   "kind": "NonNullType",
@@ -148,7 +149,6 @@ ShallowWrapper {
         },
       },
       "skip": true,
-      "warnUnhandledError": true,
     },
     "ref": null,
     "rendered": [Function],
@@ -158,7 +158,7 @@ ShallowWrapper {
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {
         "children": [Function],
         "displayName": "Apollo(WithStyles(PropaneSalesAnnual))",
@@ -254,6 +254,7 @@ ShallowWrapper {
               "variableDefinitions": Array [
                 Object {
                   "defaultValue": undefined,
+                  "directives": Array [],
                   "kind": "VariableDefinition",
                   "type": Object {
                     "kind": "NonNullType",
@@ -283,7 +284,6 @@ ShallowWrapper {
           },
         },
         "skip": true,
-        "warnUnhandledError": true,
       },
       "ref": null,
       "rendered": [Function],

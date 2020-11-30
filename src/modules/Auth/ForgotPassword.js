@@ -17,8 +17,8 @@ import { withStyles } from '@material-ui/core/styles'
 
 class ForgotPassword extends Component {
   state = {
-    authData: '',
-    error: '',
+    // authData: '',
+    // error: '',
     loading: false,
     password: '',
     showConfirm: false,
@@ -26,6 +26,43 @@ class ForgotPassword extends Component {
     snackOpen: false,
     token: '',
     username: '',
+  }
+
+  async onSubmitForm() {
+    try {
+      this.setState({ loading: true })
+      const response = await Auth.forgotPassword(this.state.username)
+      console.log(`ForgotPassword::onSubmitForm(): Response#1 = ${JSON.stringify(response, null, 2)}`) // eslint-disable-line
+      // this.setState({ authData: response, loading: false, showConfirm: true })
+      this.setState({ loading: false, showConfirm: true })
+    } catch (err) {
+      console.log(`ForgotPassword::onSubmitForm(): Error ${JSON.stringify(err, null, 2)}`) // eslint-disable-line
+      this.setState({
+        // error: err, loading: false, snackMsg: err.message, snackOpen: true,
+        loading: false, snackMsg: err.message, snackOpen: true,
+      })
+    }
+  }
+
+  async onConfirmSubmitted() {
+    try {
+      this.setState({ loading: true })
+      const response = await Auth.forgotPasswordSubmit(
+        this.state.username,
+        this.state.token,
+        this.state.password
+      )
+      console.log(`ForgotPassword::onConfirmSubmitted(): Response#2 = ${JSON.stringify(response, null, 2)}`) // eslint-disable-line
+      this.setState({ loading: false })
+      this.props.onStateChange('signIn')
+    } catch (err) {
+      const errMsg = err.message || err
+      console.log(`ForgotPassword::onConfirmSubmitted(): Error ${JSON.stringify(err, null, 2)}`) // eslint-disable-line
+      this.setState({
+        // error: errMsg, loading: false, snackMsg: errMsg, snackOpen: true,
+        loading: false, snackMsg: errMsg, snackOpen: true,
+      })
+    }
   }
 
   handleChange = (event) => {
@@ -38,36 +75,6 @@ class ForgotPassword extends Component {
 
   handleClose = () => {
     this.setState({ snackOpen: false })
-  }
-
-  async onSubmitForm() {
-    try {
-      this.setState({ loading: true })
-      const response = await Auth.forgotPassword(this.state.username)
-      console.log(`ForgotPassword::onSubmitForm(): Response#1 = ${JSON.stringify(response, null, 2)}`) // eslint-disable-line
-      this.setState({ authData: response, loading: false, showConfirm: true })
-    } catch (err) {
-      console.log(`ForgotPassword::onSubmitForm(): Error ${JSON.stringify(err, null, 2)}`) // eslint-disable-line
-      this.setState({
-        error: err, loading: false, snackMsg: err.message, snackOpen: true,
-      })
-    }
-  }
-
-  async onConfirmSubmitted() {
-    try {
-      this.setState({ loading: true })
-      const response = await Auth.forgotPasswordSubmit(this.state.username, this.state.token, this.state.password)
-      console.log(`ForgotPassword::onConfirmSubmitted(): Response#2 = ${JSON.stringify(response, null, 2)}`) // eslint-disable-line
-      this.setState({ loading: false })
-      this.props.onStateChange('signIn')
-    } catch (err) {
-      const errMsg = err.message || err
-      console.log(`ForgotPassword::onConfirmSubmitted(): Error ${JSON.stringify(err, null, 2)}`) // eslint-disable-line
-      this.setState({
-        error: errMsg, loading: false, snackMsg: errMsg, snackOpen: true,
-      })
-    }
   }
 
   renderSendCode = () => {
@@ -190,10 +197,12 @@ class ForgotPassword extends Component {
 
 ForgotPassword.propTypes = {
   authState: PropTypes.string,
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
   onStateChange: PropTypes.func.isRequired,
 }
-
+ForgotPassword.defaultProps = {
+  authState: null,
+}
 
 const styles = theme => ({
   container: {

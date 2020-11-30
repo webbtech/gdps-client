@@ -19,11 +19,6 @@ import TankLevelsDialog from './TankLevelsDialog'
 
 
 class TankForm extends Component {
-  state = {
-    editMode: false,
-    tankID: '',
-  }
-
   handleSubmit = (e) => {
     e.preventDefault()
     this.props.handleSubmit(e)
@@ -66,9 +61,17 @@ class TankForm extends Component {
             }
           </Toolbar>
         </AppBar>
-        {data && data.error && <div className={classNames(classes.dataMsg, classes.errMsg)}>Recieved error: {data.error.message}</div>}
+        {data && data.error &&
+          <div className={classNames(classes.dataMsg, classes.errMsg)}>
+            Recieved error: {data.error.message}
+          </div>
+        }
         {data && data.loading && <div className={classes.dataMsg}>Loading...</div>}
-        {errors && errors.graphql && <div className={classNames(classes.dataMsg, classes.errMsg)}>Received data error: {errors.graphql}</div>}
+        {errors && errors.graphql &&
+          <div className={classNames(classes.dataMsg, classes.errMsg)}>
+            Received data error: {errors.graphql}
+          </div>
+        }
         <form
           autoComplete="off"
           className={classes.form}
@@ -160,17 +163,21 @@ class TankForm extends Component {
   }
 }
 TankForm.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object),
   dirty: PropTypes.bool.isRequired,
-  errors: PropTypes.object,
+  errors: PropTypes.instanceOf(Object),
   handleBlur: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   setFieldValue: PropTypes.func.isRequired,
-  setValues: PropTypes.func.isRequired,
-  values: PropTypes.object,
+  values: PropTypes.instanceOf(Object),
+}
+TankForm.defaultProps = {
+  data: null,
+  errors: null,
+  values: null,
 }
 
 const styles = theme => ({

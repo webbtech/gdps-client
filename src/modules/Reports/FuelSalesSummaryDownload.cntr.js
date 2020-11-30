@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import { bindActionCreators } from 'redux'
-import { compose, graphql } from 'react-apollo'
+import { graphql } from '@apollo/react-hoc'
+import { flowRight as compose } from 'lodash'
 import { connect } from 'react-redux'
 import { withFormik } from 'formik'
 import moment from 'moment'
