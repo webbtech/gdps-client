@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import gql from 'graphql-tag'
 import moment from 'moment'
-import { graphql } from 'react-apollo'
+import { graphql } from '@apollo/react-hoc'
 
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
@@ -73,8 +73,8 @@ const Report = ({ classes, data }) => {
   )
 }
 Report.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object),
 }
 
 const ReportHeading = ({ classes, data }) => (
@@ -90,7 +90,7 @@ const ReportHeading = ({ classes, data }) => (
   </div>
 )
 ReportHeading.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
   data: PropTypes.array.isRequired,
 }
 
@@ -115,7 +115,7 @@ const ReportData = ({ classes, data, fuelTypes }) => (
   ))
 )
 ReportData.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
   data: PropTypes.array.isRequired,
 }
 
@@ -133,8 +133,8 @@ const ReportSummary = ({ classes, data, fuelTypes }) => (
   </div>
 )
 ReportSummary.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object).isRequired,
   fuelTypes: PropTypes.array.isRequired,
 }
 
@@ -159,9 +159,9 @@ class FuelDeliveries extends Component {
   }
 }
 FuelDeliveries.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object,
-  location: PropTypes.object,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object),
+  location: PropTypes.instanceOf(Object),
 }
 
 const styles = theme => ({

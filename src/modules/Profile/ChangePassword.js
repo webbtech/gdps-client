@@ -180,7 +180,7 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
 }
 
 const styles = theme => ({

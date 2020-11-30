@@ -1,53 +1,50 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
-import { errorDismiss } from './errorActions'
-
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { withStyles } from '@material-ui/core/styles'
 
+import { errorDismiss } from './errorActions'
 import Error from './Error'
 
-class ErrorContainer extends Component {
-  render() {
-    const { classes, errors } = this.props
+function ErrorContainer({ classes, errors }) {
+  const items = errors.map(err => (
+    <CSSTransition
+      classNames={{
+        appear: classes.appear,
+        appearActive: classes.appearActive,
+        enter: classes.enter,
+        enterActive: classes.enterActive,
+        exit: classes.exit,
+        exitActive: classes.exitActive,
+      }}
+      key={err.id}
+      timeout={{ enter: 500, exit: 300 }}
+    >
+      <Error
+        message={err.message}
+        onClick={() => this.props.dismissError(err.id)}
+        type={err.type}
+      />
+    </CSSTransition>
+  ))
 
-    const items = errors.map(err => (
-      <CSSTransition
-        classNames={{
-              appear: classes.appear,
-              appearActive: classes.appearActive,
-              enter: classes.enter,
-              enterActive: classes.enterActive,
-              exit: classes.exit,
-              exitActive: classes.exitActive,
-            }}
-        key={err.id}
-        timeout={{ enter: 500, exit: 300 }}
-      >
-        <Error
-          message={err.message}
-          onClick={() => this.props.dismissError(err.id)}
-          type={err.type}
-        />
-      </CSSTransition>
-    ))
-
-    return (
-      <div className={classes.errContainer}>
-        <TransitionGroup>
-          {items}
-        </TransitionGroup>
-      </div>
-    )
-  }
+  return (
+    <div className={classes.errContainer}>
+      <TransitionGroup>
+        {items}
+      </TransitionGroup>
+    </div>
+  )
 }
-
 ErrorContainer.propTypes = {
-  classes: PropTypes.object.isRequired,
-  dismissError: PropTypes.func.isRequired,
-  errors: PropTypes.array,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  dismissError: PropTypes.func.isRequired, // eslint-disable-line react/no-unused-prop-types
+  errors: PropTypes.instanceOf(Array),
+}
+ErrorContainer.defaultProps = {
+  errors: null,
 }
 
 const mapStateToProps = state => ({

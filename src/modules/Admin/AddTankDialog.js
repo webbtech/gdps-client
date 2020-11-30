@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import gql from 'graphql-tag'
-import { Mutation } from 'react-apollo'
-import { Query } from 'react-apollo'
+import { Mutation, Query } from '@apollo/react-components'
 import { sortBy } from 'lodash'
 
 import Button from '@material-ui/core/Button'
@@ -54,13 +53,13 @@ class TankDialog extends Component {
     selectedTank: '',
   }
 
-  handleClickOpen = () => {
-    this.setState({ open: true })
-  }
-
-  handleOpenConfirm = () => {
-    this.setState({ openConfirm: true })
-  }
+  setCreateFields = () => ({
+    fields: {
+      fuelType: this.state.fuelType,
+      stationID: this.props.stationID,
+      tankID: this.state.selectedTank,
+    },
+  })
 
   handleOkConfirm = () => {
     this.setState({ openConfirm: false, fuelType: '' })
@@ -82,13 +81,13 @@ class TankDialog extends Component {
     this.setState({ fuelType: value })
   }
 
-  setCreateFields = () => ({
-    fields: {
-      fuelType: this.state.fuelType,
-      stationID: this.props.stationID,
-      tankID: this.state.selectedTank,
-    },
-  })
+  handleClickOpen = () => {
+    this.setState({ open: true })
+  }
+
+  handleOpenConfirm = () => {
+    this.setState({ openConfirm: true })
+  }
 
   render() {
     const { classes, stationID } = this.props
@@ -163,7 +162,9 @@ class TankDialog extends Component {
         >
           <DialogTitle id="alert-dialog-title">Select Fuel Type and Confirm</DialogTitle>
           <DialogContent>
-            <div className={classes.msg}>NOTE: This action cannot be reversed.<br />Please ensure all details are accurate.</div>
+            <div className={classes.msg}>
+              NOTE: This action cannot be reversed.<br />Please ensure all details are accurate.
+            </div>
             <RadioGroup
               aria-label="Ringtone"
               name="ringtone"
@@ -221,7 +222,7 @@ class TankDialog extends Component {
   }
 }
 TankDialog.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
   stationID: PropTypes.string.isRequired,
 }
 

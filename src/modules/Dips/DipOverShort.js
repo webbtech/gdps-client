@@ -70,7 +70,7 @@ const DipOverShort = ({
           {rows.map((os, i) => (
             <div
               className={classes.dataRow}
-              key={i}
+              key={i} // eslint-disable-line react/no-array-index-key
             >
               <div className={classes.dataCell}>{os.fuelType}</div>
               <div className={classNames([classes.dataCell], [classes.alignRight])}>

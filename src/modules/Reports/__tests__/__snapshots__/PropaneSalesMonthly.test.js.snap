@@ -23,7 +23,7 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "function",
     "props": Object {
       "children": [Function],
       "displayName": "Apollo(WithStyles(PropaneSalesMonthly))",
@@ -74,20 +74,94 @@ ShallowWrapper {
                         "kind": "Field",
                         "name": Object {
                           "kind": "Name",
-                          "value": "sales",
+                          "value": "periodSales",
                         },
-                        "selectionSet": undefined,
-                      },
-                      Object {
-                        "alias": undefined,
-                        "arguments": Array [],
-                        "directives": Array [],
-                        "kind": "Field",
-                        "name": Object {
-                          "kind": "Name",
-                          "value": "salesSummary",
+                        "selectionSet": Object {
+                          "kind": "SelectionSet",
+                          "selections": Array [
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "dates",
+                              },
+                              "selectionSet": Object {
+                                "kind": "SelectionSet",
+                                "selections": Array [
+                                  Object {
+                                    "alias": undefined,
+                                    "arguments": Array [],
+                                    "directives": Array [],
+                                    "kind": "Field",
+                                    "name": Object {
+                                      "kind": "Name",
+                                      "value": "dateStart",
+                                    },
+                                    "selectionSet": undefined,
+                                  },
+                                  Object {
+                                    "alias": undefined,
+                                    "arguments": Array [],
+                                    "directives": Array [],
+                                    "kind": "Field",
+                                    "name": Object {
+                                      "kind": "Name",
+                                      "value": "dateEnd",
+                                    },
+                                    "selectionSet": undefined,
+                                  },
+                                  Object {
+                                    "alias": undefined,
+                                    "arguments": Array [],
+                                    "directives": Array [],
+                                    "kind": "Field",
+                                    "name": Object {
+                                      "kind": "Name",
+                                      "value": "dayRange",
+                                    },
+                                    "selectionSet": undefined,
+                                  },
+                                  Object {
+                                    "alias": undefined,
+                                    "arguments": Array [],
+                                    "directives": Array [],
+                                    "kind": "Field",
+                                    "name": Object {
+                                      "kind": "Name",
+                                      "value": "yearWeek",
+                                    },
+                                    "selectionSet": undefined,
+                                  },
+                                ],
+                              },
+                            },
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "sales",
+                              },
+                              "selectionSet": undefined,
+                            },
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "summary",
+                              },
+                              "selectionSet": undefined,
+                            },
+                          ],
                         },
-                        "selectionSet": undefined,
                       },
                       Object {
                         "alias": undefined,
@@ -98,7 +172,33 @@ ShallowWrapper {
                           "kind": "Name",
                           "value": "deliveries",
                         },
-                        "selectionSet": undefined,
+                        "selectionSet": Object {
+                          "kind": "SelectionSet",
+                          "selections": Array [
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "date",
+                              },
+                              "selectionSet": undefined,
+                            },
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "litres",
+                              },
+                              "selectionSet": undefined,
+                            },
+                          ],
+                        },
                       },
                     ],
                   },
@@ -108,6 +208,7 @@ ShallowWrapper {
             "variableDefinitions": Array [
               Object {
                 "defaultValue": undefined,
+                "directives": Array [],
                 "kind": "VariableDefinition",
                 "type": Object {
                   "kind": "NonNullType",
@@ -132,12 +233,11 @@ ShallowWrapper {
         ],
         "kind": "Document",
         "loc": Object {
-          "end": 136,
+          "end": 281,
           "start": 0,
         },
       },
       "skip": true,
-      "warnUnhandledError": true,
     },
     "ref": null,
     "rendered": [Function],
@@ -147,7 +247,7 @@ ShallowWrapper {
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {
         "children": [Function],
         "displayName": "Apollo(WithStyles(PropaneSalesMonthly))",
@@ -198,20 +298,94 @@ ShallowWrapper {
                           "kind": "Field",
                           "name": Object {
                             "kind": "Name",
-                            "value": "sales",
+                            "value": "periodSales",
                           },
-                          "selectionSet": undefined,
-                        },
-                        Object {
-                          "alias": undefined,
-                          "arguments": Array [],
-                          "directives": Array [],
-                          "kind": "Field",
-                          "name": Object {
-                            "kind": "Name",
-                            "value": "salesSummary",
+                          "selectionSet": Object {
+                            "kind": "SelectionSet",
+                            "selections": Array [
+                              Object {
+                                "alias": undefined,
+                                "arguments": Array [],
+                                "directives": Array [],
+                                "kind": "Field",
+                                "name": Object {
+                                  "kind": "Name",
+                                  "value": "dates",
+                                },
+                                "selectionSet": Object {
+                                  "kind": "SelectionSet",
+                                  "selections": Array [
+                                    Object {
+                                      "alias": undefined,
+                                      "arguments": Array [],
+                                      "directives": Array [],
+                                      "kind": "Field",
+                                      "name": Object {
+                                        "kind": "Name",
+                                        "value": "dateStart",
+                                      },
+                                      "selectionSet": undefined,
+                                    },
+                                    Object {
+                                      "alias": undefined,
+                                      "arguments": Array [],
+                                      "directives": Array [],
+                                      "kind": "Field",
+                                      "name": Object {
+                                        "kind": "Name",
+                                        "value": "dateEnd",
+                                      },
+                                      "selectionSet": undefined,
+                                    },
+                                    Object {
+                                      "alias": undefined,
+                                      "arguments": Array [],
+                                      "directives": Array [],
+                                      "kind": "Field",
+                                      "name": Object {
+                                        "kind": "Name",
+                                        "value": "dayRange",
+                                      },
+                                      "selectionSet": undefined,
+                                    },
+                                    Object {
+                                      "alias": undefined,
+                                      "arguments": Array [],
+                                      "directives": Array [],
+                                      "kind": "Field",
+                                      "name": Object {
+                                        "kind": "Name",
+                                        "value": "yearWeek",
+                                      },
+                                      "selectionSet": undefined,
+                                    },
+                                  ],
+                                },
+                              },
+                              Object {
+                                "alias": undefined,
+                                "arguments": Array [],
+                                "directives": Array [],
+                                "kind": "Field",
+                                "name": Object {
+                                  "kind": "Name",
+                                  "value": "sales",
+                                },
+                                "selectionSet": undefined,
+                              },
+                              Object {
+                                "alias": undefined,
+                                "arguments": Array [],
+                                "directives": Array [],
+                                "kind": "Field",
+                                "name": Object {
+                                  "kind": "Name",
+                                  "value": "summary",
+                                },
+                                "selectionSet": undefined,
+                              },
+                            ],
                           },
-                          "selectionSet": undefined,
                         },
                         Object {
                           "alias": undefined,
@@ -222,7 +396,33 @@ ShallowWrapper {
                             "kind": "Name",
                             "value": "deliveries",
                           },
-                          "selectionSet": undefined,
+                          "selectionSet": Object {
+                            "kind": "SelectionSet",
+                            "selections": Array [
+                              Object {
+                                "alias": undefined,
+                                "arguments": Array [],
+                                "directives": Array [],
+                                "kind": "Field",
+                                "name": Object {
+                                  "kind": "Name",
+                                  "value": "date",
+                                },
+                                "selectionSet": undefined,
+                              },
+                              Object {
+                                "alias": undefined,
+                                "arguments": Array [],
+                                "directives": Array [],
+                                "kind": "Field",
+                                "name": Object {
+                                  "kind": "Name",
+                                  "value": "litres",
+                                },
+                                "selectionSet": undefined,
+                              },
+                            ],
+                          },
                         },
                       ],
                     },
@@ -232,6 +432,7 @@ ShallowWrapper {
               "variableDefinitions": Array [
                 Object {
                   "defaultValue": undefined,
+                  "directives": Array [],
                   "kind": "VariableDefinition",
                   "type": Object {
                     "kind": "NonNullType",
@@ -256,12 +457,11 @@ ShallowWrapper {
           ],
           "kind": "Document",
           "loc": Object {
-            "end": 136,
+            "end": 281,
             "start": 0,
           },
         },
         "skip": true,
-        "warnUnhandledError": true,
       },
       "ref": null,
       "rendered": [Function],

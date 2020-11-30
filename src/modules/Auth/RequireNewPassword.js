@@ -18,12 +18,44 @@ import { withStyles } from '@material-ui/core/styles'
 
 class SignIn extends Component {
   state = {
-    error: '',
+    // error: '',
     name: '',
     password: '',
     loading: false,
     snackOpen: false,
     snackMsg: '',
+  }
+
+  async onSubmit() {
+    try {
+      this.setState({ loading: true })
+      // const response = await Auth.forgotPasswordSubmit(
+      //   this.state.username,
+      //   this.state.token,
+      //   this.state.password
+      // )
+      // completeNewPassword(user: any, password: string, requiredAttributes: any)
+
+      const { authData } = this.props
+      const response = await Auth.completeNewPassword(
+        authData,
+        this.state.password,
+        { name: this.state.name }
+      )
+      console.log(`RequireNewPassword::onSubmit(): Response#2 = ${JSON.stringify(response, null, 2)}`) // eslint-disable-line
+      this.setState({ loading: false, name: '' })
+
+      if ('challengeName' in authData && authData.challengeName === 'SMS_MFA') {
+        this.props.onStateChange('confirmSignIn', authData)
+      }
+    } catch (err) {
+      const errMsg = err.message || err
+      console.log(`RequireNewPassword::onSubmit(): Error ${JSON.stringify(err, null, 2)}`) // eslint-disable-line
+      this.setState({
+        // error: errMsg, loading: false, snackMsg: errMsg, snackOpen: true,
+        loading: false, snackMsg: errMsg, snackOpen: true,
+      })
+    }
   }
 
   handleChange = (event) => {
@@ -36,29 +68,6 @@ class SignIn extends Component {
 
   handleClose = () => {
     this.setState({ snackOpen: false })
-  }
-
-  async onSubmit() {
-    try {
-      this.setState({ loading: true })
-      // const response = await Auth.forgotPasswordSubmit(this.state.username, this.state.token, this.state.password)
-      // completeNewPassword(user: any, password: string, requiredAttributes: any)
-
-      const { authData } = this.props
-      const response = await Auth.completeNewPassword(authData, this.state.password, { name: this.state.name })
-      console.log(`RequireNewPassword::onSubmit(): Response#2 = ${JSON.stringify(response, null, 2)}`) // eslint-disable-line
-      this.setState({ loading: false, name: '' })
-
-      if ('challengeName' in authData && authData.challengeName === 'SMS_MFA') {
-        this.props.onStateChange('confirmSignIn', authData)
-      }
-    } catch (err) {
-      const errMsg = err.message || err
-      console.log(`RequireNewPassword::onSubmit(): Error ${JSON.stringify(err, null, 2)}`) // eslint-disable-line
-      this.setState({
-        error: errMsg, loading: false, snackMsg: errMsg, snackOpen: true,
-      })
-    }
   }
 
   render() {
@@ -131,10 +140,15 @@ class SignIn extends Component {
 }
 
 SignIn.propTypes = {
-  authData: PropTypes.object,
+  authData: PropTypes.instanceOf(Object),
   authState: PropTypes.string,
-  onSignIn: PropTypes.func.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  // onSignIn: PropTypes.func.isRequired,
   onStateChange: PropTypes.func.isRequired,
+}
+SignIn.defaultProps = {
+  authData: null,
+  authState: null,
 }
 
 const styles = theme => ({
@@ -161,9 +175,5 @@ const styles = theme => ({
   },
 
 })
-
-SignIn.propTypes = {
-  classes: PropTypes.object.isRequired,
-}
 
 export default withStyles(styles)(SignIn)

@@ -10,12 +10,11 @@ class Toaster extends Component {
   state = {
     duration: 3000,
     open: false,
-    message: '',
   }
 
   componentDidUpdate = (prevProps, prevState) => {
     if (prevState.open === false && this.props.message) {
-      this.setState({ message: this.props.message, open: true })
+      this.setState({ open: true })
     }
   }
 
@@ -23,11 +22,11 @@ class Toaster extends Component {
     if (reason === 'clickaway') {
       return
     }
-    this.setState({ open: false, message: '' })
+    this.setState({ open: false })
   }
 
-  handleOpen = (message) => {
-    this.setState({ open: true, message })
+  handleOpen = () => {
+    this.setState({ open: true })
   }
 
   render() {
@@ -63,9 +62,13 @@ class Toaster extends Component {
   }
 }
 Toaster.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
   duration: PropTypes.number,
   message: PropTypes.string,
+}
+Toaster.defaultProps = {
+  duration: 0,
+  message: '',
 }
 
 const styles = theme => ({

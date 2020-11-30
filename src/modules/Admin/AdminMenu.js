@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import { withRouter } from 'react-router'
@@ -6,45 +6,41 @@ import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
 
-class AdminMenu extends Component {
-  setButtonColor(pathname, searchPath) {
-    return (pathname.indexOf(searchPath) >= 0) ? 'primary' : 'default'
-  }
+function setButtonColor(pathname, searchPath) {
+  return (pathname.indexOf(searchPath) >= 0) ? 'primary' : 'default'
+}
 
-  render() {
-    const { classes } = this.props
-    const { pathname } = this.props.history.location
+function AdminMenu({ classes, history }) {
+  const { pathname } = history.location
 
-    return (
-      <div className={classes.menu}>
-        <Button
-          color={this.setButtonColor(pathname, '/admin/station-admin')}
-          component={Link}
-          to="/admin/station-admin"
-        >
-          Stations
-        </Button>
-        <Button
-          color={this.setButtonColor(pathname, '/admin/tank-')}
-          component={Link}
-          to="/admin/tank-admin"
-        >
-          Tanks
-        </Button>
-      </div>
-    )
-  }
+  return (
+    <div className={classes.menu}>
+      <Button
+        color={setButtonColor(pathname, '/admin/station-admin')}
+        component={Link}
+        to="/admin/station-admin"
+      >
+        Stations
+      </Button>
+      <Button
+        color={setButtonColor(pathname, '/admin/tank-')}
+        component={Link}
+        to="/admin/tank-admin"
+      >
+        Tanks
+      </Button>
+    </div>
+  )
 }
 AdminMenu.propTypes = {
-  classes: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 }
 
-const styles = theme => ({
+const styles = () => ({
   menu: {
     display: 'flex',
     flexDirection: 'row',
-    // fontFamily:     theme.typography.fontFamily,
   },
 })
 

@@ -3,13 +3,18 @@ import PropTypes from 'prop-types'
 
 import { withRouter } from 'react-router'
 
-// import Button from '@material-ui/core/Button'
 import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
 import { withStyles } from '@material-ui/core/styles'
 
+const mockStations = [
+  { id: 'b-10', name: 'Bridge' },
+  { id: 'ch-20', name: 'Chippawa' },
+  { id: 'co-30', name: 'Collier' },
+  { id: 'd-40', name: 'Drummond' },
+]
 
 class AdminSelectors extends Component {
   state = {
@@ -70,10 +75,10 @@ class AdminSelectors extends Component {
 }
 
 AdminSelectors.propTypes = {
-  classes: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
+  location: PropTypes.instanceOf(Object).isRequired,
+  match: PropTypes.instanceOf(Object).isRequired,
 }
 
 const styles = theme => ({
@@ -82,12 +87,5 @@ const styles = theme => ({
     minWidth: 120,
   },
 })
-
-const mockStations = [
-  { id: 'b-10', name: 'Bridge' },
-  { id: 'ch-20', name: 'Chippawa' },
-  { id: 'co-30', name: 'Collier' },
-  { id: 'd-40', name: 'Drummond' },
-]
 
 export default withRouter(withStyles(styles)(AdminSelectors))

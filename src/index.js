@@ -1,59 +1,48 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { render } from 'react-dom'
 
 import { Provider } from 'react-redux'
 import LogRocket from 'logrocket'
-import * as Sentry from '@sentry/browser'
+import * as Sentry from '@sentry/react'
 
-import registerServiceWorker from './registerServiceWorker'
+import Alert from './modules/Common/Alert'
+import Index from './modules/Index/Index'
+import * as serviceWorker from './serviceWorker'
+
 import configureStore from './store/configureStore'
 
 const LogRocketID = process.env.REACT_APP_LOGROCKET_ID
 const SentryURL = process.env.REACT_APP_SENTRY_URL
 const store = configureStore()
-const rootEl = document.getElementById('root')
 
 if (process.env.NODE_ENV === 'production') {
   LogRocket.init(LogRocketID)
   Sentry.init({ dsn: SentryURL })
 }
 
-// see: https://blog.isquaredsoftware.com/2016/11/practical-redux-part-3-project-planning-and-setup/
-// for explanation on below
-let render = () => {
-  // Dynamically import our main App component, and render it
-  const Index = require('./modules/Index/Index').default // eslint-disable-line
-
-  ReactDOM.render(
-    <Provider store={store}>
-      <Index />
-    </Provider>,
-    rootEl
+function FallbackComponent() {
+  return (
+    <Alert type="danger">An error has occured</Alert>
   )
 }
 
-if (module.hot) {
-  // Support hot reloading of components
-  // and display an overlay for runtime errors
-  const renderApp = render
+const renderApp = () => render(
+  <Provider store={store}>
+    <Sentry.ErrorBoundary fallback={FallbackComponent} showDialog>
+      <Index />
+    </Sentry.ErrorBoundary>
+  </Provider>,
+  document.getElementById('root')
+)
 
-  // In development, we wrap the rendering function to catch errors,
-  // and if something breaks, log the error and render it to the screen
-  render = () => {
-    try {
-      renderApp()
-    } catch (error) {
-      console.error(error) // eslint-disable-line
-      // renderError(error)
-    }
-  }
-
-  // Whenever the App component file or one of its dependencies
-  // is changed, re-import the updated component and re-render it
-  module.hot.accept('./modules/Index/Index', () => {
-    setTimeout(render)
-  })
+if (process.env.NODE_ENV !== 'production' && module.hot) {
+  module.hot.accept('./modules/Index/Index', renderApp)
 }
 
-registerServiceWorker()
-render()
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister()
+
+renderApp()
+

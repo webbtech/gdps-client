@@ -57,8 +57,8 @@ const Report = ({ classes, data }) => {
   )
 }
 Report.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object),
 }
 
 const ReportHeading = ({ classes, data }) => (
@@ -74,7 +74,7 @@ const ReportHeading = ({ classes, data }) => (
   </div>
 )
 ReportHeading.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
   data: PropTypes.array.isRequired,
 }
 
@@ -102,8 +102,8 @@ const ReportData = ({ classes, data, fuelTypes }) => {
   return rows
 }
 ReportData.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object).isRequired,
 }
 
 const ReportSummary = ({ classes, data, fuelTypes }) => (
@@ -120,8 +120,8 @@ const ReportSummary = ({ classes, data, fuelTypes }) => (
   </div>
 )
 ReportSummary.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object).isRequired,
   fuelTypes: PropTypes.array.isRequired,
 }
 
@@ -158,10 +158,10 @@ class OverShortAnnually extends Component {
   }
 }
 OverShortAnnually.propTypes = {
-  actions: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object,
-  location: PropTypes.object.isRequired,
+  actions: PropTypes.instanceOf(Object).isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.instanceOf(Object),
+  location: PropTypes.instanceOf(Object).isRequired,
 }
 
 const styles = theme => ({

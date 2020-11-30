@@ -2,7 +2,7 @@
 
 . $HOME/.bashrc
 
-S3_BUCKET="s3://gdps-staging-fe-origin/"
+S3_BUCKET="s3://gdps-stage-fe-origin/"
 
 # Commands
 CP="/bin/cp"
@@ -11,7 +11,7 @@ PRT="/usr/bin/printf"
 RM="/bin/rm"
 
 # Vars
-SITE="Gales Dips Staging Client"
+SITE="Gales Dips Stage Client"
 SEP="=========================================================================="
 
 $PRT "%s\n" $SEP

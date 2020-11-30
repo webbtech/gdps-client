@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
-import { compose, graphql, withApollo } from 'react-apollo'
+import { graphql, withApollo } from '@apollo/react-hoc'
+import { flowRight as compose } from 'lodash'
 import { withRouter } from 'react-router'
 
 import StationTanks from './StationTanks'
