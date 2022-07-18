@@ -53,6 +53,7 @@ const Reports = Loadable({
 
 function Index({ authState }) {
   if (authState !== 'signedIn') return null
+  console.log('client: ', client)
 
   return (
     <ApolloProvider client={client}>
@@ -140,7 +141,7 @@ function AppWithAuth() {
         const username = user.signInUserSession.idToken.payload['cognito:username']
         const { name } = user.signInUserSession.idToken.payload
         const storage = window.localStorage
-        storage.setItem(LOCAL_TOKEN_KEY, user.signInUserSession.accessToken.jwtToken)
+        storage.setItem(LOCAL_TOKEN_KEY, user.signInUserSession.idToken.jwtToken)
         LogRocket.identify(username, {
           name,
           username,
