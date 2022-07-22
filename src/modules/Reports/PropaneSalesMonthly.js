@@ -59,13 +59,13 @@ const Report = ({ classes, data }) => {
     periodSales,
   } = data.propaneSaleMonthReport
 
-  /*periodOrder.forEach((po) => {
+  /* periodOrder.forEach((po) => {
     wks.push({
       week: po,
       sales: sales[po],
       summary: salesSummary[po],
     })
-  })*/
+  }) */
 
   return (
     <div className={classes.container}>
@@ -286,7 +286,6 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit * 2,
   },
 })
-
 
 export default graphql(PSM_REPORT_QUERY, {
   skip: props => props.location.pathname.split('/').length < 4,

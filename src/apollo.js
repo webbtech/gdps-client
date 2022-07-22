@@ -10,6 +10,7 @@ import { setContext } from '@apollo/client/link/context'
 import * as Sentry from '@sentry/react'
 
 import config from './config/config'
+import { LOCAL_TOKEN_KEY } from './config/constants'
 
 const errorLink = onError(({ networkError, graphQLErrors }) => {
   if (graphQLErrors) {
@@ -28,12 +29,12 @@ const errorLink = onError(({ networkError, graphQLErrors }) => {
 const httpLink = new HttpLink({ uri: config.BASE_URL })
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = window.localStorage.getItem('userToken')
+  const token = window.localStorage.getItem(LOCAL_TOKEN_KEY)
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      Authorization: token ? `Bearer ${token}` : '',
+      Authorization: token || '',
     },
   }
 })
